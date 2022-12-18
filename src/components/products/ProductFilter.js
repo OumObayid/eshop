@@ -106,8 +106,7 @@ const ProductFilter = (props) => {
         <label className="form-label pb-2 d-flex justify-content-between justify-item-between ">
           <div className="align-middle  py-1 d-flex justify-content-between ">
             <div className="me-3">
-              Min:
-              <input
+              Min: <input
               className="fw-bold w-50"
                 type="text"
                 value={rangeMinInput}
@@ -115,8 +114,7 @@ const ProductFilter = (props) => {
               />
             </div>
             <div>
-              Max:
-              <input
+              Max: <input
                className="fw-bold w-50"
                 type="text"
                 value={rangeMaxInput}
