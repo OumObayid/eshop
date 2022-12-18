@@ -291,7 +291,7 @@ const changeTextMin = (e) => {
 }
 
 // handlechange in input range max
-const changeTextMax = (e) => {
+const changeTextMax = (e) => {  
   const v = parseInt(e.target.value, 10);
     if (v) {
       if (v < rangeMinInput && !!rangeMinInput) {
