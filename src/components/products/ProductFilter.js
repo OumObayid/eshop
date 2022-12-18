@@ -13,14 +13,17 @@ const ProductFilter = (props) => {
     clearFilter,
     changeRange,
     setRange,
-    rangeMinVal,
-    rangeMaxVal,
+    rangeMinSlide,
+    rangeMaxSlide,
+    rangeMinInput,
+    rangeMaxInput,
     selectBrand,
     valueSelectBrand,
     rangeValInit,
+    changeTextMin,
+    changeTextMax,
   ] = [...props.actions];
 
- 
   return (
     <div className="list-group col-lg-3 pe-lg-5 mb-5">
       <div
@@ -33,7 +36,6 @@ const ProductFilter = (props) => {
         className="list-group-item list-group-item-action border-top-0 border-start-0 border-end-0 border-2 "
         onClick={getAllCat}
       >
-        
         <MdKeyboardArrowRight />
         All
       </button>
@@ -104,10 +106,22 @@ const ProductFilter = (props) => {
         <label className="form-label pb-2 d-flex justify-content-between justify-item-between ">
           <div className="align-middle  py-1 d-flex justify-content-between ">
             <div className="me-3">
-              Min: <span className="fw-bold">{rangeMinVal}</span>
+              Min:
+              <input
+              className="fw-bold w-50"
+                type="text"
+                value={rangeMinInput}
+                onChange={changeTextMin}
+              />
             </div>
             <div>
-              Max: <span className="fw-bold">{rangeMaxVal}</span>
+              Max:
+              <input
+               className="fw-bold w-50"
+                type="text"
+                value={rangeMaxInput}
+                onChange={changeTextMax}
+              />
             </div>
           </div>
           <button
@@ -123,7 +137,7 @@ const ProductFilter = (props) => {
           min={rangeValInit.min}
           max={rangeValInit.max}
           step={1}
-          minValue={rangeValInit.min} 
+          minValue={rangeValInit.min}
           maxValue={rangeValInit.max}
           style={{
             border: "none",
@@ -133,7 +147,7 @@ const ProductFilter = (props) => {
           }}
           label="false"
           ruler="false"
-          barInnerColor="#848484"  
+          barInnerColor="#848484"
           onChange={changeRange}
         />
       </div>

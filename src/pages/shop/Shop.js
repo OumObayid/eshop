@@ -41,11 +41,13 @@ const Shop = () => {
   const [xioomiBr, setXioomiBr] = useState([]);
   const [itelBr, setItelBr] = useState([]);
   //range
-  const [rangeMinVal, setRangeMinVal] = useState(0);
-  const [rangeMaxVal, setRangeMaxVal] = useState(4500);
   const rangeValInit = { min: 0, max: 4500 };
+  const [rangeMinSlide, setRangeMinSlide] = useState(rangeValInit.min);
+  const [rangeMaxSlide, setRangeMaxSlide] = useState(rangeValInit.max);
+  const [rangeMinInput, setRangeMinInput] = useState(rangeValInit.min);
+  const [rangeMaxInput, setRangeMaxInput] = useState(rangeValInit.max);
   const [selectProducts, setSelectProducts] = useState("data");
- 
+
   /////////////////////////////////////////////////////////////starting features
 
   useEffect(() => {
@@ -121,7 +123,7 @@ const Shop = () => {
         );
       });
       list = list.filter(
-        (product) => product.price > rangeMinVal && product.price < rangeMaxVal
+        (product) => product.price > rangeMinSlide && product.price < rangeMaxSlide
       );
 
       setContainerData(list);
@@ -266,13 +268,55 @@ const Shop = () => {
     }
   };
 
-  //change range
-  const changeRange = (e) => {
-    setRangeMinVal(e.minValue);
-    setRangeMaxVal(e.maxValue);
-  };
-  // const changeRange = (e) => console.log(`rangeMinVal = ${e.minValue}, rangeMaxVal = ${e.maxValue}`)
+ 
+ 
+//handlechange in input range min
+const changeTextMin = (e) => {
+  const v = parseInt(e.target.value, 10);
+    if (v) {
+      if (v > rangeMaxInput && !!rangeMaxInput) {
+        setRangeMinInput(rangeMaxInput - 1);
+        setRangeMinSlide(rangeMaxInput - 1);
+      } else if (v < rangeValInit.min) {
+        setRangeMinInput(rangeValInit.min);
+        setRangeMinSlide(rangeValInit.min);
+      } else {
+        setRangeMinInput(v);
+        setRangeMinSlide(v);
+      }
+    } else {
+      setRangeMinInput("");
+      setRangeMinSlide((prev)=>prev);
+    }
+}
 
+// handlechange in input range max
+const changeTextMax = (e) => {
+  const v = parseInt(e.target.value, 10);
+    if (v) {
+      if (v < rangeMinInput && !!rangeMinInput) {
+        setRangeMaxInput(rangeMinInput + 1);
+        setRangeMaxSlide(rangeMinSlide + 1);
+      } else if (v > rangeValInit.max) {
+        setRangeMaxInput(rangeValInit.max);
+        setRangeMaxSlide(rangeValInit.max );
+      } else {
+        setRangeMaxInput(v);
+        setRangeMaxSlide(v);
+      }
+    } else {
+      setRangeMaxInput("");
+      setRangeMaxSlide((prev)=>prev);
+    }
+}
+
+ //handlechange in slide by dragging 
+ const changeRange = (e) => {
+  setRangeMinSlide(e.minValue);
+  setRangeMaxSlide(e.maxValue);
+};
+
+//handleChange in slide by click on ok
   const setRange = () => {
     let list = [];
     switch (selectProducts) {
@@ -329,12 +373,11 @@ const Shop = () => {
         list = itelBr;
         break;
       case "searched":
-        
         list = data.filter(function (product) {
           return (
-            (product.productName.toLowerCase().match(searchString) ||
+            product.productName.toLowerCase().match(searchString) ||
             product.category.toLowerCase().match(searchString) ||
-            product.brand.toLowerCase().match(searchString)) 
+            product.brand.toLowerCase().match(searchString)
           );
         });
         break;
@@ -343,11 +386,10 @@ const Shop = () => {
         break;
     }
     const list2 = list.filter(
-      (product) => product.price > rangeMinVal && product.price < rangeMaxVal
+      (product) => product.price > rangeMinSlide && product.price < rangeMaxSlide
     );
     setContainerData(list2);
     setCountP(list2.length);
-    
   };
 
   // Clear filter
@@ -363,10 +405,10 @@ const Shop = () => {
     setSearchString("");
     setSelectProducts("data"); // to initialise the select products
 
-    // setRangeMinVal(rangeValInit.min);
-    // setRangeMaxVal(rangeValInit.max);
-    // setRangeMinVal(0);
-    // setRangeMaxVal(4500);
+    // setRangeMinSlide(rangeValInit.min);
+    // setRangeMaxSlide(rangeValInit.max);
+    // setRangeMinSlide(0);
+    // setRangeMaxSlide(4500);
   };
 
   return (
@@ -383,11 +425,15 @@ const Shop = () => {
             clearFilter,
             changeRange,
             setRange,
-            rangeMinVal,
-            rangeMaxVal,
+            rangeMinSlide,
+            rangeMaxSlide,
+            rangeMinInput,
+            rangeMaxInput,
             selectBrand,
             valueSelectBrand,
-            rangeValInit
+            rangeValInit,
+            changeTextMin,
+            changeTextMax,
           ]}
         />
         <div className="col-md-9 p-0 ">
