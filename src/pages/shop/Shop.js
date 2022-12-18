@@ -10,6 +10,7 @@ import { addProduct } from "../../redux/dataSlice";
 import { useDispatch } from "react-redux";
 import Helmet from "../../components/Helmet/Helmet";
 import CardProduct from "../../components/cardProduct/CardProduct";
+import CardProductRow from "../../components/cardProductRow/CardProductRow";
 
 const Shop = () => {
   const dispatch = useDispatch();
@@ -46,6 +47,8 @@ const Shop = () => {
   const rangeValInit = { min: 0, max: 4500 };
   const [selectProducts, setSelectProducts] = useState("data");
 
+  //display 
+  const [isDisplayList, setIsDisplayList] = useState(false);
   /////////////////////////////////////////////////////////////starting features
 
   useEffect(() => {
@@ -103,6 +106,13 @@ const Shop = () => {
     setHpBr(data.filter((product) => product.brand === "Hp"));
   }, [data]);
 
+  /////////////////////////////////////////////////////////////////To display list or no list
+  const NodisplayList = () => {
+    setIsDisplayList(false)
+  }
+  const displayList = () => {
+    setIsDisplayList(true)
+  }
   //////////////////////////////////////////////////////////////////to search data
   const handlSearch = (e) => {
     //preparation
@@ -390,14 +400,24 @@ const Shop = () => {
               handlSearch,
               handleSort,
               valueSelectSort,
+              NodisplayList,
+              displayList
             ]}
           />
-          <Row className=" d-flex m-3 justify-content-between row  m-0">
-            {containerData.map((item) => (
-              <Col lg="3" md="4" sm="6" xs="6" className="mb-4" key={item.id}>
-                <CardProduct item={item} />
+          <Row className=" d-flex justify-content-between row">
+           
+            { isDisplayList 
+            ? containerData.map((item) => (
+             <Col lg="12" md="12" sm="12" xs="12" className="mb-3"  key={item.id}>
+                <CardProductRow item={item} />
               </Col>
-            ))}
+            ))
+            : containerData.map((item) => (
+              <Col lg="3" md="4" sm="6" xs="6" className="mb-4" key={item.id}>
+                 <CardProduct item={item} />
+               </Col>
+             ))
+          }
           </Row>
         </div>
       </div>

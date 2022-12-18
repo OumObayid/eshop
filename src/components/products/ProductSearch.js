@@ -5,13 +5,13 @@ import view1 from "../../assets/view1.png";
 import view2 from "../../assets/view2.png";
 
 const ProductSearch = (props) => {
-    const [countP,searchString,handlSearch,handleSort,valueSelectSort] = [...props.actions]
+    const [countP,searchString,handlSearch,handleSort,valueSelectSort,NodisplayList, displayList] = [...props.actions]
 
   return (
     <div className="d-flex justify-content-between row m-0 p-0">
               <div className=" col-md-4 d-flex justify-content-center hidden-view  row mt-1 ">
-                <img src={view1} className=" imgView  " alt="..." />
-                <img src={view2} className=" imgView  " alt="..." />
+                <img src={view1} className=" imgView  " role="button" alt="..." onClick={NodisplayList}/>
+                <img src={view2} className=" imgView  "role="button" alt="..." onClick={displayList}/>
                 <p className="col mt-2 fs-5 ">
                   <span className="fw-bold ">{countP}</span> 
                 </p>
