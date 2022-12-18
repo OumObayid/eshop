@@ -13,17 +13,12 @@ const ProductFilter = (props) => {
     clearFilter,
     changeRange,
     setRange,
-    rangeMinSlide,
-    rangeMaxSlide,
-    rangeMinInput,
-    rangeMaxInput,
+    rangeMinVal,
+    rangeMaxVal,
     selectBrand,
     valueSelectBrand,
     rangeValInit,
-    changeTextMin,
-    changeTextMax,
   ] = [...props.actions];
-
   return (
     <div className="list-group col-lg-3 pe-lg-5 mb-5">
       <div
@@ -106,20 +101,10 @@ const ProductFilter = (props) => {
         <label className="form-label pb-2 d-flex justify-content-between justify-item-between ">
           <div className="align-middle  py-1 d-flex justify-content-between ">
             <div className="me-3">
-              Min: <input
-              className="fw-bold w-50"
-                type="text"
-                value={rangeMinInput}
-                onChange={changeTextMin}
-              />
+              Min: <span className="fw-bold">{rangeMinVal}</span>
             </div>
             <div>
-              Max: <input
-               className="fw-bold w-50"
-                type="text"
-                value={rangeMaxInput}
-                onChange={changeTextMax}
-              />
+              Max: <span className="fw-bold">{rangeMaxVal}</span>
             </div>
           </div>
           <button
@@ -135,7 +120,7 @@ const ProductFilter = (props) => {
           min={rangeValInit.min}
           max={rangeValInit.max}
           step={1}
-          minValue={rangeValInit.min}
+          minValue={rangeValInit.min} 
           maxValue={rangeValInit.max}
           style={{
             border: "none",
@@ -145,7 +130,7 @@ const ProductFilter = (props) => {
           }}
           label="false"
           ruler="false"
-          barInnerColor="#848484"
+          barInnerColor="#848484"  
           onChange={changeRange}
         />
       </div>
