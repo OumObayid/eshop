@@ -45,7 +45,7 @@ const Shop = () => {
   const [rangeMaxVal, setRangeMaxVal] = useState(4500);
   const rangeValInit = { min: 0, max: 4500 };
   const [selectProducts, setSelectProducts] = useState("data");
-
+ 
   /////////////////////////////////////////////////////////////starting features
 
   useEffect(() => {
@@ -328,9 +328,16 @@ const Shop = () => {
       case "itelBr":
         list = itelBr;
         break;
-      // case "searched":
-      //   list = data;
-      //   break;
+      case "searched":
+        
+        list = data.filter(function (product) {
+          return (
+            (product.productName.toLowerCase().match(searchString) ||
+            product.category.toLowerCase().match(searchString) ||
+            product.brand.toLowerCase().match(searchString)) 
+          );
+        });
+        break;
       default:
         list = data;
         break;
@@ -340,6 +347,7 @@ const Shop = () => {
     );
     setContainerData(list2);
     setCountP(list2.length);
+    
   };
 
   // Clear filter
@@ -348,7 +356,7 @@ const Shop = () => {
   // place as props for the component this:  key={seed}
   const clearFilter = () => {
     setSeed(Math.random()); // //to refresh a component
-    setValueSelectSort(""); //to set the select in the default value
+    setValueSelectSort(""); //to set the select sorting in the default value
     setValueSelectBrand(""); //to set the select in the default value
     setContainerData(data);
     setCountP(data.length);
@@ -379,7 +387,7 @@ const Shop = () => {
             rangeMaxVal,
             selectBrand,
             valueSelectBrand,
-            rangeValInit,
+            rangeValInit
           ]}
         />
         <div className="col-md-9 p-0 ">
