@@ -12,7 +12,6 @@ import Loader from "../../components/loader/Loader";
 import Helmet from "../../components/Helmet/Helmet";
 
 const Register = () => {
-  
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,13 +31,13 @@ const Register = () => {
           //const user = userCredential.user;
           //toast.success("Registration SucessFul ...");
           try {
-            const docRef =  addDoc(collection(db, "users"), {
+            const docRef = addDoc(collection(db, "users"), {
               name: fullName,
               email: email,
             });
             console.log("Document written with ID: ", docRef.id);
           } catch (e) {
-            toast.error(`Error adding document: ${e.message}`)
+            toast.error(`Error adding document: ${e.message}`);
           }
           setIsLoading(false);
           navigate("/login");
@@ -92,8 +91,8 @@ const Register = () => {
                 Register
               </button>
               <span className={styles.register}>
-                <p>Already have an account? </p>
-                <Link to="/login">Login</Link>
+                <p>Already have an account? 
+                <Link to="/login" className="fw-bolder">&nbsp;&nbsp;Login</Link></p>
               </span>
             </form>
           </div>

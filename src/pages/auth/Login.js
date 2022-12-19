@@ -13,16 +13,14 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import Helmet from "../../components/Helmet/Helmet";
 
 const Login = () => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  
 
   //login
   const navigate = useNavigate();
   const loginUser = (e) => {
-   e.preventDefault();
+    e.preventDefault();
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -31,29 +29,27 @@ const Login = () => {
         navigate("/");
       })
       .catch((error) => {
-        toast.error('email or password is wrong');
+        toast.error("email or password is wrong");
         setIsLoading(false);
       });
   };
 
   //login with google
   const provider = new GoogleAuthProvider();
-  const loginWithG= ()=> {    
+  const loginWithG = () => {
     signInWithPopup(auth, provider)
-  .then((result) => {    
-    //const user = result.user;
-    
-    navigate("/")
-  }).catch((error) => {
-    toast.success(error.message);   
-  });
-  }
+      .then((result) => {
+        //const user = result.user;
 
-
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.success(error.message);
+      });
+  };
 
   return (
     <Helmet title="login">
-      
       {isLoading && <Loader />}
 
       <section className={`container ${styles.auth}`}>
@@ -70,7 +66,6 @@ const Login = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                
               />
               <input
                 type="password"
@@ -88,12 +83,15 @@ const Login = () => {
 
               <p>-- or --</p>
             </form>
-            <button className="--btn --btn-block --btn-danger" onClick={loginWithG}>
+            <button
+              className="--btn --btn-block --btn-danger"
+              onClick={loginWithG}
+            >
               <CgGoogle color="#fff" /> &ensp;Login With Google
-            </button>           
+            </button>            
             <span className={styles.register}>
-              <p>Don't have an account? </p>
-              <Link to="/register">&nbsp;Register</Link>
+              <p>Don't have an account? 
+              <Link to="/register" className="fw-bolder">&nbsp;&nbsp;Register</Link></p>
             </span>
           </div>
         </Card>
