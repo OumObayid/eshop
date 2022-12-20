@@ -32,11 +32,14 @@ const Stars = (props) => {
   };
 
   return (
-    <div>
-      <StarRatings
+    <div className="mt-2">
+      <StarRatings size={5}
         rating={props.stars}
         isSelectable={true}
         starRatedColor={"#FFCA2C"}
+        starHoverColor={"#D48443"}
+        starDimension={"25px"}
+        starSpacing={"1px"}
         isAggregateRating={false}
         changeRating={changeRating}
         numOfStars={6}

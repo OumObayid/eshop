@@ -51,7 +51,7 @@ const ProductDetails = () => {
     e.preventDefault();    
   };
 
-  console.log("rating",product.rating) 
+
 
 
   return (
@@ -70,7 +70,7 @@ const ProductDetails = () => {
               <Col lg="8" md="8" sm="12" xs="12" className=" mb-5 ps-5">                
                   <h2 className=" mb-3 border-2 border-bottom">{product.productName}</h2>
                   <span className="price fw-bold fs-4 mb-5">${product.price}</span>
-                  <Stars  id= {id} stars= {product.rating} vote= {product.vote} />
+                  <Stars   id= {id} stars= {product.rating} vote= {product.vote} />
                   <p className="my-5 ">
                     <span className="fw-bold me-3">Category: </span>
                     <span className="fs-4">{product.category}</span>
