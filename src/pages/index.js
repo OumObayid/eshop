@@ -10,5 +10,6 @@ export { default as Verifiemail } from "./auth/Verifiemail";
 export { default as NotFound } from "./notFound/NotFound";
 export { default as Checkout } from "./checkout/Checkout";
 export { default as Shop } from "./shop/Shop";
+export { default as ProductDetail } from "./productDetail/ProductDetail";
 
 

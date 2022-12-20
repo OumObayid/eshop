@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 //components
-import { Header, Footer,ProductDetail } from "./components";
+import { Header, Footer } from "./components";
 //pages
 import {
   Home,
@@ -13,7 +13,7 @@ import {
   Register,
   Reset,
   Verifiemail,
-  NotFound,Checkout
+  NotFound,Checkout,ProductDetail,
 } from "./pages";
 
 import { ToastContainer } from "react-toastify";

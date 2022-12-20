@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { cartActions } from "../../redux/cartSlice";
+import { cartActions } from "../../../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import "./CardProduct.css"
 

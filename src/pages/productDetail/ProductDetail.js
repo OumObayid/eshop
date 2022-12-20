@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 
-import { useParams } from "react-router-dom";
-import Helmet from "../Helmet/Helmet";
+import { Link, useParams } from "react-router-dom";
+import Helmet from "../../components/Helmet/Helmet";
 import { Container, Row, Col, Button } from "reactstrap";
 
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../redux/cartSlice";
 import { dataProducts } from "../../redux/dataSlice";
 import "./ProductDetail.css";
-import CardProduct from "../cardProduct/CardProduct";
+import CardProduct from "../../components/products/cardProduct/CardProduct";
+import {FaLongArrowAltLeft} from "react-icons/fa"
+import Stars from "../../components/stars/Stars";
 
 const ProductDetails = () => {
   const [tab, setTab] = useState("desc");
@@ -16,75 +18,84 @@ const ProductDetails = () => {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [reviewMsg, setReviewMsg] = useState("");
 
+
   const { id } = useParams();
   const dispatch = useDispatch();
 
   const products = useSelector(dataProducts);
 
-  const product = products.filter((item) => item.id === id);
+  const productId = products.filter((item) => item.id === id);
 
-  const { uid, productName, imgUrl, price, category, brand, desc } = product[0];
+  const product = productId[0];
 
   const relatedProduct = products.filter(
-    (item) => item.category === product[0].category
+    (item) => item.category === product.category
   );
 
   const addItem = () => {
     dispatch(
       cartActions.addItem({
         id,
-        productName,
-        price,
-        imgUrl,
+        productName: product.productName,
+        price: product.price,
+        imgUrl: product.imgUrl,
       })
     );
   };
-
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [product]);
   const submitHandler = (e) => {
-    e.preventDefault();
-
-    console.log(enteredName, enteredEmail, reviewMsg);
+    e.preventDefault();    
   };
+
+
+  console.log("rating",product.rating) 
+  console.log("vote",product.vote) 
+
+
   return (
     <Helmet title="Product-details">
       <section>
         <Container>
+          <div className="mb-4">
+          <h2>Product Details</h2>
+          <Link to="/shop"><FaLongArrowAltLeft/> <span className="back"> back to products</span></Link>
+          </div>
           <Row>
-            <Col lg="4" md="4">
-              <div className="product__main-img">
-                <img src={imgUrl} alt="" className="w-100" />
-              </div>
-            </Col>
+            <Row >
+              <Col lg="4" md="4" sm="12" xs="12" className=" mb-5 border">
+                  <img src={product.imgUrl} alt="" className="w-100" />
+              </Col>
+              <Col lg="8" md="8" sm="12" xs="12" className=" mb-5 ps-5">                
+                  <h2 className=" mb-3 border-2 border-bottom">{product.productName}</h2>
+                  <span className="price fw-bold fs-4 mb-5">${product.price}</span>
+                  <Stars  id= {id} stars= {product.rating} vote= {product.vote} />
+                  <p className="my-5 ">
+                    <span className="fw-bold me-3">Category: </span>
+                    <span className="fs-4">{product.category}</span>
+                  </p>
+                  <p className=" mb-5">
+                    <span className="fw-bold me-3">Brand: </span>
+                    <span className="fs-4">{product.brand}</span>
+                  </p>
+                  <Button className="fs-5" onClick={addItem} color="warning">
+                    Add to Cart
+                  </Button>                
+              </Col>
+            </Row>
 
-            <Col lg="6" md="6">
-              <div className="single__product-content">
-                <h2 className="product__title mb-3">{productName}</h2>
-                <p className="product__price">
-                  Price: <span>${price}</span>
-                </p>
-                <p className="category mb-5">
-                  Category: <span>{category}</span>
-                </p>
-
-                <Button onClick={addItem} color="warning">
-                  Add to Cart
-                </Button>
-              </div>
-            </Col>
-           
             <Col lg="12">
-              <div className="tabs d-flex align-items-center gap-5 py-3">
+              <div className="tabs d-flex align-items-center gap-5 ">
                 <h5
-                  className={` ${tab === "desc" ? "tab__active" : ""}`}
+                  className={`fs-4 ${tab === "desc" ? "tab__active" : ""}`}
                   onClick={() => setTab("desc")}
                 >
                   Description
                 </h5>
                 <h5
-                  className={` ${tab === "rev" ? "tab__active" : ""}`}
+                  className={`fs-4 ${tab === "rev" ? "tab__active" : ""}`}
                   onClick={() => setTab("rev")}
                 >
                   Review
@@ -93,7 +104,7 @@ const ProductDetails = () => {
 
               {tab === "desc" ? (
                 <div className="tab__content">
-                  <p className="fs-4">{desc}</p>
+                  <p className="fs-4">{product.desc}</p>
                 </div>
               ) : (
                 <div className="tab__form mb-3">

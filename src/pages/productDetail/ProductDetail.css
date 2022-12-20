@@ -1,7 +1,13 @@
 .single__product-content {
   padding-left: 50px;
 }
-
+.price{
+  color:#e28743
+}
+.back:hover{
+color:#e28743;
+cursor: pointer;
+}
 .product__price {
   display: flex;
   align-items: center;
@@ -46,7 +52,7 @@
 }
 
 .tab__active {
-  color: #df2020;
+  color: #e28743;
 }
 
 .form {
