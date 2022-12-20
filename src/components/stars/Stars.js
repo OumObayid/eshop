@@ -4,6 +4,7 @@ import { setRating } from "../../redux/dataSlice";
 import { useDispatch } from "react-redux";
 import { db } from "../../firebase/config";
 import { doc, updateDoc } from "firebase/firestore";
+import {RiArrowDropDownLine} from "react-icons/ri"
 
 const Stars = (props) => {
   const [rat, setRat] = useState(props.stars);
@@ -18,7 +19,7 @@ const Stars = (props) => {
     dispatch(
       setRating({ id: props.id, rating: newRating, vote: props.vote + 1 })
     );
-    
+
     const docRef = doc(db, "products", props.id);
     updateDoc(docRef, { rating: newRating, vote: props.vote + 1 })
       .then((docRef) => {
@@ -30,20 +31,27 @@ const Stars = (props) => {
         console.log(error);
       });
   };
-
+  let res = Math.round(props.stars * 10) / 10;
   return (
-    <div className="mt-2">
-      <StarRatings size={5}
-        rating={props.stars}
-        isSelectable={true}
-        starRatedColor={"#FFCA2C"}
-        starHoverColor={"#D48443"}
-        starDimension={"25px"}
-        starSpacing={"1px"}
-        isAggregateRating={false}
-        changeRating={changeRating}
-        numOfStars={6}
-      />
+    <div className="d-flex justify-content-start  mt-3 ">
+      <div className=" mb-2 me-2 d-flex align-items-end ">
+        <StarRatings
+          rating={props.stars}
+          isSelectable={true}
+          starRatedColor={"#FFCA2C"}
+          starHoverColor={"#D48443"}
+          starDimension={"16px"}
+          starSpacing={"1px"}
+          isAggregateRating={false}
+          changeRating={changeRating}
+          numOfStars={6}
+        />       
+      </div>
+      <span className="fs-4 d-flex align-items-end  ">{res}<RiArrowDropDownLine size={20}/></span>
+        
+      <span className="fs-4  d-flex align-items-end ">      
+        {props.vote} Reviews
+      </span>
     </div>
   );
 };
