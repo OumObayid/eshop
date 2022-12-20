@@ -44,15 +44,14 @@ const ProductDetails = () => {
   };
   
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0);  
   }, [product]);
+
   const submitHandler = (e) => {
     e.preventDefault();    
   };
 
-
   console.log("rating",product.rating) 
-  console.log("vote",product.vote) 
 
 
   return (

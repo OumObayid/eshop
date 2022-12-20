@@ -23,14 +23,18 @@ const dataSlice = createSlice({
           category: newProduct.category,
           brand: newProduct.brand,
           desc: newProduct.desc,
-          stars: newProduct.stars,
+          rating: newProduct.rating,
+          vote: newProduct.vote,
         });
       }
     },
     setRating: (state, action) => {     
-      const {id,stars} = action.payload;     
+      const {id,rating,vote} = action.payload;     
       const existingProduct = state.products.find((item) => item.id === id);
-      if (existingProduct) existingProduct.stars=stars   
+      if (existingProduct) {
+        existingProduct.rating=rating   
+        existingProduct.vote=vote   
+      }
     },
     deleteProduct(state, action) {
       const id = action.payload;
