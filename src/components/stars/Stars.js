@@ -7,6 +7,9 @@ import { doc, updateDoc } from "firebase/firestore";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Tooltip from "react-tooltip-lite";
 import "./Stars.css";
+import { Link } from "react-router-dom";
+
+
 const Stars = (props) => {
   const [rat, setRat] = useState(props.stars);
   const [vote, setvote] = useState(props.vote);
@@ -55,58 +58,63 @@ const Stars = (props) => {
           </svg>
         }
         content={
-          <ul className="customer-reviews">
-            <li className="customer-reviews-item flex">
-              <div className="customer-reviews-stars">5 Stars </div>
-              <div className="customer-reviews-slide">
+          <div>
+          <ul className="customer-reviews p-0">            
+            <li className="customer-reviews-item d-flex justify-content-center m-0 p-0">
+              <div className="customer-reviews-stars ">5 Stars </div>
+              <div className="customer-reviews-slide p-0">
                 <span
-                  className="customer-reviews-score"
-                  style={{ width: "81%" ,backgroundColor:"red"}}
+                  className="customer-reviews-score "
+                  style={{ width: "81%"}}
                 ></span>
               </div>
-              <div className="customer-reviews-per">81%</div>
+              <div className="customer-reviews-per ">81%</div>
             </li>
-            <li className="customer-reviews-item flex">
-              <div className="customer-reviews-stars">4 Stars </div>
-              <div className="customer-reviews-slide">
+            <li className="customer-reviews-item d-flex justify-content-center m-0 p-0">
+              <div className="customer-reviews-stars ">4 Stars </div>
+              <div className="customer-reviews-slide p-0">
                 <span
                   className="customer-reviews-score"
-                  style={{ width: "12%" }}
+                  style={{ width: "12%"}}
                 ></span>
               </div>
-              <div className="customer-reviews-per">12%</div>
+              <div className="customer-reviews-per ">12%</div>
             </li>
-            <li className="customer-reviews-item flex">
-              <div className="customer-reviews-stars">3 Stars </div>
-              <div className="customer-reviews-slide">
+            <li className="customer-reviews-item d-flex justify-content-center m-0 p-0">
+              <div className="customer-reviews-stars ">3 Stars </div>
+              <div className="customer-reviews-slide p-0">
                 <span
                   className="customer-reviews-score"
-                  style={{ width: "3%" }}
+                  style={{ width: "3%"}}
                 ></span>
               </div>
-              <div className="customer-reviews-per">3%</div>
+              <div className="customer-reviews-per ">3%</div>
             </li>
-            <li className="customer-reviews-item flex">
-              <div className="customer-reviews-stars">2 Stars </div>
-              <div className="customer-reviews-slide">
+           
+            <li className="customer-reviews-item d-flex justify-content-center m-0 p-0">
+              <div className="customer-reviews-stars ">2 Stars </div>
+              <div className="customer-reviews-slide p-0">
                 <span
                   className="customer-reviews-score"
-                  style={{ width: "1%" }}
+                  style={{ width: "1%"}}
                 ></span>
               </div>
-              <div className="customer-reviews-per">1%</div>
+              <div className="customer-reviews-per ">1%</div>
             </li>
-            <li className="customer-reviews-item flex">
-              <div className="customer-reviews-stars">1 Stars </div>
-              <div className="customer-reviews-slide">
+            <li className="customer-reviews-item d-flex justify-content-center m-0 p-0">
+              <div className="customer-reviews-stars ">1 Stars </div>
+              <div className="customer-reviews-slide p-0">
                 <span
                   className="customer-reviews-score"
-                  style={{ width: "3%" }}
+                  style={{ width: "3%"}}
                 ></span>
               </div>
-              <div className="customer-reviews-per">3%</div>
+              <div className="customer-reviews-per ">3%</div>
             </li>
+            
           </ul>
+          <Link to="/" className="text-primary allviewlink">View All Reviews</Link>
+          </div>
         }
       >
         <div className="d-flex justify-content-start  mt-3 ">
