@@ -28,7 +28,6 @@ const dataSlice = createSlice({
           rating3: newProduct.rating3,
           rating4: newProduct.rating4,
           rating5: newProduct.rating5,
-          reviews: newProduct.reviews
         });
       }
     },

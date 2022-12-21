@@ -124,7 +124,7 @@ const Stars = (props) => {
     width: per1+"%"
   };
  
-  console.log('product :', product);
+  console.log('stylePer5 :', stylePer5);
   
   return (
     <div className="d-flex justify-content-start  mt-3 ">
@@ -234,11 +234,10 @@ const Stars = (props) => {
       </Tooltip>
 
       <span
-        className="fs-4 ms-3 d-flex align-items-end allviewlink"
-        style={{cursor: "pointer"}}
+        className="fs-4 ms-5 d-flex align-items-end allviewlink"
         onClick={viewAllrev}
       >
-       {product.reviews.length}  Reviews
+         Reviews
       </span>
     </div>
   );

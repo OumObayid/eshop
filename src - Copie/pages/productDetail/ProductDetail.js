@@ -107,14 +107,23 @@ const ProductDetails = () => {
                 </div>
               ) : (
                 <div className="tab__form mb-3">
-                  {product.reviews.map((item) => (
-                    <div className="review">
-                    <p className="user__name mb-0">{item.name}</p>
-                    <p className="user__email">{item.email}</p>
-                    <p className="feedback__text">{item.review}</p>
+                  <div className="review pt-5">
+                    <p className="user__name mb-0">Jhon Doe</p>
+                    <p className="user__email">jhon1@gmail.com</p>
+                    <p className="feedback__text">great product</p>
                   </div>
-            ))}
-                  
+
+                  <div className="review">
+                    <p className="user__name mb-0">Jhon Doe</p>
+                    <p className="user__email">jhon1@gmail.com</p>
+                    <p className="feedback__text">great product</p>
+                  </div>
+
+                  <div className="review">
+                    <p className="user__name mb-0">Jhon Doe</p>
+                    <p className="user__email">jhon1@gmail.com</p>
+                    <p className="feedback__text">great product</p>
+                  </div>
                   <form className="form" onSubmit={submitHandler}>
                     <div className="form__group">
                       <input
