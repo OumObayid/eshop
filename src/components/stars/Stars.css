@@ -62,5 +62,6 @@
 
 
 .allviewlink:hover{
-  color:#E28743 !important
+  color:#E28743 !important;
+  cursor:pointer !important;
 }

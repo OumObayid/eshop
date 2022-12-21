@@ -51,7 +51,7 @@ const ProductDetails = () => {
     e.preventDefault();    
   };
 
-
+  const setTabRev=() => setTab("rev")
 
 
   return (
@@ -65,12 +65,12 @@ const ProductDetails = () => {
           <Row>
             <Row >
               <Col lg="4" md="4" sm="12" xs="12" className=" mb-5 border">
-                  <img src={product.imgUrl} alt="" className="w-100" />
+                  <figure><img src={product.imgUrl} alt="" className="w-100" /></figure>
               </Col>
               <Col lg="8" md="8" sm="12" xs="12" className=" mb-5 ps-5">                
                   <h2 className=" mb-3 border-2 border-bottom">{product.productName}</h2>
                   <span className="price fw-bold fs-4 mb-5">${product.price}</span>
-                  <Stars   id= {id} stars= {product.rating} vote= {product.vote} />
+                  <Stars   id= {id} stars= {product.rating} vote= {product.vote} handleTab={setTabRev}/>
                   <p className="my-5 ">
                     <span className="fw-bold me-3">Category: </span>
                     <span className="fs-4">{product.category}</span>
@@ -86,15 +86,15 @@ const ProductDetails = () => {
             </Row>
 
             <Col lg="12">
-              <div className="tabs d-flex align-items-center gap-5 ">
+              <div className="tabs d-flex align-items-center gap-5 border-bottom">
                 <h5
-                  className={`fs-4 ${tab === "desc" ? "tab__active" : ""}`}
+                  className={`cursor fs-4 ${tab === "desc" ? "tab__active" : ""}`}
                   onClick={() => setTab("desc")}
                 >
                   Description
                 </h5>
                 <h5
-                  className={`fs-4 ${tab === "rev" ? "tab__active" : ""}`}
+                  className={` cursor fs-4 ${tab === "rev" ? "tab__active" : ""}`}
                   onClick={() => setTab("rev")}
                 >
                   Review
@@ -162,7 +162,7 @@ const ProductDetails = () => {
             </Col>
 
             <Col lg="12" className="mb-5 mt-4">
-              <h2 className="related__Product-title">You might also like</h2>
+              <h2 className="related__Product-title"><span className="border-bottom"> You might also like</span></h2>
             </Col>
 
             {relatedProduct.map((item) => (

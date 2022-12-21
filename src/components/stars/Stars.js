@@ -36,6 +36,11 @@ const Stars = (props) => {
       });
   };
   let res = Math.round(props.stars * 10) / 10;
+
+  const viewAllrev = () => {
+    props.handleTab();
+    window.scrollTo(0,410)
+  }
   return (
     <div className="d-flex justify-content-start  mt-3 ">
       <Tooltip
@@ -61,59 +66,59 @@ const Stars = (props) => {
           <div>
           <ul className="customer-reviews p-0">            
             <li className="customer-reviews-item d-flex justify-content-center m-0 p-0">
-              <div className="customer-reviews-stars ">5 Stars </div>
+              <div className="customer-reviews-stars ">★★★★★</div>
               <div className="customer-reviews-slide p-0">
                 <span
                   className="customer-reviews-score "
                   style={{ width: "81%"}}
                 ></span>
               </div>
-              <div className="customer-reviews-per ">81%</div>
+              <div className="customer-reviews-per fw-bold">81%</div>
             </li>
             <li className="customer-reviews-item d-flex justify-content-center m-0 p-0">
-              <div className="customer-reviews-stars ">4 Stars </div>
+              <div className="customer-reviews-stars ">★★★★</div>
               <div className="customer-reviews-slide p-0">
                 <span
                   className="customer-reviews-score"
                   style={{ width: "12%"}}
                 ></span>
               </div>
-              <div className="customer-reviews-per ">12%</div>
+              <div className="customer-reviews-per fw-bold">12%</div>
             </li>
             <li className="customer-reviews-item d-flex justify-content-center m-0 p-0">
-              <div className="customer-reviews-stars ">3 Stars </div>
+              <div className="customer-reviews-stars ">★★★</div>
               <div className="customer-reviews-slide p-0">
                 <span
                   className="customer-reviews-score"
                   style={{ width: "3%"}}
                 ></span>
               </div>
-              <div className="customer-reviews-per ">3%</div>
+              <div className="customer-reviews-per fw-bold">3%</div>
             </li>
            
             <li className="customer-reviews-item d-flex justify-content-center m-0 p-0">
-              <div className="customer-reviews-stars ">2 Stars </div>
+              <div className="customer-reviews-stars ">★★</div>
               <div className="customer-reviews-slide p-0">
                 <span
                   className="customer-reviews-score"
                   style={{ width: "1%"}}
                 ></span>
               </div>
-              <div className="customer-reviews-per ">1%</div>
+              <div className="customer-reviews-per fw-bold">1%</div>
             </li>
             <li className="customer-reviews-item d-flex justify-content-center m-0 p-0">
-              <div className="customer-reviews-stars ">1 Stars </div>
+              <div className="customer-reviews-stars ">★</div>
               <div className="customer-reviews-slide p-0">
                 <span
                   className="customer-reviews-score"
                   style={{ width: "3%"}}
                 ></span>
               </div>
-              <div className="customer-reviews-per ">3%</div>
+              <div className="customer-reviews-per fw-bold">3%</div>
             </li>
             
           </ul>
-          <Link to="/" className="text-primary allviewlink">View All Reviews</Link>
+          <span onClick={viewAllrev} className="text-primary allviewlink fs-5">View All Reviews</span>
           </div>
         }
       >
@@ -138,7 +143,7 @@ const Stars = (props) => {
         </div>
       </Tooltip>
 
-      <span className="fs-4 ms-5 d-flex align-items-end ">
+      <span className="fs-4 ms-5 d-flex align-items-end allviewlink" onClick={viewAllrev}>
         {props.vote} Reviews
       </span>
     </div>

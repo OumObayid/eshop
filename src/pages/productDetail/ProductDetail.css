@@ -53,6 +53,10 @@ cursor: pointer;
 
 .tab__active {
   color: #e28743;
+  border: 1px solid #e28743;
+  padding: 5px;
+  margin: 0;
+  border-bottom: 0;
 }
 
 .form {
@@ -155,4 +159,17 @@ cursor: pointer;
   .fontResp{
     font-size: 24px !important;
   }
+}
+
+.cursor{
+  cursor:pointer
+}
+
+figure img {
+  margin-top: 18px;
+	transform: scale(0.95);
+	transition: .3s ease-in-out;
+}
+figure:hover img {
+	transform: scale(1.05);
 }
