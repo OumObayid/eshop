@@ -124,7 +124,6 @@ const Stars = (props) => {
     width: per1+"%"
   };
  
-  console.log('product :', product);
   
   return (
     <div className="d-flex justify-content-start  mt-3 ">

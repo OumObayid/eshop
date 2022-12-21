@@ -62,9 +62,11 @@ cursor: pointer;
 .form {
   width: 60%;
   margin: auto;
-  background: #fde4e4;
+  background: #f8f4f1;
   padding: 20px;
   border-radius: 5px;
+  font-size: 1.2rem;
+   
 }
 
 .form__group {
@@ -90,7 +92,7 @@ cursor: pointer;
 }
 
 .user__email {
-  font-size: 0.8rem;
+  font-size: 1.2rem;
 }
 
 .feedback__text {

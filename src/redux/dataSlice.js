@@ -57,7 +57,19 @@ const dataSlice = createSlice({
         }       
       }
     },
-    deleteProduct(state, action) {
+    productAddReview:(state,action) => {
+     const id = action.payload.id;
+     const itemReview = action.payload.review;
+     const existingProduct = state.products.find((item) => item.id === id);
+      if (existingProduct) {
+        existingProduct.reviews.push({
+          name: itemReview.name,
+          email: itemReview.email,
+          review: itemReview.review
+        })
+      }
+    },
+    deleteProduct:(state, action) => {
       const id = action.payload;
       const existingProduct = state.products.find((item) => item.id === id);
       if (existingProduct)
@@ -67,7 +79,7 @@ const dataSlice = createSlice({
 });
 
 //exporter les actions a appeler
-export const { addProduct, setRating, deleteProduct } = dataSlice.actions;
+export const { addProduct, setRating,productAddReview, deleteProduct } = dataSlice.actions;
 //select variables od state
 export const dataProducts = (state) => state.data.products;
 
