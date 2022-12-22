@@ -1,0 +1,22 @@
+.checkout__bill {
+  background: #e28743;
+  padding: 30px;
+  color: #0A1930;
+  font-size: 24px !important;
+}
+
+.checkout__total {
+  border-top: 1px solid rgb(255, 255, 255);
+  padding-top: 30px;
+}
+.checkout__form{
+  font-size: 1.4rem;
+}
+@media only screen and (max-width: 768px) {
+  .checkout__bill h2 {
+    font-size: 0.9rem;
+  }
+  .checkout__bill {
+    margin-top: 40px;
+  }
+}

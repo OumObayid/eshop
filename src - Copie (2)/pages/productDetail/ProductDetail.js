@@ -27,7 +27,6 @@ const ProductDetails = () => {
   const productId = products.filter((item) => item.id === id);
 
   const product = productId[0];
-  console.log('product :', product);
 
   const relatedProduct = products.filter(
     (item) => item.category === product.category
