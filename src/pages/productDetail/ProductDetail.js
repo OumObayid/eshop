@@ -48,11 +48,11 @@ const ProductDetails = () => {
     window.scrollTo(0, 0);
   }, [product]);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     //firebase
     const docRef = doc(db, "products", product.id);
-    updateDoc(docRef, {
+   await updateDoc(docRef, {
       reviews: arrayUnion({
         name: enteredName,
         email: enteredEmail,
@@ -128,7 +128,7 @@ const ProductDetails = () => {
             <Col lg="12">
               <div className="tabs d-flex align-items-center gap-5 border-bottom">
                 <h5
-                  className={`cursor fs-4 ${
+                  className={`allviewlink  fs-4 ${
                     tab === "desc" ? "tab__active" : ""
                   }`}
                   onClick={() => setTab("desc")}
@@ -136,7 +136,7 @@ const ProductDetails = () => {
                   Description
                 </h5>
                 <h5
-                  className={` cursor fs-4 ${
+                  className={`allviewlink  fs-4 ${
                     tab === "rev" ? "tab__active" : ""
                   }`}
                   onClick={() => setTab("rev")}
@@ -153,10 +153,10 @@ const ProductDetails = () => {
                 <div className="tab__form my-3">
                   {product.reviews
                     ? product.reviews.map((item) => (
-                        <div className="review border-bottom w-25 mb-2">
-                          <p className="user__name mb-0 ">{item.name}</p>
-                          <p className="user__email">{item.email}</p>
-                          <p className="feedback__text">{item.review}</p>
+                        <div className=" border-bottom w-100 mb-2">
+                          <p className="user__name mb-0 fs-4">{item.name}</p>
+                          <p className="user__email fs-4">{item.email}</p>
+                          <p className="feedback__text fs-4">{item.review}</p>
                         </div>
                       ))
                     : ""}
@@ -166,8 +166,8 @@ const ProductDetails = () => {
                       height: "1px",
                     }}
                   />
-                  <form className="form shadow" onSubmit={submitHandler}>
-                    <div className="form__group">
+                  <form className="form shadow " onSubmit={submitHandler}>
+                    <div className="form__group ">
                       <input
                         type="text"
                         placeholder="Enter your name"

@@ -11,5 +11,9 @@ export { default as NotFound } from "./notFound/NotFound";
 export { default as Checkout } from "./checkout/Checkout";
 export { default as Shop } from "./shop/Shop";
 export { default as ProductDetail } from "./productDetail/ProductDetail";
+export { default as About } from "./about/About";
+export { default as Terms } from "./terms/Terms";
+export { default as Policy } from "./policy/Policy";
+export { default as Services } from "./services/Service";
 
 

@@ -5,6 +5,10 @@ import { Header, Footer } from "./components";
 import {
   Home,
   Shop,
+  Services,
+  About,
+  Terms,
+  Policy,
   Cart,
   Contact,
   OrderHistory,
@@ -35,6 +39,10 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/eshop" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/policy" element={<Policy />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order-history" element={<OrderHistory />} />

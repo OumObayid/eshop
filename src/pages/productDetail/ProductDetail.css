@@ -4,6 +4,7 @@
 .price{
   color:#e28743
 }
+
 .back:hover{
 color:#e28743;
 cursor: pointer;
@@ -163,9 +164,7 @@ cursor: pointer;
   }
 }
 
-.cursor{
-  cursor:pointer
-}
+
 
 figure img {
   margin-top: 18px;
@@ -174,4 +173,13 @@ figure img {
 }
 figure:hover img {
 	transform: scale(1.05);
+}
+
+.allviewlink{
+  cursor:pointer !important;
+  cursor : arrow
+}
+.allviewlink:hover{
+  color:#E28743 !important;
+  
 }

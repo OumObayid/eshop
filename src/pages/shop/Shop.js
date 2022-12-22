@@ -9,8 +9,8 @@ import { addProduct } from "../../redux/dataSlice";
 import { useDispatch } from "react-redux";
 import Helmet from "../../components/Helmet/Helmet";
 import CardProduct from "../../components/products/cardProduct/CardProduct";
-import CardProductRow from "../../components/products/cardProductRow/CardProductRow"
-
+import CardProductRow from "../../components/products/cardProductRow/CardProductRow";
+import Top from "../../assets/Top-Button.png"
 const Shop = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
@@ -46,7 +46,7 @@ const Shop = () => {
   const rangeValInit = { min: 0, max: 4500 };
   const [selectProducts, setSelectProducts] = useState("data");
 
-  //display 
+  //display
   const [isDisplayList, setIsDisplayList] = useState(false);
   /////////////////////////////////////////////////////////////starting features
 
@@ -107,11 +107,11 @@ const Shop = () => {
 
   /////////////////////////////////////////////////////////////////To display list or no list
   const NodisplayList = () => {
-    setIsDisplayList(false)
-  }
+    setIsDisplayList(false);
+  };
   const displayList = () => {
-    setIsDisplayList(true)
-  }
+    setIsDisplayList(true);
+  };
   //////////////////////////////////////////////////////////////////to search data
   const handlSearch = (e) => {
     //preparation
@@ -400,26 +400,38 @@ const Shop = () => {
               handleSort,
               valueSelectSort,
               NodisplayList,
-              displayList
+              displayList,
             ]}
           />
           <Row className=" d-flex justify-content-between row">
-           
-            { isDisplayList 
-            ? containerData.map((item) => (
-             <Col lg="12" md="12" sm="12" xs="12" className="mb-3"  key={item.id}>
-                <CardProductRow item={item} />
-              </Col>
-            ))
-            : containerData.map((item) => (
-              <Col lg="3" md="4" sm="6" xs="6" className="mb-4" key={item.id}>
-                 <CardProduct item={item} />
-               </Col>
-             ))
-          }
+            {isDisplayList
+              ? containerData.map((item) => (
+                  <Col
+                    lg="12"
+                    md="12"
+                    sm="12"
+                    xs="12"
+                    className="mb-3"
+                    key={item.id}
+                  >
+                    <CardProductRow item={item} />
+                  </Col>
+                ))
+              : containerData.map((item) => (
+                  <Col
+                    lg="3"
+                    md="4"
+                    sm="6"
+                    xs="6"
+                    className="mb-4"
+                    key={item.id}
+                  >
+                    <CardProduct item={item} />
+                  </Col>
+                ))}
           </Row>
         </div>
-      </div>
+      </div>     
     </Helmet>
   );
 };
