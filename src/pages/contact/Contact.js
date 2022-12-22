@@ -9,7 +9,7 @@ const Contact = () => {
         <div className="h3 text-center  mb-4 title mt-4 d-flex align-items-center justify-content-center">
           <strong>Let's Get In Touch</strong>
         </div>
-        <div className="container card p-4 ">
+        <div className="container  p-4 ">
           <div className="section-title mt-3 text-center">
             <p>
               Convinced to start an interview with us? Send us a message and
