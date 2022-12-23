@@ -1,30 +1,30 @@
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import Slide from '@mui/material/Slide';
-import { forwardRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import Slide from "@mui/material/Slide";
+import { forwardRef } from "react";
+import { useDispatch } from "react-redux";
+import { cartUiActions } from "../../redux/cartUiSlice";
+import "./AlertDialogSlide.css";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
- const AlertDialogSlide = (props) => {
-
-  const navigate = useNavigate();
- 
-const handleViewCart = () => {
-  
-  navigate('/cart');
-  props.handleClose();
-}
+const AlertDialogSlide = (props) => {
+  const dispatch = useDispatch();
+  const toggleCart = () => {
+    props.handleClose();
+    dispatch(cartUiActions.toggle());
+  };
+  // const handleViewCart = () => {
+  //   props.handleClose();
+  //   setInterval(()=>{})
+  //   navigate("/cart");
+  // };
   return (
     <div>
-      
       <Dialog
         open={props.isOpen}
         TransitionComponent={Transition}
@@ -32,20 +32,44 @@ const handleViewCart = () => {
         onClose={props.handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        {/* <DialogTitle>{"Use Google's location service?"}</DialogTitle> */}
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-          A new Product has been added to your Shopping Cart. You now have {props.cartLenth} type of product in your Shopping Cart.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={props.handleClose}>Continue Shoping</Button>
-          {/* <Link to="/cart"><Button>View Shoping Cart</Button></Link> */}
-          <Button onClick={handleViewCart}>View Shoping Cart</Button>
-        </DialogActions>
+        
+          <DialogContent>
+            <DialogContentText
+              id="alert-dialog-slide-description"
+              className="fs-4"
+            >
+              <p>
+                <i
+                  className="fa fa-shopping-cart me-3 cartAlert fs-1"
+                  aria-hidden="true"
+                ></i>
+                A new Product has been added to your Shopping Cart. You now have{" "}
+                {props.cartLenth} type(s) of product in your Shopping Cart.
+              </p>
+            </DialogContentText>
+            <hr style={{ backgroundColor: "#434341", width: "100%" }} />
+
+          </DialogContent>
+          <DialogActions>
+            <button
+              type="button"
+              className="btn btnCart rounded-1 fs-5 me-4 mb-3"
+              onClick={toggleCart}
+            >
+              View Shoping Cart
+            </button>
+            <button
+              type="button"
+              className="btn btnClose rounded-1 fs-5 me-4 mb-3"
+              onClick={props.handleClose}
+            >
+              Continue Shoping
+            </button>
+          </DialogActions>
+       
       </Dialog>
     </div>
   );
-}
+};
 
-export default AlertDialogSlide
+export default AlertDialogSlide;
