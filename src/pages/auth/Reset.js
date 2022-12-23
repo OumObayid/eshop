@@ -2,12 +2,11 @@ import React , {useState} from "react";
 import styles from "./Auth.module.scss";
 import resetImg from "../../assets/reset.png";
 import { Link,useNavigate } from "react-router-dom";
-import { Card } from "../../components";
+import { Card,Loader } from "../../components";
 import { auth } from "../../firebase/config";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Loader from "../../components/loader/Loader";
 
 const Reset = () => {
   //state for email

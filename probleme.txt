@@ -4,3 +4,6 @@
 -partie admin
 -editer rangeMax et rangMin pour chaque type de donnees: seraching, category et brand
 -probleme voir console, lors du refresh
+
+- responsive
+- set titre pour chaque requete dans shop.js

@@ -1,5 +1,7 @@
 import React from 'react'
-import Helmet from '../../components/Helmet/Helmet'
+import { Helmet } from '../../components'
+
+
 const OrderHistory = () => {
   return (
     <Helmet title="OrderHistory">

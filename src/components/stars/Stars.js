@@ -158,7 +158,7 @@ const Stars = (props) => {
                    
                   ></span>
                 </div>
-                <div className="customer-reviews-per fw-bold text-end pe-2">{per5}</div>
+                <div className="customer-reviews-per fw-bold text-end px-1 my-1">{per5} %</div>
               </li>
               <li className="customer-reviews-item d-flex justify-content-center m-0 p-0">
                 <div className="customer-reviews-stars" style={{color:"#629973"}}>★★★★</div>
@@ -168,7 +168,7 @@ const Stars = (props) => {
                     style={stylePer4}
                   ></span>
                 </div>
-                <div className="customer-reviews-per fw-bold text-end pe-2">{per4}</div>
+                <div className="customer-reviews-per fw-bold text-end px-1 my-1">{per4} %</div>
               </li>
               <li className="customer-reviews-item d-flex justify-content-center m-0 p-0">
                 <div className="customer-reviews-stars" style={{color:"#629973"}}>★★★</div>
@@ -178,7 +178,7 @@ const Stars = (props) => {
                     style={stylePer3}
                   ></span>
                 </div>
-                <div className="customer-reviews-per fw-bold text-end pe-2">{per3}</div>
+                <div className="customer-reviews-per fw-bold text-end px-1 my-1">{per3} %</div>
               </li>
 
               <li className="customer-reviews-item d-flex justify-content-center m-0 p-0">
@@ -189,7 +189,7 @@ const Stars = (props) => {
                     style={stylePer2}
                   ></span>
                 </div>
-                <div className="customer-reviews-per fw-bold text-end pe-2">{per2}</div>
+                <div className="customer-reviews-per fw-bold text-end px-1 my-1">{per2} %</div>
               </li>
               <li className="customer-reviews-item d-flex justify-content-center m-0 p-0">
                 <div className="customer-reviews-stars" style={{color:"#629973"}}>★</div>
@@ -199,7 +199,7 @@ const Stars = (props) => {
                     style={stylePer1}
                   ></span>
                 </div>
-                <div className="customer-reviews-per fw-bold text-end pe-2">{per1}</div>
+                <div className="customer-reviews-per fw-bold text-end pe-1">{per1} %</div>
               </li>
             </ul>
             <span

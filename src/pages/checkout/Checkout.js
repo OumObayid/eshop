@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Container, Row, Col, Button } from "reactstrap";
-import Helmet from "../../components/Helmet/Helmet";
+import {Helmet} from "../../components";
 import "./checkout.css";
 
 const Checkout = () => {

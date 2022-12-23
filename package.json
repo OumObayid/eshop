@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "https://oumobayid.github.io/eshop",
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.10.17",
     "@reduxjs/toolkit": "^1.9.0",
     "@testing-library/jest-dom": "^5.16.0",
@@ -16,6 +18,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.6.0",
+    "react-js-dialog-box": "^1.1.6",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.0",

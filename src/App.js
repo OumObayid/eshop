@@ -1,15 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 //components
-import { Header, Footer } from "./components";
+import { Header, Footer, Carts } from "./components";
 //pages
 import {
   Home,
   Shop,
   Services,
-  About,
   Terms,
   Policy,
-  Cart,
   Contact,
   OrderHistory,
   Admin,
@@ -17,16 +15,17 @@ import {
   Register,
   Reset,
   Verifiemail,
-  NotFound,Checkout,ProductDetail,
+  NotFound,
+  Checkout,
+  ProductDetail,
 } from "./pages";
 
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
-import {cartIsVisible} from "./redux/cartUiSlice"; 
-import Carts from "./components/cart/Carts";
+import { cartIsVisible } from "./redux/cartUiSlice";
 
 function App() {
-  const showCart = useSelector(cartIsVisible)
+  const showCart = useSelector(cartIsVisible);
 
   return (
     <BrowserRouter>
@@ -38,12 +37,12 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/eshop" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/about" element={<About />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/policy" element={<Policy />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<Carts />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order-history" element={<OrderHistory />} />
         <Route path="/admin" element={<Admin />} />

@@ -1,18 +1,17 @@
 import React from "react";
-import Helmet from "../../components/Helmet/Helmet";
-
+import {Helmet} from "../../components";
 import "./Contact.css";
 const Contact = () => {
   return (
     <Helmet title="contact">
-      <section className=" contact " id="contact">
+      <section className=" contact" id="contact">
         <div className="h3 text-center  mb-4 title mt-4 d-flex align-items-center justify-content-center">
           <strong>Let's Get In Touch</strong>
         </div>
         <div className="container  p-4 ">
-          <div className="section-title mt-3 text-center">
-            <p>
-              Convinced to start an interview with us? Send us a message and
+          <div className="section-title mb-5 text-center ">
+            <p className="fs-3">
+              Convinced to start an interview with us? <br />Send us a message and
               we'll get back to you as soon as possible!
             </p>
           </div>
@@ -48,7 +47,7 @@ const Contact = () => {
                 <h5>
                   <strong>Call Us</strong>
                 </h5>
-                <p>+212 555 555</p>
+                <p>+212 555 555 555</p>
               </div>
             </div>
           </div>
@@ -59,7 +58,7 @@ const Contact = () => {
                 className="shadow col-12 mb-3 p-3"
                 name="contact"
                 method="post"
-                action="php/mail.php"
+                action="#"
               >
                 <div className="form-row row">
                   <div className="input-icons col-md-6 form-group mb-4">
@@ -117,11 +116,9 @@ const Contact = () => {
             <div className="shadow map mb-3 col-lg-6 p-0 ">              
               <iframe
                 title="adress"
-                class="shadow-card "
-                src="https://maps.google.com/maps?q=45,%20Boulevard%20Hassan%20II%20casablanca&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                frameborder="0"
-                style={{ width: "100%", height: "335px",  }}
-                allowfullscreen
+                className="shadow-card "
+                src="https://maps.google.com/maps?q=45,%20Boulevard%20Hassan%20II%20casablanca&t=&z=13&ie=UTF8&iwloc=&output=embed"        
+                style={{ width: "100%", height: "335px",  }}                
               ></iframe>
             </div>
           </div>

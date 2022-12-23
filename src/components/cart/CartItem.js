@@ -28,25 +28,23 @@ const CartItem = ({ item }) => {
   const deletItem = () => {
     dispatch(deleteItem(id));
   };
-
   return (
     <ListGroupItem className="border-0 cart__item">
-      <div className="cart__item-info d-flex gap-2">
-        <img src={img} alt="product-img" />
-
-        <div className="cart__product-info w-100 d-flex align-items-center gap-4 justify-content-between">
+      <div className="cart__item-info d-flex gap-4">
+        <div><img src={img} alt="product-img"/></div>
+        <div className="cart__product-info w-100 d-flex align-items-center gap-4 justify-content-between ">
           <div>
-            <h6 className="cart__product-title">{title}</h6>
-            <p className=" d-flex align-items-center gap-5 cart__product-price">
-              {quantity}x <span>${totalPrice}</span>
+            <span className="fw-bolder fs-5  ">{title}</span>
+            <p className=" d-flex align-items-center gap-5 fs-5 ">
+              {quantity} x <span>${totalPrice}</span>
             </p>
-            <div className=" d-flex align-items-center justify-content-between increase__decrease-btn">
+            <div className=" d-flex align-items-center justify-content-between  increase__decrease-btn">
               <span className="increase__btn" onClick={incrementItem}>
-                <i className="ri-add-line"></i>
+                <i className="ri-add-line fw-bolder"></i>
               </span>
-              <span className="quantity">{quantity}</span>
-              <span className="decrease__btn" onClick={decreaseItem}>
-                <i className="ri-subtract-line"></i>
+              <span className="quantity fw-bolder">{quantity}</span>
+              <span className="decrease__btn " onClick={decreaseItem}>
+                <i className="ri-subtract-line fw-bolder"></i>
               </span>
             </div>
           </div>

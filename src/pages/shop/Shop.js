@@ -3,15 +3,17 @@ import "./Shop.css";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { Row, Col } from "reactstrap";
-import ProductFilter from "../../components/products/ProductFilter";
-import ProductSearch from "../../components/products/ProductSearch";
 import { addProduct } from "../../redux/dataSlice";
 import { useDispatch } from "react-redux";
-import Helmet from "../../components/Helmet/Helmet";
-import CardProduct from "../../components/products/cardProduct/CardProduct";
-import CardProductRow from "../../components/products/cardProductRow/CardProductRow";
-import Top from "../../assets/Top-Button.png"
+import { ProductFilter, ProductSearch,Helmet,CardProduct,CardProductRow,Scrolltop } from "../../components";
+
+
+
 const Shop = () => {
+  useEffect(() => {
+    window.scrollTo(0,0);
+   },[]) 
+
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
   var [containerData, setContainerData] = useState([]);
@@ -369,7 +371,9 @@ const Shop = () => {
     // setRangeMinVal(0);
     // setRangeMaxVal(4500);
   };
-
+  
+    
+  
   return (
     <Helmet title="shopping">
       <div className=" pt-5 d-flex justify-content-center row fs-5">
@@ -431,7 +435,8 @@ const Shop = () => {
                 ))}
           </Row>
         </div>
-      </div>     
+      </div>   
+      <Scrolltop />  
     </Helmet>
   );
 };

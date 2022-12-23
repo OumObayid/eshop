@@ -28,11 +28,12 @@
 
 .cart__close span i {
   font-size: 1.1rem;
-  background: #212245;
+  background-color: #212245;
   padding: 5px;
   border-radius: 50%;
   color: #fff;
   cursor: pointer;
+  cursor : arrow;
 }
 .cart__item-list {
   height: calc(100vh - 140px);
@@ -46,17 +47,17 @@
   padding: 5px 20px;
   width: 100%;
   height: 80px;
-  background: #df2020;
+  background: #E28743;
 }
 
-.cart__bottom h6 {
-  font-size: 1rem;
-  color: #fff;
+hr{
+  background-color: "#434341";
+  width:"100%";
 }
 
-.cart__bottom h6 span {
-  font-size: 1.3rem;
-  font-weight: 600;
+.cart__bottom p span {
+  color: #ffffff;
+  margin-left: 10px;
 }
 
 .cart__bottom button {

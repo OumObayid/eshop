@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
-
 import { Link, useParams } from "react-router-dom";
-import Helmet from "../../components/Helmet/Helmet";
+import {Helmet,CardProduct,Stars} from "../../components";
 import { Container, Row, Col, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../redux/cartSlice";
 import { dataProducts, productAddReview } from "../../redux/dataSlice";
 import "./ProductDetail.css";
-import CardProduct from "../../components/products/cardProduct/CardProduct";
 import { FaLongArrowAltLeft } from "react-icons/fa";
-import Stars from "../../components/stars/Stars";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 

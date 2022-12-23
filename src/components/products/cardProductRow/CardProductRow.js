@@ -1,19 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { cartActions } from "../../../redux/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./CardProductRow.css";
 import Card from "../../card/Card";
 import { Row, Col } from "reactstrap";
+import {AlertDialogSlide} from "../../../components";
+
 
 const CardProduct = (props) => {
+  
+  const cartProducts = useSelector((state) => state.cart.cartItems);
+  const cartLenth=cartProducts.length
   const prod = props.item;
   const dispatch = useDispatch();
+  // for dialog box
+  const [isOpen, setisOpen] = useState(false)
+
   const addToCart = () => {
     dispatch(cartActions.addItem(prod));
+    setisOpen(true)
   };
+
+ const closeBox = () => {
+    setisOpen(false)
+  }
+  
   return (
     <Card>
+       {isOpen && (<AlertDialogSlide handleClose={closeBox} isOpen={isOpen} cartLenth={cartLenth}/>)}
       <Row>
         <Col lg="4" md="4" sm="12" xs="12" className="border-2 border-end">
           <Link

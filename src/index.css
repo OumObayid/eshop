@@ -279,6 +279,7 @@ p {
   border: 1px solid transparent;
   border-radius: 3px;
   cursor: pointer;
+  cursor : arrow;
   display: flex;
   justify-content: center;
   align-items: center;

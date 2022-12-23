@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import styles from "./Auth.module.scss";
 import registerImg from "../../assets/register.png";
 import { Link, useNavigate } from "react-router-dom";
-import { Card } from "../../components";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
-import Loader from "../../components/loader/Loader";
-import Helmet from "../../components/Helmet/Helmet";
+import {Loader,Helmet,Card} from "../../components";
 
 const Register = () => {
   const [fullName, setFullName] = useState("");

@@ -17,37 +17,30 @@ const ProductSearch = (props) => {
                 </p>
               </div>
   
-              <div className="col-md-4 col-sm-12 mb-sm-3 mb-3  ">
+              <div className="col-md-4 col-sm-12 mb-sm-3 mb-3 d-flex">
+              <span className="col-md-4 col-sm-3 col-3 text-end mt-2 me-2 fs-5  fw-bold">
+                  Search by :
+                </span>
                 <div className="input-group">
                   <input
-                    className="form-control  border fs-5"
+                    className="form-control  border fs-5 rounded"
                     type="search"
                     placeholder="name or category"
                     aria-label=".form-control-lg example"
                     value={searchString}
                     onChange={handlSearch}
                   />
-                  <span className="input-group-append my-auto">
-                    <form>
-                      <button className="btn btn-outline-secondary bg-white border border-0   ms-n5 " onClick={(e)=>e.preventDefault()}>
-                        <IconContext.Provider
-                          value={{ color: "#e28743", size: "15px" }}
-                        >
-                          <FiSearch />
-                        </IconContext.Provider>
-                      </button>
-                    </form>
-                  </span>
+               
                 </div>
               </div>
   
               <div className="col-md-4 row justify-content-end  pe-0 ">
-                <span className="col-md-4 col-sm-3 col-3 text-end mt-2  fs-5  ">
+                <span className="col-md-4 col-sm-3 col-3 text-end mt-2  fs-5 fw-bold ">
                   Sort by :
                 </span>
                 <div className="col-md-7 col-sm-9 col-9 p-0 me-md-4 ">
                   <select
-                    className="form-select col col-2 fs-5 "
+                    className="form-select col col-2 fs-5 rounded"
                     aria-label=".form-select-lg example"
                     onChange={handleSort}
                     value={valueSelectSort}

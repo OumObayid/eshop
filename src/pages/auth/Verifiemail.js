@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSearchParams } from 'react-router-dom';
-import Helmet from '../../components/Helmet/Helmet';
+import {Helmet} from '../../components';
 
 const Verifiemail = () => {
 

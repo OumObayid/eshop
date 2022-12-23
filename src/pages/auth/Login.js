@@ -2,15 +2,13 @@ import { useState } from "react";
 import styles from "./Auth.module.scss";
 import loginImg from "../../assets/login.png";
 import { CgGoogle } from "react-icons/cg";
-import { Card } from "../../components";
+import { Card,Helmet,Loader } from "../../components";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/config";
-import Loader from "../../components/loader/Loader";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import Helmet from "../../components/Helmet/Helmet";
 
 const Login = () => {
   const [email, setEmail] = useState("");
