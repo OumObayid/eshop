@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import {Helmet,CardProduct,Stars} from "../../components";
+import { Helmet, CardProduct, Stars } from "../../components";
 import { Container, Row, Col, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../redux/cartSlice";
@@ -9,6 +9,7 @@ import "./ProductDetail.css";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import { AlertDialogSlide } from "../../components";
 
 const ProductDetails = () => {
   const [tab, setTab] = useState("desc");
@@ -18,14 +19,17 @@ const ProductDetails = () => {
 
   const { id } = useParams();
   const dispatch = useDispatch();
-
+  // for having a product details
   const products = useSelector(dataProducts);
-
   const productId = products.filter((item) => item.id === id);
-
   const product = productId[0];
-  console.log('product :', product);
 
+  // // for dialog box
+  const cartProducts = useSelector((state) => state.cart.cartItems);
+  const cartLenth = cartProducts.length;
+  const [isOpen, setisOpen] = useState(false);
+
+  // for having relatedProduct
   const relatedProduct = products.filter(
     (item) => item.category === product.category
   );
@@ -39,6 +43,12 @@ const ProductDetails = () => {
         imgUrl: product.imgUrl,
       })
     );
+    setisOpen(true); //to open dialog box
+  };
+
+  //to close dialog box via props
+  const closeBox = () => {
+    setisOpen(false);
   };
 
   useEffect(() => {
@@ -49,7 +59,7 @@ const ProductDetails = () => {
     e.preventDefault();
     //firebase
     const docRef = doc(db, "products", product.id);
-   await updateDoc(docRef, {
+    await updateDoc(docRef, {
       reviews: arrayUnion({
         name: enteredName,
         email: enteredEmail,
@@ -84,6 +94,14 @@ const ProductDetails = () => {
 
   return (
     <Helmet title="Product-details">
+      {isOpen && (
+        <AlertDialogSlide
+          handleClose={closeBox}
+          isOpen={isOpen}
+          cartLenth={cartLenth}
+        />
+      )}
+
       <section>
         <Container>
           <div className="mb-4">
@@ -116,7 +134,7 @@ const ProductDetails = () => {
                   <span className="fw-bold me-3">Brand: </span>
                   <span className="fs-4">{product.brand}</span>
                 </p>
-                <Button className="fs-5" onClick={addItem} color="warning">
+                <Button className="fs-5 rounded" onClick={addItem} color="warning">
                   Add to Cart
                 </Button>
               </Col>
