@@ -122,7 +122,7 @@ const ProductDetails = () => {
                 <h2 className=" mb-3 border-2 border-bottom">
                   {product.productName}
                 </h2>
-                <span className="price fw-bold fs-4 mb-5">
+                <span className="price fw-bold fs-2 mb-5">
                   ${product.price}
                 </span>
                 <Stars actions={[product, setTabRev]} />
