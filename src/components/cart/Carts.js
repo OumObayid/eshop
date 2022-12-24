@@ -1,11 +1,10 @@
 import { ListGroup } from "reactstrap";
 import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
-
 import { useDispatch, useSelector } from "react-redux";
 import { cartUiActions } from "../../redux/cartUiSlice";
-
 import "./Carts.css";
+import Slide from '@mui/material/Slide';
 
 const Carts = () => {
   const dispatch = useDispatch();
@@ -13,9 +12,11 @@ const Carts = () => {
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const toggleCart = () => {
     dispatch(cartUiActions.toggle());
-    
+
   };
   return (
+    <Slide direction="left" in={true} mountOnEnter unmountOnExit>
+
     <div className="cart__container">
       <ListGroup className="cart">
         <div className="cart__close">
@@ -60,6 +61,7 @@ const Carts = () => {
         </div>
       </ListGroup>
     </div>
+    </Slide>
   );
 };
 
