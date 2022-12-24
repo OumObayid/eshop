@@ -12,11 +12,9 @@ const Carts = () => {
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const toggleCart = () => {
     dispatch(cartUiActions.toggle());
-
   };
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-
     <div className="cart__container">
       <ListGroup className="cart">
         <div className="cart__close">
