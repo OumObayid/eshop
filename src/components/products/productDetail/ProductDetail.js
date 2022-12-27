@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Helmet, CardProduct, Stars,AlertDialogSlide } from "../../";
+import { Helmet, CardProduct, Stars, AlertDialogSlide } from "../../";
 import { Container, Row, Col, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../redux/cartSlice";
@@ -9,7 +9,9 @@ import "./ProductDetail.css";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/config";
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const ProductDetail = () => {
   const [tab, setTab] = useState("desc");
   const [enteredName, setEnteredName] = useState("");
@@ -50,9 +52,7 @@ const ProductDetail = () => {
     setisOpen(false);
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [product]);
+ 
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -88,8 +88,18 @@ const ProductDetail = () => {
         console.log(error);
       });
   };
- 
- 
+
+  //for slide products
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: true,
+    speed: 1000,
+    adaptiveHeight: true
+  };
 
   const setTabRev = () => setTab("rev");
 
@@ -135,7 +145,11 @@ const ProductDetail = () => {
                   <span className="fw-bold me-3">Brand: </span>
                   <span className="fs-4">{product.brand}</span>
                 </p>
-                <Button className="fs-5 rounded" onClick={addItem} color="warning">
+                <Button
+                  className="fs-5 rounded"
+                  onClick={addItem}
+                  color="warning"
+                >
                   Add to Cart
                 </Button>
               </Col>
@@ -225,13 +239,41 @@ const ProductDetail = () => {
               <h2 className="related__Product-title">
                 <span className="border-bottom"> You might also like</span>
               </h2>
-            </Col>
-
-            {relatedProduct.map((item) => (
+            </Col>          
+             <Slider {...settings}>
+              {relatedProduct.map((item) => (
               <Col lg="3" md="4" sm="6" xs="6" className="mb-4" key={item.id}>
                 <CardProduct item={item} />
               </Col>
             ))}
+            </Slider>
+            
+          </Row>
+          <Row>
+            <Col>
+          
+              {/* <Slider {...settings}>
+                <div>
+                  <h3>1</h3>
+                </div>
+                <div>
+                  <h3>2</h3>
+                </div>
+                <div>
+                  <h3>3</h3>
+                </div>
+                <div>
+                  <h3>4</h3>
+                </div>
+                <div>
+                  <h3>5</h3>
+                </div>
+                <div>
+                  <h3>6</h3>
+                </div>
+              </Slider> */}
+       
+            </Col>
           </Row>
         </Container>
       </section>

@@ -8,7 +8,9 @@
   color: #E28743;
   font-size: 26px;
 }
-
+#contact {
+  margin-top: 20px;
+}
 form {
   width: 100%;
   height: 100%;

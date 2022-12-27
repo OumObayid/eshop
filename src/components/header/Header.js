@@ -14,6 +14,9 @@ import { removeActiveUser, setActiveUser } from "../../redux/authSlice";
 import ShowOnLogin from "../showHiddenLinks/ShowOnLogin";
 import HiddenOnLogin from "../showHiddenLinks/HiddenOnLogin";
 import { cartUiActions } from "../../redux/cartUiSlice";
+import logoEshop from "../../assets/logo.gif";
+
+import { HashLink } from "react-router-hash-link";
 
 const logo = (
   <div className={styles.logo}>
@@ -113,7 +116,8 @@ const Header = () => {
 
   return (
     <header id="navbar" >
-      <div className={` ${styles.header}`}>{logo}</div>
+      {/* <div className={` ${styles.header}`}>{logo}</div> */}
+      <Link to="/"><img  src= {logoEshop} alt="logo" style={{width:"90px"}} /></Link>
       <nav
         className={showMenu ? `${styles["show-nav"]}` : `${styles["hide-nav"]}`}
         onClick={toggleMenu}
@@ -144,9 +148,9 @@ const Header = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/contact" className={activeLink}>
+            <HashLink to="/#contact" className={activeLink}>
               Contact Us
-            </NavLink>
+            </HashLink>
           </li>
         </ul>
         <div className={styles["header-right"]}>

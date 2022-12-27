@@ -1,13 +1,16 @@
 import React from "react";
-import {Helmet} from "../../components";
 import "./Contact.css";
+import contactTitle from "../../assets/contact.png"
 const Contact = () => {
   return (
-    <Helmet title="contact">
+    
       <section className="contact" id="contact">
-        <div className="h3 text-center  mb-4 title d-flex align-items-center justify-content-center">
-          <strong>Let's Get In Touch</strong>
-        </div>
+          {/* <strong>Let's Get In Touch</strong> */}
+          <div className="mb-3 d-flex justify-content-center">
+        {/* <h1 className="text-center txtTitre  mb-5">All Categorys</h1> */}
+        <img src={contactTitle} style={{height:"65px"}} alt="all categorys" />
+      </div>
+       
         <div className="container  p-4 ">
           <div className="section-title mb-5 text-center ">
             <p className="fs-3">
@@ -124,7 +127,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
-    </Helmet>
+  
   );
 };
 

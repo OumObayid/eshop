@@ -10,15 +10,21 @@ import ourhistory from "../../assets/ourhistory.png";
 import { Row, Col, Container } from "reactstrap";
 import { HashLink } from "react-router-hash-link";
 import { BsEyeglasses } from "react-icons/bs";
+import aboutusTitle from "../../assets/About-Us.png";
+import eShopNowTitle from "../../assets/eShop-Now.png";
+import OurHistoryTitle from "../../assets/Our-History.png";
 
 const About = () => {
   return (
-    <Container id="about">
-      <Row >
-        <Col>
-          <h1 className="text-center txtorange mt-5 mb-5">About Us</h1>
-        </Col>
-      </Row>
+    <Container className="about" id="about">
+      <div className="mb-3 mt-5 d-flex justify-content-center">
+        {/* <h1 className="text-center txtTitre  mb-5">All Categorys</h1> */}
+        <img
+          src={aboutusTitle}
+          style={{ height: "55px" }}
+          alt="all categorys"
+        />
+      </div>
       <Row>
         <Col className="mb-0 d-flex justify-content-center">
           <HashLink
@@ -114,114 +120,129 @@ const About = () => {
       </Row>
       <Row className="rownow mb-5" id="eshopnow">
         <div className="now">
-        <Row>
-          <Col className=" mt-5  text-center">
-            <div className="txtimgNow1">
-              <img src={eshopnow} alt="eshop" />
-              <h2 className="text-center nowtitre ">eShop Now</h2>
-              <p className="text-center ">In a Few Numbers</p>
-            </div>
-          </Col>
-        </Row>
-        <Row className="d-flex justify-content-between">
-          <Col className=" mb-3 mx-4 nowCol">
-            <div className="hovenow hovenow  flex-column ">
-              <div className="nowimg1 nowimg mx-auto d-flex">
-                <p className="m-auto text-center">
-                  +300,000 <br /> Products
+          <Row>
+            <Col className=" mt-5  text-center">
+              <div className="txtimgNow1">
+                <img src={eshopnow} alt="eshop" />
+                {/* <h2 className="text-center nowtitre ">eShop Now</h2> */}
+                <div className=" d-flex justify-content-center">
+                  <img
+                    src={eShopNowTitle}
+                    style={{ height: "55px" }}
+                    alt="all categorys"
+                  />
+                </div>
+                <p className="text-center ">In a Few Numbers</p>
+              </div>
+            </Col>
+          </Row>
+          <Row className="d-flex justify-content-between">
+            <Col className=" mb-3 mx-4 nowCol">
+              <div className="hovenow hovenow  flex-column ">
+                <div className="nowimg1 nowimg mx-auto d-flex">
+                  <p className="m-auto text-center">
+                    +300,000 <br /> Products
+                  </p>
+                </div>
+                <p className="text-center">
+                  eShop offers you the most assortment wide at an unbeatable
+                  price
                 </p>
               </div>
-              <p className="text-center">
-                eShop offers you the most assortment wide at an unbeatable price
-              </p>
-            </div>
-          </Col>
-          <Col className="mb-3 mx-4 nowCol">
-            <div className="hovenow flex-column ">
-              <div className="nowimg2 nowimg mx-auto d-flex">
-                <p className="m-auto text-center">
-                  23 country
-                  <br /> Africans
+            </Col>
+            <Col className="mb-3 mx-4 nowCol">
+              <div className="hovenow flex-column ">
+                <div className="nowimg2 nowimg mx-auto d-flex">
+                  <p className="m-auto text-center">
+                    23 country
+                    <br /> Africans
+                  </p>
+                </div>
+                <p className="text-center">
+                  No. 1 in Morocco eShop is present in Egypt, Ivory Coast, ...
                 </p>
               </div>
-              <p className="text-center">
-                No. 1 in Morocco eShop is present in Egypt, Ivory Coast, ...
-              </p>
-            </div>
-          </Col>
-          <Col className="mb-3 mx-4 nowCol">
-            <div className="hovenow flex-column ">
-              <div className="nowimg3 nowimg mx-auto d-flex">
-                <p className="m-auto text-center">
-                  7,000 <br />
-                  brands National <br /> & International
+            </Col>
+            <Col className="mb-3 mx-4 nowCol">
+              <div className="hovenow flex-column ">
+                <div className="nowimg3 nowimg mx-auto d-flex">
+                  <p className="m-auto text-center">
+                    7,000 <br />
+                    brands National <br /> & International
+                  </p>
+                </div>
+                <p className="text-center">
+                  Samsung, Infinix, Innjoo, Vero Moda, Jack & Jones...
                 </p>
               </div>
-              <p className="text-center">
-                Samsung, Infinix, Innjoo, Vero Moda, Jack & Jones...
-              </p>
-            </div>
-          </Col>
-          <Col className="mb-3 mx-4 nowCol">
-            <div className="hovenow flex-column ">
-              <div className="nowimg4 nowimg mx-auto d-flex">
-                <p className="m-auto text-center">
-                  50% of <br />
-                  female managers
-                </p>
+            </Col>
+            <Col className="mb-3 mx-4 nowCol">
+              <div className="hovenow flex-column ">
+                <div className="nowimg4 nowimg mx-auto d-flex">
+                  <p className="m-auto text-center">
+                    50% of <br />
+                    female managers
+                  </p>
+                </div>
+                <p className="text-center">CEO & MD included </p>
               </div>
-              <p className="text-center">CEO & MD included </p>
-            </div>
-          </Col>
-          <Col className="mb-3 mx-4 nowCol">
-            <div className="hovenow flex-column ">
-              <div className="nowimg5 nowimg mx-auto d-flex">
-                <p className="m-auto text-center">
-                  +550,000 <br /> registrations
-                </p>
+            </Col>
+            <Col className="mb-3 mx-4 nowCol">
+              <div className="hovenow flex-column ">
+                <div className="nowimg5 nowimg mx-auto d-flex">
+                  <p className="m-auto text-center">
+                    +550,000 <br /> registrations
+                  </p>
+                </div>
+                <p className="text-center">to the Newsletter in Morocco </p>
               </div>
-              <p className="text-center">to the Newsletter in Morocco </p>
-            </div>
-          </Col>
-          <Col className="mb-3 mx-4 nowCol">
-            <div className="hovenow flex-column ">
-              <div className="nowimg6 nowimg mx-auto d-flex">
-                <p className="m-auto text-center">
-                  2,000 <br /> Employees
-                </p>
+            </Col>
+            <Col className="mb-3 mx-4 nowCol">
+              <div className="hovenow flex-column ">
+                <div className="nowimg6 nowimg mx-auto d-flex">
+                  <p className="m-auto text-center">
+                    2,000 <br /> Employees
+                  </p>
+                </div>
+                <p className="text-center">around the world </p>
               </div>
-              <p className="text-center">around the world </p>
-            </div>
-          </Col>
-          <Col className="mb-3 mx-4 nowCol itemnow">
-            <div className="hovenow flex-column ">
-              <div className="nowimg7 nowimg mx-auto d-flex">
-                <p className="m-auto text-center">
-                  +3,000,000
-                  <br /> visits
-                </p>
+            </Col>
+            <Col className="mb-3 mx-4 nowCol itemnow">
+              <div className="hovenow flex-column ">
+                <div className="nowimg7 nowimg mx-auto d-flex">
+                  <p className="m-auto text-center">
+                    +3,000,000
+                    <br /> visits
+                  </p>
+                </div>
+                <p className="text-center">per month</p>
               </div>
-              <p className="text-center">per month</p>
-            </div>
-          </Col>
-          <Col className="mb-3 mx-4 nowCol">
-            <div className="hovenow flex-column ">
-              <div className="nowimg8 nowimg mx-auto d-flex">
-                <p className="m-auto text-center">
-                  +120,000 <br /> Orders
-                </p>
+            </Col>
+            <Col className="mb-3 mx-4 nowCol">
+              <div className="hovenow flex-column ">
+                <div className="nowimg8 nowimg mx-auto d-flex">
+                  <p className="m-auto text-center">
+                    +120,000 <br /> Orders
+                  </p>
+                </div>
+                <p className="text-center">all month of Black Friday 2019 </p>
               </div>
-              <p className="text-center">all month of Black Friday 2019 </p>
-            </div>
-          </Col>
-        </Row>
+            </Col>
+          </Row>
         </div>
-      </Row>      
+      </Row>
       <Row id="history" className="mt-5">
         <Col className="now fs-4 mt-5  text-center ">
           <div className="txtimgNow2">
             <img src={ourhistory} alt="eshop" />
-            <h2 className="text-center nowtitre ">Our History</h2>
+            {/* <h2 className="text-center nowtitre ">Our History</h2> */}
+            <div className=" d-flex justify-content-center">
+                  <img
+                    src={OurHistoryTitle}
+                    style={{ height: "55px" }}
+                    alt="all categorys"
+                  />
+                </div>
           </div>
           <div className="d-flex justify-content-between">
             <div className="me-5">

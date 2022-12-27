@@ -8,7 +8,6 @@ import {
   Services,
   Terms,
   Policy,
-  Contact,
   OrderHistory,
   Admin,
   Login,
@@ -43,7 +42,6 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/CategoryDetail/:id" element={<CategoryDetail />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/policy" element={<Policy />} />
         <Route path="/cart" element={<Carts />} />
         <Route path="/checkout" element={<Checkout />} />
