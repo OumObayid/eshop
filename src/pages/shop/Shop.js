@@ -3,7 +3,7 @@ import "./Shop.css";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { Row, Col } from "reactstrap";
-import { addProduct } from "../../redux/dataSlice";
+import { addProduct,addCategory } from "../../redux/dataSlice";
 import { useDispatch } from "react-redux";
 import { ProductFilter, ProductSearch,Helmet,CardProduct,CardProductRow,Scrolltop } from "../../components";
 
@@ -69,15 +69,19 @@ const Shop = () => {
       setCountP(list.length); // update count of product
     };
     getProducts(); // call to function
-
-    // a effacer
-
-    // setData(data2);
-    // setContainerData(data2);
-    // data2.forEach((item) => {
-    //   dispatch(addProduct(item));
-    // });
-    // setCountP(data2.length);
+    const getCategorys = async () => {
+      //////////////// get data from firebase
+      const ref = collection(db, "categorys");
+      const querySnapshot = await getDocs(ref);
+      const list = [];
+      querySnapshot.forEach((doc) => {
+        let fullDoc = { id: doc.id, ...doc.data() }; //concate id to document
+        list.push(fullDoc); //put data in array list
+        dispatch(addCategory(fullDoc)); // put doc in store redux
+      });      
+    };
+    getCategorys(); // call to function
+ 
   }, [dispatch]);
 
   //////////////////   get categorys / brands

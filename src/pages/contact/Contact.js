@@ -4,8 +4,8 @@ import "./Contact.css";
 const Contact = () => {
   return (
     <Helmet title="contact">
-      <section className=" contact" id="contact">
-        <div className="h3 text-center  mb-4 title mt-4 d-flex align-items-center justify-content-center">
+      <section className="contact" id="contact">
+        <div className="h3 text-center  mb-4 title d-flex align-items-center justify-content-center">
           <strong>Let's Get In Touch</strong>
         </div>
         <div className="container  p-4 ">

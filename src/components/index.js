@@ -14,6 +14,8 @@ export { default as Search } from "./search/Search";
 export { default as HiddenOnLogin } from "./showHiddenLinks/HiddenOnLogin";
 export { default as ShowOnLogin } from "./showHiddenLinks/ShowOnLogin";
 export { default as Slider } from "./slider/Slider";
-// export { default as sliderData } from "./slider/slider-data";
+export { default as CategoryList } from "./category/CategoryList";
 export { default as Stars } from "./stars/Stars";
+export { default as CategoryDetail } from "./category/CategoryDetail";
+export { default as ProductDetail } from "./products/productDetail/ProductDetail";
 

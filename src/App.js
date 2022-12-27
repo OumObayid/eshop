@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 //components
-import { Header, Footer, Carts } from "./components";
+import { Header, Footer, Carts,CategoryDetail,ProductDetail } from "./components";
 //pages
 import {
   Home,
@@ -16,15 +16,18 @@ import {
   Reset,
   Verifiemail,
   NotFound,
-  Checkout,
-  ProductDetail,
+  Checkout,  
 } from "./pages";
-
+//toast
 import { ToastContainer } from "react-toastify";
+//data
 import { useSelector } from "react-redux";
 import { cartIsVisible } from "./redux/cartUiSlice";
 
+
 function App() {
+
+  //to show or hide cart
   const showCart = useSelector(cartIsVisible);
 
   return (
@@ -39,7 +42,7 @@ function App() {
         <Route path="/eshop" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/terms" element={<Terms />} />
-        <Route path="/terms" element={<Terms />} />
+        <Route path="/CategoryDetail/:id" element={<CategoryDetail />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/policy" element={<Policy />} />
         <Route path="/cart" element={<Carts />} />

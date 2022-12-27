@@ -1,21 +1,270 @@
 import React from "react";
 import "./About.css";
+import imgAbout from "../../assets/shoping.jpg";
+import aaa from "../../assets/aaa.png";
+import bbb from "../../assets/bbb.png";
+import ccc from "../../assets/ccc.png";
+import ddd from "../../assets/ddd.png";
+import eshopnow from "../../assets/eshopnow.png";
+import ourhistory from "../../assets/ourhistory.png";
+import { Row, Col, Container } from "reactstrap";
+import { HashLink } from "react-router-hash-link";
+import { BsEyeglasses } from "react-icons/bs";
+
 const About = () => {
   return (
-    <div id="about">
-      <div>
-        Etsy is a marketplace where people around the world connect to make,
-        sell, and buy unique goods. We empower makers and sellers to start and
-        grow their businesses. Our mission is to keep commerce human, and we're
-        committed to building Etsy as a platform that supports entrepreneurial
-        women. Etsy was founded in 2005 in Brooklyn, New York by Rob Kalin,
-        Chris Maguire, and Haim Schoppik. Rob had the original idea for Etsy as
-        a way to connect people who made things with those who needed them. The
-        first item sold on Etsy was a pair of handmade mittens! Today, Etsy is a
-        global community of entrepreneurs. We're available in more than 200
-        countries and regions around the world. And we're growing every day.
-      </div>
-    </div>
+    <Container id="about">
+      <Row >
+        <Col>
+          <h1 className="text-center txtorange mt-5 mb-5">About Us</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="mb-0 d-flex justify-content-center">
+          <HashLink
+            to="/#vision"
+            className="font1 mx-5 text-nowrap  text-center"
+          >
+            Our vision
+          </HashLink>
+          <HashLink
+            to="/#eshopnow"
+            className="font1 mx-5 text-nowrap text-center"
+          >
+            eShop Now
+          </HashLink>
+          <HashLink
+            to="/#history"
+            className="font1 mx-5 text-nowrap  text-center"
+          >
+            Our History
+          </HashLink>
+        </Col>
+      </Row>
+      <Row id="vision">
+        <Col>
+          <hr className="hrStyle" />
+        </Col>
+      </Row>
+      <Row>
+        <Col lg="6" md="6" sm="12" xs="12" className="m-0 p-0 rowVision">
+          <div>
+            <img
+              className="w-100 m-0 p-0 rowVision"
+              src={imgAbout}
+              alt="shopping"
+            />
+          </div>
+        </Col>
+        <Col lg="6" md="6" sm="12" xs="12" className="m-0 p-0 rowVision">
+          <div className="ourVision1">
+            <div className="ourVision2 d-flex justify-content-center align-item-center">
+              <div className="ourVision3 text-center">
+                <BsEyeglasses size={50} className="glasses" />
+                <h3 className="text-light">Our Vision</h3>
+                <p className="text-light">
+                  Revolutionize the shopping experience around the world
+                </p>
+              </div>
+            </div>
+          </div>
+        </Col>
+      </Row>
+      <Row className="my-5 colvision">
+        <Col>
+          <div className="text-center mb-3">
+            <img src={aaa} alt="eshop" />
+          </div>
+          <div className="text-center fs-4">
+            <p>Provide products </p>
+            <p className="txtmiddle"> 100% </p>
+            <p> authentic</p>
+          </div>
+        </Col>
+        <Col>
+          <div className="text-center mb-3">
+            <img src={bbb} alt="eshop" />
+          </div>
+          <div className="text-center fs-4">
+            <p>With the best</p>
+            <p className="txtmiddle">price</p>
+            <p>the world</p>
+          </div>
+        </Col>
+        <Col>
+          <div className="text-center mb-3">
+            <img src={ccc} alt="eshop" />
+          </div>
+          <div className="text-center fs-4">
+            <p> the platform</p>
+            <p className="txtmiddle">purchase</p>
+            <p>the most practical</p>
+          </div>
+        </Col>
+        <Col>
+          <div className="text-center mb-3">
+            <img src={ddd} alt="eshop" />
+          </div>
+          <div className="text-center fs-4">
+            <p className="p-0 m-0">Bring you the</p>
+            <p className="txtmiddle">best support</p>
+            <p>in in the world</p>
+          </div>
+        </Col>
+      </Row>
+      <Row className="rownow mb-5" id="eshopnow">
+        <div className="now">
+        <Row>
+          <Col className=" mt-5  text-center">
+            <div className="txtimgNow1">
+              <img src={eshopnow} alt="eshop" />
+              <h2 className="text-center nowtitre ">eShop Now</h2>
+              <p className="text-center ">In a Few Numbers</p>
+            </div>
+          </Col>
+        </Row>
+        <Row className="d-flex justify-content-between">
+          <Col className=" mb-3 mx-4 nowCol">
+            <div className="hovenow hovenow  flex-column ">
+              <div className="nowimg1 nowimg mx-auto d-flex">
+                <p className="m-auto text-center">
+                  +300,000 <br /> Products
+                </p>
+              </div>
+              <p className="text-center">
+                eShop offers you the most assortment wide at an unbeatable price
+              </p>
+            </div>
+          </Col>
+          <Col className="mb-3 mx-4 nowCol">
+            <div className="hovenow flex-column ">
+              <div className="nowimg2 nowimg mx-auto d-flex">
+                <p className="m-auto text-center">
+                  23 country
+                  <br /> Africans
+                </p>
+              </div>
+              <p className="text-center">
+                No. 1 in Morocco eShop is present in Egypt, Ivory Coast, ...
+              </p>
+            </div>
+          </Col>
+          <Col className="mb-3 mx-4 nowCol">
+            <div className="hovenow flex-column ">
+              <div className="nowimg3 nowimg mx-auto d-flex">
+                <p className="m-auto text-center">
+                  7,000 <br />
+                  brands National <br /> & International
+                </p>
+              </div>
+              <p className="text-center">
+                Samsung, Infinix, Innjoo, Vero Moda, Jack & Jones...
+              </p>
+            </div>
+          </Col>
+          <Col className="mb-3 mx-4 nowCol">
+            <div className="hovenow flex-column ">
+              <div className="nowimg4 nowimg mx-auto d-flex">
+                <p className="m-auto text-center">
+                  50% of <br />
+                  female managers
+                </p>
+              </div>
+              <p className="text-center">CEO & MD included </p>
+            </div>
+          </Col>
+          <Col className="mb-3 mx-4 nowCol">
+            <div className="hovenow flex-column ">
+              <div className="nowimg5 nowimg mx-auto d-flex">
+                <p className="m-auto text-center">
+                  +550,000 <br /> registrations
+                </p>
+              </div>
+              <p className="text-center">to the Newsletter in Morocco </p>
+            </div>
+          </Col>
+          <Col className="mb-3 mx-4 nowCol">
+            <div className="hovenow flex-column ">
+              <div className="nowimg6 nowimg mx-auto d-flex">
+                <p className="m-auto text-center">
+                  2,000 <br /> Employees
+                </p>
+              </div>
+              <p className="text-center">around the world </p>
+            </div>
+          </Col>
+          <Col className="mb-3 mx-4 nowCol itemnow">
+            <div className="hovenow flex-column ">
+              <div className="nowimg7 nowimg mx-auto d-flex">
+                <p className="m-auto text-center">
+                  +3,000,000
+                  <br /> visits
+                </p>
+              </div>
+              <p className="text-center">per month</p>
+            </div>
+          </Col>
+          <Col className="mb-3 mx-4 nowCol">
+            <div className="hovenow flex-column ">
+              <div className="nowimg8 nowimg mx-auto d-flex">
+                <p className="m-auto text-center">
+                  +120,000 <br /> Orders
+                </p>
+              </div>
+              <p className="text-center">all month of Black Friday 2019 </p>
+            </div>
+          </Col>
+        </Row>
+        </div>
+      </Row>      
+      <Row id="history" className="mt-5">
+        <Col className="now fs-4 mt-5  text-center ">
+          <div className="txtimgNow2">
+            <img src={ourhistory} alt="eshop" />
+            <h2 className="text-center nowtitre ">Our History</h2>
+          </div>
+          <div className="d-flex justify-content-between">
+            <div className="me-5">
+              <ul className=" text-start">
+                <li>
+                  Created in April 2016, eShop is the No. 1 e-commerce site in
+                  Morocco whose objective and vision are to provide the widest
+                  assortment at the best price for all Moroccans.
+                </li>
+                <li>
+                  The eShop.ma website is unquestionably the leading online
+                  shopping destination in Morocco, with 8.5 million monthly
+                  visits, 3,000 sellers and over 300,000 products.
+                </li>
+                <li>
+                  eSHop is one of the Top 10 most visited sites in Morocco.
+                </li>
+                <li>The average delivery time is 1-5 days.</li>
+              </ul>
+            </div>
+            <div>
+              <ul className="text-start">
+                <li>
+                  eShop offers quality services adapted to e-commerce in Africa:
+                  delivery throughout the kingdom, flexible payment methods
+                  (payment in cash on delivery, by credit card) and free returns
+                  within 7 days.
+                </li>
+                <li>
+                  eShop Morocco employs 350 people including a great team
+                  available to our customers 6 days a week.
+                </li>
+                <li>
+                  eShop has set up training sessions dedicated to sellers that
+                  will allow them to improve their sales performance and develop
+                  their skills.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

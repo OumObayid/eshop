@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { cartActions } from "../../../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +8,7 @@ import { AlertDialogSlide } from "../../../components";
 const CardProduct = (props) => {
   const cartProducts = useSelector((state) => state.cart.cartItems);
   const cartLenth = cartProducts.length;
-  const prod = props.item;
+  const prod = props.item; 
 
   const dispatch = useDispatch();
   // for dialog box
@@ -34,7 +34,7 @@ const CardProduct = (props) => {
       )}
 
       <Link
-        to={`/ProductDetail/${prod.id}`}
+        to={ `/ProductDetail/${prod.id} `}
         className="justify-content-center row"
       >
         <img
@@ -53,7 +53,7 @@ const CardProduct = (props) => {
         </div>
       </Link>
       <button className="btn btn-warning  fs-5  m-0" onClick={addToCart}>
-        Add to cart
+           Add to cart
       </button>
     </div>
   );

@@ -165,7 +165,7 @@ const Header = () => {
               <div className="nav-item dropdown d-flex justify-content-between pt-3">
                 <div
                   className="nav-link  align-middle mb-3 "
-                  style={{ color: "#e28743" }}
+                  style={{ color: "#F89B34" }}
                   id="navbarDropdownMenuLink"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -203,7 +203,7 @@ const Header = () => {
                 className="align-middle"
                 style={{
                   paddingTop: "1px",
-                  background: "#e28743",
+                  background: "#F89B34",
                   width: "15px",
                   height: "15px",
                   borderRadius: "50%",

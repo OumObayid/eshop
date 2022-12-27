@@ -2,11 +2,11 @@
   padding-left: 50px;
 }
 .price{
-  color:#e28743
+  color:#F89B34
 }
 
 .back:hover{
-color:#e28743;
+color:#F89B34;
 cursor: pointer;
 cursor : arrow;
 }
@@ -55,8 +55,8 @@ cursor : arrow;
 }
 
 .tab__active {
-  color: #e28743;
-  border: 1px solid #e28743;
+  color: #F89B34;
+  border: 1px solid #F89B34;
   padding: 5px;
   margin: 0;
   border-bottom: 0;

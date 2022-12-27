@@ -21,6 +21,7 @@
     "react-js-dialog-box": "^1.1.6",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.3.0",
+    "react-router-hash-link": "^2.4.3",
     "react-scripts": "^5.0.0",
     "react-slider": "^2.0.4",
     "react-star-ratings": "^2.3.0",

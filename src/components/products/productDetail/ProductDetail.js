@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Helmet, CardProduct, Stars } from "../../components";
+import { Helmet, CardProduct, Stars,AlertDialogSlide } from "../../";
 import { Container, Row, Col, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "../../redux/cartSlice";
-import { dataProducts, productAddReview } from "../../redux/dataSlice";
+import { cartActions } from "../../../redux/cartSlice";
+import { dataProducts, productAddReview } from "../../../redux/dataSlice";
 import "./ProductDetail.css";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import { db } from "../../firebase/config";
-import { AlertDialogSlide } from "../../components";
+import { db } from "../../../firebase/config";
 
-const ProductDetails = () => {
+const ProductDetail = () => {
   const [tab, setTab] = useState("desc");
   const [enteredName, setEnteredName] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -89,6 +88,8 @@ const ProductDetails = () => {
         console.log(error);
       });
   };
+ 
+ 
 
   const setTabRev = () => setTab("rev");
 
@@ -238,4 +239,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default ProductDetail;

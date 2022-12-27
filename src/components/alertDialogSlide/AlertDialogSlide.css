@@ -1,12 +1,12 @@
 .btnClose{
- border: 1px solid #E28743;
- color : #E28743;
+ border: 1px solid #F89B34;
+ color : #F89B34;
 } 
 .btnCart{
-    background-color: #E28743;
+    background-color: #F89B34;
     color: #fff;
 } 
 
 .cartAlert{
- color:#E28743
+ color:#F89B34
 }

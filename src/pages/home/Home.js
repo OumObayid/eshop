@@ -1,4 +1,4 @@
-import {Helmet,Slider,Scrolltop} from "../../components";
+import {Helmet,Slider,Scrolltop,CategoryList} from "../../components";
 import {Contact,About} from "../";
 import { useEffect } from "react";
 
@@ -12,6 +12,7 @@ const Home = () => {
     <div>
       <Slider />
       <Helmet title="shopping">
+        <CategoryList />
         <About />
         <Contact />
         <Scrolltop />

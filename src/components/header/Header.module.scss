@@ -24,7 +24,7 @@ header {
   cursor: pointer;
   cursor : arrow;
   span {
-    color: #e28743;
+    color: #F89B34;
   }
 }
 
@@ -49,7 +49,7 @@ nav  {
       a {
         color: #fff;
         &:hover {
-          color: #e28743;
+          color: #F89B34;
         }
       }
     }
@@ -64,7 +64,7 @@ nav  {
     color: #fff;
     position: relative;
     &:hover {
-      color: #e28743;
+      color: #F89B34;
     }
     &.active {
       color: var(--color-danger);
@@ -89,7 +89,7 @@ nav  {
     margin: 0 5px;
     color: #fff;
     &:hover {
-      color: #e28743;
+      color: #F89B34;
     }
     &.active {
       color: var(--color-danger);
@@ -186,14 +186,14 @@ nav  {
      display: block;
     padding: 5px 0;
     &:hover {
-      color: #e28743;
+      color: #F89B34;
     }
     // border-bottom: 1px solid #333;
     a {
       color: #fff;
       position: relative;
       &:hover {
-        color: #e28743;
+        color: #F89B34;
       }
       p {
         position: absolute;
@@ -239,7 +239,7 @@ nav  {
 }
 
 span.cart__badge {
-  background: #e28743 !important;
+  background: #F89B34 !important;
   position: absolute;
   top: 20px;
 z-index: 40;

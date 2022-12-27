@@ -16,7 +16,7 @@
 
   --color-primary: #007bff;
   --color-success: #28a745;
-  --color-danger: #e28743;
+  --color-danger: #F89B34;
 }
 
 * {
@@ -183,7 +183,7 @@ p {
   color: #007bff;
 }
 .--color-danger {
-  color: #e28743;
+  color: #F89B34;
 }
 .--color-success {
   color: #28a745;
@@ -309,7 +309,7 @@ p {
 }
 .--btn-danger {
   color: #fff;
-  background: #e28743;
+  background: #F89B34;
 }
 
 .--btn-success {

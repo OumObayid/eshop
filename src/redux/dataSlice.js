@@ -6,6 +6,7 @@ const dataSlice = createSlice({
   // contenu de l'etat
   initialState: {
     products: [],
+    categorys: []
   },
 
   reducers: {
@@ -32,6 +33,24 @@ const dataSlice = createSlice({
         });
       }
     },
+    deleteProduct:(state, action) => {
+      const id = action.payload;
+      const existingProduct = state.products.find((item) => item.id === id);
+      if (existingProduct)
+        state.products = state.products.filter((item) => item.id !== id);
+    },
+    productAddReview:(state,action) => {
+      const id = action.payload.id;
+      const itemReview = action.payload.review;
+      const existingProduct = state.products.find((item) => item.id === id);
+       if (existingProduct) {
+         existingProduct.reviews.push({
+           name: itemReview.name,
+           email: itemReview.email,
+           review: itemReview.review
+         })
+       }
+     },     
     setRating: (state, action) => {
       const { id, numRat } = action.payload;
       const existingProduct = state.products.find((item) => item.id === id);
@@ -57,30 +76,35 @@ const dataSlice = createSlice({
         }       
       }
     },
-    productAddReview:(state,action) => {
-     const id = action.payload.id;
-     const itemReview = action.payload.review;
-     const existingProduct = state.products.find((item) => item.id === id);
-      if (existingProduct) {
-        existingProduct.reviews.push({
-          name: itemReview.name,
-          email: itemReview.email,
-          review: itemReview.review
-        })
+    addCategory: (state, action) => {
+      const newCategory = action.payload;
+      const existingItem = state.categorys.find(
+        (item) => item.id === newCategory.id
+      );
+      if (!existingItem) {
+        state.categorys.push({
+          id: newCategory.id,
+          categoryName: newCategory.categoryName,
+          imgCat: newCategory.imgCat,          
+          descCat: newCategory.descCat,         
+        });
       }
     },
-    deleteProduct:(state, action) => {
+    deleteCategory:(state, action) => {
       const id = action.payload;
-      const existingProduct = state.products.find((item) => item.id === id);
-      if (existingProduct)
-        state.products = state.products.filter((item) => item.id !== id);
+      const existingCategory = state.categorys.find((item) => item.id === id);
+      if (existingCategory)
+        state.categorys = state.categorys.filter((item) => item.id !== id);
     },
+  
+   
   },
 });
 
 //exporter les actions a appeler
-export const { addProduct, setRating,productAddReview, deleteProduct } = dataSlice.actions;
+export const { addProduct, setRating,productAddReview, deleteProduct,addCategory,deleteCategory } = dataSlice.actions;
 //select variables od state
 export const dataProducts = (state) => state.data.products;
+export const datacategorys = (state) => state.data.categorys;
 
 export default dataSlice;
