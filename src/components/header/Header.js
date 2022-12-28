@@ -57,9 +57,11 @@ const Header = () => {
   const [userName, setUserName] = useState("");
 
   //display or hide menu
-  const toggleMenu = () => {
+  const toggleMenu = (even) => {
     setShowMenu(!showMenu);
   };
+  
+  
 
   //hide show cart
   const toggleCart = () => {
@@ -137,7 +139,7 @@ const Header = () => {
       </Link>
       <nav
         className={showMenu ? `${styles["show-nav"]}` : `${styles["hide-nav"]}`}
-        onClick={toggleMenu}
+        
       >
         <div
           className={
@@ -150,17 +152,17 @@ const Header = () => {
           {" "}
         </div>
         <ul className="mb-0">
-          <li className={styles["logo-mobile"]}>
+          <li className={styles["logo-mobile"]} onClick={toggleMenu}>
             {logo}
             <FaTimes size={22} color="#fff" />
           </li>
           <li>
-            <NavLink to="/" className={activeLink}>
+            <NavLink to="/" className={activeLink} onClick={toggleMenu}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/shop" className={activeLink}>
+            <NavLink to="/shop" className={activeLink} onClick={toggleMenu}>
               Shop
             </NavLink>
           </li>
@@ -176,17 +178,17 @@ const Header = () => {
               All Categorys
             </Link>
             <ul className="dropdown-menu" id="dropdown-menu1" aria-labelledby="navbarDropdown">
-              <li>
+              <li onClick={toggleMenu}>
                 <Link to="/" className="dropdown-item">
                   Action
                 </Link>
               </li>
-              <li>
+              <li onClick={toggleMenu}>
                 <Link to="/" className="dropdown-item">
                   Another action
                 </Link>
               </li>
-              <li>
+              <li onClick={toggleMenu}>
                 <Link to="/" className="dropdown-item">
                   Something else here
                 </Link>
@@ -194,7 +196,7 @@ const Header = () => {
             </ul>
           </li>
           <li>
-            <HashLink to="/#contact" className={activeLink}>
+            <HashLink to="/#contact" className={activeLink} onClick={toggleMenu}>
               Contact Us
             </HashLink>
           </li>
@@ -203,10 +205,10 @@ const Header = () => {
           <span className="m-0 ">
             <HiddenOnLogin>
               <span className={styles.links}>
-                <NavLink to="/login" className={activeLink}>
+                <NavLink to="/login" className={activeLink} onClick={toggleMenu}>
                   Login
                 </NavLink>
-                <NavLink to="/register" className={activeLink}>
+                <NavLink to="/register" className={activeLink} onClick={toggleMenu}>
                   Register
                 </NavLink>
               </span>
@@ -228,7 +230,7 @@ const Header = () => {
                 <ul className="dropdown-menu" id="dropdown-menu2" aria-labelledby="navbarDropdown" 
                 style={{position: "absolute", inset: "0px auto auto 0px", margin: "0px", transform: "translate3d(0px, 30px, 0px)"}}>
                   <li>
-                    <Link to="/order-history" className=" dropdown-item">
+                    <Link to="/order-history" className=" dropdown-item" onClick={toggleMenu}>
                       My Orders
                     </Link>
                   </li>
@@ -237,6 +239,7 @@ const Header = () => {
                       to="/"
                       className=" dropdown-item"
                       onClick={LogoutUser}
+                      
                     >
                       Logout
                     </Link>
@@ -296,7 +299,9 @@ const Header = () => {
               </p>
           </span>
         </span>
-        <HiOutlineMenuAlt3 size={28} onClick={toggleMenu} />
+        <HiOutlineMenuAlt3 size={28} 
+        onClick={toggleMenu}
+         />
       </div>
     </header>
   );
