@@ -29,19 +29,19 @@ const About = () => {
         <Col className="mb-0 d-flex justify-content-center">
           <HashLink
             to="/#vision"
-            className="font1 mx-5 text-nowrap  text-center"
+            className="font1  text-nowrap  text-center"
           >
             Our vision
           </HashLink>
           <HashLink
             to="/#eshopnow"
-            className="font1 mx-5 text-nowrap text-center"
+            className="font1  text-nowrap text-center"
           >
             eShop Now
           </HashLink>
           <HashLink
             to="/#history"
-            className="font1 mx-5 text-nowrap  text-center"
+            className="font1  text-nowrap  text-center"
           >
             Our History
           </HashLink>
@@ -77,8 +77,8 @@ const About = () => {
         </Col>
       </Row>
       <Row className="my-5 colvision">
-        <Col>
-          <div className="text-center mb-3">
+        <Col className="mb-5">
+          <div className="text-center">
             <img src={aaa} alt="eshop" />
           </div>
           <div className="text-center fs-4">
@@ -87,8 +87,8 @@ const About = () => {
             <p> authentic</p>
           </div>
         </Col>
-        <Col>
-          <div className="text-center mb-3">
+        <Col className="mb-5">
+          <div className="text-center">
             <img src={bbb} alt="eshop" />
           </div>
           <div className="text-center fs-4">
@@ -97,8 +97,8 @@ const About = () => {
             <p>the world</p>
           </div>
         </Col>
-        <Col>
-          <div className="text-center mb-3">
+        <Col className="mb-5">
+          <div className="text-center">
             <img src={ccc} alt="eshop" />
           </div>
           <div className="text-center fs-4">
@@ -107,8 +107,8 @@ const About = () => {
             <p>the most practical</p>
           </div>
         </Col>
-        <Col>
-          <div className="text-center mb-3">
+        <Col className="mb-5">
+          <div className="text-center">
             <img src={ddd} alt="eshop" />
           </div>
           <div className="text-center fs-4">
@@ -232,7 +232,7 @@ const About = () => {
         </div>
       </Row>
       <Row id="history" className="mt-5">
-        <Col className="now fs-4 mt-5  text-center ">
+        <Col  className="now fs-4 mt-5  text-center ">
           <div className="txtimgNow2">
             <img src={ourhistory} alt="eshop" />
             {/* <h2 className="text-center nowtitre ">Our History</h2> */}
@@ -244,8 +244,8 @@ const About = () => {
                   />
                 </div>
           </div>
-          <div className="d-flex justify-content-between">
-            <div className="me-5">
+          <Row  className=" d-flex justify-content-between">
+            <Col className="me-5">
               <ul className=" text-start">
                 <li>
                   Created in April 2016, eShop is the No. 1 e-commerce site in
@@ -262,8 +262,8 @@ const About = () => {
                 </li>
                 <li>The average delivery time is 1-5 days.</li>
               </ul>
-            </div>
-            <div>
+            </Col>
+            <Col>
               <ul className="text-start">
                 <li>
                   eShop offers quality services adapted to e-commerce in Africa:
@@ -281,8 +281,8 @@ const About = () => {
                   their skills.
                 </li>
               </ul>
-            </div>
-          </div>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </Container>
