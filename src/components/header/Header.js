@@ -31,18 +31,18 @@ const logo = (
 const Header = () => {
   //to animate navbar
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 768px)')
-    if (mediaQuery.matches){
-    window.onscroll = function() {
-    var currentScrollPos = window.pageYOffset;
-      if ( currentScrollPos < 100 || currentScrollPos > 400) {
-        document.getElementById("navbar").style.top = "0";
-      } else {
-        document.getElementById("navbar").style.top = "-100px";
-      }
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    if (mediaQuery.matches) {
+      window.onscroll = function () {
+        var currentScrollPos = window.pageYOffset;
+        if (currentScrollPos < 100 || currentScrollPos > 400) {
+          document.getElementById("navbar").style.top = "0";
+        } else {
+          document.getElementById("navbar").style.top = "-100px";
+        }
+      };
     }
-  }
-   }, [])
+  }, []);
   //Code to show or hide menu in mobile
   const [showMenu, setShowMenu] = useState(false);
   //for active link
@@ -114,10 +114,27 @@ const Header = () => {
     });
   });
 
+
+  const showList1=()=>{
+      document.getElementById("dropdown-menu1").classList.add("show");  
+  }
+  const hideList1=()=>{
+    document.getElementById("dropdown-menu1").classList.remove("show"); 
+
+  }
+    const showList2=()=>{
+      document.getElementById("dropdown-menu2").classList.add("show");   
+  }
+  const hideList2=()=>{
+    document.getElementById("dropdown-menu2").classList.remove("show"); 
+ }
+ 
   return (
-    <header id="navbar" >
+    <header id="navbar">
       {/* <div className={` ${styles.header}`}>{logo}</div> */}
-      <Link to="/"><img  src= {logoEshop} alt="logo" style={{width:"90px"}} /></Link>
+      <Link to="/">
+        <img src={logoEshop} alt="logo" style={{ width: "90px" }} />
+      </Link>
       <nav
         className={showMenu ? `${styles["show-nav"]}` : `${styles["hide-nav"]}`}
         onClick={toggleMenu}
@@ -147,6 +164,35 @@ const Header = () => {
               Shop
             </NavLink>
           </li>
+          <li className="nav-item dropdown" id="dropdown" onMouseEnter={showList1} onMouseLeave={hideList1}>
+            <Link
+              to="/"
+              className=" dropdown-toggle cat"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              All Categorys
+            </Link>
+            <ul className="dropdown-menu" id="dropdown-menu1" aria-labelledby="navbarDropdown">
+              <li>
+                <Link to="/" className="dropdown-item">
+                  Action
+                </Link>
+              </li>
+              <li>
+                <Link to="/" className="dropdown-item">
+                  Another action
+                </Link>
+              </li>
+              <li>
+                <Link to="/" className="dropdown-item">
+                  Something else here
+                </Link>
+              </li>
+            </ul>
+          </li>
           <li>
             <HashLink to="/#contact" className={activeLink}>
               Contact Us
@@ -154,9 +200,9 @@ const Header = () => {
           </li>
         </ul>
         <div className={styles["header-right"]}>
-          <span className={styles.links}>
+          <span>
             <HiddenOnLogin>
-              <span>
+              <span className={styles.links}>
                 <NavLink to="/login" className={activeLink}>
                   Login
                 </NavLink>
@@ -166,31 +212,34 @@ const Header = () => {
               </span>
             </HiddenOnLogin>
             <ShowOnLogin>
-              <div className="nav-item dropdown d-flex justify-content-between pt-3">
+             
+              <div className="nav-item dropdown d-flex justify-content-between pt-3" onMouseEnter={showList2} onMouseLeave={hideList2}>
                 <div
-                  className="nav-link  align-middle mb-3 "
+                  className="nav-link dropdown-toggle align-middle mb-3 "                  
                   style={{ color: "#F89B34" }}
-                  id="navbarDropdownMenuLink"
+                  id="navbarDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  aria-expanded="false" 
+                  
                 >
                   <FaUserCircle size={24} />
                 </div>
-                <ul
-                 style={{ backgroundColor: "#0A1930",borderRadius:"6px"}}
-                  className="dropdown-menu text-center"
-                  aria-labelledby="navbarDropdownMenuLink"
-                >
+                <ul className="dropdown-menu" id="dropdown-menu2" aria-labelledby="navbarDropdown" 
+                style={{position: "absolute", inset: "0px auto auto 0px", margin: "0px", transform: "translate3d(0px, 40px, 0px)"}}>
                   <li>
-                    <NavLink to="/order-history" className={activeLink}>
+                    <Link to="/order-history" className=" dropdown-item">
                       My Orders
-                    </NavLink>
+                    </Link>
                   </li>
                   <li>
-                    <NavLink to="/" onClick={LogoutUser}>
+                    <Link
+                      to="/"
+                      className=" dropdown-item"
+                      onClick={LogoutUser}
+                    >
                       Logout
-                    </NavLink>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -226,11 +275,11 @@ const Header = () => {
 
       <div className={styles["menu-icon"]}>
         <span className={styles.cart}>
-          <Link to="/cart">
+          <span to="/cart"  onClick={toggleCart}>
             Cart
             <FaShoppingCart size={20} />
             <p>{totalQuantity}</p>
-          </Link>
+          </span>
         </span>
         <HiOutlineMenuAlt3 size={28} onClick={toggleMenu} />
       </div>

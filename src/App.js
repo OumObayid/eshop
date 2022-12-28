@@ -15,7 +15,7 @@ import {
   Reset,
   Verifiemail,
   NotFound,
-  Checkout,  
+  Checkout,
 } from "./pages";
 //toast
 import { ToastContainer } from "react-toastify";

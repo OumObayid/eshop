@@ -1,0 +1,13 @@
+h1.txtTitre {
+  color: #f89b34 !important;
+ 
+}
+.cat img {
+  width: 350px !important;
+  height: 200px;
+}
+.txtDesc{
+  text-align: justify;
+  font-size: 16px;
+  font-weight: 400;
+}
