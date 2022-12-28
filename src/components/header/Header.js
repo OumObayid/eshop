@@ -149,7 +149,7 @@ const Header = () => {
         >
           {" "}
         </div>
-        <ul className="pt-3">
+        <ul className="mb-0">
           <li className={styles["logo-mobile"]}>
             {logo}
             <FaTimes size={22} color="#fff" />
@@ -200,7 +200,7 @@ const Header = () => {
           </li>
         </ul>
         <div className={styles["header-right"]}>
-          <span>
+          <span className="m-0 ">
             <HiddenOnLogin>
               <span className={styles.links}>
                 <NavLink to="/login" className={activeLink}>
@@ -213,9 +213,9 @@ const Header = () => {
             </HiddenOnLogin>
             <ShowOnLogin>
              
-              <div className="nav-item dropdown d-flex justify-content-between pt-3" onMouseEnter={showList2} onMouseLeave={hideList2}>
-                <div
-                  className="nav-link dropdown-toggle align-middle mb-3 "                  
+              <div className="nav-item   dropdown d-flex justify-content-between  align-middle" onMouseEnter={showList2} onMouseLeave={hideList2}>
+                <div                               
+                  className={`nav-link ${styles.FaUser}`}                  
                   style={{ color: "#F89B34" }}
                   id="navbarDropdown"
                   role="button"
@@ -226,7 +226,7 @@ const Header = () => {
                   <FaUserCircle size={24} />
                 </div>
                 <ul className="dropdown-menu" id="dropdown-menu2" aria-labelledby="navbarDropdown" 
-                style={{position: "absolute", inset: "0px auto auto 0px", margin: "0px", transform: "translate3d(0px, 40px, 0px)"}}>
+                style={{position: "absolute", inset: "0px auto auto 0px", margin: "0px", transform: "translate3d(0px, 30px, 0px)"}}>
                   <li>
                     <Link to="/order-history" className=" dropdown-item">
                       My Orders
@@ -247,7 +247,7 @@ const Header = () => {
           </span>
           <span role="button" className={styles.cart}>
             <div
-              className="d-flex justify-content-center  "
+              className={styles.cartHidden}
               onClick={toggleCart}
             >
               <span className="mr-2 mt-2 fs-4 ">Cart</span>
@@ -274,11 +274,26 @@ const Header = () => {
       </nav>
 
       <div className={styles["menu-icon"]}>
-        <span className={styles.cart}>
-          <span to="/cart"  onClick={toggleCart}>
+        <span className="  ">
+          <span className={styles.cartbask} to="/cart"  onClick={toggleCart}>
             Cart
             <FaShoppingCart size={20} />
-            <p>{totalQuantity}</p>
+            <p
+                className="align-middle"
+                style={{
+                  paddingTop: "1px",
+                  background: "#F89B34",
+                  width: "15px",
+                  height: "15px",
+                  borderRadius: "50%",
+                  zIndex: 40,
+                  fontSize: "10px",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                {totalQuantity}
+              </p>
           </span>
         </span>
         <HiOutlineMenuAlt3 size={28} onClick={toggleMenu} />
