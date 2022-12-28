@@ -10,13 +10,11 @@
   height: 2px !important;
   margin-top: 0;
 }
-.font1 {
+.font {
   font-size: 16px;
   color:#0A1930;
-  margin-left: 20px;
-  margin-right: 20px;
 }
-.font1:hover {
+.font:hover {
   color: #f89b34 !important;
 }
 .rowVision {
@@ -29,7 +27,7 @@
 }
 .ourVision2 {
   /* background-color: rgb(226, 135, 67, 0.9); */
-  background-color: rgb(248, 155, 52, 0.8);
+  background-color: rgb(248, 155, 52, 0.12);
   height: 310px;
   width: 100%;
 }
@@ -123,4 +121,37 @@ transition: all .5s;
 }
 .about{
   margin-top: 80px;
+}
+.visionmenu{
+  background-color: #f8f4f1;
+  padding-top: 12px;
+  padding-bottom: 12px;
+width: 40rem;
+display:inline-block;
+  border-radius: 50px;
+  margin: auto;  
+  box-shadow: 0px 3px 7px 1px rgb(0 0 0 / 50%);
+}
+.font1{
+  margin-right: 15px;
+}
+.font2{
+  margin-right: 15px;
+  margin-left: 15px;
+}
+.font3{
+  margin-left: 15px;
+}
+
+@media screen and (max-width: 800px) {
+.font1{
+  display: none;
+}
+.font2{
+  margin-right: 15px;
+  margin-left: 15px;
+}
+.font3{
+  margin-left: 15px;
+}
 }

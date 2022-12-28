@@ -11,13 +11,10 @@ const CategoryDetail = () => {
 // for having a product details from categoryId
 
 const categorys = useSelector(datacategorys);
-console.log('categorys :', categorys);
 const categoryId = categorys.filter((item) => item.id === id);
 const category = categoryId[0];
 const data = useSelector(dataProducts);
-console.log('data :', data);
 const productsCat=data.filter((item) => item.category === category.categoryName)
-console.log('productsCat :', productsCat);
 useEffect(() => {
   window.scrollTo(0,0);
 }, [])

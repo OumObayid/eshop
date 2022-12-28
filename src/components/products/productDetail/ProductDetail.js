@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Helmet, CardProduct, Stars, AlertDialogSlide } from "../../";
+import { Helmet, CardProduct, Stars, AlertDialogSlide, SlideProduct } from "../../";
 import { Container, Row, Col, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../redux/cartSlice";
@@ -9,9 +9,7 @@ import "./ProductDetail.css";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/config";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 const ProductDetail = () => {
   const [tab, setTab] = useState("desc");
   const [enteredName, setEnteredName] = useState("");
@@ -182,8 +180,8 @@ const ProductDetail = () => {
               ) : (
                 <div className="tab__form my-3">
                   {product.reviews
-                    ? product.reviews.map((item) => (
-                        <div className=" border-bottom w-100 mb-2">
+                    ? product.reviews.map((item,index) => (
+                        <div key={index} className=" border-bottom w-100 mb-2">
                           <p className="user__name mb-0 fs-4">{item.name}</p>
                           <p className="user__email fs-4">{item.email}</p>
                           <p className="feedback__text fs-4">{item.review}</p>
@@ -240,41 +238,14 @@ const ProductDetail = () => {
                 <span className="border-bottom"> You might also like</span>
               </h2>
             </Col>          
-             <Slider {...settings}>
+            <SlideProduct>
               {relatedProduct.map((item) => (
-              <Col lg="3" md="4" sm="6" xs="6" className="mb-4" key={item.id}>
+              <Col lg="3" md="3" sm="12" xs="12" className="mb-4" key={item.id}>
                 <CardProduct item={item} />
               </Col>
             ))}
-            </Slider>
-            
-          </Row>
-          <Row>
-            <Col>
-          
-              {/* <Slider {...settings}>
-                <div>
-                  <h3>1</h3>
-                </div>
-                <div>
-                  <h3>2</h3>
-                </div>
-                <div>
-                  <h3>3</h3>
-                </div>
-                <div>
-                  <h3>4</h3>
-                </div>
-                <div>
-                  <h3>5</h3>
-                </div>
-                <div>
-                  <h3>6</h3>
-                </div>
-              </Slider> */}
-       
-            </Col>
-          </Row>
+            </SlideProduct>            
+          </Row>         
         </Container>
       </section>
     </Helmet>

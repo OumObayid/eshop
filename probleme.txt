@@ -7,3 +7,7 @@
 
 - responsive
 - set titre pour chaque requete dans shop.js
+
+scroll to contact from link contact in header
+
+erreur dans le console

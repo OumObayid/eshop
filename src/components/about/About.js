@@ -17,42 +17,46 @@ import OurHistoryTitle from "../../assets/Our-History.png";
 const About = () => {
   return (
     <Container className="about" id="about">
-      <div className="mb-3 mt-5 d-flex justify-content-center">
-        {/* <h1 className="text-center txtTitre  mb-5">All Categorys</h1> */}
+      <div className=" mt-5 text-center">
         <img
           src={aboutusTitle}
-          style={{ height: "55px" }}
+          style={{ height: "4.4rem" }}
           alt="all categorys"
         />
       </div>
+      <div className="d-flex justify-content-center">
+        <hr
+          style={{
+            position: "relative",
+            top: "-1.25rem",
+            backgroundColor: "#434341",
+            width: "100%",
+          }}
+        />
+      </div>
       <Row>
-        <Col className="mb-0 d-flex justify-content-center">
+        <div className="visionmenu mb-5 d-flex justify-content-center">
           <HashLink
             to="/#vision"
-            className="font1  text-nowrap  text-center"
+            className="font font1  ms-0  text-nowrap  text-center"
           >
             Our vision
           </HashLink>
           <HashLink
             to="/#eshopnow"
-            className="font1  text-nowrap text-center"
+            className="font font2  text-nowrap text-center"
           >
             eShop Now
           </HashLink>
           <HashLink
             to="/#history"
-            className="font1  text-nowrap  text-center"
+            className="font font3 me-0 text-nowrap  text-center"
           >
             Our History
           </HashLink>
-        </Col>
-      </Row>
+        </div>
+      </Row>     
       <Row id="vision">
-        <Col>
-          <hr className="hrStyle" />
-        </Col>
-      </Row>
-      <Row>
         <Col lg="6" md="6" sm="12" xs="12" className="m-0 p-0 rowVision">
           <div>
             <img

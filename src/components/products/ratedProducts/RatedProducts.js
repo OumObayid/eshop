@@ -1,6 +1,7 @@
 import { Row, Col } from "reactstrap";
 import {SlideProduct,CardProduct}  from "../../../components";
 import WellRatedProducts from "../../../assets/Well-Rated-Products.png"
+import { useEffect, useState } from "react";
 
 const RatedProducts = ({ products }) => {
   const sortProducts = products.sort((a, b) => {
@@ -21,16 +22,27 @@ const RatedProducts = ({ products }) => {
     return ratingA < ratingB ? 1 : ratingA > ratingB ? -1 : 0;
   });
 const productRatedTop=sortProducts.slice(0,10)
+
+
   return (
     <div className="ratedmargTop">
-      <div className="mb-3 d-flex justify-content-center">
-        {/* <h1 className="text-center txtTitre  mb-5">Well Rated Products</h1> */}
-        <img src={WellRatedProducts} style={{height:"75px"}} alt="Well Rated Products" />
+      <div className="text-center">
+        <img src={WellRatedProducts} style={{height:"4.7rem"}} alt="Well Rated Products" />
+      </div>
+      <div className="d-flex justify-content-center">
+        <hr
+          style={{
+            position: "relative",
+            top: "-1.25rem",
+            backgroundColor: "#434341",
+            width: "100%",
+          }}
+        />
       </div>
       <Row className=" d-flex justify-content-between mb-5">
-      <SlideProduct>
-        {productRatedTop.map((product) => (
-          <Col lg="3" md="3" sm="12" xs="12" className="mb-3" key={products.id}>
+      <SlideProduct >
+        {productRatedTop.map((product,index) => (
+          <Col lg="3" md="3" sm="12" xs="12" className="mb-3" key={index}>
             <CardProduct item={product} />
           </Col>
         ))}

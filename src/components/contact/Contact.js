@@ -5,12 +5,19 @@ const Contact = () => {
   return (
     
       <section className="contact" id="contact">
-          {/* <strong>Let's Get In Touch</strong> */}
-          <div className="mb-3 d-flex justify-content-center">
-        {/* <h1 className="text-center txtTitre  mb-5">All Categorys</h1> */}
-        <img src={contactTitle} style={{height:"65px"}} alt="all categorys" />
+          <div className="mb-3 text-center">
+        <img src={contactTitle} style={{height:"6.25rem"}} alt="all categorys" />
       </div>
-       
+      <div className="d-flex justify-content-center">
+        <hr
+          style={{
+            position: "relative",
+            top: "-1.25rem",
+            backgroundColor: "#434341",
+            width: "100%",
+          }}
+        />
+      </div>
         <div className="container  p-4 ">
           <div className="section-title mb-5 text-center ">
             <p className="fs-3">

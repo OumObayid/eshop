@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Header.module.scss";
+import logoEshop from "../../assets/logo.png";
+
 import { FaShoppingCart, FaTimes, FaUserCircle } from "react-icons/fa";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
-import { signOut, onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "../../firebase/config";
-import { useSelector, useDispatch } from "react-redux";
 
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { collection, getDocs, where, query } from "firebase/firestore";
+import { auth, db } from "../../firebase/config";
+
+import { useSelector, useDispatch } from "react-redux";
+import { cartUiActions } from "../../redux/cartUiSlice";
+import { datacategorys } from "../../redux/dataSlice";
+import { removeActiveUser, setActiveUser } from "../../redux/authSlice";
+
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { removeActiveUser, setActiveUser } from "../../redux/authSlice";
+
 import ShowOnLogin from "../showHiddenLinks/ShowOnLogin";
 import HiddenOnLogin from "../showHiddenLinks/HiddenOnLogin";
-import { cartUiActions } from "../../redux/cartUiSlice";
-import logoEshop from "../../assets/logo.gif";
 
 import { HashLink } from "react-router-hash-link";
 
@@ -60,8 +65,6 @@ const Header = () => {
   const toggleMenu = (even) => {
     setShowMenu(!showMenu);
   };
-  
-  
 
   //hide show cart
   const toggleCart = () => {
@@ -116,30 +119,31 @@ const Header = () => {
     });
   });
 
+  // to show list in dropdown
+  const showList1 = () => {
+    document.getElementById("dropdown-menu1").classList.add("show");
+  };
+  const hideList1 = () => {
+    document.getElementById("dropdown-menu1").classList.remove("show");
+  };
+  const showList2 = () => {
+    document.getElementById("dropdown-menu2").classList.add("show");
+  };
+  const hideList2 = () => {
+    document.getElementById("dropdown-menu2").classList.remove("show");
+  };
 
-  const showList1=()=>{
-      document.getElementById("dropdown-menu1").classList.add("show");  
-  }
-  const hideList1=()=>{
-    document.getElementById("dropdown-menu1").classList.remove("show"); 
+  //to get gategory list
+  const categorylist = useSelector(datacategorys);
 
-  }
-    const showList2=()=>{
-      document.getElementById("dropdown-menu2").classList.add("show");   
-  }
-  const hideList2=()=>{
-    document.getElementById("dropdown-menu2").classList.remove("show"); 
- }
- 
   return (
     <header id="navbar">
       {/* <div className={` ${styles.header}`}>{logo}</div> */}
       <Link to="/">
-        <img src={logoEshop} alt="logo" style={{ width: "90px" }} />
+        <img src={logoEshop} alt="logo" style={{ width: "110px" }} />
       </Link>
       <nav
         className={showMenu ? `${styles["show-nav"]}` : `${styles["hide-nav"]}`}
-        
       >
         <div
           className={
@@ -166,7 +170,12 @@ const Header = () => {
               Shop
             </NavLink>
           </li>
-          <li className="nav-item dropdown" id="dropdown" onMouseEnter={showList1} onMouseLeave={hideList1}>
+          <li
+            className="nav-item dropdown"
+            id="dropdown"
+            onMouseEnter={showList1}
+            onMouseLeave={hideList1}
+          >
             <Link
               to="/"
               className=" dropdown-toggle cat"
@@ -177,26 +186,28 @@ const Header = () => {
             >
               All Categorys
             </Link>
-            <ul className="dropdown-menu" id="dropdown-menu1" aria-labelledby="navbarDropdown">
-              <li onClick={toggleMenu}>
-                <Link to="/" className="dropdown-item">
-                  Action
-                </Link>
-              </li>
-              <li onClick={toggleMenu}>
-                <Link to="/" className="dropdown-item">
-                  Another action
-                </Link>
-              </li>
-              <li onClick={toggleMenu}>
-                <Link to="/" className="dropdown-item">
-                  Something else here
-                </Link>
-              </li>
+            <ul
+              className="dropdown-menu"
+              id="dropdown-menu1"
+              aria-labelledby="navbarDropdown"
+            >
+              {categorylist.map((itemcat,index) => {
+                return (
+                  <li key={index} onClick={toggleMenu}>
+                    <Link to={`/CategoryDetail/${itemcat.id}`} className="dropdown-item">
+                      {itemcat.categoryName}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </li>
           <li>
-            <HashLink to="/#contact" className={activeLink} onClick={toggleMenu}>
+            <HashLink
+              to="/#contact"
+              className={activeLink}
+              onClick={toggleMenu}
+            >
               Contact Us
             </HashLink>
           </li>
@@ -205,32 +216,55 @@ const Header = () => {
           <span className="m-0 ">
             <HiddenOnLogin>
               <span className={styles.links}>
-                <NavLink to="/login" className={activeLink} onClick={toggleMenu}>
+                <NavLink
+                  to="/login"
+                  className={activeLink}
+                  onClick={toggleMenu}
+                >
                   Login
                 </NavLink>
-                <NavLink to="/register" className={activeLink} onClick={toggleMenu}>
+                <NavLink
+                  to="/register"
+                  className={activeLink}
+                  onClick={toggleMenu}
+                >
                   Register
                 </NavLink>
               </span>
             </HiddenOnLogin>
             <ShowOnLogin>
-             
-              <div className="nav-item   dropdown d-flex justify-content-between  align-middle" onMouseEnter={showList2} onMouseLeave={hideList2}>
-                <div                               
-                  className={`nav-link ${styles.FaUser}`}                  
+              <div
+                className="nav-item   dropdown d-flex justify-content-between  align-middle"
+                onMouseEnter={showList2}
+                onMouseLeave={hideList2}
+              >
+                <div
+                  className={`nav-link ${styles.FaUser}`}
                   style={{ color: "#F89B34" }}
                   id="navbarDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
-                  aria-expanded="false" 
-                  
+                  aria-expanded="false"
                 >
                   <FaUserCircle size={24} />
                 </div>
-                <ul className="dropdown-menu" id="dropdown-menu2" aria-labelledby="navbarDropdown" 
-                style={{position: "absolute", inset: "0px auto auto 0px", margin: "0px", transform: "translate3d(0px, 30px, 0px)"}}>
+                <ul
+                  className="dropdown-menu"
+                  id="dropdown-menu2"
+                  aria-labelledby="navbarDropdown"
+                  style={{
+                    position: "absolute",
+                    inset: "0px auto auto 0px",
+                    margin: "0px",
+                    transform: "translate3d(0px, 30px, 0px)",
+                  }}
+                >
                   <li>
-                    <Link to="/order-history" className=" dropdown-item" onClick={toggleMenu}>
+                    <Link
+                      to="/order-history"
+                      className=" dropdown-item"
+                      onClick={toggleMenu}
+                    >
                       My Orders
                     </Link>
                   </li>
@@ -239,7 +273,6 @@ const Header = () => {
                       to="/"
                       className=" dropdown-item"
                       onClick={LogoutUser}
-                      
                     >
                       Logout
                     </Link>
@@ -249,10 +282,7 @@ const Header = () => {
             </ShowOnLogin>
           </span>
           <span role="button" className={styles.cart}>
-            <div
-              className={styles.cartHidden}
-              onClick={toggleCart}
-            >
+            <div className={styles.cartHidden} onClick={toggleCart}>
               <span className="mr-2 mt-2 fs-4 ">Cart</span>
               <i className="ri-shopping-basket-line fs-2"></i>
               <p
@@ -278,30 +308,28 @@ const Header = () => {
 
       <div className={styles["menu-icon"]}>
         <span className="  ">
-          <span className={styles.cartbask} to="/cart"  onClick={toggleCart}>
+          <span className={styles.cartbask} to="/cart" onClick={toggleCart}>
             Cart
             <FaShoppingCart size={20} />
             <p
-                className="align-middle"
-                style={{
-                  paddingTop: "1px",
-                  background: "#F89B34",
-                  width: "15px",
-                  height: "15px",
-                  borderRadius: "50%",
-                  zIndex: 40,
-                  fontSize: "10px",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                }}
-              >
-                {totalQuantity}
-              </p>
+              className="align-middle"
+              style={{
+                paddingTop: "1px",
+                background: "#F89B34",
+                width: "15px",
+                height: "15px",
+                borderRadius: "50%",
+                zIndex: 40,
+                fontSize: "10px",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              {totalQuantity}
+            </p>
           </span>
         </span>
-        <HiOutlineMenuAlt3 size={28} 
-        onClick={toggleMenu}
-         />
+        <HiOutlineMenuAlt3 size={28} onClick={toggleMenu} />
       </div>
     </header>
   );
