@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { cartActions } from "../../../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -52,7 +52,7 @@ const CardProduct = (props) => {
           </p>
         </div>
       </Link>
-      <button className="btn btn-warning  fs-5  m-0" onClick={addToCart}>
+      <button className="btn btn-warning  fs-5  m-0 w-100" onClick={addToCart}>
            Add to cart
       </button>
     </div>

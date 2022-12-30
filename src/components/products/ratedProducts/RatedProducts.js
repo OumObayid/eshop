@@ -1,7 +1,6 @@
 import { Row, Col } from "reactstrap";
 import {SlideProduct,CardProduct}  from "../../../components";
 import WellRatedProducts from "../../../assets/Well-Rated-Products.png"
-import { useEffect, useState } from "react";
 
 const RatedProducts = ({ products }) => {
   const sortProducts = products.sort((a, b) => {

@@ -26,11 +26,12 @@ const SlideProduct = (props) => {
     arrows: true,
     autoplay: true,
     speed: 1000,
-    adaptiveHeight: true
+    adaptiveHeight: true,
   };
   return (
     <Slider {...settings}>
-        {props.children}</Slider>
+        {props.children}       
+    </Slider>
   )
 }
 

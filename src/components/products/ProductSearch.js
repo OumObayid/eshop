@@ -1,6 +1,4 @@
 import React from 'react'
-import { FiSearch } from "react-icons/fi";
-import { IconContext } from "react-icons";
 import view1 from "../../assets/view1.png";
 import view2 from "../../assets/view2.png";
 

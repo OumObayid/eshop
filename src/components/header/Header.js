@@ -138,9 +138,9 @@ const Header = () => {
 
   return (
     <header id="navbar">
-      {/* <div className={` ${styles.header}`}>{logo}</div> */}
       <Link to="/">
-        <img src={logoEshop} alt="logo" style={{ width: "110px" }} />
+              <div className={` ${styles.header}`}>{logo}</div>
+        {/* <img src={logoEshop} alt="logo" style={{ width: "110px" }} /> */}
       </Link>
       <nav
         className={showMenu ? `${styles["show-nav"]}` : `${styles["hide-nav"]}`}
@@ -201,8 +201,8 @@ const Header = () => {
                 );
               })}
             </ul>
-          </li>
-          <li>
+          </li>          
+          {/* <li>
             <HashLink
               to="/#contact"
               className={activeLink}
@@ -210,8 +210,9 @@ const Header = () => {
             >
               Contact Us
             </HashLink>
-          </li>
+          </li> */}
         </ul>
+ 
         <div className={styles["header-right"]}>
           <span className="m-0 ">
             <HiddenOnLogin>
@@ -259,6 +260,15 @@ const Header = () => {
                     transform: "translate3d(0px, 30px, 0px)",
                   }}
                 >
+                    <li>
+                    <Link
+                      to="/account"
+                      className=" dropdown-item"
+                      onClick={toggleMenu}
+                    >
+                      My Account
+                    </Link>
+                  </li>
                   <li>
                     <Link
                       to="/order-history"
