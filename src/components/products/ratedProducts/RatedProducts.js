@@ -1,9 +1,15 @@
 import { Row, Col } from "reactstrap";
 import {SlideProduct,CardProduct}  from "../../../components";
 import WellRatedProducts from "../../../assets/Well-Rated-Products.png"
+import { dataProducts } from "../../../redux/dataSlice";
+import { useSelector } from "react-redux";
 
-const RatedProducts = ({ products }) => {
-  const sortProducts = products.sort((a, b) => {
+const RatedProducts = () => {
+  
+  const products = useSelector(dataProducts);
+  const arrayForSort = [...products]
+
+  const sortProducts  = arrayForSort.sort((a, b) => {
     const a1 = a.rating1;
     const a2 = a.rating2;
     const a3 = a.rating3;
@@ -20,6 +26,7 @@ const RatedProducts = ({ products }) => {
       (b1 * 1 + b2 * 2 + b3 * 3 + b4 * 4 + b5 * 5) / (b1 + b2 + b3 + b4 + b5);
     return ratingA < ratingB ? 1 : ratingA > ratingB ? -1 : 0;
   });
+
 const productRatedTop=sortProducts.slice(0,10)
 
 

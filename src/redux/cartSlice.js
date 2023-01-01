@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { now } from "jquery";
 
 const items =
   localStorage.getItem("cartItems") !== null
@@ -42,13 +43,16 @@ const cartSlice = createSlice({
 
       if (!existingItem) {
         // ===== note: if you use just redux you should not mute state array instead of clone the state array, but if you use redux toolkit that will not a problem because redux toolkit clone the array behind the scene
-
+        const current = new Date();
+        const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+        
         state.cartItems.push({
           id: newItem.id,
           title: newItem.productName,
           img: newItem.imgUrl,
           price: newItem.price,
           quantity: 1,
+          orderDate: date,
           totalPrice: newItem.price,
         });
       } else {
@@ -119,11 +123,18 @@ const cartSlice = createSlice({
         state.totalQuantity
       );
     },
+    clearCart(state, action) {
+      state.cartItems = [];
+     state.totalAmount=0;
+     state.totalQuantity=0
+     setItemFunc([],0,0);
+      
+    }
   },
 });
 
 //exporter les actions a appeler
-export const { addItem , setItemFunct,removeItem,deleteItem } = cartSlice.actions;
+export const { addItem , setItemFunct,removeItem,deleteItem ,clearCart} = cartSlice.actions;
 //select variables of state
 export const cartItems = (state) => state.cart.cartItems;
 export const totalQuantityy = (state) => state.cart.totalQuantity;

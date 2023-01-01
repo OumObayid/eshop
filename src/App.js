@@ -23,6 +23,7 @@ import {
   NotFound,
   Checkout,
   Account,
+  CheckoutSuccess,
 } from "./pages";
 //toast
 import { ToastContainer } from "react-toastify";
@@ -50,6 +51,7 @@ function App() {
           <Route path="/policy" element={<Policy />} />
           <Route path="/cart" element={<Carts />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkoutSuccess" element={<CheckoutSuccess />} />
           <Route path="/order-history" element={<OrderHistory />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />

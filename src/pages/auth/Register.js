@@ -32,6 +32,15 @@ const Register = () => {
             const docRef = addDoc(collection(db, "users"), {
               name: fullName,
               email: email,
+              password : password, 
+              tel: "",
+              address: "",
+              country: "",
+              region :"",
+              city : "",
+              postalCode: "",
+              orders: []     
+                      
             });
             console.log("Document written with ID: ", docRef.id);
           } catch (e) {

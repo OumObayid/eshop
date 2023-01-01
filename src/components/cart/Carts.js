@@ -1,5 +1,5 @@
 import { ListGroup } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CartItem from "./CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { cartUiActions } from "../../redux/cartUiSlice";
@@ -8,10 +8,16 @@ import Slide from '@mui/material/Slide';
 
 const Carts = () => {
   const dispatch = useDispatch();
+   const navigate = useNavigate();
   const cartProducts = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const toggleCart = () => {
-    dispatch(cartUiActions.toggle());
+    dispatch(cartUiActions.toggle());  
+    if(cartProducts.length !==0){
+      navigate("/checkout")       
+    }
+  
+    
   };
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -52,9 +58,9 @@ const Carts = () => {
             <span className="  fw-bold fs-3">${totalAmount}</span>
           </p>
           <button>
-            <Link to="/checkout" onClick={toggleCart}>
+            <span   onClick={toggleCart}>
               Checkout
-            </Link>
+            </span>
           </button>
         </div>
       </ListGroup>

@@ -2,15 +2,22 @@ import { useState } from "react";
 import styles from "./Auth.module.scss";
 import loginImg from "../../assets/login.png";
 import { CgGoogle } from "react-icons/cg";
-import { Card,Helmet,Loader } from "../../components";
+import { Card, Helmet, Loader } from "../../components";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
+
+  //check if user is connected
+  onAuthStateChanged(auth, (user) => {   
+    if (user) {
+      navigate("/");
+    } 
+  })
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +29,8 @@ const Login = () => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        //const user = userCredential.user;
+        // const user = userCredential.user;
+
         setIsLoading(false);
         navigate("/");
       })
@@ -57,9 +65,9 @@ const Login = () => {
         <Card>
           <div className={styles.form}>
             <h2>Login</h2>
-            <form onSubmit={loginUser}>
-              <input
-                type="text"
+            <form onSubmit={loginUser}>              
+                <input
+                type="email"
                 placeholder="Email"
                 required
                 value={email}
@@ -86,10 +94,14 @@ const Login = () => {
               onClick={loginWithG}
             >
               <CgGoogle color="#fff" /> &ensp;Login With Google
-            </button>            
+            </button>
             <span className={styles.register}>
-              <p>Don't have an account? 
-              <Link to="/register" className="fw-bolder">&nbsp;&nbsp;Register</Link></p>
+              <p>
+                Don't have an account?
+                <Link to="/register" className="fw-bolder">
+                  &nbsp;&nbsp;Register
+                </Link>
+              </p>
             </span>
           </div>
         </Card>

@@ -12,7 +12,7 @@ import { auth, db } from "../../firebase/config";
 
 import { useSelector, useDispatch } from "react-redux";
 import { cartUiActions } from "../../redux/cartUiSlice";
-import { datacategorys } from "../../redux/dataSlice";
+import { addCategory, addProduct, datacategorys } from "../../redux/dataSlice";
 import { removeActiveUser, setActiveUser } from "../../redux/authSlice";
 
 import { toast } from "react-toastify";
@@ -21,10 +21,8 @@ import "react-toastify/dist/ReactToastify.css";
 import ShowOnLogin from "../showHiddenLinks/ShowOnLogin";
 import HiddenOnLogin from "../showHiddenLinks/HiddenOnLogin";
 
-import { HashLink } from "react-router-hash-link";
-
 const logo = (
-  <div className={styles.logo}>
+  <div className={styles.logo} style={{marginTop:"8px"}}>
     <Link to="/">
       <h2>
         e<span>Shop</span>.
@@ -34,6 +32,36 @@ const logo = (
 );
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const [categorys, setCategorys] = useState([]);
+  useEffect(() => {
+    const getCategorys = async () => {
+      //////////////// get data from firebase
+      const ref = collection(db, "categorys");
+      const querySnapshot = await getDocs(ref);
+      const list = [];
+      querySnapshot.forEach((doc) => {
+        let fullDoc = { id: doc.id, ...doc.data() }; //concate id to document
+        list.push(fullDoc); //put data in array list
+        dispatch(addCategory(fullDoc)); // put doc in store redux
+      });
+      setCategorys(list);
+    };
+    getCategorys(); // call to function
+    const getProducts = async () => {
+      //////////////// get data from firebase
+      const ref = collection(db, "products");
+      const querySnapshot = await getDocs(ref);
+      const list = [];
+      querySnapshot.forEach((doc) => {
+        let fullDoc = { id: doc.id, ...doc.data() }; //concate id to document
+        list.push(fullDoc); //put data in array list
+        dispatch(addProduct(fullDoc)); // put doc in store redux
+      });
+     
+    };
+    getProducts();
+  }, [dispatch]);
   //to animate navbar
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 768px)");
@@ -53,7 +81,7 @@ const Header = () => {
   //for active link
   const activeLink = ({ isActive }) => (isActive ? `${styles.active}` : "");
   //redux
-  const dispatch = useDispatch();
+  
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
   //to navigate
@@ -201,16 +229,7 @@ const Header = () => {
                 );
               })}
             </ul>
-          </li>          
-          {/* <li>
-            <HashLink
-              to="/#contact"
-              className={activeLink}
-              onClick={toggleMenu}
-            >
-              Contact Us
-            </HashLink>
-          </li> */}
+          </li>         
         </ul>
  
         <div className={styles["header-right"]}>

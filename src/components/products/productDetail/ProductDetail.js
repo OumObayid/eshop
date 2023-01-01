@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Helmet, CardProduct, Stars, AlertDialogSlide, SlideProduct } from "../../";
+import {
+  Helmet,
+  CardProduct,
+  Stars,
+  AlertDialogSlide,
+  SlideProduct,
+} from "../../";
 import { Container, Row, Col, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../redux/cartSlice";
@@ -50,8 +56,6 @@ const ProductDetail = () => {
     setisOpen(false);
   };
 
- 
-
   const submitHandler = async (e) => {
     e.preventDefault();
     //firebase
@@ -88,7 +92,6 @@ const ProductDetail = () => {
   };
 
   //for slide products
-
 
   const setTabRev = () => setTab("rev");
 
@@ -171,7 +174,7 @@ const ProductDetail = () => {
               ) : (
                 <div className="tab__form my-3">
                   {product.reviews
-                    ? product.reviews.map((item,index) => (
+                    ? product.reviews.map((item, index) => (
                         <div key={index} className=" border-bottom w-100 mb-2">
                           <p className="user__name mb-0 fs-4">{item.name}</p>
                           <p className="user__email fs-4">{item.email}</p>
@@ -228,15 +231,22 @@ const ProductDetail = () => {
               <h2 className="related__Product-title">
                 <span className="border-bottom"> You might also like</span>
               </h2>
-            </Col>          
+            </Col>
             <SlideProduct>
               {relatedProduct.map((item) => (
-              <Col lg="3" md="3" sm="12" xs="12" className="mb-4" key={item.id}>
-                <CardProduct item={item} />
-              </Col>
-            ))}
-            </SlideProduct>            
-          </Row>         
+                <Col
+                  lg="3"
+                  md="3"
+                  sm="12"
+                  xs="12"
+                  className="mb-4"
+                  key={item.id}
+                >
+                  <CardProduct item={item} />
+                </Col>
+              ))}
+            </SlideProduct>
+          </Row>
         </Container>
       </section>
     </Helmet>

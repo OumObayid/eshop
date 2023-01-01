@@ -76,7 +76,7 @@ cursor : arrow;
   margin-bottom: 30px;
 }
 .form__group input,
-.form__group textarea {
+.form__group textarea select{
   width: 100%;
   background: transparent;
   padding: 7px 20px;
@@ -85,7 +85,9 @@ cursor : arrow;
 }
 
 .form__group input:focus,
-.form__group textarea:focus {
+.form__group textarea:focus,
+.form__group select:focus
+ {
   outline: none;
 }
 
@@ -145,7 +147,8 @@ cursor : arrow;
   }
 
   .form__group input::placeholder,
-  .form__group textarea::placeholder {
+  .form__group textarea::placeholder,.form__group select::placeholder
+   {
     font-size: 0.8rem;
   }
   .related__Product-title {

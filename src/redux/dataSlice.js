@@ -6,10 +6,11 @@ const dataSlice = createSlice({
   // contenu de l'etat
   initialState: {
     products: [],
-    categorys: []
+    categorys: [],   
   },
 
   reducers: {
+    //products
     addProduct: (state, action) => {
       const newProduct = action.payload;
       const existingItem = state.products.find(
@@ -76,6 +77,7 @@ const dataSlice = createSlice({
         }       
       }
     },
+    ////categorys
     addCategory: (state, action) => {
       const newCategory = action.payload;
       const existingItem = state.categorys.find(
@@ -96,7 +98,8 @@ const dataSlice = createSlice({
       if (existingCategory)
         state.categorys = state.categorys.filter((item) => item.id !== id);
     },
-  
+   
+
    
   },
 });
