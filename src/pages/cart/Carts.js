@@ -7,10 +7,10 @@ const Carts = () => {
   const cartProducts = useSelector((state) => state.cart.cartItems);
   return (
     <div>
-      <ListGroup>
+      <ListGroup >
         <div className="cart__item-list ">
           <div>
-            <hr style={{ backgroundColor: "#434341", width: "100%" }} />
+            <hr style={{ backgroundColor: "#434341", width: "97%" }} />
           </div>
           {cartProducts.length === 0 ? (
             <h6 className="text-center mt-5">No item added to the cart</h6>
@@ -21,7 +21,7 @@ const Carts = () => {
                 <hr
                   style={{
                     backgroundColor: "#434341",
-                    width: "100%",
+                    width: "97%",
                   }}
                 />
               </div>

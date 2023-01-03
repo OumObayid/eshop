@@ -17,7 +17,7 @@
   cursor : arrow;
 }
 .cart__item-list {
-  height: calc(100vh - 140px);
+  height: calc(100vh - 210px);
   overflow: auto
 }
 

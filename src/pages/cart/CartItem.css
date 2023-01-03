@@ -1,6 +1,6 @@
-.cart__item-info img {
-  width: 70px;
-  height: 70px;
+img.imgcheckout {
+  width: 120px;
+  height: 120px;
   object-fit: cover;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .delete__btn {
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-weight: 600;
 }
 

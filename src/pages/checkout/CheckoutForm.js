@@ -17,28 +17,30 @@ import {
   doc,
   updateDoc,
   arrayUnion,
-  FieldValue,
 } from "firebase/firestore";
 import { cartItems, clearCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
+import $ from "jquery";
+
 
 /////////////declare options for card element
 const CARD_OPTIONS = {
   iconStyle: "solid",
   style: {
     base: {
-      iconColor: "#F89B34",
-      color: "#000",
+      iconColor: "",
+      color: "#0A1930",
       fontWeight: 500,
       fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
       fontSize: "16px",
       fontSmoothing: "antialiased",
       ":-webkit-autofill": { color: "#fce883" },
-      "::placeholder": { color: "#87bbfd" },
+      "::placeholder": { color: "#5a7091" },
     },
     invalid: {
-      iconColor: "#ffc7ee",
-      color: "#ffc7ee",
+      iconColor: "#f70e0e",
+      color: "#f70e0e",
     },
   },
 };
@@ -181,32 +183,34 @@ export default function CheckoutForm() {
   };
   ////////////---end---/////////// function to valid payment
 
-  const execute = async () => {
-    const docRef = doc(db, "users", user.id);
-    await updateDoc(docRef, {
-      tel: enterNumber,
-      address: enterAddress,
-      country: enterCountry,
-      region: enterRegion,
-      city: enterCity,
-      postalCode: postalCode,
-      // orders: cartProducts
-    })
-      .then((docRef) => {})
-      .catch((error) => {
-        toast.error(error.message);
-        console.log("error.message :", error.message);
-      });
-    await cartProducts.forEach((item) => {
-      updateDoc(docRef, {
-        orders: arrayUnion(item),
-      })
-        .then((docRef) => {})
-        .catch((error) => {
-          toast.error(error.message);
-        });
-    });
-  };
+  // const execute = async () => {
+  //   const docRef = doc(db, "users", user.id);
+  //   await updateDoc(docRef, {
+  //     tel: enterNumber,
+  //     address: enterAddress,
+  //     country: enterCountry,
+  //     region: enterRegion,
+  //     city: enterCity,
+  //     postalCode: postalCode,
+  //     // orders: cartProducts
+  //   })
+  //     .then((docRef) => {})
+  //     .catch((error) => {
+  //       toast.error(error.message);
+  //       console.log("error.message :", error.message);
+  //     });
+  //   await cartProducts.forEach((item) => {
+  //     updateDoc(docRef, {
+  //       orders: arrayUnion(item),
+  //     })
+  //       .then((docRef) => {})
+  //       .catch((error) => {
+  //         toast.error(error.message);
+  //       });
+  //   });
+  // };
+ 
+
 
   return (
     <Helmet title="checkout">
@@ -236,9 +240,9 @@ export default function CheckoutForm() {
             </Col>
             <Col lg="6" md="6">
               <h2 className="mb-4">Payemnt</h2>
-              <form className="checkout__form" onSubmit={handleSubmit}>
+              <form  onSubmit={handleSubmit}>
                 <div className="form__group">
-                  <input
+                  <input className="fontfrm "
                     type="number"
                     placeholder="Phone number"
                     required
@@ -246,26 +250,16 @@ export default function CheckoutForm() {
                   />
                 </div>
                 <div className="form__group">
-                  <input
+                  <input className="fontfrm"
                     type="text"
                     placeholder="Enter your address"
                     required
                     onChange={(e) => setEnterAddress(e.target.value)}
                   />
-                </div>
-                {/* <div className="form__group">                    
-                    <select class="my-select" required>
-                    <option selected="selected" data-img-src="img/rena.png">
-                        Rena Cugelman
-                      </option>
-                      <option data-content="../../assets/About-Us.png">Adnan Sagar</option>
-                     
-                     
-                    </select>
-                  </div> */}
+                </div>               
                 <Location action={[changeCountry, changeRegion, changeCity]} />
                 <div className="form__group">
-                  <input
+                  <input className="fontfrm"
                     type="number"
                     placeholder="Postal code"
                     required
@@ -284,9 +278,9 @@ export default function CheckoutForm() {
               </form>
             </Col>
           </Row>
-          <button className="btn btn-warning w-100 h-25" onClick={execute}>
-            clear cart
-          </button>
+          {/* <button className="btn btn-warning w-100 h-25" onClick={execute}>
+            test firebse
+          </button> */}
         </Container>
       </section>
     </Helmet>

@@ -81,13 +81,9 @@ h3 {
 .checkout__total h4{
 	color: #F89B34 !important;
 }
-.checkout__form{
-  font-size: 1.4rem;
-}
+
 @media only screen and (max-width: 768px) {
-  .checkout__bill h2 {
-    font-size: 0.9rem;
-  }
+
   .checkout__bill {
     margin-top: 40px;
   }
@@ -95,18 +91,22 @@ h3 {
 
 
 /* a verifier */
-select.fontfrm{
+.fontfrm{
 	font-family: Poppins, sans-serif !important;
 	font-weight:  400 !important;
 	font-size:  14px !important;
 	font-style:  normal !important;
 	line-height:  21px !important;
-	padding: 7px 20px;
+	padding: 7px 20px !important;
 	color:#757575;
 	border: none;
   border-bottom: 1px solid #2122454c;
   border-radius: 5px;
 }
-select.fontfrm:focus{
+.fontfrm:focus{
 	outline: none;
+}
+.fontfrm::placeholder{
+	font-size:  14px !important;
+
 }

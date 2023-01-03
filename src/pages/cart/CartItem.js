@@ -29,9 +29,9 @@ const CartItem = ({ item }) => {
     dispatch(deleteItem(id));
   };
   return (
-    <ListGroupItem className="border-0 cart__item">
+    <ListGroupItem className="my-0  border-0 cart__item">
       <div className="cart__item-info d-flex gap-4">
-        <div><img src={img} alt="product-img"/></div>
+        <div><img src={img} className=" imgcheckout" alt="product-img"/></div>
         <div className="cart__product-info w-100 d-flex align-items-center gap-4 justify-content-between ">
           <div>
             <span className="fw-bolder fs-5  ">{title}</span>
@@ -49,7 +49,7 @@ const CartItem = ({ item }) => {
             </div>
           </div>
 
-          <span className="delete__btn" onClick={deletItem}>
+          <span className="delete__btn btndeletCheck me-2" onClick={deletItem}>
             <i className="ri-close-line"></i>
           </span>
         </div>
