@@ -54,8 +54,12 @@ hr{
   font-weight: 600;
 }
 
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 800px) {
   .cart {
     width: 300px !important;
+  }
+  .cart__item-list {
+    height: auto;
+    overflow: auto
   }
 }
