@@ -45,7 +45,7 @@ const CardProduct = (props) => {
 
         <div className="card-body justify-content-center row">
           <h5 className="card-title text-danger text-center pt-4 h-25">
-            ${prod.price}
+            ${prod.price.toLocaleString()}
           </h5>
           <p className="card-text text-center fs-5 h-25 m-0 text-truncate ">
             {prod.productName}

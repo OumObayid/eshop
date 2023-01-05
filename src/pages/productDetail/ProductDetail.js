@@ -6,17 +6,24 @@ import {
   Stars,
   AlertDialogSlide,
   SlideProduct,
-} from "../../";
+} from "../../components";
 import { Container, Row, Col, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "../../../redux/cartSlice";
-import { dataProducts, productAddReview } from "../../../redux/dataSlice";
+import { cartActions } from "../../redux/cartSlice";
+import { dataProducts, productAddReview } from "../../redux/dataSlice";
 import "./ProductDetail.css";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../firebase/config";
+import { db } from "../../firebase/config";
+import { useEffect } from "react";
 
 const ProductDetail = () => {
+
+  useEffect(() => {
+  window.scrollTo(0,0)
+  })
+  
+
   const [tab, setTab] = useState("desc");
   const [enteredName, setEnteredName] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -126,7 +133,7 @@ const ProductDetail = () => {
                   {product.productName}
                 </h2>
                 <span className="price fw-bold fs-2 mb-5">
-                  ${product.price}
+                  ${product.price.toLocaleString()}
                 </span>
                 <Stars actions={[product, setTabRev]} />
                 <p className="my-5 ">

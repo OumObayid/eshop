@@ -1,6 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Col, Button } from "reactstrap";
 import { Helmet, Location } from "../../components";
@@ -20,9 +20,6 @@ import {
 } from "firebase/firestore";
 import { cartItems, clearCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
-import $ from "jquery";
-
 
 /////////////declare options for card element
 const CARD_OPTIONS = {
@@ -102,9 +99,12 @@ export default function CheckoutForm() {
   const shippingCost = 30;
   const totalAmount = cartTotalAmount + Number(shippingCost);
 
-  //functions to pass to component Location (country,region,city):
+  //functions to get infos (country,region,city) from component Location:
+
+
+  
   const changeCountry = (e) => {
-    setEnterCountry(e.target.options[e.target.options.selectedIndex].text);
+     setEnterCountry(e.target.value);  
   };
   const changeRegion = (e) => {
     setEnterRegion(e.target.value);
@@ -127,7 +127,7 @@ export default function CheckoutForm() {
           amount: totalAmount * 100, //total price to paid what we must get from the cart
           id,
         });
-        console.log(" user.id :", user.id);
+        // console.log(" user.id :", user.id);
         if (response.data.success) {
           const docRef = doc(db, "users", user.id);
           await updateDoc(docRef, {
@@ -165,7 +165,7 @@ export default function CheckoutForm() {
           };
 
           shippingInfo.push(userShippingAddress);
-          console.log("shippingInfo :", shippingInfo);
+          // console.log("shippingInfo :", shippingInfo);
           //end shiping info
           //clear cart
           dispatch(clearCart());
@@ -225,14 +225,14 @@ export default function CheckoutForm() {
               <Col lg="12" md="12">
                 <div className="checkout__bill">
                   <h5 className="d-flex align-items-center justify-content-between ">
-                    Subtotal: <span>${cartTotalAmount}</span>
+                    Subtotal: <span>${cartTotalAmount.toLocaleString()}</span>
                   </h5>
                   <h5 className="d-flex align-items-center justify-content-between ">
-                    Shipping: <span>${shippingCost}</span>
+                    Shipping: <span>${shippingCost.toLocaleString()}</span>
                   </h5>
                   <div className="checkout__total">
                     <h4 className="d-flex align-items-center justify-content-between">
-                      Total: <span>${totalAmount}</span>
+                      Total: <span>${totalAmount.toLocaleString()}</span>
                     </h4>
                   </div>
                 </div>
@@ -257,7 +257,7 @@ export default function CheckoutForm() {
                     onChange={(e) => setEnterAddress(e.target.value)}
                   />
                 </div>               
-                <Location action={[changeCountry, changeRegion, changeCity]} />
+                <Location action={[changeCountry, changeRegion, changeCity]}  />
                 <div className="form__group">
                   <input className="fontfrm"
                     type="number"

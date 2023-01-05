@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Header.module.scss";
-import logoEshop from "../../assets/logo.png";
+// import logoEshop from "../../assets/logo.png";
 
 import { FaShoppingCart, FaTimes, FaUserCircle } from "react-icons/fa";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
@@ -222,7 +222,7 @@ const Header = () => {
               {categorylist.map((itemcat,index) => {
                 return (
                   <li key={index} onClick={toggleMenu}>
-                    <Link to={`/CategoryDetail/${itemcat.id}`} className="dropdown-item">
+                    <Link to={`/categoryDetail/${itemcat.id}`} className="dropdown-item">
                       {itemcat.categoryName}
                     </Link>
                   </li>
@@ -333,8 +333,7 @@ const Header = () => {
             </div>
           </span>
         </div>
-      </nav>
-
+      </nav>     
       <div className={styles["menu-icon"]}>
         <span className="  ">
           <span className={styles.cartbask} to="/cart" onClick={toggleCart}>

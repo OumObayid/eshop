@@ -5,7 +5,7 @@ import { db } from "../../firebase/config";
 import { Row, Col } from "reactstrap";
 import { addProduct,addCategory } from "../../redux/dataSlice";
 import { useDispatch } from "react-redux";
-import { ProductFilter, ProductSearch,Helmet,CardProduct,CardProductRow,Scrolltop } from "../../components";
+import { ProductFilter, ProductSearch,Helmet,CardProduct,CardProductRow,Scrolltop,  } from "../../components";
 
 
 
@@ -381,6 +381,7 @@ const Shop = () => {
   return (
     <Helmet title="shopping">
       <div className=" pt-5 d-flex justify-content-center row fs-5">
+      
         <ProductFilter
           key={seed}
           actions={[
@@ -399,7 +400,8 @@ const Shop = () => {
             rangeValInit,
           ]}
         />
-        <div className="col-md-9 p-0 ">
+        <div className="col-md-9 p-0 "> 
+       
           <ProductSearch
             actions={[
               countP,

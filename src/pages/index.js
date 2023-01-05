@@ -13,7 +13,9 @@ export { default as Shop } from "./shop/Shop";
 export { default as Services } from "./services/Service";
 export { default as Terms } from "./terms/Terms";
 export { default as Account } from "./account/Account";
+export { default as Accountedit } from "./account/Accountedit";
 export { default as Cart } from "./cart/Carts";
+export { default as ProductDetail } from "./productDetail/ProductDetail";
 
 
 

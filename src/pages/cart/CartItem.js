@@ -36,7 +36,7 @@ const CartItem = ({ item }) => {
           <div>
             <span className="fw-bolder fs-5  ">{title}</span>
             <p className=" d-flex align-items-center gap-5 fs-5 ">
-              {quantity} x <span>${totalPrice}</span>
+              {quantity} x <span>${totalPrice.toLocaleString()}</span>
             </p>
             <div className=" d-flex align-items-center justify-content-between  increase__decrease-btn">
               <span className="increase__btn" onClick={incrementItem}>

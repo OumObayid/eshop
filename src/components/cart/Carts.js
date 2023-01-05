@@ -66,7 +66,7 @@ const Carts = () => {
           <div className="cart__bottom d-flex align-items-center justify-content-between">
             <p className="my-auto">
               <span className="text-light fs-5 ">Subtotal :</span>
-              <span className="  fw-bold fs-3">${totalAmount}</span>
+              <span className="  fw-bold fs-3">${totalAmount.toLocaleString()}</span>
             </p>
             <button>
               <span onClick={toggleCart}>Checkout</span>

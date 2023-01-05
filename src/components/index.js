@@ -17,7 +17,6 @@ export { default as Slider } from "./slider/Slider";
 export { default as CategoryList } from "./category/CategoryList";
 export { default as Stars } from "./stars/Stars";
 export { default as CategoryDetail } from "./category/CategoryDetail";
-export { default as ProductDetail } from "./products/productDetail/ProductDetail";
 export { default as RatedProducts } from "./products/ratedProducts/RatedProducts";
 export { default as SlideProduct } from "./slideProduct/SlideProduct";
 export { default as About } from "./about/About";

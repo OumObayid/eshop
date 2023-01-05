@@ -4,8 +4,7 @@ import {
   Header,
   Footer,
   Carts,
-  CategoryDetail,
-  ProductDetail,  
+  CategoryDetail,  
 } from "./components";
 //pages
 import {
@@ -23,7 +22,9 @@ import {
   NotFound,
   Checkout,
   Account,
+  Accountedit,
   CheckoutSuccess,
+  ProductDetail
 } from "./pages";
 //toast
 import { ToastContainer } from "react-toastify";
@@ -47,7 +48,7 @@ function App() {
           <Route path="/eshop" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/terms" element={<Terms />} />
-          <Route path="/CategoryDetail/:id" element={<CategoryDetail />} />
+          <Route path="/categoryDetail/:id" element={<CategoryDetail />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/cart" element={<Carts />} />
           <Route path="/checkout" element={<Checkout />} />
@@ -58,8 +59,9 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/reset" element={<Reset />} />
           <Route path="/verifiemail" element={<Verifiemail />} />
-          <Route path="/ProductDetail/:id" element={<ProductDetail />} />
+          <Route path="/productDetail/:id" element={<ProductDetail />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/accountedit" element={<Accountedit />} />
           <Route path="*" element={<NotFound />} />     
       </Routes>
       <Footer />

@@ -4,7 +4,7 @@ const Category = ({category}) => {
   return (
     <div className=" m-1 card   p-1  ">
       <Link
-        to={`/CategoryDetail/${category.id}`}
+        to={`/categoryDetail/${category.id}`}
         className="justify-content-center row"
       >
         <p className=" text-center fs-2 h-25 m-0 ">
