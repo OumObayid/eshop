@@ -16,10 +16,7 @@
   cursor: pointer;
   cursor : arrow;
 }
-/* .cart__item-list {
-  height: calc(100vh - 210px);
-  overflow: auto;
-} */
+
 
 .cart__bottom {
   position: absolute;
