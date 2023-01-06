@@ -195,7 +195,7 @@ export default function CheckoutForm() {
   return (
     <Helmet title="checkout">
       <section>
-        <Container>
+        
           <Row id="container-element">
             <Col lg="7" md="7" className="products ">
               <Card>
@@ -222,9 +222,9 @@ export default function CheckoutForm() {
             </Col>
 
             <Col lg="5" md="5" className=" products fixed" id="products">
-              <div>
+              
                 <Card>
-                  <div className="d-flex  justify-content-between align-items-center ">
+                  <div className="Payemnt  ">
                     <h2>Payemnt</h2>
                     <div className="cart-icons-list ">
                       <span className="ms-3">method </span>
@@ -346,13 +346,13 @@ export default function CheckoutForm() {
                     alt="eshop"
                   />
                 </Card>
-              </div>{" "}
+             
             </Col>
           </Row>
           {/* <button className="btn btn-warning w-100 h-25" onClick={execute}>
             test firebse
           </button> */}
-        </Container>
+       
       </section>
     </Helmet>
   );

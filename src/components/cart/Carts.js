@@ -33,8 +33,8 @@ const Carts = () => {
           </div>
           <h3 className="ms-3 ">Summary</h3> 
           <div className="my-0 py-0">
-            <div className="cart-icons-list">
-              <span>payment method :</span>
+            <div className="cart-icons-list ">
+              <span >payment method :</span>
               <div className=" mx-5">
                 <img
                   className="cart-icons-img mx-2"

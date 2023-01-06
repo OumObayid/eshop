@@ -72,11 +72,7 @@ hr{
   font-weight: 600;
 }
 
-@media only screen and (max-width: 576px) {
-  .cart {
-    width: 300px !important;
-  }
-}
+
 
 .noitem span,.noitem p{
   color:#282828;
@@ -111,4 +107,16 @@ justify-content: center;
 }
 .cart-icons-img {
   height: 24px;
+}
+
+@media only screen and (max-width: 576px) {
+  .cart {
+    width: 300px !important;
+  }
+  .cart-icons-list{    
+    margin-left: 10px;
+  }
+  .cart-icons-list div{  
+    width: 40%;
+  }
 }
