@@ -28,10 +28,7 @@ const Footer = () => {
       <ul className="list-inline">
         <li className="list-inline-item">
           <Link to="/">Home</Link>
-        </li>
-        <li className="list-inline-item">
-          <Link to="/services">Services</Link>
-        </li>
+        </li>        
         <li className="list-inline-item">
           <HashLink to="/#about">About</HashLink>
         </li>

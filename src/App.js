@@ -10,7 +10,6 @@ import {
 import {
   Home,
   Shop,
-  Services,
   Terms,
   Policy,
   OrderHistory,
@@ -46,7 +45,6 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/eshop" element={<Home />} />
-          <Route path="/services" element={<Services />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/categoryDetail/:id" element={<CategoryDetail />} />
           <Route path="/policy" element={<Policy />} />
