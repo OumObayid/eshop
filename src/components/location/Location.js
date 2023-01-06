@@ -2,9 +2,13 @@ import React, { useEffect } from "react";
 import $ from "jquery";
 
 const Location = (props) => {
+  //from component CheckoutForm
   const changeCountry=props.action[0];
   const changeRegion=props.action[1];
   const changeCity=props.action[2];
+  
+  //from component Accountedit
+  const selected=props.selected
   
   //for select Country Region City
   useEffect(() => {
@@ -81,13 +85,14 @@ const Location = (props) => {
   
   return (
     <>
-      <div className="form__group">
+      <div className="form__group fs-4">
         <select
           className="form-select fontfrm "
           id="country"
           onChange={changeCountry}
         >
           <option value=""> Country</option>
+          {(selected !==null)?<option selected>{selected[0]}</option>:""}
         </select>
       </div>
       <div className="form__group ">
@@ -97,6 +102,7 @@ const Location = (props) => {
           onChange={changeRegion}
         >
           <option value="">Region</option>
+          {(selected !==null)?<option selected>{selected[1]}</option>:""}
         </select>
       </div>
       <div className="form__group ">
@@ -106,6 +112,8 @@ const Location = (props) => {
           onChange={changeCity}
         >
           <option value="">City</option>
+          {(selected !==null)?<option selected>{selected[2]}</option>:""}
+
         </select>
       </div>
     </>

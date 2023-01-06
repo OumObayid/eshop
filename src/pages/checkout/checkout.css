@@ -91,20 +91,20 @@ h3 {
 .fontfrm {
   font-family: Poppins, sans-serif !important;
   font-weight: 400 !important;
-  font-size: 14px !important;
+  font-size: 16px !important;
   font-style: normal !important;
   line-height: 21px !important;
   padding: 7px 20px !important;
   color: #757575;
   border: none;
-  border-bottom: 1px solid #2122454c;
-  border-radius: 5px;
+  border-bottom: 1px solid #2122454c;  border-radius: 5px;
+
 }
 .fontfrm:focus {
   outline: none;
 }
 .fontfrm::placeholder {
-  font-size: 14px !important;
+  font-size: 16px !important;
 }
 
 .cart-icons-list {

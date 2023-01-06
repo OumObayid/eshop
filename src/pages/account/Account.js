@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Helmet } from "../../components";
 import { auth, db } from "../../firebase/config";
 import "./Account.css";
+
 const Account = () => {
   const [user, setUser] = useState({});
   ///////////////////first of all check if logged

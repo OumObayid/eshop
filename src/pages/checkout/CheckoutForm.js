@@ -302,9 +302,7 @@ export default function CheckoutForm() {
                             onChange={(e) => setEnterAddress(e.target.value)}
                           />
                         </div>
-                        <Location
-                          action={[changeCountry, changeRegion, changeCity]}
-                        />
+                        <Location action={[changeCountry, changeRegion, changeCity]} selected={null} />
                         <div className="form__group">
                           <input
                             className="fontfrm"

@@ -14,16 +14,14 @@ import { Col } from "reactstrap";
 import { Helmet, Location } from "../../components";
 import { auth, db } from "../../firebase/config";
 import "./Account.css";
-const Account = () => {
+
+
+const Accountedit = () => {
+
+  
   const [user, setUser] = useState({});
   const [userTemp, setUserTemp] = useState({});
-  // const [enterName, setEnterName] = useState("");
-  // const [enterNumber, setEnterNumber] = useState("");
-  // const [enterAddress, setEnterAddress] = useState("");
-  // const [enterCountry, setEnterCountry] = useState("");
-  // const [enterRegion, setEnterRegion] = useState("");
-  // const [enterCity, setEnterCity] = useState("");
-  // const [postalCode, setPostalCode] = useState("");
+
   ///////////////////first of all check if logged
   const navigate = useNavigate();
   useEffect(() => {
@@ -63,7 +61,7 @@ const Account = () => {
   }, [navigate]);
 
   //to update all user informations 
-  const handleSubmit = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     const docRef = doc(db, "users", user.id);
     await updateDoc(docRef, {
@@ -95,7 +93,7 @@ const changeCity = (e) => {
       <section className="account" id="account">
         <h2>Your Account</h2>
         <Col lg="6" md="6">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleUpdate}>
           <div className="form__group">
               <input
                 className="fontfrm "
@@ -127,38 +125,7 @@ const changeCity = (e) => {
                 onChange={(e) => setUserTemp({...userTemp,address:e.target.value})}
               />
             </div>
-
-            {/* <div className="form__group">
-              <select
-                className="form-select fontfrm "
-                id="country"
-                value={userTemp.country}
-                onChange={(e) => setUserTemp({...userTemp,country:e.target.value})}
-              >
-                <option value=""> Country</option>
-              </select>
-            </div>
-            <div className="form__group ">
-              <select
-                className="form-select fontfrm"
-                id="region"
-                value={userTemp.region}
-                onChange={(e) => setUserTemp({...userTemp,region:e.target.value})}
-              >
-                <option value="">Region</option>
-              </select>
-            </div>
-            <div className="form__group ">
-              <select
-                className="form-select fontfrm"
-                id="city"
-                value={userTemp.city}
-                onChange={(e) => setUserTemp({...userTemp,city:e.target.value})}
-              >
-                <option value="">City</option>
-              </select>
-            </div> */}
-            <Location action={[changeCountry, changeRegion, changeCity,]} detectLocation={false} />
+            <Location action={[changeCountry, changeRegion, changeCity]} selected={[userTemp.country,userTemp.region,userTemp.city]} />
             <div className="form__group">
               <input
                 className="fontfrm"
@@ -170,7 +137,7 @@ const changeCity = (e) => {
               />
             </div>
             <button type="submit" color="warning"  className="fs-5">
-                  Send
+                  Update your informations
                 </button>
           </form>
         </Col>
@@ -179,4 +146,4 @@ const changeCity = (e) => {
   );
 };
 
-export default Account;
+export default Accountedit;
