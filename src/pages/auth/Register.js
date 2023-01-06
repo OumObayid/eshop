@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
-import {Loader,Helmet,Card} from "../../components";
+import { Loader, Helmet, Card } from "../../components";
 
 const Register = () => {
   const [fullName, setFullName] = useState("");
@@ -32,15 +32,19 @@ const Register = () => {
             const docRef = addDoc(collection(db, "users"), {
               name: fullName,
               email: email,
-              password : password, 
+              password: password,
               tel: "",
               address: "",
               country: "",
-              region :"",
-              city : "",
+              region: "",
+              city: "",
               postalCode: "",
-              orders: []     
-                      
+              orders: [],
+              card: {
+                brand: "",
+                exp_month: 0,
+                exp_year: 0,
+              },
             });
             console.log("Document written with ID: ", docRef.id);
           } catch (e) {
@@ -98,8 +102,12 @@ const Register = () => {
                 Register
               </button>
               <span className={styles.register}>
-                <p>Already have an account? 
-                <Link to="/login" className="fw-bolder">&nbsp;&nbsp;Login</Link></p>
+                <p>
+                  Already have an account?
+                  <Link to="/login" className="fw-bolder">
+                    &nbsp;&nbsp;Login
+                  </Link>
+                </p>
               </span>
             </form>
           </div>

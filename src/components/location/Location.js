@@ -64,7 +64,6 @@ const Location = (props) => {
       BATTUTA_KEY +
       "&callback=?";
     $.getJSON(url, function(data) {
-      console.log(data);
       $("#city option").remove();
       $('#city').append('<option value="">Please select your city</option>');
       $.each(data, function(index, value) {
