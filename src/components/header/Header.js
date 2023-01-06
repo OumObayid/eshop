@@ -33,7 +33,6 @@ const logo = (
 
 const Header = () => {
   const dispatch = useDispatch();
-  const [categorys, setCategorys] = useState([]);
   useEffect(() => {
     const getCategorys = async () => {
       //////////////// get data from firebase
@@ -45,7 +44,6 @@ const Header = () => {
         list.push(fullDoc); //put data in array list
         dispatch(addCategory(fullDoc)); // put doc in store redux
       });
-      setCategorys(list);
     };
     getCategorys(); // call to function
     const getProducts = async () => {
@@ -86,8 +84,6 @@ const Header = () => {
 
   //to navigate
   const navigate = useNavigate();
-  //to recupere user if he is online
-  const [userName, setUserName] = useState("");
 
   //display or hide menu
   const toggleMenu = (even) => {
@@ -127,7 +123,6 @@ const Header = () => {
           );
           const querySnapshot = await getDocs(q);
           querySnapshot.forEach((doc) => {
-            setUserName(doc.data().name);
           });
         };
         fetchUser();
