@@ -197,7 +197,7 @@ export default function CheckoutForm() {
       <section>
         
           <Row id="container-element">
-            <Col lg="7" md="7" className="products ">
+            <Col lg="7" md="7">
               <Card>
                 <h2 className="mb-2">Summary</h2>
                 <Col lg="12" md="12" className="">
