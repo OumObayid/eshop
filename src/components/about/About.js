@@ -16,7 +16,7 @@ import OurHistoryTitle from "../../assets/Our-History.png";
 
 const About = () => {
   return (
-    <Container className="about" id="about">
+    <div className="about" id="about">
       <div className=" mt-5 text-center">
         <img
           src={aboutusTitle}
@@ -289,7 +289,7 @@ const About = () => {
           </Row>
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 };
 
