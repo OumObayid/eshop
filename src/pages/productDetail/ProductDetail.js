@@ -7,7 +7,7 @@ import {
   AlertDialogSlide,
   SlideProduct,
 } from "../../components";
-import { Container, Row, Col, Button } from "reactstrap";
+import { Row, Col, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../redux/cartSlice";
 import { dataProducts, productAddReview } from "../../redux/dataSlice";
@@ -113,7 +113,7 @@ const ProductDetail = () => {
       )}
 
       <section>
-        <Container>
+        <div>
           <div className="mb-4">
             <h2>Product Details</h2>
             <Link to="/shop">
@@ -254,7 +254,7 @@ const ProductDetail = () => {
               ))}
             </SlideProduct>
           </Row>
-        </Container>
+        </div>
       </section>
     </Helmet>
   );

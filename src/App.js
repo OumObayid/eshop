@@ -21,9 +21,9 @@ import {
   NotFound,
   Checkout,
   Account,
-  Accountedit,
   CheckoutSuccess,
-  ProductDetail
+  ProductDetail,
+  Wishlist
 } from "./pages";
 //toast
 import { ToastContainer } from "react-toastify";
@@ -59,7 +59,7 @@ function App() {
           <Route path="/verifiemail" element={<Verifiemail />} />
           <Route path="/productDetail/:id" element={<ProductDetail />} />
           <Route path="/account" element={<Account />} />
-          <Route path="/accountedit" element={<Accountedit />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="*" element={<NotFound />} />     
       </Routes>
       <Footer />

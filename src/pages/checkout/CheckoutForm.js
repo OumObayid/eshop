@@ -267,7 +267,7 @@ export default function CheckoutForm() {
                           <h4>Delivery address</h4>
                           <span>
                             <Link
-                              to="/accountedit"
+                              to="/account"
                               className="fs-4 text-danger"
                             >
                               Change

@@ -7,7 +7,7 @@ import ccc from "../../assets/ccc.png";
 import ddd from "../../assets/ddd.png";
 import eshopnow from "../../assets/eshopnow.png";
 import ourhistory from "../../assets/ourhistory.png";
-import { Row, Col, Container } from "reactstrap";
+import { Row, Col } from "reactstrap";
 import { HashLink } from "react-router-hash-link";
 import { BsEyeglasses } from "react-icons/bs";
 import aboutusTitle from "../../assets/About-Us.png";

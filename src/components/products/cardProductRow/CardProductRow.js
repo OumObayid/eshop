@@ -32,7 +32,7 @@ const CardProduct = (props) => {
       <Row>
         <Col lg="4" md="4" sm="12" xs="12" className="border-2 border-end">
           <Link
-            to={`/ProductDetail/${prod.id}`}
+            to={`/productDetail/${prod.id}`}
             className="justify-content-center row"
           > <img src={prod.imgUrl} alt="imagee"/>
           </Link>

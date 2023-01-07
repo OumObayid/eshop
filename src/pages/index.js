@@ -12,9 +12,9 @@ export { default as Policy } from "./policy/Policy";
 export { default as Shop } from "./shop/Shop";
 export { default as Terms } from "./terms/Terms";
 export { default as Account } from "./account/Account";
-export { default as Accountedit } from "./account/Accountedit";
 export { default as Cart } from "./cart/Carts";
 export { default as ProductDetail } from "./productDetail/ProductDetail";
+export { default as Wishlist } from "./wishlist/Wishlist";
 
 
 

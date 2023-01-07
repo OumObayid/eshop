@@ -2,6 +2,13 @@
  margin-top:2rem;;
 }
 
-.ri-edit-2-fill{
-    font-size: 25px;
+.btnInfo{
+    margin-top: 20px;
+}
+.btnInfo:hover{
+cursor: pointer;
+}
+.fStyle{
+    font-weight: 500;
+    font-size: 16;
 }

@@ -22,4 +22,5 @@ export { default as SlideProduct } from "./slideProduct/SlideProduct";
 export { default as About } from "./about/About";
 export { default as Contact } from "./contact/Contact";
 export { default as Location } from "./location/Location";
+export { default as AccountMenu } from "./accountMenu/AccountMenu";
 

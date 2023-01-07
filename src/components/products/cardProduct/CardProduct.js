@@ -34,7 +34,7 @@ const CardProduct = (props) => {
       )}
 
       <Link
-        to={ `/ProductDetail/${prod.id} `}
+        to={ `/productDetail/${prod.id} `}
         className="justify-content-center row"
       >
         <img
