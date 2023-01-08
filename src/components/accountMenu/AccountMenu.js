@@ -14,7 +14,7 @@ const AccountMenu = ({ active }) => {
 
 
   return (
-    <Col lg="3" md="3" sm="12" xs="12" className="list-group mb-5">
+    <div className=" list_menu mb-5">
       <Link to="/account">        
         <button
           id="account_link"
@@ -30,17 +30,17 @@ const AccountMenu = ({ active }) => {
       <Link to="/order-history">
         <button
           id="orders_link"
-          className="list-group-item list-group-item-action me-3 rounded-0 d-flex align-items-center py-3 "
+          className="fiPackage list-group-item list-group-item-action me-3 rounded-0 d-flex align-items-center"
         >
           <FiPackage
             id="orderIco"
             color="#F49934"
-            size="24px"
-            className="ri-heart-line  fw-bold  me-3"
+            size="19px"
+            className="ri-heart-line  fw-bold my-2 me-3"
           />
           <span className="fs-3 me-3">Orders</span>
         </button>
-      </Link>
+      </Link>     
       <Link to="/wishlist">        
         <button
           id="wishlist_link"
@@ -53,7 +53,7 @@ const AccountMenu = ({ active }) => {
           <span className="fs-3 me-3">Wishlist</span>
         </button>
       </Link>
-    </Col>
+    </div>
   );
 };
 

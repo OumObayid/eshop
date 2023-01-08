@@ -34,32 +34,34 @@ const OrderItem = ({ item }) => {
           cartLenth={cartLenth}
         />
       )}
-      <div className="cart__item-info d-flex gap-4">
-        <Link to={ `/ProductDetail/${item.id} `}>
-          <img src={item.img} className=" imgcheckout" alt="product-img" />
-        </Link>
-        <div className="cart__product-info w-100 d-flex align-items-center gap-4 justify-content-between ">
+      <div className=" gap-4 contain">
+        <div className="col-lg-8 col-md-8 d-flex align-items-center gap-4 justify-content-start ">
+          <Link to={`/ProductDetail/${item.id} `}>
+            <img src={item.img} className=" imgcheckout" alt="product-img" />
+          </Link>
           <div>
             <span className="bolderF fs-3  ">{item.title}</span>
-            <p className=" d-flex align-items-center gap-5 fs-3 ">
+            <p className=" d-flex align-items-center gap-5 fs-4 ">
               <span>${item.price}</span> x <span>{item.quantity}</span>
             </p>
           </div>
-          <div className="fs-3 col-3">
-            <div >
-              <span className="bolderF">Total : </span>
+        </div>
+        <div className="fs-3 col-lg-2 col-md-2 col-sm-12 col-xs-12 contain2">
+          <div className="d-flex ">
+            <span className="bolderF  d-flex text-nowrap">
+              Total : &nbsp;
               <span style={{ color: "#F49934" }}>
                 ${item.totalPrice.toLocaleString()}
               </span>
-            </div>
-            <Button
-              className="fs-4 rounded w-100 my-5"
-              onClick={addItem}
-              color="warning"
-            >
-              order again
-            </Button>
+            </span>
           </div>
+          <Button
+            className="fs-5  rounded  my-5"
+            onClick={addItem}
+            color="warning"
+          >
+            order again
+          </Button>
         </div>
       </div>
     </ListGroupItem>

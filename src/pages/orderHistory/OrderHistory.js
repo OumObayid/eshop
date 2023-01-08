@@ -8,10 +8,9 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase/config";
 import OrderItem from "./OrderItem";
+import "./OrderHistory.css";
 
 const OrderHistory = () => {
-  const [user, setUser] = useState({});
-  const [userTemp, setUserTemp] = useState({});
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
 
@@ -41,10 +40,6 @@ const OrderHistory = () => {
               orders: doc.data().orders,
             };
           });
-          //call function
-          setUser(user);
-          setUserTemp(user);
-          console.log("user :", user);
           setOrders(user.orders);
         };
         getUser(user.email);
@@ -54,8 +49,10 @@ const OrderHistory = () => {
   return (
     <Helmet title="OrderHistory">
       <section className="orders" id="orders">
-        <Row className=" ">
-          <AccountMenu active="orders" />
+        <Row>
+          <Col lg="3" md="3" sm="12" xs="12">
+            <AccountMenu active="orders" />
+          </Col>
           {/* -----show informations read only--- */}
           <Col lg="9" md="9" sm="12" xs="12">
             <p className="h2" style={{ color: "#F49934" }}>
@@ -79,8 +76,9 @@ const OrderHistory = () => {
                       />
                     </div>
                   ))
-                ) : (<>
-                  <h4 className="text-center my-5">No Order did by you</h4>
+                ) : (
+                  <>
+                    <h4 className="text-center my-5">No Order did by you</h4>
                   </>
                 )}
               </div>

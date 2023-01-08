@@ -368,9 +368,14 @@ p {
   margin-right: 1rem;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .--flex-dir-column {
     flex-direction: column;
+  }
+  .container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0 0px;
   }
 }
 

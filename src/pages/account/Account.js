@@ -59,7 +59,6 @@ const Account = () => {
         getUser(user.email);
       }
     });
-    
   }, [navigate]);
 
   //  //handle for changing user informations
@@ -155,50 +154,63 @@ const Account = () => {
   return (
     <Helmet title="Account">
       <section className="account" id="account">
-        <Row className=" ">
-          <AccountMenu active="account" />
+        <Row>
+          <Col lg="3" md="3" sm="12" xs="12">
+            <AccountMenu active="account" />
+          </Col>
           {/* -----show informations read only--- */}
-          <Col lg="9" md="9" sm="12" xs="12" >
+          <Col lg="9" md="9" sm="12" xs="12">
             <p className="h2" style={{ color: "#F49934" }}>
               Your Account
             </p>
             {/* informations read only */}
             <hr style={{ backgroundColor: "#434341", width: "100%" }} />
-            <div className="d-flex justify-content-around align-items-center">
-              <div className="fs-4 border p-3">
-                <div className="d-flex">
-                  <div className="form__group pers  row">
-                    <span>Full Name: </span>
-                    <p className="fStyle">{user.name}</p>
-                  </div>
-                  <div className="form__group pers row">
+            <div className="content__info ">
+              <Col lg="9" md="9" sm="12" xs="12" className="fs-4 border p-3">
+                <Col className="form__group pers  row">
+                  <span>Full Name: </span>
+                  <p className="fStyle">{user.name}</p>
+                </Col>
+                <Col className="flex_email_tel">
+                  <Col                   
+                    className="form__group pers row"
+                  >
                     <span>Email: </span>
                     <p className="fStyle">{user.email}</p>
-                  </div>
-                  <div className="form__group pers row">
+                  </Col>
+                  <Col
+                   
+                    className="form__group pers row"
+                  >
                     <span>Phone: </span>
                     <p className="fStyle">{user.tel}</p>
-                  </div>
-                </div>
+                  </Col>
+                </Col>
 
-                <div className="form__group pers row">
+                <Col className="form__group pers row">
                   <span>Address: </span>
                   <p className="fStyle">{user.address}</p>
-                </div>
-                <div className="form__group pers row">
+                </Col>
+                <Col className="pers row">
                   <span>Location: </span>
-                  <p className="fStyle d-flex">
-                    <div>{user.postalCode}, &nbsp;&nbsp; </div>
-                    <div>{user.city}, &nbsp; &nbsp; </div>
-                    <div>{user.region}, &nbsp; &nbsp; </div>
-                    <div>{user.country}</div>
+                  <p className="fStyle d-flex text-wrap">
+                    {user.postalCode}, &nbsp;
+                    {user.city}, &nbsp;
+                    {user.region}, &nbsp;
+                    {user.country}
                   </p>
-                </div>
-              </div>
+                </Col>
+              </Col>
               {/*button update info or password */}
-              <div className="btn_style ">
+              <Col
+                lg="3"
+                md="3"
+                sm="12"
+                xs="12"
+                className="btn_style btnInfo  ms-3 "
+              >
                 <div
-                  className="d-flex btnInfo"
+                  className="d-flex"
                   data-bs-target="#mymodalInfo"
                   data-bs-toggle="modal"
                 >
@@ -215,7 +227,7 @@ const Account = () => {
                   <p className="h4 ">Your Informations</p>
                 </div>
                 <div
-                  className="d-flex btnInfo "
+                  className="d-flex "
                   data-bs-toggle="modal"
                   data-bs-target="#mymodalPass"
                 >
@@ -231,7 +243,7 @@ const Account = () => {
                   ></i>
                   <p className="h4">Your Password</p>
                 </div>
-              </div>
+              </Col>
             </div>
           </Col>
         </Row>
@@ -265,8 +277,8 @@ const Account = () => {
                 {/* ---content modal--- */}
                 <Col lg="12" md="12">
                   <form onSubmit={handleUpdateInfo}>
-                    <div className="d-flex justify-content-between">
-                      <div className="form__group col-5">
+                    <div className="input_namephone">
+                      <Col lg="5" md="5" sm="12" xs="12" className="form__group ">
                         <input
                           className="fontfrm "
                           type="text"
@@ -280,8 +292,8 @@ const Account = () => {
                             })
                           }
                         />
-                      </div>
-                      <div className="form__group col-5">
+                      </Col>
+                      <Col lg="5" md="5" sm="12" xs="12" className="form__group ">
                         <input
                           className="fontfrm "
                           type="number"
@@ -295,7 +307,7 @@ const Account = () => {
                             })
                           }
                         />
-                      </div>
+                      </Col>
                     </div>
                     <div className="form__group">
                       <input
@@ -436,7 +448,7 @@ const Account = () => {
                     )}
                     <div>
                       <button type="submit" className="btn btn-warning fs-5">
-                        Update your informations
+                        Update Your Informations
                       </button>
                     </div>
                   </form>

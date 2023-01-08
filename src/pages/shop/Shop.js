@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./Shop.css";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/config";
+
 import { Row, Col } from "reactstrap";
-import { addProduct, addCategory, dataProducts } from "../../redux/dataSlice";
-import { useDispatch, useSelector } from "react-redux";
+import {  dataProducts } from "../../redux/dataSlice";
+import { useSelector } from "react-redux";
 import {
   ProductFilter,
   ProductSearch,
@@ -13,13 +11,13 @@ import {
   CardProductRow,
   Scrolltop,
 } from "../../components";
+import "./Shop.css";
 
 const Shop = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const dispatch = useDispatch();
   const [data, setData] = useState([]);
   var [containerData, setContainerData] = useState([]);
   const [countP, setCountP] = useState(0);
@@ -388,7 +386,7 @@ const Shop = () => {
               displayList,
             ]}
           />
-          <Row className=" d-flex justify-content-between row">
+          <Row className=" d-flex justify-content-between mt-3 row">
             {isDisplayList
               ? containerData.map((item) => (
                   <Col

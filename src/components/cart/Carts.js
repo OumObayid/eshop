@@ -38,25 +38,26 @@ const Carts = () => {
           <h3 className="ms-3 ">Summary</h3> 
           <div className="my-0 py-0">
             <div className="cart-icons-list ">
-              <span >payment method :</span>
-              <div className=" mx-5">
+              <span className="w-50">payment method:</span>
+              <div className=" mx-3">
+
                 <img
-                  className="cart-icons-img mx-2"
+                  className="cart-icons-img"
                   src="https://img.alicdn.com/tfs/TB1xcMWdEKF3KVjSZFEXXXExFXa-68-48.png"
                   alt="bank"
                 />
                 <img
-                  className="cart-icons-img mx-2"
+                  className="cart-icons-img"
                   src="https://img.alicdn.com/tfs/TB19TEYdB1D3KVjSZFyXXbuFpXa-53-48.png"
                   alt="bank"
                 />
                 <img
-                  className="cart-icons-img mx-2"
+                  className="cart-icons-img"
                   src="https://img.alicdn.com/tfs/TB19qM7drus3KVjSZKbXXXqkFXa-39-48.png"
                   alt="bank"
                 />
                 <img
-                  className="cart-icons-img mx-2"
+                  className="cart-icons-img"
                   src="https://img.alicdn.com/tfs/TB18So3dBKw3KVjSZFOXXarDVXa-41-48.png"
                   data-spm-anchor-id="a2g0o.cart.0.i5.606c378dFhfEKO"
                   alt="bank"

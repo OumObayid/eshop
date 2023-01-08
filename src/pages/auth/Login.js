@@ -57,7 +57,6 @@ const Login = () => {
   return (
     <Helmet title="login">
       {isLoading && <Loader />}
-
       <section className={`container ${styles.auth}`}>
         <div className={styles.img}>
           <img src={loginImg} alt="login" width={350} />

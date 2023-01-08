@@ -1,23 +1,25 @@
-import React from 'react'
-import { Col, ListGroup, Row } from 'reactstrap'
-import { AccountMenu, Helmet } from '../../components'
+import React from "react";
+import { Col, ListGroup, Row } from "reactstrap";
+import { AccountMenu, Helmet } from "../../components";
 
 const Wishlist = () => {
   return (
     <Helmet title="wishlist">
-    <section className="" id="wishlist">
-      <Row className=" ">
-        <AccountMenu active="wishlist" />
-        {/* -----show informations read only--- */}
-        <Col lg="9" md="9" sm="12" xs="12">
-          <p className="h2" style={{ color: "#F49934" }}>
-            Your wishlist
-          </p>
-          {/* informations read only */}
-          <hr style={{ backgroundColor: "#434341", width: "100%" }} />
-          {/* list of wishlist */}
-          <ListGroup>
-              <div className="cart__item-list border">                
+      <section className="" id="wishlist">
+        <Row>
+          <Col lg="3" md="3" sm="12" xs="12">
+            <AccountMenu active="wishlist" />
+          </Col>
+          {/* -----show informations read only--- */}
+          <Col lg="9" md="9" sm="12" xs="12">
+            <p className="h2" style={{ color: "#F49934" }}>
+              Your wishlist
+            </p>
+            {/* informations read only */}
+            <hr style={{ backgroundColor: "#434341", width: "100%" }} />
+            {/* list of wishlist */}
+            <ListGroup>
+              <div className="cart__item-list border">
                 {/* {wishlist.length !== 0 ? (
                   wishlist.map((item, index) => (
                     <div key={index}>
@@ -35,11 +37,11 @@ const Wishlist = () => {
                 )} */}
               </div>
             </ListGroup>
-        </Col>
-      </Row>
-    </section>
+          </Col>
+        </Row>
+      </section>
     </Helmet>
-  )
-}
+  );
+};
 
-export default Wishlist
+export default Wishlist;
