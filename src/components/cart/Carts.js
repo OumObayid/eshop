@@ -11,9 +11,13 @@ const Carts = () => {
   const navigate = useNavigate();
   const cartProducts = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
-  const toggleCart = () => {
+  const closeCart = () => {
     dispatch(cartUiActions.toggle());
+  }
+  const handleCheckout = () => {
+    
     if (cartProducts.length !== 0) {
+      dispatch(cartUiActions.toggle());
       navigate("/checkout");
     }
   };
@@ -27,7 +31,7 @@ const Carts = () => {
       <div className="cart__container">
         <ListGroup className="cart">
           <div className="cart__close w-100">
-            <span onClick={toggleCart} className="">
+            <span onClick={closeCart} className="">
               <i className="ri-close-fill "></i>
             </span>                      
           </div>
@@ -105,7 +109,7 @@ const Carts = () => {
               </span>
             </p>
             <button>
-              <span className="fs-5" onClick={toggleCart}>
+              <span className="fs-5" onClick={handleCheckout}>
                 Checkout
               </span>
             </button>

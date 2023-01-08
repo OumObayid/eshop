@@ -79,8 +79,9 @@ const OrderHistory = () => {
                       />
                     </div>
                   ))
-                ) : (
+                ) : (<>
                   <h4 className="text-center my-5">No Order did by you</h4>
+                  </>
                 )}
               </div>
             </ListGroup>

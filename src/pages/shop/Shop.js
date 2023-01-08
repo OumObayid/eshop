@@ -3,16 +3,21 @@ import "./Shop.css";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { Row, Col } from "reactstrap";
-import { addProduct,addCategory } from "../../redux/dataSlice";
-import { useDispatch } from "react-redux";
-import { ProductFilter, ProductSearch,Helmet,CardProduct,CardProductRow,Scrolltop,  } from "../../components";
-
-
+import { addProduct, addCategory, dataProducts } from "../../redux/dataSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ProductFilter,
+  ProductSearch,
+  Helmet,
+  CardProduct,
+  CardProductRow,
+  Scrolltop,
+} from "../../components";
 
 const Shop = () => {
   useEffect(() => {
-    window.scrollTo(0,0);
-   },[]) 
+    window.scrollTo(0, 0);
+  }, []);
 
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
@@ -50,39 +55,13 @@ const Shop = () => {
 
   //display
   const [isDisplayList, setIsDisplayList] = useState(false);
-  /////////////////////////////////////////////////////////////starting features
-
+  /////////////////////////////////////////////////////////////get data
+  const dataProd = useSelector(dataProducts);
   useEffect(() => {
-    const getProducts = async () => {
-      //////////////// get data from firebase
-      const ref = collection(db, "products");
-      const querySnapshot = await getDocs(ref);
-      const list = [];
-      querySnapshot.forEach((doc) => {
-        let fullDoc = { id: doc.id, ...doc.data() }; //concate id to document
-        list.push(fullDoc); //put data in array list
-        dispatch(addProduct(fullDoc)); // put doc in store redux
-      });
-
-      setData(list); // put data in state data
-      setContainerData(list); // put data in state containerData
-      setCountP(list.length); // update count of product
-    };
-    getProducts(); // call to function
-    const getCategorys = async () => {
-      //////////////// get data from firebase
-      const ref = collection(db, "categorys");
-      const querySnapshot = await getDocs(ref);
-      const list = [];
-      querySnapshot.forEach((doc) => {
-        let fullDoc = { id: doc.id, ...doc.data() }; //concate id to document
-        list.push(fullDoc); //put data in array list
-        dispatch(addCategory(fullDoc)); // put doc in store redux
-      });      
-    };
-    getCategorys(); // call to function
- 
-  }, [dispatch]);
+    setData(dataProd);
+    setContainerData(dataProd); // put data in state containerData
+    setCountP(dataProd.length); // update count of product
+  }, [dataProd]);
 
   //////////////////   get categorys / brands
   useEffect(() => {
@@ -375,13 +354,10 @@ const Shop = () => {
     // setRangeMinVal(0);
     // setRangeMaxVal(4500);
   };
-  
-    
-  
+
   return (
     <Helmet title="shopping">
       <div className=" pt-5 d-flex justify-content-center row fs-5">
-      
         <ProductFilter
           key={seed}
           actions={[
@@ -400,8 +376,7 @@ const Shop = () => {
             rangeValInit,
           ]}
         />
-        <div className="col-md-9 p-0 "> 
-       
+        <div className="col-md-9 p-0 ">
           <ProductSearch
             actions={[
               countP,
@@ -441,8 +416,8 @@ const Shop = () => {
                 ))}
           </Row>
         </div>
-      </div>   
-      <Scrolltop />  
+      </div>
+      <Scrolltop />
     </Helmet>
   );
 };
