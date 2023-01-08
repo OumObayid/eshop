@@ -57,7 +57,7 @@ const OrderHistory = () => {
         <Row className=" ">
           <AccountMenu active="orders" />
           {/* -----show informations read only--- */}
-          <Col lg="9" md="9" sm="12" xs="12" className="border">
+          <Col lg="9" md="9" sm="12" xs="12">
             <p className="h2" style={{ color: "#F49934" }}>
               Your Orders
             </p>
@@ -66,7 +66,7 @@ const OrderHistory = () => {
 
             {/* list of orders */}
             <ListGroup>
-              <div className="cart__item-list ">
+              <div className="cart__item-list border">
                 {orders.length !== 0 ? (
                   orders.map((item, index) => (
                     <div key={index}>
@@ -80,7 +80,7 @@ const OrderHistory = () => {
                     </div>
                   ))
                 ) : (
-                  <h6 className="text-center mt-5">No Order did by yoy</h6>
+                  <h4 className="text-center my-5">No Order did by you</h4>
                 )}
               </div>
             </ListGroup>

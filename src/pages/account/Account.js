@@ -167,25 +167,25 @@ const Account = () => {
             <div className="d-flex justify-content-around align-items-center">
               <div className="fs-4 border p-3">
                 <div className="d-flex">
-                  <div className="form__group  row">
+                  <div className="form__group pers  row">
                     <span>Full Name: </span>
                     <p className="fStyle">{user.name}</p>
                   </div>
-                  <div className="form__group  row">
+                  <div className="form__group pers row">
                     <span>Email: </span>
                     <p className="fStyle">{user.email}</p>
                   </div>
-                  <div className="form__group  row">
+                  <div className="form__group pers row">
                     <span>Phone: </span>
                     <p className="fStyle">{user.tel}</p>
                   </div>
                 </div>
 
-                <div className="form__group row">
+                <div className="form__group pers row">
                   <span>Address: </span>
                   <p className="fStyle">{user.address}</p>
                 </div>
-                <div className="form__group row">
+                <div className="form__group pers row">
                   <span>Location: </span>
                   <p className="fStyle d-flex">
                     <div>{user.postalCode}, &nbsp;&nbsp; </div>
@@ -212,7 +212,7 @@ const Account = () => {
                     }}
                     className="ri-edit-2-fill  me-1"
                   ></i>
-                  <p className="h4 me-5">Your Informations</p>
+                  <p className="h4 ">Your Informations</p>
                 </div>
                 <div
                   className="d-flex btnInfo "
@@ -227,7 +227,7 @@ const Account = () => {
                       position: "relative",
                       top: "-12px",
                     }}
-                    className="ri-edit-2-fill  me-1"
+                    className="ri-edit-2-fill  "
                   ></i>
                   <p className="h4">Your Password</p>
                 </div>
@@ -246,14 +246,14 @@ const Account = () => {
         >
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
-              <div className="modal-header">
-                <h3
+              <div className="modal-header ">
+                <h4
                   className="modal-title"
                   id="ModalLabelInfos"
                   style={{ color: "#F49934" }}
                 >
                   Update Your Account
-                </h3>
+                </h4>
                 <button
                   type="button"
                   className="btn-close"
