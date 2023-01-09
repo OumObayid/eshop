@@ -1,4 +1,4 @@
-.bolderF {
+.bolderF,.orderdate {
   font-weight: 500 !important;
 }
 @media screen and (min-width: 700px) {

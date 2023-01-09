@@ -1,0 +1,22 @@
+import { Helmet } from "../../components";
+
+const CheckoutSuccess = () => {
+
+  return (
+    <Helmet >
+    <div style={{paddingTop:"40px",paddingBottom:"10px",}} className="container my-5">
+      <h2 >Checkout Successful</h2>
+      <p>Your order might take some time to process.</p>
+      <p>Check your order status at your profile after about 10mins.</p>
+      <p>
+        Incase of any inqueries contact the support at <strong>support@eshop.com</strong>
+      </p>
+    </div>
+    </Helmet>
+  );
+};
+
+export default CheckoutSuccess;
+
+
+

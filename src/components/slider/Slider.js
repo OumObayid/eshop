@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useCallback } from "react";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { sliderData } from "./slider-data";
@@ -8,14 +9,15 @@ const Slider = () => {
 
   //parametre autoscroll slide
   const autoScroll = true;
-  let slideInterval;
+  
   let IntervalTime = 5000;
 
   const [currentSlide, setcurrentSlide] = useState(0);
   const sliderLenth = sliderData.length;
-  const nextSlide = () => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const nextSlide = useCallback(() => {
     setcurrentSlide(currentSlide === sliderLenth - 1 ? 0 : currentSlide + 1);
-  };
+  });
   const prevSlide = () => {
     setcurrentSlide(currentSlide === 0 ? sliderLenth - 1 : currentSlide - 1);
   };
@@ -25,6 +27,7 @@ const Slider = () => {
   }, []);
 
   useEffect(() => {
+    let slideInterval;
     if (autoScroll) {
       const auto = () => {
         slideInterval = setInterval(nextSlide, IntervalTime);
@@ -32,7 +35,7 @@ const Slider = () => {
       auto();
     }
     return () => clearInterval(slideInterval);
-  }, [currentSlide, slideInterval, autoScroll]);
+  }, [currentSlide, IntervalTime,nextSlide, autoScroll]);
 
   return (
     <div className="slider" id="slider">

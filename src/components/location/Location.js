@@ -12,12 +12,12 @@ const Location = (props) => {
   
   //for select Country Region City
   useEffect(() => {
-    var BATTUTA_KEY = "00000000000000000000000000000000";
+    let BATTUTA_KEY = "00000000000000000000000000000000";
 
-    var dataCountry=[];
-    var  countryCode =""
+    let dataCountry=[];
+    let  countryCode =""
   // Populate country select box from battuta API
-  var urlforCountry =
+  let urlforCountry =
     "https://battuta.medunes.net/api/country/all/?key=" +
     BATTUTA_KEY +
     "&callback=?";
@@ -38,7 +38,7 @@ const Location = (props) => {
     const country = dataCountry.find((value) => value.name===$("#country").val())   
      countryCode = country.code;
     // Populate country select box from battuta API
-    var urlforRegion =
+    let urlforRegion =
       "https://battuta.medunes.net/api/region/" +
       countryCode +
       "/all/?key=" +
@@ -58,8 +58,8 @@ const Location = (props) => {
   // Region selected --> updated city list
   $("#region").on("change", function() {
     // Populate country select box from battuta API
-    var region = $("#region").val();
-    var url =
+    let region = $("#region").val();
+    let url =
       "https://battuta.medunes.net/api/city/" +
       countryCode +
       "/search/?region=" +
@@ -90,9 +90,10 @@ const Location = (props) => {
           className="form-select fontfrm "
           id="country"
           onChange={changeCountry}
-        >
-          <option value=""> Country</option>
-          {(selected !==null)?<option selected>{selected[0]}</option>:""}
+        >         
+          {(selected !==null)
+          ?<option selected>{selected[0]}</option>
+          :<option selected value=""> Country</option>}
         </select>
       </div>
       <div className="form__group ">
@@ -100,9 +101,10 @@ const Location = (props) => {
           className="form-select fontfrm"
           id="region"
           onChange={changeRegion}
-        >
-          <option value="">Region</option>
-          {(selected !==null)?<option selected>{selected[1]}</option>:""}
+        >          
+          {(selected !==null)
+          ?<option selected>{selected[1]}</option>
+          :<option selected value="">Region</option>}
         </select>
       </div>
       <div className="form__group ">
@@ -110,10 +112,10 @@ const Location = (props) => {
           className="form-select fontfrm"
           id="city"
           onChange={changeCity}
-        >
-          <option value="">City</option>
-          {(selected !==null)?<option selected>{selected[2]}</option>:""}
-
+        >          
+          {(selected !==null)
+          ?<option selected>{selected[2]}</option>
+          :<option selected value="">City</option>}
         </select>
       </div>
     </>

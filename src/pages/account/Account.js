@@ -1,11 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth";
 import {
-  collection,
   doc,
-  getDocs,
-  updateDoc,
-  query,
-  where,
+  updateDoc, 
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +10,8 @@ import { AccountMenu, Helmet, Location } from "../../components";
 import { auth, db } from "../../firebase/config";
 import "./Account.css";
 import $ from "jquery";
+import { useSelector } from "react-redux";
+import { datauser } from "../../redux/dataSlice";
 
 const Account = () => {
   const [user, setUser] = useState({});
@@ -25,42 +23,20 @@ const Account = () => {
   const [errorSuccessPassword, setErrorSuccessPassword] = useState([]);
   ///////////////////first of all check if logged
   const navigate = useNavigate();
+  const userinfo= useSelector(datauser);
+  
   useEffect(() => {
+    setUser(userinfo);
+    setUserTemp(userinfo);
     onAuthStateChanged(auth, (user) => {
       if (!user) {
         navigate("/login");
-      } else {
-        const getUser = async (email) => {
-          const q = query(collection(db, "users"), where("email", "==", email));
-          const querySnapshot = await getDocs(q);
-          let user = {};
-          querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            // console.log(doc.id, " => ", doc.data());
-            user = {
-              id: doc.id,
-              name: doc.data().name,
-              email: doc.data().email,
-              password: doc.data().password,
-              tel: doc.data().tel,
-              address: doc.data().address,
-              country: doc.data().country,
-              region: doc.data().region,
-              city: doc.data().city,
-              postalCode: doc.data().postalCode,
-              orders: doc.data().orders,
-            };
-          });
-          //call function
-          setUser(user);
-          setUserTemp(user);
-          console.log("user :", user);
-        };
-        getUser(user.email);
       }
     });
-  }, [navigate]);
+    // console.log('userinforedux :', userinfo);
 
+  }, [navigate,userinfo]);
+ 
   //  //handle for changing user informations
   const handleUpdateInfo = async (e) => {
     e.preventDefault();
@@ -168,31 +144,26 @@ const Account = () => {
             <div className="content__info ">
               <Col lg="9" md="9" sm="12" xs="12" className="fs-4 border p-3">
                 <Col className="form__group pers  row">
-                  <span>Full Name: </span>
+                  <span className="fs-5">Full Name: </span>
                   <p className="fStyle">{user.name}</p>
                 </Col>
                 <Col className="flex_email_tel">
-                  <Col                   
-                    className="form__group pers row"
-                  >
-                    <span>Email: </span>
+                  <Col className="form__group pers row">
+                    <span className="fs-5">Email: </span>
                     <p className="fStyle">{user.email}</p>
                   </Col>
-                  <Col
-                   
-                    className="form__group pers row"
-                  >
-                    <span>Phone: </span>
+                  <Col className="form__group pers row">
+                    <span className="fs-5">Phone: </span>
                     <p className="fStyle">{user.tel}</p>
                   </Col>
                 </Col>
 
                 <Col className="form__group pers row">
-                  <span>Address: </span>
+                  <span className="fs-5">Address: </span>
                   <p className="fStyle">{user.address}</p>
                 </Col>
                 <Col className="pers row">
-                  <span>Location: </span>
+                  <span className="fs-5">Location: </span>
                   <p className="fStyle d-flex text-wrap">
                     {user.postalCode}, &nbsp;
                     {user.city}, &nbsp;
@@ -278,7 +249,13 @@ const Account = () => {
                 <Col lg="12" md="12">
                   <form onSubmit={handleUpdateInfo}>
                     <div className="input_namephone">
-                      <Col lg="5" md="5" sm="12" xs="12" className="form__group ">
+                      <Col
+                        lg="5"
+                        md="5"
+                        sm="12"
+                        xs="12"
+                        className="form__group "
+                      >
                         <input
                           className="fontfrm "
                           type="text"
@@ -293,7 +270,13 @@ const Account = () => {
                           }
                         />
                       </Col>
-                      <Col lg="5" md="5" sm="12" xs="12" className="form__group ">
+                      <Col
+                        lg="5"
+                        md="5"
+                        sm="12"
+                        xs="12"
+                        className="form__group "
+                      >
                         <input
                           className="fontfrm "
                           type="number"

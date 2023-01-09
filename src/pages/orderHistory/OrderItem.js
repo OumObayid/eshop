@@ -64,6 +64,7 @@ const OrderItem = ({ item }) => {
           </Button>
         </div>
       </div>
+      <p className="text-center"><span className="fs-5">order placed on : </span> <span className="orderdate fs-4">{item.orderDate}</span></p>
     </ListGroupItem>
   );
 };

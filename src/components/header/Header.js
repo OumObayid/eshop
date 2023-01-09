@@ -12,7 +12,7 @@ import { auth, db } from "../../firebase/config";
 
 import { useSelector, useDispatch } from "react-redux";
 import { cartUiActions } from "../../redux/cartUiSlice";
-import { addCategory, addProduct, datacategorys } from "../../redux/dataSlice";
+import { addCategory, addProduct, datacategorys, updateUserInfo } from "../../redux/dataSlice";
 import { removeActiveUser, setActiveUser } from "../../redux/authSlice";
 
 import { toast } from "react-toastify";
@@ -33,7 +33,56 @@ const logo = (
 
 const Header = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        //if user is logged
+        const fetchUser = async () => {
+          const q = query(
+            collection(db, "users"),
+            where("email", "==", user.email)
+          );
+          const querySnapshot = await getDocs(q);
+          let userinfos = {};
+          querySnapshot.forEach((doc) => {
+            userinfos = {
+              id: doc.id,
+              name: doc.data().name,
+              email: doc.data().email,
+              password: doc.data().password,
+              tel: doc.data().tel,
+              address: doc.data().address,
+              country: doc.data().country,
+              region: doc.data().region,
+              city: doc.data().city,
+              postalCode: doc.data().postalCode,
+              card: doc.data().card,
+              orders: doc.data().orders,
+            };
+          });
+          //memorise user infos in redux store
+          dispatch(updateUserInfo(userinfos));
+        };
+        fetchUser();
+        //to memorize active user in redux store
+        dispatch(
+          setActiveUser({
+            email: user.email,
+            userName: user.email,
+            uid: user.uid,
+          })
+        );
+        
+      } else {
+        //if user is logged out
+        //to memorize inactive user in redux
+        dispatch(removeActiveUser());
+      }
+    });
+  });
+  useEffect(() => {
+     //get all categorys from firebase
     const getCategorys = async () => {
       //////////////// get data from firebase
       const ref = collection(db, "categorys");
@@ -44,8 +93,10 @@ const Header = () => {
         list.push(fullDoc); //put data in array list
         dispatch(addCategory(fullDoc)); // put doc in store redux
       });
-    };
+    };   
     getCategorys(); // call to function
+
+     //get all products from firebase
     const getProducts = async () => {
       //////////////// get data from firebase
       const ref = collection(db, "products");
@@ -58,14 +109,16 @@ const Header = () => {
       });
      
     };
-    getProducts();
+    getProducts();    
+    // get User data from firebase
+    
   }, [dispatch]);
   //to animate navbar
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 768px)");
     if (mediaQuery.matches) {
       window.onscroll = function () {
-        var currentScrollPos = window.pageYOffset;
+        let currentScrollPos = window.pageYOffset;
         if (currentScrollPos < 100 || currentScrollPos > 400) {
           document.getElementById("navbar").style.top = "0";
         } else {
@@ -112,35 +165,7 @@ const Header = () => {
       });
   };
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        //if user is logged
-        const fetchUser = async () => {
-          const q = query(
-            collection(db, "users"),
-            where("email", "==", user.email)
-          );
-          const querySnapshot = await getDocs(q);
-          querySnapshot.forEach((doc) => {
-          });
-        };
-        fetchUser();
-        //to memorize active user in redux
-        dispatch(
-          setActiveUser({
-            email: user.email,
-            userName: user.email,
-            uid: user.uid,
-          })
-        );
-      } else {
-        //if user is logged out
-        //to memorize inactive user in redux
-        dispatch(removeActiveUser());
-      }
-    });
-  });
+
 
   // to show list in dropdown
   const showList1 = () => {

@@ -3,7 +3,7 @@ import { Helmet } from "../../components";
 const CheckoutSuccess = () => {
 
   return (
-    <Helmet >
+    <Helmet title="checkout success" >
     <div style={{paddingTop:"40px",paddingBottom:"10px",}} className="container my-5">
       <h2 >Checkout Successful</h2>
       <p>Your order might take some time to process.</p>

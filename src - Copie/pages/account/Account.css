@@ -1,0 +1,41 @@
+.account{
+ margin-top:2rem;;
+}
+
+.btnInfo{
+    margin-top: 20px;
+}
+.btnInfo:hover{
+cursor: pointer;
+}
+.fStyle{
+    font-weight: 500;
+    font-size: 16;
+}
+.pers{
+    background-color: #f5f5f5;
+    margin : 2px;
+}
+.modal-header{
+    background-color: #f5f5f5;
+}
+@media screen and (min-width: 700px) {
+.content__info,.flex_email_tel{
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.input_namephone{
+    display: flex;
+    justify-content: space-between;
+}
+
+}
+@media screen and (max-width: 700px) {
+.btnInfo{
+    display: flex;
+    justify-content: space-around;
+    margin-left: 0px !important;
+}
+
+}

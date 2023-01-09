@@ -9,43 +9,21 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase/config";
 import OrderItem from "./OrderItem";
 import "./OrderHistory.css";
+import { datauser } from "../../redux/dataSlice";
+import { useSelector } from "react-redux";
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
-
+  const userinfo= useSelector(datauser);
   useEffect(() => {
+    setOrders(userinfo.orders);
     onAuthStateChanged(auth, (user) => {
       if (!user) {
         navigate("/login");
-      } else {
-        const getUser = async (email) => {
-          const q = query(collection(db, "users"), where("email", "==", email));
-          const querySnapshot = await getDocs(q);
-          let user = {};
-          querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            // console.log(doc.id, " => ", doc.data());
-            user = {
-              id: doc.id,
-              name: doc.data().name,
-              email: doc.data().email,
-              password: doc.data().password,
-              tel: doc.data().tel,
-              address: doc.data().address,
-              country: doc.data().country,
-              region: doc.data().region,
-              city: doc.data().city,
-              postalCode: doc.data().postalCode,
-              orders: doc.data().orders,
-            };
-          });
-          setOrders(user.orders);
-        };
-        getUser(user.email);
       }
     });
-  }, [navigate]);
+  }, [navigate,userinfo.orders]);
   return (
     <Helmet title="OrderHistory">
       <section className="orders" id="orders">

@@ -6,11 +6,30 @@ const dataSlice = createSlice({
   // contenu de l'etat
   initialState: {
     products: [],
-    categorys: [],   
+    categorys: [],
+    userinfos: {
+      id: "",
+      name: "",
+      email: "",
+      tel: "",
+      address: "",
+      country: "",
+      region: "",
+      city: "",
+      postalCode: "",
+      password: "",
+      card: {
+        brand: "",
+        exp_month: "",
+        exp_year: "",
+      },
+      orders: [],
+    },
   },
 
   reducers: {
-    //products
+    ///////////////////////PRODUCTS/////////////////////
+    //add products
     addProduct: (state, action) => {
       const newProduct = action.payload;
       const existingItem = state.products.find(
@@ -30,28 +49,31 @@ const dataSlice = createSlice({
           rating3: newProduct.rating3,
           rating4: newProduct.rating4,
           rating5: newProduct.rating5,
-          reviews: newProduct.reviews
+          reviews: newProduct.reviews,
         });
       }
     },
-    deleteProduct:(state, action) => {
+    //delete product
+    deleteProduct: (state, action) => {
       const id = action.payload;
       const existingProduct = state.products.find((item) => item.id === id);
       if (existingProduct)
         state.products = state.products.filter((item) => item.id !== id);
     },
-    productAddReview:(state,action) => {
+    //add review to product
+    productAddReview: (state, action) => {
       const id = action.payload.id;
       const itemReview = action.payload.review;
       const existingProduct = state.products.find((item) => item.id === id);
-       if (existingProduct) {
-         existingProduct.reviews.push({
-           name: itemReview.name,
-           email: itemReview.email,
-           review: itemReview.review
-         })
-       }
-     },     
+      if (existingProduct) {
+        existingProduct.reviews.push({
+          name: itemReview.name,
+          email: itemReview.email,
+          review: itemReview.review,
+        });
+      }
+    },
+    //add rating to product
     setRating: (state, action) => {
       const { id, numRat } = action.payload;
       const existingProduct = state.products.find((item) => item.id === id);
@@ -74,10 +96,11 @@ const dataSlice = createSlice({
             break;
           default:
             break;
-        }       
+        }
       }
     },
-    ////categorys
+    /////////////////////////CATEGORYS/////////////////////
+    //add category
     addCategory: (state, action) => {
       const newCategory = action.payload;
       const existingItem = state.categorys.find(
@@ -87,27 +110,60 @@ const dataSlice = createSlice({
         state.categorys.push({
           id: newCategory.id,
           categoryName: newCategory.categoryName,
-          imgCat: newCategory.imgCat,          
-          descCat: newCategory.descCat,         
+          imgCat: newCategory.imgCat,
+          descCat: newCategory.descCat,
         });
       }
     },
-    deleteCategory:(state, action) => {
+    //delect category
+    deleteCategory: (state, action) => {
       const id = action.payload;
       const existingCategory = state.categorys.find((item) => item.id === id);
       if (existingCategory)
         state.categorys = state.categorys.filter((item) => item.id !== id);
     },
-   
+    /////////////////////////USERINFOS/////////////////////
+    //update user infos
+    updateUserInfo: (state, action) => {
+      const user = action.payload;
+      const userinfos = state.userinfos;
 
-   
+      userinfos.id = user.id;
+      userinfos.name = user.name;
+      userinfos.email = user.email;
+      userinfos.tel = user.tel;
+      userinfos.address = user.address;
+      userinfos.country = user.country;
+      userinfos.region = user.region;
+      userinfos.city = user.city;
+      userinfos.postalCode = user.postalCode;
+      userinfos.password = user.password;
+      userinfos.card.brand = user.card.brand;
+      userinfos.card.exp_month = user.card.exp_month;
+      userinfos.card.exp_year = user.card.exp_year;
+      userinfos.orders=[];
+      user.orders.forEach((element) => {
+        userinfos.orders.push(element);
+      });
+     
+    },
   },
 });
 
 //exporter les actions a appeler
-export const { addProduct, setRating,productAddReview, deleteProduct,addCategory,deleteCategory } = dataSlice.actions;
+export const {
+  addProduct,
+  setRating,
+  productAddReview,
+  deleteProduct,
+  addCategory,
+  deleteCategory,
+  updateUserInfo
+} = dataSlice.actions;
 //select variables od state
 export const dataProducts = (state) => state.data.products;
 export const datacategorys = (state) => state.data.categorys;
+export const datauser = (state) => state.data.userinfos;
+
 
 export default dataSlice;
