@@ -1,4 +1,3 @@
-import { ListGroup } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import CartItem from "./CartItem";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,16 +5,23 @@ import { cartUiActions } from "../../redux/cartUiSlice";
 import "./Carts.css";
 import Slide from "@mui/material/Slide";
 import imgCart from "../../assets/cartitems.svg";
+import { useEffect, useState } from "react";
 const Carts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartProducts = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
+  const [slide, setSlide] = useState(true)
   const closeCart = () => {
-    dispatch(cartUiActions.toggle());
-  }
+    setSlide(!slide);    
+   const setInterv = setInterval(() => {
+    dispatch(cartUiActions.toggle());   
+    clearInterval(setInterv);
+   }, 1000);  
+
+  };
+
   const handleCheckout = () => {
-    
     if (cartProducts.length !== 0) {
       dispatch(cartUiActions.toggle());
       navigate("/checkout");
@@ -27,20 +33,19 @@ const Carts = () => {
     navigate("/shop");
   };
   return (
-    <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div className="cart__container">
-        <ListGroup className="cart">
-          <div className="cart__close w-100">
-            <span onClick={closeCart} className="">
-              <i className="ri-close-fill "></i>
-            </span>                      
+    <Slide direction="left" in={slide} mountOnEnter unmountOnExit>
+      <div className="cart__container ">
+        <div className="cart">
+          <div className="cart_close w-100  px-3 my-0">
+            <span onClick={closeCart} className="btnclose">
+              <i className="ri-close-fill"></i>
+            </span>
           </div>
-          <h3 className="ms-3 ">Summary</h3> 
+          <h3 className="ms-3   ">Summary</h3>
           <div className="my-0 py-0">
             <div className="cart-icons-list ">
               <span className="w-50">payment method:</span>
               <div className=" mx-3">
-
                 <img
                   className="cart-icons-img"
                   src="https://img.alicdn.com/tfs/TB1xcMWdEKF3KVjSZFEXXXExFXa-68-48.png"
@@ -67,7 +72,7 @@ const Carts = () => {
             <hr style={{ backgroundColor: "#434341", width: "100%" }} />
           </div>
 
-          <div className="cart__item-list_right  me-3 ">
+          <div className="cart_item-list_right  me-3 ">
             {cartProducts.length === 0 ? (
               <div className="text-center noitem">
                 <p>
@@ -102,7 +107,7 @@ const Carts = () => {
             )}
           </div>
 
-          <div className="cart__bottom  d-flex align-items-center justify-content-between">
+          <div className="cart_bottom  d-flex align-items-center justify-content-between">
             <p className="my-auto">
               <span className="text-light fs-4">Subtotal :</span>
               <span className="  fw-bold fs-3">
@@ -115,7 +120,7 @@ const Carts = () => {
               </span>
             </button>
           </div>
-        </ListGroup>
+        </div>
       </div>
     </Slide>
   );

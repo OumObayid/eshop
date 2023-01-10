@@ -31,14 +31,12 @@ import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
 import { cartIsVisible } from "./redux/cartUiSlice";
 import { CookiesProvider } from "react-cookie";
-import Cookies from "./components/Cookies";
 
 function App() {
   //to show or hide cart
   const showCart = useSelector(cartIsVisible);
 
   return (
-    <CookiesProvider>
     <BrowserRouter>
       <ToastContainer />
       <Header />
@@ -63,12 +61,10 @@ function App() {
           <Route path="/productDetail/:id" element={<ProductDetail />} />
           <Route path="/account" element={<Account />} />
           <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/cookies" element={<Cookies />} />
           <Route path="*" element={<NotFound />} />     
       </Routes>
       <Footer />
     </BrowserRouter>
-    </CookiesProvider>
   );
 }
 

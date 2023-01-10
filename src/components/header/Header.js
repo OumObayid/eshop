@@ -34,6 +34,20 @@ const logo = (
 const Header = () => {
   const dispatch = useDispatch();
 
+    // //to animate navbar
+    // useEffect(() => {
+    //   const mediaQuery = window.matchMedia("(min-width: 768px)");
+    //   if (mediaQuery.matches) {
+    //     window.onscroll = function () {
+    //       let currentScrollPos = window.pageYOffset;
+    //       if (currentScrollPos < 100 || currentScrollPos > 400) {
+    //         document.getElementById("navbar").style.top = "0";
+    //       } else {
+    //         document.getElementById("navbar").style.top = "-100px";
+    //       }
+    //     };
+    //   }
+    // }, []);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -113,20 +127,7 @@ const Header = () => {
     // get User data from firebase
     
   }, [dispatch]);
-  //to animate navbar
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
-    if (mediaQuery.matches) {
-      window.onscroll = function () {
-        let currentScrollPos = window.pageYOffset;
-        if (currentScrollPos < 100 || currentScrollPos > 400) {
-          document.getElementById("navbar").style.top = "0";
-        } else {
-          document.getElementById("navbar").style.top = "-100px";
-        }
-      };
-    }
-  }, []);
+
   //Code to show or hide menu in mobile
   const [showMenu, setShowMenu] = useState(false);
   //for active link

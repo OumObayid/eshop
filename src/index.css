@@ -32,6 +32,8 @@ html {
 
 body {
   font-family: var(--font-family);
+  overflow-x: hidden;
+  
 }
 
 section {
@@ -436,4 +438,25 @@ a {
 a:hover {
   color: var(--color-dark);
   
+}
+
+/* width */
+body::-webkit-scrollbar {
+
+  width: 10px;
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  background: #F6B234; 
+}
+
+/* Handle on hover */
+body::-webkit-scrollbar-thumb:hover {
+  background: #dd930b; 
 }

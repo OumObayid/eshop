@@ -42,10 +42,7 @@ const cartSlice = createSlice({
 
       if (!existingItem) {
         // ===== note: if you use just redux you should not mute state array instead of clone the state array, but if you use redux toolkit that will not a problem because redux toolkit clone the array behind the scene
-        // const current = new Date();
-        // const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-        // const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-        
+                
         state.cartItems.push({
           id: newItem.id,
           title: newItem.productName,
@@ -73,13 +70,7 @@ const cartSlice = createSlice({
         state.totalQuantity
       );
     },
-    updateCartCommand  : (state,action)=>{
-      //  const item = action.payload;
-      //  const cartItem = state.cartItems.find((element)=>(item.id=element.id))
-      //  const current = new Date();
-      //   const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-      //  cartItem.orderDate=date;
-    },
+ 
 
       // ========= remove item ========
 
@@ -141,7 +132,7 @@ const cartSlice = createSlice({
 });
 
 //exporter les actions a appeler
-export const { addItem ,updateCartCommand, setItemFunct,removeItem,deleteItem ,clearCart} = cartSlice.actions;
+export const { addItem , setItemFunct,removeItem,deleteItem ,clearCart} = cartSlice.actions;
 //select variables of state
 export const cartItems = (state) => state.cart.cartItems;
 export const totalQuantityy = (state) => state.cart.totalQuantity;

@@ -35,7 +35,7 @@ const CartItem = ({ item }) => {
         <div className="cart__product-info w-100 d-flex align-items-center gap-4 justify-content-between ">
           <div>
             <span className="fw-bolder fs-5  ">{title}</span>
-            <p className=" d-flex align-items-center gap-5 fs-5 ">
+            <p className="quantprice d-flex align-items-center gap-5 fs-5 ">
               {quantity} x <span>${totalPrice.toLocaleString()}</span>
             </p>
             <div className=" d-flex align-items-center justify-content-between  increase__decrease-btn">
@@ -49,8 +49,8 @@ const CartItem = ({ item }) => {
             </div>
           </div>
 
-          <span className="delete__btn" onClick={deletItem}>
-            <i className="ri-close-line"></i>
+          <span className="delete_btn p-0" onClick={deletItem}>
+            <i className="ri-close-line rcl"></i>
           </span>
         </div>
       </div>
