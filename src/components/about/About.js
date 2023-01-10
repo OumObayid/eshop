@@ -248,7 +248,7 @@ const About = () => {
                   />
                 </div>
           </div>
-          <Row  className=" d-flex justify-content-between">
+          <Row  className=" history">
             <Col className="me-5">
               <ul className=" text-start">
                 <li>

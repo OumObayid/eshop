@@ -155,4 +155,7 @@ display:inline-block;
 .font3{
   margin-left: 15px;
 }
+.history{
+  display: block;
+}
 }
