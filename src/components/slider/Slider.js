@@ -4,9 +4,13 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { sliderData } from "./slider-data";
 import "./Slider.scss";
+import bg1 from "../../assets/bg-1.jpg"
+import bg2 from "../../assets/bg-2.jpg"
+import bg3 from "../../assets/bg-3.jpg"
+import bg4 from "../../assets/bg-4.jpg"
 
 const Slider = () => {
-
+const image=[bg1,bg2,bg3,bg4];
   //parametre autoscroll slide
   const autoScroll = true;
   
@@ -42,7 +46,7 @@ const Slider = () => {
       <AiOutlineArrowLeft className="arrow prev" onClick={prevSlide} />
       <AiOutlineArrowRight className="arrow next" onClick={nextSlide} />
       {sliderData.map((slide, index) => {
-        const { image, heading, desc } = slide;
+        const {  heading, desc } = slide;
         return (
           <div
             key={index}
@@ -50,7 +54,7 @@ const Slider = () => {
           >
             {index === currentSlide && (
               <>
-                <img className="img" src={image} alt="slide" />
+                <img className="img" src={image[index]} alt="slide" />
                 <div className="content">
                   <h2>{heading}</h2>
                   <p>{desc}</p>
