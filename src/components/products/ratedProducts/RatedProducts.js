@@ -31,7 +31,7 @@ const productRatedTop=sortProducts.slice(0,10)
 
 
   return (
-    <div className="ratedmargTop">
+    <div className="container ratedmargTop">
       <div className="text-center">
         <img src={WellRatedProducts} style={{height:"4.7rem"}} alt="Well Rated Products" />
       </div>
