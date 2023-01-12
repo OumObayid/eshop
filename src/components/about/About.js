@@ -1,6 +1,6 @@
 import React from "react";
 import "./About.css";
-import imgAbout from "../../assets/shoping.jpg";
+import imgAbout from "../../assets/shoping.webp";
 import aaa from "../../assets/aaa.png";
 import bbb from "../../assets/bbb.png";
 import ccc from "../../assets/ccc.png";

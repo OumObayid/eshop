@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 const SlideProduct = (props) => {
  
   const [slidesToShow, setSlidesToShow] = useState(4)
-
   
   const  getSlidesToShow = () =>{
     var x = window.matchMedia("(max-width: 750px)")
@@ -26,7 +25,7 @@ const SlideProduct = (props) => {
     arrows: true,
     autoplay: true,
     speed: 1000,
-    adaptiveHeight: true,
+    adaptiveHeight: true,    
   };
   return (
     <Slider {...settings}>

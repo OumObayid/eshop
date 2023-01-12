@@ -6,6 +6,7 @@ import { AlertDialogSlide } from "../../components";
 import { cartActions } from "../../redux/cartSlice";
 import "./OrderItem.css";
 const OrderItem = ({ item }) => {
+  
   const cartProducts = useSelector((state) => state.cart.cartItems);
   const cartLenth = cartProducts.length;
   const [isOpen, setisOpen] = useState(false);
@@ -42,7 +43,7 @@ const OrderItem = ({ item }) => {
           <div>
             <span className="bolderF fs-3  ">{item.title}</span>
             <p className=" d-flex align-items-center gap-5 fs-4 ">
-              <span>${item.price}</span> x <span>{item.quantity}</span>
+              <span>${item.price.toLocaleString()}</span> x <span>{item.quantity}</span>
             </p>
           </div>
         </div>

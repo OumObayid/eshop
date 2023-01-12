@@ -30,7 +30,6 @@ import { ToastContainer } from "react-toastify";
 //data
 import { useSelector } from "react-redux";
 import { cartIsVisible } from "./redux/cartUiSlice";
-import { CookiesProvider } from "react-cookie";
 
 function App() {
   //to show or hide cart

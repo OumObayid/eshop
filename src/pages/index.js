@@ -15,6 +15,7 @@ export { default as Account } from "./account/Account";
 export { default as Cart } from "./cart/Carts";
 export { default as ProductDetail } from "./productDetail/ProductDetail";
 export { default as Wishlist } from "./wishlist/Wishlist";
+export { default as WishItem } from "./wishlist/WishItem";
 
 
 

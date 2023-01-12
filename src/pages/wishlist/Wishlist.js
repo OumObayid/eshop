@@ -1,8 +1,15 @@
 import React from "react";
-import { Col, ListGroup, Row } from "reactstrap";
+import { useSelector } from "react-redux";
+import { Col,Row } from "reactstrap";
 import { AccountMenu, Helmet } from "../../components";
-
+ import WishItem from "./WishItem";
+import { dataWishs } from "../../redux/wishSlice";
+import imgWish from "../../assets/wish.png"
+import { Link } from "react-router-dom";
 const Wishlist = () => {
+  const listwishs = useSelector(dataWishs);
+
+
   return (
     <Helmet title="wishlist">
       <section className="" id="wishlist">
@@ -18,25 +25,40 @@ const Wishlist = () => {
             {/* informations read only */}
             <hr style={{ backgroundColor: "#434341", width: "100%" }} />
             {/* list of wishlist */}
-            <ListGroup>
-              <div className="cart__item-list border">
-                {/* {wishlist.length !== 0 ? (
-                  wishlist.map((item, index) => (
-                    <div key={index}>
-                      <WishlistItem item={item} key={index} />
-                      <hr
-                        style={{
-                          backgroundColor: "#434341",
-                          width: "97%",
-                        }}
-                      />
-                    </div>
-                  ))
-                ) : (
-                  <h4 className="text-center my-5">No Order did by you</h4>
-                )} */}
+           
+            <div className="  me-3 ">
+            {listwishs.length === 0 ? (
+              <div className="text-center">
+                <p>
+                  <img src={imgWish} width="200" alt="no wish" />
+                </p>
+                <span className="text-center fs-2 mt-5">It is empty here.</span>
+                <p className="text-center mt-5">
+                  Browse our products and discover <br />
+                  our best offers!
+                </p>
+                <Link to="/shop"
+                  className="btn btn-warning mt-2 fs-5"                 
+                >
+                  START SHOPPING
+                </Link>
               </div>
-            </ListGroup>
+            ) : (
+              <>
+                {listwishs.map((item, index) => (
+                  <div key={index}>
+                    <WishItem item={item} key={index} />
+                    <hr
+                      style={{
+                        backgroundColor: "#434341",
+                        width: "100%",
+                      }}
+                    />
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
           </Col>
         </Row>
       </section>

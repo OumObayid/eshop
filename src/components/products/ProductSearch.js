@@ -1,6 +1,6 @@
 import React from "react";
-import view1 from "../../assets/view1.png";
-import view2 from "../../assets/view2.png";
+import view1 from "../../assets/view1.webp";
+import view2 from "../../assets/view2.webp";
 
 const ProductSearch = (props) => {
   const [

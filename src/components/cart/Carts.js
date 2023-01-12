@@ -5,7 +5,7 @@ import { cartUiActions } from "../../redux/cartUiSlice";
 import "./Carts.css";
 import Slide from "@mui/material/Slide";
 import imgCart from "../../assets/cartitems.svg";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 const Carts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

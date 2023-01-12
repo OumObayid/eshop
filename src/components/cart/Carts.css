@@ -10,10 +10,10 @@
 
 .cart {
   position: absolute;
-  top: 3%;
+  top: 1.5%;
   right: 0;
   width: 33%;
-  height: 94%;
+  height: 97%;
   background: #fff;
   z-index: 999999;
   border-radius: 2%;
@@ -27,17 +27,18 @@ transition: all 0.5s fade;
   padding: 10px 20px;
 }
 .cart_close span i:hover{
-   background-color: #E99734;
+   background-color: #f4bc77;
 }
 .cart_close span i {
-  font-size: 1.1rem;
-  background-color: #212245;
+  font-size: 1.6rem;
+  background-color: #E99734;
   padding: 5px;
   border-radius: 50%;
-  color: #fff;
+  color: #7f4e12;
   cursor: pointer;
   cursor : arrow;
  transition: all 0.5s ;
+ font-weight: 600;
 }
 
 .cart_item-list_right {

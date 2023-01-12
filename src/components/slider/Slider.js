@@ -4,10 +4,10 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { sliderData } from "./slider-data";
 import "./Slider.scss";
-import bg1 from "../../assets/bg-1.jpg"
-import bg2 from "../../assets/bg-2.jpg"
-import bg3 from "../../assets/bg-3.jpg"
-import bg4 from "../../assets/bg-4.jpg"
+import bg1 from "../../assets/bg-1.webp"
+import bg2 from "../../assets/bg-2.webp"
+import bg3 from "../../assets/bg-3.webp"
+import bg4 from "../../assets/bg-4.webp"
 
 const Slider = () => {
 const image=[bg1,bg2,bg3,bg4];

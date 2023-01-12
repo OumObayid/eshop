@@ -1,9 +1,7 @@
-
-
 header {
   position: fixed;
   top: 0;
- z-index: 999;
+  z-index: 999;
   transition: top 0.3s;
   width: 100%;
   background-color: var(--dark-blue);
@@ -14,27 +12,26 @@ header {
   margin: 0 auto;
   padding: 2rem;
   height: 5rem;
-  transition:  1.0s;
-  box-shadow: 0px 6px 14px 0px rgba(0,0,0,0.75);
+  transition: 1s;
+  box-shadow: 0px 6px 14px 0px rgba(0, 0, 0, 0.75);
 }
 
 .logo a h2 {
   width: 25%;
   color: #fff;
   cursor: pointer;
-  cursor : arrow;
+  cursor: arrow;
   span {
-    color: #F89B34;
+    color: #f89b34;
   }
 }
 
-nav  {
+nav {
   width: 75%;
   display: flex;
   justify-content: space-between;
-  
+
   ul {
-    
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,18 +41,16 @@ nav  {
     }
 
     li {
-
       margin: 0 5px;
       a {
         color: #fff;
         &:hover {
-          color: #F89B34;
+          color: #f89b34;
         }
       }
     }
   }
 }
-
 
 .header-right {
   display: flex;
@@ -65,7 +60,7 @@ nav  {
     color: #fff;
     position: relative;
     &:hover {
-      color: #F89B34;
+      color: #f89b34;
     }
     &.active {
       color: var(--color-danger);
@@ -90,7 +85,7 @@ nav  {
     margin: 0 5px;
     color: #fff;
     &:hover {
-      color: #F89B34;
+      color: #f89b34;
     }
     &.active {
       color: var(--color-danger);
@@ -100,7 +95,7 @@ nav  {
 
 .menu-icon {
   cursor: pointer;
-  cursor : arrow;
+  cursor: arrow;
   display: none;
 }
 @media screen and (min-width: 800px) {
@@ -120,19 +115,21 @@ nav  {
   }
 }
 
-.cartHidden{
+.cartHidden,
+.wishHidden {
   display: flex;
   justify-content: center;
 }
 @media screen and (max-width: 800px) {
-  .FaUser{
+  .FaUser {
     padding: 0;
-    margin-top: 10px;  
+    margin-top: 10px;
   }
-  .cartHidden{
+  .cartHidden,
+  .wishHidden {
     display: none;
   }
-  nav {    
+  nav {
     display: block;
     position: absolute;
     top: 0;
@@ -165,9 +162,9 @@ nav  {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        >* {
+        > * {
           cursor: pointer;
-          cursor : arrow;
+          cursor: arrow;
         }
       }
       li {
@@ -180,7 +177,7 @@ nav  {
     }
 
     .header-right {
-      display: block;      
+      display: block;
       margin-left: 26px;
       .cart {
         // display: block;
@@ -200,7 +197,7 @@ nav  {
       .links {
         display: block;
         margin: 0;
-      padding: 0;
+        padding: 0;
         a {
           display: block;
           margin: 0;
@@ -211,17 +208,17 @@ nav  {
     }
   }
   .cart {
-     display: block;
+    display: block;
     padding: 5px 0;
     &:hover {
-      color: #F89B34;
+      color: #f89b34;
     }
     // border-bottom: 1px solid #333;
     a {
       color: #fff;
       position: relative;
       &:hover {
-        color: #F89B34;
+        color: #f89b34;
       }
       p {
         position: absolute;
@@ -240,10 +237,9 @@ nav  {
   }
   .menu-icon {
     display: flex;
-   justify-content:flex-end;
+    justify-content: flex-end;
     width: 300px;
-   align-items: center;
-
+    align-items: center;
 
     > * {
       margin-left: 2rem;
@@ -251,20 +247,21 @@ nav  {
       align-items: center;
     }
   }
-  .cartbask{
+  .cartbask {
     font-size: 16px;
     display: contents;
   }
+  .wish {
+    display: flex;
+    justify-content: start;
+  }
 }
 
-
-ul li.catli .cat{
-  color: #0A1930 !important;
+ul li.catli .cat {
+  color: #0a1930 !important;
 }
 
 .dropdown:hover .dropdown-menu {
   display: block !important;
   margin-top: 0 !important;
 }
-
-

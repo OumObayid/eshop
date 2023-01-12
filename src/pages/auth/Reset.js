@@ -1,6 +1,6 @@
 import React , {useState} from "react";
 import styles from "./Auth.module.scss";
-import resetImg from "../../assets/reset.png";
+import resetImg from "../../assets/reset.webp";
 import { Link,useNavigate } from "react-router-dom";
 import { Card,Loader } from "../../components";
 import { auth } from "../../firebase/config";

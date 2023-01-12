@@ -320,6 +320,15 @@ const Header = () => {
                   </li>
                   <li>
                     <Link
+                      to="/wishlist"
+                      className=" dropdown-item"  
+                      onClick={toggleMenu}                   
+                    >
+                      my favourites
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
                       to="/"
                       className=" dropdown-item"
                       onClick={LogoutUser}
@@ -330,6 +339,12 @@ const Header = () => {
                 </ul>
               </div>
             </ShowOnLogin>
+          </span>
+          <span role="button" className={styles.cart}>
+            <Link to="/wishlist" className={styles.wishHidden} >
+              <span className="mr-2 mt-2 fs-4 ">Wishlist</span>
+              <i className="ri-heart-line fs-2"></i>              
+            </Link>
           </span>
           <span role="button" className={styles.cart}>
             <div className={styles.cartHidden} onClick={toggleCart}>

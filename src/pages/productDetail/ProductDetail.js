@@ -16,31 +16,41 @@ import { FaLongArrowAltLeft } from "react-icons/fa";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useEffect } from "react";
+import { addWish, dataWishs, deleteWish } from "../../redux/wishSlice";
 
 const ProductDetail = () => {
+  const dispatch = useDispatch();
 
   useEffect(() => {
-  window.scrollTo(0,0)
-  })
-  
-
-  const [tab, setTab] = useState("desc");
-  const [enteredName, setEnteredName] = useState("");
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [reviewMsg, setReviewMsg] = useState("");
+    window.scrollTo(0, 0);
+  });
 
   const { id } = useParams();
-  const dispatch = useDispatch();
+
   // for having a product details
-  const products = useSelector(dataProducts);
+  let products = useSelector(dataProducts);
   const productId = products.filter((item) => item.id === id);
   const product = productId[0];
-
   // // for dialog box
   const cartProducts = useSelector((state) => state.cart.cartItems);
   const cartLenth = cartProducts.length;
   const [isOpen, setisOpen] = useState(false);
+  // for wishlist
+  const [wishCount, setWishCount] = useState(product.wish);
+  const [wish, setWish] = useState(false);
+  const WishedProd = useSelector(dataWishs).find(
+    (item) => item.id === product.id
+  );
 
+  useEffect(() => {  
+    WishedProd !== undefined ? setWish(true) : setWish(false);  
+  }, [WishedProd]);
+
+  //for review
+  const [tab, setTab] = useState("desc");
+  const [enteredName, setEnteredName] = useState("");
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [reviewMsg, setReviewMsg] = useState("");
   // for having relatedProduct
   const relatedProduct = products.filter(
     (item) => item.category === product.category
@@ -99,8 +109,30 @@ const ProductDetail = () => {
   };
 
   //for slide products
-
   const setTabRev = () => setTab("rev");
+
+  // wish
+  const toggle_wish = async () => {
+    const docRef = doc(db, "products", product.id);
+    let countwish=0;
+    if (wish === true) {
+      countwish=wishCount-1;
+      setWishCount(countwish)     
+      dispatch(deleteWish(product.id));
+      
+    } else {
+      countwish=wishCount+1;
+      setWishCount(countwish)   
+      dispatch(addWish(product));      
+    }
+    await updateDoc(docRef, {
+      wish: countwish,
+    })
+      .then((docRef) => {})
+      .catch((error) => {
+        console.log("error.message :", error.message);
+      });
+  };
 
   return (
     <Helmet title="Product-details">
@@ -133,7 +165,7 @@ const ProductDetail = () => {
                   {product.productName}
                 </h2>
                 <span className="price fw-bold fs-2 mb-5">
-                  ${product.price.toLocaleString()}
+                  ${Number(product.price).toLocaleString()}
                 </span>
                 <Stars actions={[product, setTabRev]} />
                 <p className="my-5 ">
@@ -144,13 +176,26 @@ const ProductDetail = () => {
                   <span className="fw-bold me-3">Brand: </span>
                   <span className="fs-4">{product.brand}</span>
                 </p>
-                <Button
-                  className="fs-5 rounded"
-                  onClick={addItem}
-                  color="warning"
-                >
-                  Add to Cart
-                </Button>
+                <div className="d-flex">
+                  <Button
+                    className="fs-5 rounded px-5 me-4"
+                    onClick={addItem}
+                    color="warning"
+                  >
+                    Add to Cart
+                  </Button>
+                  <span
+                    className="wish px-3 border rounded d-flex align-items-center"
+                    onClick={toggle_wish}
+                  >
+                    {wish === true ? (
+                      <i className="ri-heart-fill fs-2 me-3 text-danger"></i>
+                    ) : (
+                      <i className="heart1 ri-heart-line fs-2 me-3 "></i>
+                    )}
+                    <span className="fs-5">{wishCount}</span>
+                  </span>
+                </div>
               </Col>
             </Row>
 
@@ -216,9 +261,9 @@ const ProductDetail = () => {
                       />
                     </div>
 
-                    <div >
+                    <div>
                       <textarea
-                      className="w-100"
+                        className="w-100"
                         rows={5}
                         type="text"
                         placeholder="Write your review"
@@ -240,20 +285,22 @@ const ProductDetail = () => {
                 <span className="border-bottom"> You might also like</span>
               </h2>
             </Col>
-            <SlideProduct>
-              {relatedProduct.map((item) => (
-                <Col
-                  lg="3"
-                  md="3"
-                  sm="12"
-                  xs="12"
-                  className="mb-4"
-                  key={item.id}
-                >
-                  <CardProduct item={item} />
-                </Col>
-              ))}
-            </SlideProduct>
+            <div className="container">
+              <SlideProduct className="container">
+                {relatedProduct.map((item) => (
+                  <Col
+                    lg="3"
+                    md="3"
+                    sm="12"
+                    xs="12"
+                    className="mb-4"
+                    key={item.id}
+                  >
+                    <CardProduct item={item} />
+                  </Col>
+                ))}
+              </SlideProduct>
+            </div>
           </Row>
         </div>
       </section>

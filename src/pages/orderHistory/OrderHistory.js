@@ -2,13 +2,11 @@ import React from "react";
 import { Col, ListGroup, Row } from "reactstrap";
 import { AccountMenu, Helmet } from "../../components";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, getDocs, query, where } from "firebase/firestore";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, db } from "../../firebase/config";
+import { auth } from "../../firebase/config";
 import OrderItem from "./OrderItem";
-import "./OrderHistory.css";
 import { datauser } from "../../redux/dataSlice";
 import { useSelector } from "react-redux";
 

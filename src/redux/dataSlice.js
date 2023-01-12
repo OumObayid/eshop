@@ -50,6 +50,7 @@ const dataSlice = createSlice({
           rating4: newProduct.rating4,
           rating5: newProduct.rating5,
           reviews: newProduct.reviews,
+          wish: newProduct.wish,
         });
       }
     },
@@ -72,6 +73,14 @@ const dataSlice = createSlice({
           review: itemReview.review,
         });
       }
+    },
+    setWish : (state,action) => {
+    // const id = action.payload.id;
+    // const val = action.payload.val;
+    // const existingProduct = state.products.find((item) => item.id === id);
+    // if (existingProduct) {
+    //   existingProduct.wish= existingProduct.wish + val;
+    // }
     },
     //add rating to product
     setRating: (state, action) => {
@@ -138,9 +147,11 @@ const dataSlice = createSlice({
       userinfos.city = user.city;
       userinfos.postalCode = user.postalCode;
       userinfos.password = user.password;
-      userinfos.card.brand = user.card.brand;
-      userinfos.card.exp_month = user.card.exp_month;
-      userinfos.card.exp_year = user.card.exp_year;
+      userinfos.card ={
+        brand : user.card.brand,
+        exp_month : user.card.exp_month,
+        exp_year : user.card.exp_year,
+      }     
       userinfos.orders=[];
       user.orders.forEach((element) => {
         userinfos.orders.push(element);
@@ -153,6 +164,7 @@ const dataSlice = createSlice({
 //exporter les actions a appeler
 export const {
   addProduct,
+  setWish,
   setRating,
   productAddReview,
   deleteProduct,

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Auth.module.scss";
-import registerImg from "../../assets/register.png";
+import registerImg from "../../assets/register.webp";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -113,7 +113,7 @@ const Register = () => {
           </div>
         </Card>
         <div className={styles.img}>
-          <img src={registerImg} alt="register" width={300} />
+          <img src={registerImg} alt="register" width={403} />
         </div>
       </section>
     </Helmet>

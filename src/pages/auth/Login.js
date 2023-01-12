@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Auth.module.scss";
-import loginImg from "../../assets/login.png";
+import loginImg from "../../assets/login.webp";
 import { CgGoogle } from "react-icons/cg";
 import { Card, Helmet, Loader } from "../../components";
 import { Link, useNavigate } from "react-router-dom";
@@ -59,7 +59,7 @@ const Login = () => {
       {isLoading && <Loader />}
       <section className={`container ${styles.auth}`}>
         <div className={styles.img}>
-          <img src={loginImg} alt="login" width={350} />
+          <img  src={loginImg} alt="login" width={384} />
         </div>
         <Card>
           <div className={styles.form}>
