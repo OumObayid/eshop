@@ -460,3 +460,14 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-thumb:hover {
   background: #dd930b; 
 }
+
+/* all button */
+.btnAll{
+  background-color: #fff;
+  border: 2px solid #F49934 !important;
+  border-radius: 25px !important;
+  padding: 5px;
+}
+.btnAll:hover{
+  background-color: #f49a3428;
+}

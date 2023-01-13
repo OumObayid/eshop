@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Col,Row } from "reactstrap";
-import { AccountMenu, Helmet } from "../../components";
+import { AccountMenu, Helmet, RatedProducts } from "../../components";
  import WishItem from "./WishItem";
 import { dataWishs } from "../../redux/wishSlice";
 import imgWish from "../../assets/wish.png"
@@ -59,6 +59,7 @@ const Wishlist = () => {
               </>
             )}
           </div>
+          <RatedProducts />
           </Col>
         </Row>
       </section>

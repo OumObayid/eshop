@@ -55,11 +55,11 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/reset" element={<Reset />} />
           <Route path="/verifiemail" element={<Verifiemail />} />
           <Route path="/productDetail/:id" element={<ProductDetail />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/account" element={<Account />} />        
           <Route path="*" element={<NotFound />} />     
       </Routes>
       <Footer />

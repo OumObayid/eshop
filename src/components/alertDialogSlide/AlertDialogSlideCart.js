@@ -13,7 +13,7 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const AlertDialogSlide = (props) => {
+const AlertDialogSlideCart = (props) => {
   const dispatch = useDispatch();
   const toggleCart = () => {
     props.handleClose();
@@ -68,4 +68,4 @@ const AlertDialogSlide = (props) => {
   );
 };
 
-export default AlertDialogSlide;
+export default AlertDialogSlideCart;

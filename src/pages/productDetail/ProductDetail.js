@@ -4,7 +4,7 @@ import {
   Helmet,
   CardProduct,
   Stars,
-  AlertDialogSlide,
+  AlertDialogSlideCart,
   SlideProduct,
 } from "../../components";
 import { Row, Col, Button } from "reactstrap";
@@ -17,7 +17,7 @@ import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useEffect } from "react";
 import { addWish, dataWishs, deleteWish } from "../../redux/wishSlice";
-
+import AlertDialogSlideWich from "../../components/alertDialogSlide/AlertDialogSlideWish";
 const ProductDetail = () => {
   const dispatch = useDispatch();
 
@@ -35,6 +35,7 @@ const ProductDetail = () => {
   const cartProducts = useSelector((state) => state.cart.cartItems);
   const cartLenth = cartProducts.length;
   const [isOpen, setisOpen] = useState(false);
+  const [isOpen2, setisOpen2] = useState(false);
   // for wishlist
   const [wishCount, setWishCount] = useState(product.wish);
   const [wish, setWish] = useState(false);
@@ -42,8 +43,8 @@ const ProductDetail = () => {
     (item) => item.id === product.id
   );
 
-  useEffect(() => {  
-    WishedProd !== undefined ? setWish(true) : setWish(false);  
+  useEffect(() => {
+    WishedProd !== undefined ? setWish(true) : setWish(false);
   }, [WishedProd]);
 
   //for review
@@ -71,6 +72,10 @@ const ProductDetail = () => {
   //to close dialog box via props
   const closeBox = () => {
     setisOpen(false);
+  };
+  //to close dialog box 2 via props
+  const closeBox2 = () => {
+    setisOpen2(false);
   };
 
   const submitHandler = async (e) => {
@@ -114,16 +119,15 @@ const ProductDetail = () => {
   // wish
   const toggle_wish = async () => {
     const docRef = doc(db, "products", product.id);
-    let countwish=0;
+    let countwish = 0;
     if (wish === true) {
-      countwish=wishCount-1;
-      setWishCount(countwish)     
+      countwish = wishCount - 1;
+      setWishCount(countwish);
       dispatch(deleteWish(product.id));
-      
     } else {
-      countwish=wishCount+1;
-      setWishCount(countwish)   
-      dispatch(addWish(product));      
+      countwish = wishCount + 1;
+      setWishCount(countwish);
+      dispatch(addWish(product));
     }
     await updateDoc(docRef, {
       wish: countwish,
@@ -132,15 +136,24 @@ const ProductDetail = () => {
       .catch((error) => {
         console.log("error.message :", error.message);
       });
+
+      setisOpen2(true); //to open dialog box
   };
 
   return (
     <Helmet title="Product-details">
-      {isOpen && (
-        <AlertDialogSlide
+      {isOpen &&  (
+        <AlertDialogSlideCart
           handleClose={closeBox}
           isOpen={isOpen}
           cartLenth={cartLenth}
+        />
+      )}
+       {isOpen2 && wish && (
+        <AlertDialogSlideWich
+          handleClose={closeBox2}
+          isOpen={isOpen2}
+          
         />
       )}
 
@@ -177,13 +190,13 @@ const ProductDetail = () => {
                   <span className="fs-4">{product.brand}</span>
                 </p>
                 <div className="d-flex">
-                  <Button
-                    className="fs-5 rounded px-5 me-4"
+                  <button
+                    className="btnAll fs-4 px-5 me-4"
                     onClick={addItem}
                     color="warning"
                   >
                     Add to Cart
-                  </Button>
+                  </button>
                   <span
                     className="wish px-3 border rounded d-flex align-items-center"
                     onClick={toggle_wish}

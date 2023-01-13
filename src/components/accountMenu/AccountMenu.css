@@ -1,20 +1,26 @@
-.bg{
-    background-color: #F49934;
+.bg {
+  background-color: #f49934;
 }
 @media screen and (max-width: 700px) {
-.list_menu{
+  .list_menu {
     display: flex !important;
     justify-content: center !important;
-}
-
-
+    /* width: 95%; */
+    /* border: 1px solid red; */
+  }
+  .itemlist{
+    width: 95%;
+    /* border: 1px solid rgb(0, 255, 153); */
+    padding-left: 3px;
+    padding-right: 3px;
+  }
 }
 @media screen and (min-width: 700px) {
-    .fiPackage{
-        padding-top: 9px;
-        padding-bottom: 9px;
-    }
+  .fiPackage {
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
 }
-.itemlist:hover{
-    background-color: #F49934 !important;
+.itemlist:hover {
+  background-color: #f49934 !important;
 }

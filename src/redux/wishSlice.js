@@ -28,6 +28,8 @@ const wishSlice = createSlice({
             productName: newWish.productName,
             imgUrl: newWish.imgUrl,
             price : newWish.price,
+            category : newWish.category,
+            brand : newWish.brand,
           });
         }
       } else {
@@ -36,6 +38,8 @@ const wishSlice = createSlice({
           productName: newWish.productName,
           imgUrl: newWish.imgUrl,
           price : newWish.price,
+          category : newWish.category,
+          brand : newWish.brand,
         });
       }
       setItemStorage(state.wishItems.map((item) => item));

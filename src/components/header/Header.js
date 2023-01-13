@@ -332,7 +332,6 @@ const Header = () => {
             <Link
               to="/wishlist"
               className={styles.cartHidden}
-              onClick={toggleMenu}
             >
               <span className="ms-0 me-1 ">Wishlist</span>
               <i className="ri-heart-line fs-2"></i>
@@ -340,21 +339,22 @@ const Header = () => {
 
             <div className={styles.cartHidden} onClick={toggleCart}>
               <span className="me-1 ">Cart</span>
-              <CgShoppingCart size={24} className="mb-1" />
+              <CgShoppingCart size={24} className="mb-2" />
 
               <p
                 className="align-middle"
                 style={{
                   paddingTop: "1px",
                   background: "#F89B34",
-                  width: "17px",
-                  height: "17px",
+                  width: "14px",
+                  height: "14px",
                   borderRadius: "50%",
                   zIndex: 40,
-                  fontSize: "12px",
+                  fontSize: "10px",
                   fontWeight: "bold",
                   textAlign: "center",
                   color: "#0A1930",
+                  marginBottom:"10px"
                 }}
               >
                 {totalQuantity}
@@ -364,9 +364,9 @@ const Header = () => {
         </div>
       </nav>
       <div className={styles["menu-icon"]}>
-        <span className="  ">
-          <Link to="/wishlist" className={styles.wish} onClick={toggleMenu}>
-            <span className="me-1 mt-2">Wishlist</span>
+        <span className=" d-flex align-item-center ">
+          <Link to="/wishlist" className={styles.wish}>
+            <span className="me-1">Wishlist</span>
             <i className="ri-heart-line fs-1 "></i>
           </Link>
           <span className={styles.cartbask} to="/cart" onClick={toggleCart}>

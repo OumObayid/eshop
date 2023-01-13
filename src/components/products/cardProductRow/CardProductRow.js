@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./CardProductRow.css";
 import Card from "../../card/Card";
 import { Row, Col } from "reactstrap";
-import {AlertDialogSlide} from "../../../components";
+import {AlertDialogSlideCart} from "../../../components";
 
 
 const CardProduct = (props) => {
@@ -28,7 +28,7 @@ const CardProduct = (props) => {
   
   return (
     <Card>
-       {isOpen && (<AlertDialogSlide handleClose={closeBox} isOpen={isOpen} cartLenth={cartLenth}/>)}
+       {isOpen && (<AlertDialogSlideCart handleClose={closeBox} isOpen={isOpen} cartLenth={cartLenth}/>)}
       <Row>
         <Col lg="4" md="4" sm="12" xs="12" className="border-2 border-end">
           <Link

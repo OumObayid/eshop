@@ -1,22 +1,28 @@
 .bolderF,.orderdate {
   font-weight: 500 !important;
 }
+.containt1 {
+  display: flex !important;
+  justify-content:start !important;
+  align-items: center !important;
+  gap: 20px !important;
+}
 @media screen and (min-width: 700px) {
   .contain {
     display: flex;
     justify-content: space-between;
   }
+ 
   .contain2 button{
     width: 82%;
   }
 }
 @media screen and (max-width: 700px) {
-  .contain2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+
   .contain2 button{
-    width: 50%;
+    width: 100%;
+  }
+  .bolderF{
+    text-align: center !important;
   }
 }

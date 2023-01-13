@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, ListGroup, Row } from "reactstrap";
-import { AccountMenu, Helmet } from "../../components";
+import { AccountMenu, Helmet, RatedProducts } from "../../components";
 import { onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -39,7 +39,7 @@ const OrderHistory = () => {
 
             {/* list of orders */}
             <ListGroup>
-              <div className="cart__item-list border">
+              <div className="cart__item-list border p-2">
                 {orders.length !== 0 ? (
                   orders.map((item, index) => (
                     <div key={index}>
@@ -58,8 +58,11 @@ const OrderHistory = () => {
                   </>
                 )}
               </div>
-            </ListGroup>
+            </ListGroup>          
+
+           <RatedProducts />
           </Col>
+          
         </Row>
       </section>
     </Helmet>

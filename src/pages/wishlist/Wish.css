@@ -1,6 +1,19 @@
+.btnwish{
+  background-color: #fff;
+  border: 2px solid #F49934 !important;
+  border-radius: 25px !important;
+  padding: 5px;
+}
+.btnwish:hover{
+  background-color: #f49a3428;
+}
 .bolderF,.orderdate {
     font-weight: 500 !important;
   }
+  .fwbld{
+    font-weight: 500;
+  }
+  
   @media screen and (min-width: 700px) {
     .contain {
       display: flex;
@@ -15,9 +28,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      
     }
     .contain2 button{
-      width: 50%;
+      width: 100%;
+      margin-bottom: 0 !important;     
     }
   }
   

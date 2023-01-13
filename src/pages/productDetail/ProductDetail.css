@@ -189,7 +189,13 @@ figure:hover img {
   color:#E28743 !important;
   
 }
-.wish{cursor:pointer}
+.wish{
+  cursor:pointer;
+  transition: all 0.5s
+}
+.wish:hover{
+  background-color: rgba(232, 37, 37, 0.103);
+}
 .heart1:hover{
   color:red !important
 }
