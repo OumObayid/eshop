@@ -16,7 +16,7 @@ header {
   box-shadow: 0px 6px 14px 0px rgba(0, 0, 0, 0.75);
 }
 
-.logo a h2 {
+.logo a h3 {
   width: 25%;
   color: #fff;
   cursor: pointer;
@@ -55,23 +55,6 @@ nav {
 .header-right {
   display: flex;
   align-items: center;
-  .cart a {
-    display: flex;
-    color: #fff;
-    position: relative;
-    &:hover {
-      color: #f89b34;
-    }
-    &.active {
-      color: var(--color-danger);
-    }
-    p {
-      position: absolute;
-      top: -1rem;
-      right: -1rem;
-      font-weight: 500;
-    }
-  }
 
   span {
     margin: 0 5px;
@@ -116,17 +99,32 @@ nav {
 }
 
 .cartHidden,
-.wishHidden {
+.wish {
   display: flex;
   justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 1.4rem;
+  margin-right: 4px;
+}
+.cartHidden:hover,
+.wish:hover,
+.account:hover {
+  color: #f89b34 !important;
+  cursor: pointer;
+}
+.account {
+  color: #fff;
 }
 @media screen and (max-width: 800px) {
-  .FaUser {
-    padding: 0;
-    margin-top: 10px;
+  .wish {
+    font-size: 1.6rem !important;
+    margin-right: 10px;
+    i {
+      margin-top: 2px;
+    }
   }
-  .cartHidden,
-  .wishHidden {
+  .cartHidden {
     display: none;
   }
   nav {
@@ -168,7 +166,7 @@ nav {
         }
       }
       li {
-        padding: 5px 0;
+        padding: 10px 0;
         border-bottom: 1px solid #333;
         a {
           display: block;
@@ -179,56 +177,27 @@ nav {
     .header-right {
       display: block;
       margin-left: 26px;
-      .cart {
-        // display: block;
-        // padding: 5px 0;
-        border-bottom: 1px solid #333;
-        // a {
-        //   position: relative;
-        //   p {
-        //     position: absolute;
-        //     top: -1rem;
-        //     left: 5rem;
-        //     font-weight: 500;
-        //   }
-        // }
+      .spanaccount {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        padding: 10px 0 !important;
+        border-bottom: 1px solid #333 !important;
       }
-
       .links {
-        display: block;
-        margin: 0;
-        padding: 0;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
         a {
-          display: block;
-          margin: 0;
-          padding: 5px 0;
-          border-bottom: 1px solid #333;
+          display: block !important;
+          margin: 0 !important;
+          padding: 10px 0 !important;
+          border-bottom: 1px solid #333 !important;
         }
       }
     }
   }
-  .cart {
-    display: block;
-    padding: 5px 0;
-    &:hover {
-      color: #f89b34;
-    }
-    // border-bottom: 1px solid #333;
-    a {
-      color: #fff;
-      position: relative;
-      &:hover {
-        color: #f89b34;
-      }
-      p {
-        position: absolute;
-        top: -1rem;
-        left: 5rem;
-        font-weight: 500;
-        color: #fff;
-      }
-    }
-  }
+
   .show-nav {
     transform: translateX(0);
   }
@@ -251,17 +220,9 @@ nav {
     font-size: 16px;
     display: contents;
   }
-  .wish {
-    display: flex;
-    justify-content: start;
+
+  #dropdown {
+    margin-top: 10px !important;
+    border: 1px solid red !important;
   }
-}
-
-ul li.catli .cat {
-  color: #0a1930 !important;
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block !important;
-  margin-top: 0 !important;
 }
