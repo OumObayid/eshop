@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, ListGroupItem } from "reactstrap";
+import { ListGroupItem } from "reactstrap";
 import { AlertDialogSlideCart } from "../../components";
 import { cartActions } from "../../redux/cartSlice";
 import "./OrderItem.css";

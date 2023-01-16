@@ -162,7 +162,7 @@ declare module 'stripe' {
         }
 
         namespace Shipping {
-          type Carrier = 'fedex' | 'usps';
+          type Carrier = 'dhl' | 'fedex' | 'royal_mail' | 'usps';
 
           type Service = 'express' | 'priority' | 'standard';
 
@@ -1105,7 +1105,7 @@ declare module 'stripe' {
 
       interface CardCreateParams {
         /**
-         * The currency for the card. This currently must be `usd`.
+         * The currency for the card.
          */
         currency: string;
 

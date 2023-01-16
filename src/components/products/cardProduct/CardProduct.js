@@ -52,7 +52,7 @@ const CardProduct = (props) => {
           </p>
         </div>
       </Link>
-      <button className="btn btn-warning  fs-5  m-0 w-100" onClick={addToCart}>
+      <button className="btn btnAll  fs-5  m-0 w-100" onClick={addToCart}>
            Add to cart
       </button>
     </div>

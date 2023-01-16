@@ -29,12 +29,12 @@ const CartItem = ({ item }) => {
     dispatch(deleteItem(id));
   };
   return (
-    <ListGroupItem className="border-0 cart__item">
+    <div className="border-0 cart__item">
       <div className="cart__item-info d-flex gap-4">
         <div><img src={img} alt="product-img"/></div>
-        <div className="cart__product-info w-100 d-flex align-items-center gap-4 justify-content-between ">
+        <div className="cart__product-info w-75 d-flex align-items-center gap-4 justify-content-between ">
           <div>
-            <span className="fw-bolder fs-5  ">{title}</span>
+            <span className="fw-bolder fs-5 ">{title}</span>
             <p className="quantprice d-flex align-items-center gap-5 fs-5 ">
               {quantity} x <span>${Number(totalPrice).toLocaleString()}</span>
             </p>
@@ -54,7 +54,7 @@ const CartItem = ({ item }) => {
           </span>
         </div>
       </div>
-    </ListGroupItem>
+    </div>
   );
 };
 

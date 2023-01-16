@@ -285,7 +285,7 @@ const ProductDetail = () => {
                         required
                       />
                     </div>
-                    <Button type="submit" className="fs-5" color="warning">
+                    <Button type="submit" className="fs-5 btnAll" color="warning">
                       Add Review
                     </Button>
                   </form>

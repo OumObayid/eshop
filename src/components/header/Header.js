@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Header.module.scss";
-import $ from "jquery";
+// import $ from "jquery";
 // import logoEshop from "../../assets/logo.png";
 
 import { FaTimes } from "react-icons/fa";

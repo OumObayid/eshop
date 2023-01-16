@@ -72,7 +72,7 @@ const Carts = () => {
             <hr style={{ backgroundColor: "#434341", width: "100%" }} />
           </div>
 
-          <div className="cart_item-list_right  me-3 ">
+          <div className="cart_item-list_right  mx-3 ">
             {cartProducts.length === 0 ? (
               <div className="text-center noitem">
                 <p>

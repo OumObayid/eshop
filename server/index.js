@@ -1,39 +1,42 @@
-const express = require("express")
-const app = express()
-require("dotenv").config()
-const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
-const bodyParser = require("body-parser")
-const cors = require("cors")
+const express = require("express");
+const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+const logger = require("morgan");
+const cors = require("cors");
 
-app.use(cors())
+const port = 4000;
 
-app.post("/payment", cors(), async (req, res) => {
-	let { amount, id } = req.body
-	try {
-		const payment = await stripe.paymentIntents.create({
-			amount,
-			currency: "USD",
-			description: "eShop company",
-			payment_method: id,
-			confirm: true
-		})
-		console.log("Payment", payment)
-		res.json({
-			message: "Payment successful",
-			success: true
-		})
-	} catch (error) {
-		console.log("Error", error)
-		res.json({
-			message: "Payment failed",
-			success: false
-		})
-	}
-})
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
-app.listen(process.env.PORT || 4000, () => {
-	console.log("Sever is listening on port 4000")
-})
+app.post("/api/stripe-payment", (req, res) => {
+  const stripe = require("stripe")(
+    "sk_test_51MKIp3KSFdzmNXFyEjktY77RffQ0SaClt6TtQSkkxKngztBVH4wvoB4klP83nvO6VgKBSiHS5PMVHExjjhZ4NatW00wDDZMUO6"
+  );
+
+  const { amount, email, token } = req.body;
+  console.log('req.body :', req.body);
+
+  stripe.customers
+    .create({
+      email: email,
+      source: token.id,
+      name: token.card.name,
+    })
+    .then((customer) => {
+      return stripe.charges.create({
+        amount: parseFloat(amount) * 100,
+        description: `Payment for USD ${amount}`,
+        currency: "USD",
+        customer: customer.id,
+      });
+    })
+    .then((charge) => res.status(200).send(charge))
+    .catch((err) => console.log(err));
+});
+
+app.listen(port, () =>
+  console.log(`Example app listening at http://localhost:${port}`)
+);

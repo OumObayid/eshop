@@ -16,13 +16,16 @@
     "axios": "^1.2.2",
     "cors": "^2.8.5",
     "country-dropdown-with-flags-for-react": "^1.1.4",
+    "final-form": "^4.20.8",
     "firebase": "^9.14.0",
     "jquery": "^3.6.3",
     "multi-range-slider-react": "^2.0.2",
     "node-sass": "^8.0.0",
+    "payment": "^2.4.6",
     "react": "^17.0.2",
-    "react-cookie": "^4.1.1",
+    "react-credit-cards": "^0.8.3",
     "react-dom": "^17.0.2",
+    "react-final-form": "^6.5.9",
     "react-icons": "^4.6.0",
     "react-js-dialog-box": "^1.1.6",
     "react-redux": "^8.0.5",
@@ -36,7 +39,8 @@
     "react-tooltip-lite": "^1.12.0",
     "reactstrap": "^9.1.5",
     "remixicon": "^2.5.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^5.3.6"
   },
   "scripts": {
     "start": "react-scripts start",

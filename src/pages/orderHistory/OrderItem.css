@@ -3,7 +3,7 @@
 }
 .containt1 {
   display: flex !important;
-  justify-content:start !important;
+  justify-content:flex-start !important;
   align-items: center !important;
   gap: 20px !important;
 }

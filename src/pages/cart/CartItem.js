@@ -34,8 +34,8 @@ const CartItem = ({ item }) => {
         <div><img src={img} className=" imgcheckout" alt="product-img"/></div>
         <div className="cart__product-info w-100 d-flex align-items-center gap-4 justify-content-between ">
           <div>
-            <span className="fw-bolder fs-5  ">{title}</span>
-            <p className=" d-flex align-items-center gap-5 fs-5 ">
+            <span className="fw-bolder fs-4  ">{title}</span>
+            <p className=" d-flex align-items-center gap-5 fs-4 ">
               {quantity} x <span>${totalPrice.toLocaleString()}</span>
             </p>
             <div className=" d-flex align-items-center justify-content-between  increase__decrease-btn">
