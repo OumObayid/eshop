@@ -271,7 +271,7 @@ function Checkout() {
                     <form onSubmit={handleSubmit}>
                       {addressSaved ? (
                         <>
-                          <div className="d-flex justify-content-between">
+                          <div className="d-flex justify-content-between p-0">
                             <h4>Delivery address</h4>
                             <span>
                               <Link to="/account" className="fs-4 change">
