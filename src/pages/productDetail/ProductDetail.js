@@ -207,7 +207,7 @@ const ProductDetail = () => {
                     <span className="fs-5">{wishCount}</span>
                   </span>
                   <span>
-                    <WhatsappShareButton title="add to cart" url={`http://localhost:3000/productDetail/${product.id}`}><i className="ri-share-fill fs-1 ms-4 share"></i></WhatsappShareButton>
+                    <WhatsappShareButton  url={document.location.href}><i className="ri-share-fill fs-1 ms-4 share"></i></WhatsappShareButton>
                   </span>
                 </div>
               </Col>
