@@ -18,8 +18,7 @@ import {
   addCategory,
   addProduct,
   datacategorys,
-  datauser,
-  updateUserInfo,
+   updateUserInfo,
 } from "../../redux/dataSlice";
 import { removeActiveUser, setActiveUser } from "../../redux/authSlice";
 
@@ -28,6 +27,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import ShowOnLogin from "../showHiddenLinks/ShowOnLogin";
 import HiddenOnLogin from "../showHiddenLinks/HiddenOnLogin";
+
 
 const logo = (
   <div className={styles.logo} style={{ marginTop: "8px" }}>
@@ -164,20 +164,6 @@ const Header = () => {
       });
   };
 
-  // to show list in dropdown
-  const showList1 = () => {
-    document.getElementById("dropdown-menu1").classList.add("show");
-  };
-  const hideList1 = () => {
-    document.getElementById("dropdown-menu1").classList.remove("show");
-  };
-  const showList2 = () => {
-    document.getElementById("dropdown-menu2").classList.add("show");
-  };
-  const hideList2 = () => {
-    document.getElementById("dropdown-menu2").classList.remove("show");
-  };
-
   //to get gategory list
   const categorylist = useSelector(datacategorys);
 
@@ -215,9 +201,7 @@ const Header = () => {
           </li>
           <li
             className="nav-item dropdown "
-            id="dropdown"
-            onMouseEnter={showList1}
-            onMouseLeave={hideList1}
+            id="dropdown"            
           >
             <Link
               to="/"
@@ -269,8 +253,6 @@ const Header = () => {
             <div
               className={` ${styles.spanaccount}  ms-0 me-4 `}
               id="dropdown"
-              onMouseEnter={showList2}
-              onMouseLeave={hideList2}
             >
               <Link
                 to="/"

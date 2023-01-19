@@ -8,7 +8,6 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
 import { Loader, Helmet, Card } from "../../components";
-import { getAuth, sendSignInLinkToEmail } from "firebase/auth";
 
 const Register = () => {
   const [fullName, setFullName] = useState("");
