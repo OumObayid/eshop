@@ -13,7 +13,7 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const AlertDialogSlideCart = (props) => {
+const AlertDialogSlideSimple = (props) => {
   const dispatch = useDispatch();
   const toggleCart = () => {
     props.handleClose();
@@ -41,8 +41,7 @@ const AlertDialogSlideCart = (props) => {
               aria-hidden="true"
             ></i>
             <p>
-              A new Product has been added to your Shopping Cart. You now have{" "}
-              {props.cartLenth} type(s) of product in your Shopping Cart.
+              A new Product has been added to your Shopping Cart.
             </p></div>
           </DialogContentText>
           <hr style={{ backgroundColor: "#434341", width: "100%" }} />
@@ -68,4 +67,4 @@ const AlertDialogSlideCart = (props) => {
   );
 };
 
-export default AlertDialogSlideCart;
+export default AlertDialogSlideSimple;

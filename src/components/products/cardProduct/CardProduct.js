@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { cartActions } from "../../../redux/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "./CardProduct.css";
-import { AlertDialogSlideCart } from "../../../components";
+import { AlertDialogSlideSimple } from "../../../components";
 
 const CardProduct = (props) => {
-  const cartProducts = useSelector((state) => state.cart.cartItems);
-  const cartLenth = cartProducts.length;
   const prod = props.item; 
 
   const dispatch = useDispatch();
@@ -26,10 +24,10 @@ const CardProduct = (props) => {
   return (
     <div className="card m-1  shadow p-1 hoverCard ">
       {isOpen && (
-        <AlertDialogSlideCart
+        <AlertDialogSlideSimple
           handleClose={closeBox}
           isOpen={isOpen}
-          cartLenth={cartLenth}
+         
         />
       )}
 

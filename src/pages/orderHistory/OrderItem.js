@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { ListGroupItem } from "reactstrap";
-import { AlertDialogSlideCart } from "../../components";
+import { AlertDialogSlideSimple } from "../../components";
 import { cartActions } from "../../redux/cartSlice";
 import "./OrderItem.css";
 const OrderItem = ({ item }) => {
-  const cartProducts = useSelector((state) => state.cart.cartItems);
-  const cartLenth = cartProducts.length;
   const [isOpen, setisOpen] = useState(false);
   const dispatch = useDispatch();
   const addItem = () => {
@@ -28,10 +26,9 @@ const OrderItem = ({ item }) => {
   return (
     <ListGroupItem className="my-0  border-0 cart__item">
       {isOpen && (
-        <AlertDialogSlideCart
+        <AlertDialogSlideSimple
           handleClose={closeBox}
           isOpen={isOpen}
-          cartLenth={cartLenth}
         />
       )}
       <div className=" gap-4 contain">

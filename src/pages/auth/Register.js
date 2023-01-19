@@ -8,6 +8,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
 import { Loader, Helmet, Card } from "../../components";
+import { getAuth, sendSignInLinkToEmail } from "firebase/auth";
 
 const Register = () => {
   const [fullName, setFullName] = useState("");
@@ -27,8 +28,11 @@ const Register = () => {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           //const user = userCredential.user;
-          //toast.success("Registration SucessFul ...");
-          try {
+           // send verification mail.
+           userCredential.user.sendEmailVerification();
+           auth.signOut();
+           alert("Email sent");          
+          try {  
             const docRef = addDoc(collection(db, "users"), {
               name: fullName,
               email: email,
@@ -41,17 +45,23 @@ const Register = () => {
               postalCode: "",
               orders: [],
               card: {
+                idCard: "",
+                numberCard: "",
+                last4: "",
+                nameOnCard: "",
+                cvc: "",
                 brand: "",
                 exp_month: 0,
                 exp_year: 0,
               },
-            });
+            });           
             console.log("Document written with ID: ", docRef.id);
+            
           } catch (e) {
             toast.error(`Error adding document: ${e.message}`);
           }
           setIsLoading(false);
-          navigate("/login");
+          navigate("/verifiemail");
         })
         .catch((error) => {
           toast.error(error.message);

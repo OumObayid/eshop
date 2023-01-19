@@ -24,7 +24,8 @@ const Login = () => {
 
   //login
   const navigate = useNavigate();
-  const loginUser = (e) => {
+
+  const loginUser = (e) => {    
     e.preventDefault();
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
@@ -57,7 +58,7 @@ const Login = () => {
   return (
     <Helmet title="login">
       {isLoading && <Loader />}
-      <section className={`container ${styles.auth}`}>
+      <section className={`container ${styles.auth}`}>z
         <div className={styles.img}>
           <img  src={loginImg} alt="login" width={384} />
         </div>

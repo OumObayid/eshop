@@ -199,3 +199,12 @@ figure:hover img {
 .heart1:hover{
   color:red !important
 }
+
+.share{
+ color:#d17b18;
+ transition:all 1s
+}
+.share:hover{
+  color:#f7c081;
+  transition:all 1s
+ }

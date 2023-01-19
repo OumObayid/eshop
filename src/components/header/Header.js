@@ -18,6 +18,7 @@ import {
   addCategory,
   addProduct,
   datacategorys,
+  datauser,
   updateUserInfo,
 } from "../../redux/dataSlice";
 import { removeActiveUser, setActiveUser } from "../../redux/authSlice";
@@ -40,32 +41,21 @@ const logo = (
 
 const Header = () => {
   const dispatch = useDispatch();
-
-  // //to animate navbar
-  // useEffect(() => {
-  //   const mediaQuery = window.matchMedia("(min-width: 768px)");
-  //   if (mediaQuery.matches) {
-  //     window.onscroll = function () {
-  //       let currentScrollPos = window.pageYOffset;
-  //       if (currentScrollPos < 100 || currentScrollPos > 400) {
-  //         document.getElementById("navbar").style.top = "0";
-  //       } else {
-  //         document.getElementById("navbar").style.top = "-100px";
-  //       }
-  //     };
-  //   }
-  // }, []);
+  //to navigate
+  const navigate = useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         //if user is logged
+        
         const fetchUser = async () => {
+          let userinfos = {};
           const q = query(
             collection(db, "users"),
             where("email", "==", user.email)
           );
-          const querySnapshot = await getDocs(q);
-          let userinfos = {};
+
+          const querySnapshot = await getDocs(q);        
           querySnapshot.forEach((doc) => {
             userinfos = {
               id: doc.id,
@@ -81,11 +71,14 @@ const Header = () => {
               card: doc.data().card,
               orders: doc.data().orders,
             };
-          });
-          //memorise user infos in redux store
-          dispatch(updateUserInfo(userinfos));
+          });  
+          console.log('userinfos :', userinfos);
+          dispatch(updateUserInfo(userinfos));          
         };
-        fetchUser();
+        fetchUser()
+        
+       
+       
         //to memorize active user in redux store
         dispatch(
           setActiveUser({
@@ -101,7 +94,9 @@ const Header = () => {
       }
     });
   });
+
   useEffect(() => {
+    
     //get all categorys from firebase
     const getCategorys = async () => {
       //////////////// get data from firebase
@@ -140,8 +135,7 @@ const Header = () => {
 
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
-  //to navigate
-  const navigate = useNavigate();
+
 
   //display or hide menu
   const toggleMenu = (even) => {
@@ -327,7 +321,7 @@ const Header = () => {
                 </li>
               </ul>
             </div>
-          </ShowOnLogin>
+          </ShowOnLogin>          
           <div className="d-flex align-items-center">
             <Link
               to="/wishlist"

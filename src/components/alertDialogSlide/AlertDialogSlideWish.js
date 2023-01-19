@@ -5,7 +5,6 @@ import DialogContentText from "@mui/material/DialogContentText";
 import Slide from "@mui/material/Slide";
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
-import CardProduct from "../products/cardProduct/CardProduct";
 import RatedProducts from "../products/ratedProducts/RatedProducts";
 import "./AlertDialogSlide.css";
 

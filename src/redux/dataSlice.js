@@ -19,9 +19,14 @@ const dataSlice = createSlice({
       postalCode: "",
       password: "",
       card: {
+        idCard: "",
+        numberCard: "",
+        last4: "",
+        nameOnCard: "",
+        cvc: "",
         brand: "",
-        exp_month: "",
-        exp_year: "",
+        exp_month: 0,
+        exp_year: 0,
       },
       orders: [],
     },
@@ -135,6 +140,7 @@ const dataSlice = createSlice({
     //update user infos
     updateUserInfo: (state, action) => {
       const user = action.payload;
+      console.log('user :', user);
       const userinfos = state.userinfos;
 
       userinfos.id = user.id;
@@ -147,10 +153,15 @@ const dataSlice = createSlice({
       userinfos.city = user.city;
       userinfos.postalCode = user.postalCode;
       userinfos.password = user.password;
-      userinfos.card ={
-        brand : user.card.brand,
-        exp_month : user.card.exp_month,
-        exp_year : user.card.exp_year,
+      userinfos.card = {
+        idCard: user.card.idCard,
+        numberCard: user.card.numberCard,
+        last4: user.card.last4,
+        nameOnCard: user.card.nameOnCard,
+        cvc: user.card.cvc,
+        brand: user.card.brand,
+        exp_month: user.card.exp_month,
+        exp_year: user.card.exp_year,
       }     
       userinfos.orders=[];
       user.orders.forEach((element) => {

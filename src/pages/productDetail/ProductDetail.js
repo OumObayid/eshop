@@ -4,7 +4,7 @@ import {
   Helmet,
   CardProduct,
   Stars,
-  AlertDialogSlideCart,
+  AlertDialogSlideSimple,
   SlideProduct,
 } from "../../components";
 import { Row, Col, Button } from "reactstrap";
@@ -18,12 +18,13 @@ import { db } from "../../firebase/config";
 import { useEffect } from "react";
 import { addWish, dataWishs, deleteWish } from "../../redux/wishSlice";
 import AlertDialogSlideWich from "../../components/alertDialogSlide/AlertDialogSlideWish";
+import { WhatsappShareButton } from "react-share";
 const ProductDetail = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  });
+  },[]);
 
   const { id } = useParams();
 
@@ -32,8 +33,6 @@ const ProductDetail = () => {
   const productId = products.filter((item) => item.id === id);
   const product = productId[0];
   // // for dialog box
-  const cartProducts = useSelector((state) => state.cart.cartItems);
-  const cartLenth = cartProducts.length;
   const [isOpen, setisOpen] = useState(false);
   const [isOpen2, setisOpen2] = useState(false);
   // for wishlist
@@ -143,10 +142,9 @@ const ProductDetail = () => {
   return (
     <Helmet title="Product-details">
       {isOpen &&  (
-        <AlertDialogSlideCart
+        <AlertDialogSlideSimple
           handleClose={closeBox}
           isOpen={isOpen}
-          cartLenth={cartLenth}
         />
       )}
        {isOpen2 && wish && (
@@ -189,7 +187,7 @@ const ProductDetail = () => {
                   <span className="fw-bold me-3">Brand: </span>
                   <span className="fs-4">{product.brand}</span>
                 </p>
-                <div className="d-flex">
+                <div className="d-flex align-items-center">
                   <button
                     className="btnAll fs-4 px-5 me-4"
                     onClick={addItem}
@@ -207,6 +205,9 @@ const ProductDetail = () => {
                       <i className="heart1 ri-heart-line fs-2 me-3 "></i>
                     )}
                     <span className="fs-5">{wishCount}</span>
+                  </span>
+                  <span>
+                    <WhatsappShareButton title="add to cart" url={`http://localhost:3000/productDetail/${product.id}`}><i className="ri-share-fill fs-1 ms-4 share"></i></WhatsappShareButton>
                   </span>
                 </div>
               </Col>

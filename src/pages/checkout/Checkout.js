@@ -12,7 +12,7 @@ import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "reactstrap";
-import { Helmet, Location } from "../../components";
+import { Helmet, Loader, Location } from "../../components";
 import "./Checkout.css";
 import Carts from "../cart/Carts";
 import { onAuthStateChanged } from "firebase/auth";
@@ -44,6 +44,8 @@ function Checkout() {
   const [enterCity, setEnterCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [addressSaved, setAddressSaved] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -120,15 +122,16 @@ function Checkout() {
   }, []);
 
   const onSubmit = async (values) => {
+    setIsLoading(true);
     await sleep(300);
     try {
       window.Stripe.card.createToken(
         {
-          number: values.number,
+          number: values.numberCard,
           exp_month: values.expiry.split("/")[0],
           exp_year: values.expiry.split("/")[1],
           cvc: values.cvc,
-          name: values.name,
+          name: values.nameOnCard,
         },
         (status, response) => {
           if (status === 200) {
@@ -138,8 +141,7 @@ function Checkout() {
                 email: user.email,
                 amount: totalAmount,
               })
-              .then(async (res) => {
-                // window.alert(JSON.stringify(res.data, 0, 2));
+              .then(async (res) => {  
                 let orderlist = [];
                 await cartProducts.forEach((item) => {
                   let order = {
@@ -165,27 +167,58 @@ function Checkout() {
                     city: enterCity,
                     postalCode: postalCode,
                     orders: orderlist,
+                    card: {
+                      idCard: res.data.payment_method,
+                      numberCard: values.numberCard,
+                      brand: res.data.payment_method_details.card.brand,
+                      nameOnCard: values.nameOnCard,
+                      exp_month: res.data.payment_method_details.card.exp_month,
+                      exp_year: res.data.payment_method_details.card.exp_year,
+                      cvc: values.cvc,
+                      last4: res.data.payment_method_details.card.last4,
+                    },
                   });
                 else
                   await updateDoc(docRef, {
                     orders: orderlist,
+                    card: {
+                      idCard: res.data.payment_method,
+                      numberCard: values.numberCard,
+                      brand: res.data.payment_method_details.card.brand,
+                      nameOnCard: values.nameOnCard,
+                      exp_month: res.data.payment_method_details.card.exp_month,
+                      exp_year: res.data.payment_method_details.card.exp_year,
+                      cvc: values.cvc,
+                      last4: res.data.payment_method_details.card.last4,
+                    },
                   })
                     .then((docRef) => {
-                      dispatch(clearCart());
+                      setIsLoading(false);
+                      dispatch(clearCart());                      
                       navigate("/checkoutSuccess");
                     })
                     .catch((error) => {
+                      setIsLoading(false);
                       toast.error(error.message);
                       console.log("error.message :", error.message);
                     });
               })
-              .catch((err) => console.log(err));
+              .catch((err) =>{
+                setIsLoading(false);
+                 console.log(err)
+                 toast.error(err.message);               
+
+              });
           } else {
+            setIsLoading(false);
+            toast.error(response.error.message);  
             console.log(response.error.message);
           }
         }
       );
     } catch (error) {
+      setIsLoading(false);
+      toast.error(error.message);  
       console.log("error catch", error.message);
     }
   };
@@ -201,11 +234,12 @@ function Checkout() {
   );
   return (
     <Helmet title="checkout">
+      {isLoading && <Loader/>}
       <section>
         <Row id="container-element">
           <Col lg="6" md="6">
             <div>
-              <h2 >Summary</h2>
+              <h2>Summary</h2>
               <Col lg="12" md="12" className="border undersummary">
                 <Carts />
               </Col>
@@ -255,9 +289,9 @@ function Checkout() {
                   />
                 </div>
               </div>
-            </div>            
-            <Styles >
-              <Form 
+            </div>
+            <Styles>
+              <Form
                 onSubmit={onSubmit}
                 render={({
                   handleSubmit,
@@ -308,7 +342,7 @@ function Checkout() {
                               onChange={(e) => setEnterAddress(e.target.value)}
                             />
                           </div>
-                          <Location
+                          <Location 
                             action={[changeCountry, changeRegion, changeCity]}
                             selected={null}
                           />
@@ -329,8 +363,8 @@ function Checkout() {
                       />
                       <Card
                         style={{ cardRatio: "1.1" }}
-                        number={values.number || ""}
-                        name={values.name || ""}
+                        number={values.numberCard || ""}
+                        name={values.nameOnCard || ""}
                         expiry={values.expiry || ""}
                         cvc={values.cvc || ""}
                         focused={active}
@@ -339,7 +373,7 @@ function Checkout() {
                       <div>
                         <Field
                           className="fs-4  w-100 mx-2"
-                          name="number"
+                          name="numberCard"
                           component="input"
                           type="text"
                           pattern="[\d| ]{16,22}"
@@ -350,7 +384,7 @@ function Checkout() {
                       <div>
                         <Field
                           className="fs-4 w-100 mx-2"
-                          name="name"
+                          name="nameOnCard"
                           component="input"
                           type="text"
                           placeholder="Your name as it appears on the card"
@@ -397,12 +431,12 @@ function Checkout() {
                   );
                 }}
               />
-              <div className="d-flex justify-content-between align-item-center">
+              <div className="undersummary py-2">
                 {logo}
-                <div>
-                  <p className="safe-info-text">
-                    keeps your information and payment safe
-                  </p>
+                <p className="fs-4 text-start">
+                  keeps your information and payment safe
+                </p>
+                <div className="text-start">
                   <img
                     className="safe-info-img"
                     src="//ae01.alicdn.com/kf/H5ebd67335c2c4725b0f7e7d501482657Q.png"
