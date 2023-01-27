@@ -15,7 +15,6 @@ import { datauser } from "../../redux/dataSlice";
 
 const Account = () => {
   const [user, setUser] = useState({});
-  const [userTemp, setUserTemp] = useState({});
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConf, setNewPasswordConf] = useState("");
@@ -27,7 +26,6 @@ const Account = () => {
   
   useEffect(() => {
     setUser(userinfo);
-    setUserTemp(userinfo);
     onAuthStateChanged(auth, (user) => {
       if (!user) {
         navigate("/login");
@@ -42,13 +40,13 @@ const Account = () => {
     e.preventDefault();
     const docRef = doc(db, "users", user.id);
     await updateDoc(docRef, {
-      name: userTemp.name,
-      tel: userTemp.tel,
-      address: userTemp.address,
-      country: userTemp.country,
-      region: userTemp.region,
-      city: userTemp.city,
-      postalCode: userTemp.postalCode,
+      name: user.name,
+      tel: user.tel,
+      address: user.address,
+      country: user.country,
+      region: user.region,
+      city: user.city,
+      postalCode: user.postalCode,
     })
       //if all pass good
       .then((docRef) => {
@@ -74,13 +72,13 @@ const Account = () => {
   };
 
   const changeCountry = (e) => {
-    setUserTemp({ ...userTemp, country: e.target.value });
+    setUser({ ...user, country: e.target.value });
   };
   const changeRegion = (e) => {
-    setUserTemp({ ...userTemp, region: e.target.value });
+    setUser({ ...user, region: e.target.value });
   };
   const changeCity = (e) => {
-    setUserTemp({ ...userTemp, city: e.target.value });
+    setUser({ ...user, city: e.target.value });
   };
 
   //handle for changing user password
@@ -261,10 +259,10 @@ const Account = () => {
                           type="text"
                           placeholder="Your name"
                           required
-                          value={userTemp.name}
+                          value={user.name}
                           onChange={(e) =>
-                            setUserTemp({
-                              ...userTemp,
+                            setUser({
+                              ...user,
                               name: e.target.value,
                             })
                           }
@@ -282,10 +280,10 @@ const Account = () => {
                           type="number"
                           placeholder="Phone number"
                           required
-                          value={userTemp.tel}
+                          value={user.tel}
                           onChange={(e) =>
-                            setUserTemp({
-                              ...userTemp,
+                            setUser({
+                              ...user,
                               tel: e.target.value,
                             })
                           }
@@ -298,10 +296,10 @@ const Account = () => {
                         type="text"
                         placeholder="Enter your address"
                         required
-                        value={userTemp.address}
+                        value={user.address}
                         onChange={(e) =>
-                          setUserTemp({
-                            ...userTemp,
+                          setUser({
+                            ...user,
                             address: e.target.value,
                           })
                         }
@@ -310,9 +308,9 @@ const Account = () => {
                     <Location
                       action={[changeCountry, changeRegion, changeCity]}
                       selected={[
-                        userTemp.country,
-                        userTemp.region,
-                        userTemp.city,
+                        user.country,
+                        user.region,
+                        user.city,
                       ]}
                     />
                     <div className="form__group">
@@ -321,10 +319,10 @@ const Account = () => {
                         type="number"
                         placeholder="Postal code"
                         required
-                        value={userTemp.postalCode}
+                        value={user.postalCode}
                         onChange={(e) =>
-                          setUserTemp({
-                            ...userTemp,
+                          setUser({
+                            ...user,
                             postalCode: e.target.value,
                           })
                         }

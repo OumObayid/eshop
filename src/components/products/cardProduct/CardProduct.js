@@ -22,7 +22,7 @@ const CardProduct = (props) => {
   };
 
   return (
-    <div className="card m-1  shadow p-1 hoverCard ">
+    <div className="card m-1  shadow p-1 ">
       {isOpen && (
         <AlertDialogSlideSimple
           handleClose={closeBox}

@@ -21,7 +21,7 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== cpassword) {
-      toast.error("passwords do not muatch");
+      toast.error("passwords do not mutch");
     } else {
       setIsLoading(true);
       createUserWithEmailAndPassword(auth, email, password)
@@ -32,7 +32,8 @@ const Register = () => {
            auth.signOut();
            alert("Email sent");          
           try {  
-            const docRef = addDoc(collection(db, "users"), {
+            const ref = collection(db, "users");
+            const docRef = addDoc(ref, {
               name: fullName,
               email: email,
               password: password,
@@ -54,7 +55,7 @@ const Register = () => {
                 exp_year: 0,
               },
             });           
-            console.log("Document written with ID: ", docRef.id);
+            // console.log("Document written with ID: ", docRef.id);
             
           } catch (e) {
             toast.error(`Error adding document: ${e.message}`);

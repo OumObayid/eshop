@@ -172,7 +172,7 @@ const dataSlice = createSlice({
   },
 });
 
-//exporter les actions a appeler
+//export actions to call
 export const {
   addProduct,
   setWish,
@@ -183,7 +183,8 @@ export const {
   deleteCategory,
   updateUserInfo
 } = dataSlice.actions;
-//select variables od state
+
+//export  states
 export const dataProducts = (state) => state.data.products;
 export const datacategorys = (state) => state.data.categorys;
 export const datauser = (state) => state.data.userinfos;

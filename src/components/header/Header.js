@@ -120,6 +120,7 @@ const Header = () => {
       querySnapshot.forEach((doc) => {
         let fullDoc = { id: doc.id, ...doc.data() }; //concate id to document
         list.push(fullDoc); //put data in array list
+        console.log('fullDoc :', fullDoc);
         dispatch(addProduct(fullDoc)); // put doc in store redux
       });
     };

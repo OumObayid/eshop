@@ -166,12 +166,12 @@ const ProductDetail = () => {
           </div>
           <Row>
             <Row>
-              <Col lg="4" md="4" sm="12" xs="12" className=" mb-5 border">
-                <figure>
-                  <img src={product.imgUrl} alt="" className="w-100" />
+              <Col lg="6" md="6" sm="12" xs="12" className=" mb-5 border">
+                <figure className="text-center">
+                  <img src={product.imgUrl} alt="" className="w-75 " />
                 </figure>
               </Col>
-              <Col lg="8" md="8" sm="12" xs="12" className=" mb-5 ps-5">
+              <Col lg="6" md="6" sm="12" xs="12" className=" mb-5 ps-5">
                 <h2 className=" mb-3 border-2 border-bottom">
                   {product.productName}
                 </h2>
