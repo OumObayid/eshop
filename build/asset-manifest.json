@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/eshop/static/css/main.66bde8dd.css",
+    "main.js": "/eshop/static/js/main.e898d54a.js",
+    "static/media/remixicon.svg?t=1590207869815": "/eshop/static/media/remixicon.9cedd2150922ead84869.svg",
+    "static/media/remixicon.eot?t=1590207869815": "/eshop/static/media/remixicon.5cb99e6cba5a4619063f.eot",
+    "static/media/remixicon.ttf?t=1590207869815": "/eshop/static/media/remixicon.f2616f597cf98f38d234.ttf",
+    "static/media/bg-4.webp": "/eshop/static/media/bg-4.9a5b86d0653568d4bdca.webp",
+    "static/media/remixicon.woff?t=1590207869815": "/eshop/static/media/remixicon.8d09fa11700ed63cf96e.woff",
+    "static/media/remixicon.woff2?t=1590207869815": "/eshop/static/media/remixicon.90668f6f9b3c2c18a090.woff2",
+    "static/media/bg-1.webp": "/eshop/static/media/bg-1.d23d8d8acec06bbd0543.webp",
+    "static/media/bg-2.webp": "/eshop/static/media/bg-2.9bff258903192341df9f.webp",
+    "static/media/allcategorys.png": "/eshop/static/media/allcategorys.bd66c5f7a827531c92a0.png",
+    "static/media/login.webp": "/eshop/static/media/login.43f7b36e1b44a624d01f.webp",
+    "static/media/Our-History.png": "/eshop/static/media/Our-History.1c7d4a630bf5186ecaa0.png",
+    "static/media/shoping.webp": "/eshop/static/media/shoping.e2dabdf0402019b2686a.webp",
+    "static/media/eShop-Now.png": "/eshop/static/media/eShop-Now.c5f1152ae2b337ad8534.png",
+    "static/media/contact.png": "/eshop/static/media/contact.7ceeb78d61f32462506a.png",
+    "static/media/wish.png": "/eshop/static/media/wish.4e6e3828066f6f7d1a74.png",
+    "static/media/loader.gif": "/eshop/static/media/loader.a1a996746e5e48352c81.gif",
+    "static/media/Well-Rated-Products.png": "/eshop/static/media/Well-Rated-Products.6d31d5b76c8fe9d6fe84.png",
+    "static/media/About-Us.png": "/eshop/static/media/About-Us.9ef16ac2fef4cb498717.png",
+    "static/media/register.webp": "/eshop/static/media/register.46806c13f8292b8092ba.webp",
+    "static/media/bg-3.webp": "/eshop/static/media/bg-3.3311d1b8a7d48e632bed.webp",
+    "static/media/reset.webp": "/eshop/static/media/reset.357490cf4a477ee6c90a.webp",
+    "static/media/slick.svg": "/eshop/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/eshop/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/eshop/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/eshop/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/eshop/index.html",
+    "static/media/cartitems.svg": "/eshop/static/media/cartitems.668e6453a5bb97398fd2c1ac52229d57.svg",
+    "static/media/view2.webp": "/eshop/static/media/view2.54e0db95dd4acaccd7c4.webp",
+    "static/media/view1.webp": "/eshop/static/media/view1.af8eb376a601237ca143.webp",
+    "main.66bde8dd.css.map": "/eshop/static/css/main.66bde8dd.css.map",
+    "main.e898d54a.js.map": "/eshop/static/js/main.e898d54a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.66bde8dd.css",
+    "static/js/main.e898d54a.js"
+  ]
+}
