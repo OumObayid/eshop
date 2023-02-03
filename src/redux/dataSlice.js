@@ -140,7 +140,6 @@ const dataSlice = createSlice({
     //update user infos
     updateUserInfo: (state, action) => {
       const user = action.payload;
-      console.log('user :', user);
       const userinfos = state.userinfos;
 
       userinfos.id = user.id;

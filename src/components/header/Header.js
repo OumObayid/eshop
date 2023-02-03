@@ -18,7 +18,7 @@ import {
   addCategory,
   addProduct,
   datacategorys,
-   updateUserInfo,
+  updateUserInfo,
 } from "../../redux/dataSlice";
 import { removeActiveUser, setActiveUser } from "../../redux/authSlice";
 
@@ -27,7 +27,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import ShowOnLogin from "../showHiddenLinks/ShowOnLogin";
 import HiddenOnLogin from "../showHiddenLinks/HiddenOnLogin";
-
 
 const logo = (
   <div className={styles.logo} style={{ marginTop: "8px" }}>
@@ -47,15 +46,16 @@ const Header = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         //if user is logged
-        
+
         const fetchUser = async () => {
           let userinfos = {};
+          //query
           const q = query(
             collection(db, "users"),
             where("email", "==", user.email)
           );
 
-          const querySnapshot = await getDocs(q);        
+          const querySnapshot = await getDocs(q);
           querySnapshot.forEach((doc) => {
             userinfos = {
               id: doc.id,
@@ -71,19 +71,16 @@ const Header = () => {
               card: doc.data().card,
               orders: doc.data().orders,
             };
-          });  
-          console.log('userinfos :', userinfos);
-          dispatch(updateUserInfo(userinfos));          
+          });
+          dispatch(updateUserInfo(userinfos));
         };
-        fetchUser()
-        
-       
-       
+        //call function
+        fetchUser();
+
         //to memorize active user in redux store
         dispatch(
           setActiveUser({
             email: user.email,
-            userName: user.email,
             uid: user.uid,
           })
         );
@@ -93,10 +90,9 @@ const Header = () => {
         dispatch(removeActiveUser());
       }
     });
-  });
+  }, [dispatch]);
 
   useEffect(() => {
-    
     //get all categorys from firebase
     const getCategorys = async () => {
       //////////////// get data from firebase
@@ -120,7 +116,6 @@ const Header = () => {
       querySnapshot.forEach((doc) => {
         let fullDoc = { id: doc.id, ...doc.data() }; //concate id to document
         list.push(fullDoc); //put data in array list
-        console.log('fullDoc :', fullDoc);
         dispatch(addProduct(fullDoc)); // put doc in store redux
       });
     };
@@ -135,8 +130,6 @@ const Header = () => {
   //redux
 
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
-
-
 
   //display or hide menu
   const toggleMenu = (even) => {
@@ -200,10 +193,7 @@ const Header = () => {
               Shop
             </NavLink>
           </li>
-          <li
-            className="nav-item dropdown "
-            id="dropdown"            
-          >
+          <li className="nav-item dropdown " id="dropdown">
             <Link
               to="/"
               className=" dropdown-toggle"
@@ -251,10 +241,7 @@ const Header = () => {
             </span>
           </HiddenOnLogin>
           <ShowOnLogin>
-            <div
-              className={` ${styles.spanaccount}  ms-0 me-4 `}
-              id="dropdown"
-            >
+            <div className={` ${styles.spanaccount}  ms-0 me-4 `} id="dropdown">
               <Link
                 to="/"
                 className={`dropdown-toggle mt-5 ${styles.account} `}
@@ -304,12 +291,9 @@ const Header = () => {
                 </li>
               </ul>
             </div>
-          </ShowOnLogin>          
+          </ShowOnLogin>
           <div className="d-flex align-items-center">
-            <Link
-              to="/wishlist"
-              className={styles.cartHidden}
-            >
+            <Link to="/wishlist" className={styles.cartHidden}>
               <span className="ms-0 me-1 ">Wishlist</span>
               <i className="ri-heart-line fs-2"></i>
             </Link>
@@ -331,7 +315,7 @@ const Header = () => {
                   fontWeight: "bold",
                   textAlign: "center",
                   color: "#0A1930",
-                  marginBottom:"10px"
+                  marginBottom: "10px",
                 }}
               >
                 {totalQuantity}

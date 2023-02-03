@@ -72,6 +72,7 @@ const Register = () => {
 
   return (
     <Helmet title="register">
+
       {isLoading && <Loader />}
       <section className={`container ${styles.auth}`}>
         <Card>

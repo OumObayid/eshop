@@ -23,13 +23,14 @@ const Account = () => {
   ///////////////////first of all check if logged
   const navigate = useNavigate();
   const userinfo= useSelector(datauser);
-  
   useEffect(() => {
     setUser(userinfo);
     onAuthStateChanged(auth, (user) => {
       if (!user) {
         navigate("/login");
       }
+      else 
+      console.log('user :', user);
     });
     // console.log('userinforedux :', userinfo);
 
