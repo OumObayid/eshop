@@ -3,6 +3,7 @@ export { default as Login } from "./auth/Login";
 export { default as Register } from "./auth/Register";
 export { default as Reset } from "./auth/Reset";
 export { default as Verifiemail } from "./auth/Verifiemail";
+export { default as Confirmemail } from "./auth/Confirmemail";
 export { default as Checkout } from "./checkout/Checkout";
 export { default as CheckoutSuccess } from "./checkout/CheckoutSuccess";
 export { default as Home } from "./home/Home";

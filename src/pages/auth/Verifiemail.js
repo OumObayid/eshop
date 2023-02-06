@@ -1,19 +1,34 @@
-import React from 'react'
-import { useSearchParams } from 'react-router-dom';
-import {Helmet} from '../../components';
+import { Link } from "react-router-dom";
+import { Helmet } from "../../components";
 
 const Verifiemail = () => {
-
-  const [searchParams, setSearchParams] = useSearchParams();
-  const oobCode = searchParams.get("oobCode")
-  const apiKey = searchParams.get("apiKey")
-
+ 
   return (
     <Helmet title="verify email">
-      Verifiemail
-     <h2>{`oobCode:${oobCode}  apiKey:${apiKey}`}</h2>
-    </Helmet>
-  )
-}
+    <div class="container bg-white shadow w-75 mt-5">
+  <div class="row justify-content-center bg-white  mt-5">
+    <div class="col-md-12 col-lg-10">
+      <div class="d-md-flex">
+       
+        <div class="login-wrap mt-3 p-4 p-md-5">
+          <div class="form-group mb-5">
+            <h5 class="text-center">We have sent you a confirmation email.</h5>
+            <p class="text-center mt-5">
+              Please check your email and click on the link to verfiy your email
+              address.
+            </p>
+          </div>
+          <div class="formGroup text-center mb-5">
+            Go back to? <Link to="/login" class="redirect" >Sign in</Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-export default Verifiemail
+    </Helmet>
+  );
+};
+
+export default Verifiemail;

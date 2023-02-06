@@ -4,7 +4,10 @@ import registerImg from "../../assets/register.webp";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { auth, db } from "../../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
 import { Loader, Helmet, Card } from "../../components";
@@ -26,40 +29,40 @@ const Register = () => {
       setIsLoading(true);
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          //const user = userCredential.user;
-           // send verification mail.
-           userCredential.user.sendEmailVerification();
-           auth.signOut();
-           alert("Email sent");          
-          try {  
-            const ref = collection(db, "users");
-            const docRef = addDoc(ref, {
-              name: fullName,
-              email: email,
-              password: password,
-              tel: "",
-              address: "",
-              country: "",
-              region: "",
-              city: "",
-              postalCode: "",
-              orders: [],
-              card: {
-                idCard: "",
-                numberCard: "",
-                last4: "",
-                nameOnCard: "",
-                cvc: "",
-                brand: "",
-                exp_month: 0,
-                exp_year: 0,
-              },
-            });           
-            // console.log("Document written with ID: ", docRef.id);
-            
-          } catch (e) {
-            toast.error(`Error adding document: ${e.message}`);
-          }
+          const user = userCredential.user;
+          const ref = collection(db, "users");
+          const docRef = addDoc(ref, {
+            name: fullName,
+            email: email,
+            password: password,
+            tel: "",
+            address: "",
+            country: "",
+            region: "",
+            city: "",
+            postalCode: "",
+            orders: [],
+            card: {
+              idCard: "",
+              numberCard: "",
+              last4: "",
+              nameOnCard: "",
+              cvc: "",
+              brand: "",
+              exp_month: 0,
+              exp_year: 0,
+            },
+          })
+            .then((rep) => {
+              // send verification mail.
+              sendEmailVerification(user).then(() => {
+                auth.signOut();
+              });
+            })
+            .catch((e) => {
+              toast.error(`Error adding document: ${e.message}`);
+            });
+
           setIsLoading(false);
           navigate("/verifiemail");
         })
@@ -72,7 +75,6 @@ const Register = () => {
 
   return (
     <Helmet title="register">
-
       {isLoading && <Loader />}
       <section className={`container ${styles.auth}`}>
         <Card>

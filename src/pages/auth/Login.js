@@ -11,7 +11,7 @@ import { auth } from "../../firebase/config";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
-
+  const navigate = useNavigate();
   //check if user is connected
   onAuthStateChanged(auth, (user) => {   
     if (user) {
@@ -23,17 +23,19 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   //login
-  const navigate = useNavigate();
+ 
 
   const loginUser = (e) => {    
     e.preventDefault();
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // const user = userCredential.user;
+        const user = userCredential.user;
 
         setIsLoading(false);
-        navigate("/");
+        if (user.emailVerified) navigate("/account");
+        else navigate("/verifiemail");
+       
       })
       .catch((error) => {
         toast.error("email or password is wrong");

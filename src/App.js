@@ -23,7 +23,8 @@ import {
   Account,
   CheckoutSuccess,
   ProductDetail,
-  Wishlist
+  Wishlist,
+  Confirmemail
 } from "./pages";
 //toast
 import { ToastContainer } from "react-toastify";
@@ -58,6 +59,7 @@ function App() {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/reset" element={<Reset />} />
           <Route path="/verifiemail" element={<Verifiemail />} />
+          <Route path="/Confirmemail" element={<Confirmemail />} />
           <Route path="/productDetail/:id" element={<ProductDetail />} />
           <Route path="/account" element={<Account />} />        
           <Route path="*" element={<NotFound />} />     
