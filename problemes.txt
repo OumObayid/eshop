@@ -1,2 +1,0 @@
-orders apres payement n'est pas mise a jours s'il vient de redux 
-quand on fait une nouvelle order l'ancien disparait

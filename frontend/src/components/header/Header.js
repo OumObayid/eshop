@@ -301,7 +301,7 @@ const Header = () => {
                 className="align-middle"
                 style={{
                   paddingTop: "1px",
-                  background: "#F89B34",
+                  background: "red",
                   width: "14px",
                   height: "14px",
                   borderRadius: "50%",
@@ -310,7 +310,7 @@ const Header = () => {
                   fontWeight: "bold",
                   textAlign: "center",
                   color: "#0A1930",
-                  marginBottom: "10px",
+                  marginBottom: "20px",
                 }}
               >
                 {totalQuantity}
@@ -331,7 +331,7 @@ const Header = () => {
               className="align-middle"
               style={{
                 paddingTop: "1px",
-                background: "#F89B34",
+                background: "var(--color-danger)",
                 width: "17px",
                 height: "17px",
                 borderRadius: "50%",

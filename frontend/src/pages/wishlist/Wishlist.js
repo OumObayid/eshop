@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Col,Row } from "reactstrap";
 import { AccountMenu, Helmet, RatedProducts } from "../../components";
  import WishItem from "./WishItem";
 import { dataWishs } from "../../redux/wishSlice";
 import imgWish from "../../assets/wish.png"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase/config";
 const Wishlist = () => {
   const listwishs = useSelector(dataWishs);
-
+   const navigate = useNavigate();
+ useEffect(() => {    
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        navigate("/login");
+      } else console.log("user :", user);
+    });
+  }, [navigate]);
 
   return (
     <Helmet title="wishlist">

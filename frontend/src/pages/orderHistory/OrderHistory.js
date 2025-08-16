@@ -1,4 +1,4 @@
-import { Col, ListGroup, Row } from "reactstrap";
+import { Col, ListGroup, Row, Spinner } from "reactstrap";
 import { AccountMenu, Helmet, RatedProducts } from "../../components";
 import { onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
@@ -11,15 +11,21 @@ import { useSelector } from "react-redux";
 const OrderHistory = () => {
   const navigate = useNavigate();
   const userinfo = useSelector(datauser);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
         navigate("/login");
+      } else {
+        // simulate loading delay
+        setTimeout(() => setLoading(false), 500); 
       }
     });
-  
+
+    return () => unsubscribe();
   }, [navigate]);
+
   return (
     <Helmet title="OrderHistory">
       <section className="orders" id="orders">
@@ -36,7 +42,11 @@ const OrderHistory = () => {
 
             <ListGroup>
               <div className="cart__item-list border p-2">
-                {userinfo.orders.length > 0 ? (
+                {loading ? (
+                  <div className="text-center my-5">
+                    <Spinner color="primary" /> Loading your orders...
+                  </div>
+                ) : userinfo.orders.length > 0 ? (
                   userinfo.orders.map((item, index) => (
                     <div key={index}>
                       <OrderItem item={item} />
@@ -49,7 +59,7 @@ const OrderHistory = () => {
                     </div>
                   ))
                 ) : (
-                  <h4 className="text-center my-5">No Order did by you</h4>
+                  <h4 className="text-center my-5">No Order made by you</h4>
                 )}
               </div>
             </ListGroup>

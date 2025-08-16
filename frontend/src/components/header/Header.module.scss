@@ -5,7 +5,7 @@ header {
   transition: top 0.3s;
   width: 100%;
   background-color: var(--dark-blue);
-  color: #fff;
+  color: #ada8a8 !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,11 +18,11 @@ header {
 
 .logo a h3 {
   width: 25%;
-  color: #fff;
+  color: #ada8a8;
   cursor: pointer;
   cursor: arrow;
   span {
-    color: #f89b34;
+    color: var(--color-danger);
   }
 }
 
@@ -43,9 +43,9 @@ nav {
     li {
       margin: 0 5px;
       a {
-        color: #fff;
+        color: #ada8a8;
         &:hover {
-          color: #f89b34;
+          color: var(--color-danger) !important;
         }
       }
     }
@@ -60,18 +60,18 @@ nav {
     margin: 0 5px;
 
     p {
-      color: #fff;
+      color: #ada8a8;
     }
   }
 
   .links a {
     margin: 0 5px;
-    color: #fff;
+    color: #ada8a8;
     &:hover {
-      color: #f89b34;
+      color: var(--color-danger) !important;
     }
     &.active {
-      color: var(--color-danger);
+      color: var(--color-danger) !important;
     }
   }
 }
@@ -94,7 +94,7 @@ nav {
     bottom: -3px;
     width: 100%;
     height: 2px;
-    background-color: #fff;
+    background-color: #ada8a8;
   }
 }
 
@@ -103,14 +103,14 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: #ada8a8;
   font-size: 1.4rem;
   margin-right: 4px;
 }
 .cartHidden:hover,
 .wish:hover,
 .account:hover {
-  color: #f2b519 !important;
+  color: var(--color-danger)!important;
   cursor: pointer;
 }
 .account {

@@ -29,24 +29,42 @@ const OrderItem = ({ item }) => {
 
   return (
     <ListGroupItem className="my-0 border-0 cart__item">
-      {isOpen && <AlertDialogSlideSimple handleClose={closeBox} isOpen={isOpen} />}
+      {isOpen && (
+        <AlertDialogSlideSimple handleClose={closeBox} isOpen={isOpen} />
+      )}
 
       {item.items.map((product, index) => (
         <div key={product.id}>
           <div className="gap-4 contain">
+            {/* Image et titre du produit */}
             <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12 containt1">
               <Link to={`/ProductDetail/${product.id}`}>
-                <img src={product.img} className="imgcheckout" alt={product.title} />
+                <img
+                  src={product.img}
+                  className="imgcheckout"
+                  alt={product.title}
+                />
               </Link>
               <div>
                 <span className="bolderF fs-3">{product.title}</span>
                 <p className="d-flex align-items-center gap-5 fs-4">
-                  <span>${Number(product.price || 0).toLocaleString()}</span>x{" "}
-                  <span>{product.quantity}</span>
+                  <span style={{ color: "#1abc9c" , fontWeight: "bold" }}>
+                    ${Number(product.price || 0).toLocaleString()}
+                  </span>
+                  x <span>{product.quantity}</span>
+                </p>
+
+                {/* Date de la commande pour ce produit */}
+                <p className="text-center mt-2">
+                  <span className="fs-5">Order placed on: </span>
+                  <span className="orderdate fs-4">
+                    {new Date(product.orderDate).toDateString()}
+                  </span>
                 </p>
               </div>
             </div>
 
+            {/* Total et bouton "order again" */}
             <div className="fs-3 col-lg-2 col-md-2 col-sm-12 col-xs-12 row">
               <span className="bolderF d-flex justify-content-center text-wrap">
                 <span>Total : &nbsp;</span>
@@ -71,11 +89,6 @@ const OrderItem = ({ item }) => {
           )}
         </div>
       ))}
-
-      <p className="text-center mt-3">
-        <span className="fs-5">Order placed on: </span>
-        <span className="orderdate fs-4">{new Date(item.createdAt).toDateString()}</span>
-      </p>
     </ListGroupItem>
   );
 };

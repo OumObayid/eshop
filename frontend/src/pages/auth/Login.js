@@ -82,7 +82,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button type="submit" className="--btn --btn-block btn-warning">
+              <button   type="submit" className="--btn --btn-block btn-warning">
                 Login
               </button>
               <div className={styles.links}>
@@ -92,7 +92,7 @@ const Login = () => {
               <p>-- or --</p>
             </form>
             <button
-              className="--btn --btn-block --btn-danger"
+              className="--btn --btn-block btn-warning"
               onClick={loginWithG}
             >
               <CgGoogle color="#fff" /> &ensp;Login With Google

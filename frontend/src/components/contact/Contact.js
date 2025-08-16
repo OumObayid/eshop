@@ -1,7 +1,60 @@
-import React from "react";
+import { useState } from "react";
+import axios from "axios";
+
 import "./Contact.css";
 import contactTitle from "../../assets/contact.png";
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+
+  // Mise à jour des champs
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  // Envoi du message
+  // Soumission du formulaire
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess("");
+    setError("");
+    const BASE_URL_APIEMAIL = process.env.REACT_APP_API_BASE_URL_EMAIL;
+    console.log('BASE_URL_APIEMAIL :', BASE_URL_APIEMAIL);
+    const dataMessage = {     
+      to: process.env.REACT_APP_EMAIL_ADMIN,
+      subject: formData.subject,
+      message: `<p><strong>De :</strong> ${formData.email}</p>
+                <p><strong>Message :</strong></p>
+                <p>${formData.message}</p>`,
+    };
+        console.log('to:', dataMessage.to);
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL_APIEMAIL}/apiEmail/email/sendEmail.php`,
+        dataMessage);
+
+      if (response.data.success) {
+        setSuccess("Message envoyé avec succès !");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setError("Erreur lors de l'envoi du message.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Erreur de connexion au serveur.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <section className="contact" id="contact">
       <div className="mb-3 text-center">
@@ -67,11 +120,11 @@ const Contact = () => {
         <div className=" frmcart row d-flex justify-content-between pe-2">
           <div className="col-lg-6 mb-3">
             <form
+              onSubmit={handleSubmit}
               id="myForm"
               className="shadow col-12 mb-3 p-3"
               name="contact"
               method="post"
-              action="#"
             >
               <div className="form-row row">
                 <div className="input-icons col-md-6 form-group mb-4">
@@ -81,6 +134,9 @@ const Contact = () => {
                     name="name"
                     className="form-control name"
                     id="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
                     placeholder="Your Name"
                   />
                 </div>
@@ -91,6 +147,9 @@ const Contact = () => {
                     className="form-control email"
                     name="email"
                     id="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
                     placeholder="Your Email"
                   />
                 </div>
@@ -102,6 +161,8 @@ const Contact = () => {
                   className="form-control subject"
                   name="subject"
                   id="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   placeholder="Subject"
                 />
               </div>
@@ -111,6 +172,8 @@ const Contact = () => {
                   name="message"
                   id="message"
                   rows="7"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Your Message"
                 ></textarea>
               </div>
@@ -120,9 +183,11 @@ const Contact = () => {
                 className="text-center text-danger"
               ></div>
               <div className="text-center">
-                <button id="submit" type="submit">
-                  Send Message
+                <button id="submit" type="submit" disabled={loading}>
+                  {loading ? "sending..." : "Send Message"}
                 </button>
+                {success && <p style={{ color: "green" }}>{success}</p>}
+                {error && <p style={{ color: "red" }}>{error}</p>}
               </div>
             </form>
           </div>
