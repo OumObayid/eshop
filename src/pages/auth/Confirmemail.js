@@ -6,63 +6,66 @@ import { Helmet } from "../../components";
 
 const Confirmemail = () => {
   const navigate = useNavigate();
-  const [verified, setverified] = useState(true);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [verified, setVerified] = useState(true);
+  const [searchParams] = useSearchParams();
   const oobCode = searchParams.get("oobCode");
-    const auth = getAuth()
+  const auth = getAuth();
+
   useEffect(() => {
-    const restoredEmail = null;
-    checkActionCode(auth, oobCode).then((info) => {
-        // Get the restored email address.
-        restoredEmail = info['data']['email'];
-        console.log('restoredEmail :', restoredEmail);
-    
+    if (!oobCode) return;
+
+    let restoredEmail = null; // use let, pas const
+
+    // Vérifie le code et récupère l'email
+    checkActionCode(auth, oobCode)
+      .then((info) => {
+        restoredEmail = info['data']?.email || null;
+        console.log("restoredEmail:", restoredEmail);
+
+        // Applique le code de vérification
+        return applyActionCode(auth, oobCode);
       })
-      if (oobCode !== null) {
-        applyActionCode(auth, oobCode)
-          .then(() => {
-            setverified(true);
-          })
-          .catch((err) => {
-            setverified(false);
-          });
-      }
-    
-  });
+      .then(() => {
+        setVerified(true);
+      })
+      .catch((err) => {
+        console.error(err);
+        setVerified(false);
+      });
+  }, [auth, oobCode]);
 
   return (
-    <Helmet title="verify email">
-      <div class="container bg-white shadow w-75 mt-5">
-        <div class="row justify-content-center bg-white  mt-5">
-          <div class="col-md-12 col-lg-10 w-100">
-            <div class="d-md-flex">
+    <Helmet title="Verify Email">
+      <div style={{marginTop:"100px"}} className="container bg-white shadow w-75 ">
+        <div className="row justify-content-center bg-white ">
+          <div className="col-md-12 col-lg-10 w-100 ">
+            <div className="d-md-flex justify-content-center">
               <div
-                class="img"
+                className="img"
                 style={{ backgroundImage: "url(../../../../assets/)" }}
               ></div>
-              <div class="login-wrap mt-3 p-4 p-md-5">
+              <div className="login-wrap text-center mt-3 p-4 p-md-5">
                 {verified ? (
-                  <div class="form-group mb-5">
+                  <div className="form-group mb-5">
                     <h3>Your mail has been verified</h3>
                     <p>You can now sign in with your new account</p>
                   </div>
                 ) : (
-                  <div class="form-group mb-5">
-                    <h3>Your mail has not been verified!!!</h3>
-                    <p class="text-center mt-5">
-                      Please check your email and click on the link to verfiy
-                      your email address.
+                  <div className="form-group mb-3">
+                    <h4>Your mail has not been verified!!!</h4>
+                    <p className="text-center mt-5">
+                      Please check your email and click on the link to verify your email address.
                     </p>
                   </div>
                 )}
               </div>
             </div>
-            <div class="formGroup text-center mb-5">
-              <span className="fs-5"> Go back to?</span>{" "}
-              <Link to="/login" class="redirect">
+            <p className="formGroup text-center mb-5">
+              <span className="fs-5">Go back to?</span>{" "}
+              <Link to="/login" className="redirect">
                 Sign in
               </Link>
-            </div>
+            </p>
           </div>
         </div>
       </div>

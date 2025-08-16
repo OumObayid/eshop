@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   Helmet,
@@ -15,49 +15,55 @@ import "./ProductDetail.css";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import { useEffect } from "react";
 import { addWish, dataWishs, deleteWish } from "../../redux/wishSlice";
 import AlertDialogSlideWich from "../../components/alertDialogSlide/AlertDialogSlideWish";
 import { WhatsappShareButton } from "react-share";
+
 const ProductDetail = () => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  },[]);
-
   const { id } = useParams();
 
-  // for having a product details
-  let products = useSelector(dataProducts);
+  const products = useSelector(dataProducts);
   const productId = products.filter((item) => item.id === id);
   const product = productId[0];
-  // // for dialog box
-  const [isOpen, setisOpen] = useState(false);
-  const [isOpen2, setisOpen2] = useState(false);
-  // for wishlist
-  const [wishCount, setWishCount] = useState(product.wish);
+
+  // Hooks pour dialog boxes
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+
+  // Hooks pour wishlist
+  const [wishCount, setWishCount] = useState(product?.wish || 0);
   const [wish, setWish] = useState(false);
-  const WishedProd = useSelector(dataWishs).find(
-    (item) => item.id === product.id
+  const WishedProd = useSelector(dataWishs)?.find(
+    (item) => item.id === product?.id
   );
 
-  useEffect(() => {
-    console.log('isOpen2 :', isOpen2);
-
-    WishedProd !== undefined ? setWish(true) : setWish(false);
-  }, [WishedProd]);
-
-  //for review
+  // Hooks pour review
   const [tab, setTab] = useState("desc");
   const [enteredName, setEnteredName] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
   const [reviewMsg, setReviewMsg] = useState("");
-  // for having relatedProduct
-  const relatedProduct = products.filter(
-    (item) => item.category === product.category
-  );
 
+  // Scroll top au chargement
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // Synchronisation wishlist
+  useEffect(() => {
+    setWish(WishedProd !== undefined);
+  }, [WishedProd]);
+
+  // Early return si produit non trouvé
+  if (!product) {
+    return (
+      <Helmet title="Product-details">
+        <p>Loading...</p>
+      </Helmet>
+    );
+  }
+
+  // Ajouter au panier
   const addItem = () => {
     dispatch(
       cartActions.addItem({
@@ -67,21 +73,16 @@ const ProductDetail = () => {
         imgUrl: product.imgUrl,
       })
     );
-    setisOpen(true); //to open dialog box
+    setIsOpen(true);
   };
 
-  //to close dialog box via props
-  const closeBox = () => {
-    setisOpen(false);
-  };
-  //to close dialog box 2 via props
-  const closeBox2 = () => {
-    setisOpen2(false);
-  };
+  // Fermeture des dialog boxes
+  const closeBox = () => setIsOpen(false);
+  const closeBox2 = () => setIsOpen2(false);
 
+  // Soumission review
   const submitHandler = async (e) => {
     e.preventDefault();
-    //firebase
     const docRef = doc(db, "products", product.id);
     await updateDoc(docRef, {
       reviews: arrayUnion({
@@ -90,8 +91,7 @@ const ProductDetail = () => {
         review: reviewMsg,
       }),
     })
-      .then((docRef) => {
-        //redux
+      .then(() => {
         dispatch(
           productAddReview({
             id: id,
@@ -102,222 +102,183 @@ const ProductDetail = () => {
             },
           })
         );
-        //scroll to review
-        setTabRev();
+        setTab("rev");
         window.scrollTo(0, 410);
         setEnteredEmail("");
         setEnteredName("");
         setReviewMsg("");
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   };
 
-  //for slide products
-  const setTabRev = () => setTab("rev");
-
-  // wish
+  // Toggle wishlist
   const toggle_wish = async () => {
     const docRef = doc(db, "products", product.id);
-    let countwish = 0;
-    if (wish === true) {
-      countwish = wishCount - 1;
-      setWishCount(countwish);
-      dispatch(deleteWish(product.id));
-    } else {
-      countwish = wishCount + 1;
-      setWishCount(countwish);
-      dispatch(addWish(product));
-    }
-    await updateDoc(docRef, {
-      wish: countwish,
-    })
-      .then((docRef) => {})
-      .catch((error) => {
-        console.log("error.message :", error.message);
-      });
+    let countwish = wish ? wishCount - 1 : wishCount + 1;
+    setWishCount(countwish);
 
-      setisOpen2(true); //to open dialog box
+    if (wish) dispatch(deleteWish(product.id));
+    else dispatch(addWish(product));
+
+    await updateDoc(docRef, { wish: countwish }).catch((error) =>
+      console.log("error.message :", error.message)
+    );
+
+    setWish(!wish);
+    setIsOpen2(true);
   };
+
+  // Logo section
+  const logo = (
+    <div className="logo" style={{ marginTop: "8px" }}>
+      <Link to="/">
+        <h3>
+          e<span>Shop</span>.
+        </h3>
+      </Link>
+    </div>
+  );
 
   return (
     <Helmet title="Product-details">
-      {isOpen &&  (
-        <AlertDialogSlideSimple
-          handleClose={closeBox}
-          isOpen={isOpen}
-        />
-      )}
-       {isOpen2 && wish && (
-        <AlertDialogSlideWich
-          handleClose={closeBox2}
-          isOpen={isOpen2}          
-        />
+      {isOpen && <AlertDialogSlideSimple handleClose={closeBox} isOpen={isOpen} />}
+      {isOpen2 && wish && (
+        <AlertDialogSlideWich handleClose={closeBox2} isOpen={isOpen2} />
       )}
 
       <section>
-        <div>
-          <div className="mb-4">
-            <h2>Product Details</h2>
-            <Link to="/shop">
-              <FaLongArrowAltLeft />{" "}
-              <span className="back"> back to products</span>
-            </Link>
-          </div>
-          <Row>
-            <Row>
-              <Col lg="6" md="6" sm="12" xs="12" className=" mb-5 border">
-                <figure className="text-center">
-                  <img src={product.imgUrl} alt="" className="w-75 " />
-                </figure>
-              </Col>
-              <Col lg="6" md="6" sm="12" xs="12" className=" mb-5 ps-5">
-                <h2 className=" mb-3 border-2 border-bottom">
-                  {product.productName}
-                </h2>
-                <span className="price fw-bold fs-2 mb-5">
-                  ${Number(product.price).toLocaleString()}
-                </span>
-                <Stars actions={[product, setTabRev]} />
-                <p className="my-5 ">
-                  <span className="fw-bold me-3">Category: </span>
-                  <span className="fs-4">{product.category}</span>
-                </p>
-                <p className=" mb-5">
-                  <span className="fw-bold me-3">Brand: </span>
-                  <span className="fs-4">{product.brand}</span>
-                </p>
-                <div className="d-flex align-items-center">
-                  <button
-                    className="btnAll fs-4 px-5 me-4"
-                    onClick={addItem}
-                    color="warning"
-                  >
-                    Add to Cart
-                  </button>
-                  <span
-                    className="wish px-3 border rounded d-flex align-items-center"
-                    onClick={toggle_wish}
-                  >
-                    {wish === true ? (
-                      <i className="ri-heart-fill fs-2 me-3 text-danger"></i>
-                    ) : (
-                      <i className="heart1 ri-heart-line fs-2 me-3 "></i>
-                    )}
-                    <span className="fs-5">{wishCount}</span>
-                  </span>
-                  <span>
-                    <WhatsappShareButton  url={document.location.href}><i className="ri-share-fill fs-1 ms-4 share"></i></WhatsappShareButton>
-                  </span>
-                </div>
-              </Col>
-            </Row>
+        <div className="mb-4">
+          <h2>Product Details</h2>
+          <Link to="/shop">
+            <FaLongArrowAltLeft /> <span className="back"> back to products</span>
+          </Link>
+        </div>
 
-            <Col lg="12">
-              <div className="tabs d-flex align-items-center gap-5 border-bottom">
-                <h5
-                  className={`allviewlink  fs-4 ${
-                    tab === "desc" ? "tab__active" : ""
-                  }`}
-                  onClick={() => setTab("desc")}
-                >
-                  Description
-                </h5>
-                <h5
-                  className={`allviewlink  fs-4 ${
-                    tab === "rev" ? "tab__active" : ""
-                  }`}
-                  onClick={() => setTab("rev")}
-                >
-                  Review
-                </h5>
+        <Row>
+          <Col lg="6" md="6" sm="12" xs="12" className=" mb-5 border">
+            <figure className="text-center">
+              <img src={product.imgUrl} alt="" className="w-50 " />
+            </figure>
+          </Col>
+
+          <Col lg="6" md="6" sm="12" xs="12" className=" mb-5 ps-5">
+            <h2 className=" mb-3 border-2 border-bottom">{product.productName}</h2>
+            <span className="price fw-bold fs-2 mb-5">${Number(product.price).toLocaleString()}</span>
+            <Stars actions={[product, () => setTab("rev")]} />
+            <p className="my-5 ">
+              <span className="fw-bold me-3">Category: </span>
+              <span className="fs-4">{product.category}</span>
+            </p>
+            <p className=" mb-5">
+              <span className="fw-bold me-3">Brand: </span>
+              <span className="fs-4">{product.brand}</span>
+            </p>
+
+            <div className="d-flex align-items-center">
+              <button className="btnAll fs-4 px-5 me-4" onClick={addItem} color="warning">
+                Add to Cart
+              </button>
+              <span className="wish px-3 border rounded d-flex align-items-center" onClick={toggle_wish}>
+                {wish ? (
+                  <i className="ri-heart-fill fs-2 me-3 text-danger"></i>
+                ) : (
+                  <i className="heart1 ri-heart-line fs-2 me-3 "></i>
+                )}
+                <span className="fs-5">{wishCount}</span>
+              </span>
+              <span>
+                <WhatsappShareButton url={document.location.href}>
+                  <i className="ri-share-fill fs-1 ms-4 share"></i>
+                </WhatsappShareButton>
+              </span>
+            </div>
+          </Col>
+
+          <Col lg="12">
+            <div className="tabs d-flex align-items-center gap-5 border-bottom">
+              <h5 className={`allviewlink  fs-4 ${tab === "desc" ? "tab__active" : ""}`} onClick={() => setTab("desc")}>
+                Description
+              </h5>
+              <h5 className={`allviewlink  fs-4 ${tab === "rev" ? "tab__active" : ""}`} onClick={() => setTab("rev")}>
+                Review
+              </h5>
+            </div>
+
+            {tab === "desc" ? (
+              <div className="tab__content">
+                <p className="fs-4">{product.desc}</p>
               </div>
+            ) : (
+              <div className="tab__form my-3">
+                {product.reviews?.map((item, index) => (
+                  <div key={index} className=" border-bottom w-100 mb-2">
+                    <p className="user__name mb-0 fs-4">{item.name}</p>
+                    <p className="user__email fs-4">{item.email}</p>
+                    <p className="feedback__text fs-4">{item.review}</p>
+                  </div>
+                ))}
 
-              {tab === "desc" ? (
-                <div className="tab__content">
-                  <p className="fs-4">{product.desc}</p>
-                </div>
-              ) : (
-                <div className="tab__form my-3">
-                  {product.reviews
-                    ? product.reviews.map((item, index) => (
-                        <div key={index} className=" border-bottom w-100 mb-2">
-                          <p className="user__name mb-0 fs-4">{item.name}</p>
-                          <p className="user__email fs-4">{item.email}</p>
-                          <p className="feedback__text fs-4">{item.review}</p>
-                        </div>
-                      ))
-                    : ""}
-                  <hr
-                    style={{
-                      borderColor: "black",
-                      height: "1px",
-                    }}
-                  />
-                  <form className="form shadow " onSubmit={submitHandler}>
-                    <div className="form__group ">
-                      <input
-                        type="text"
-                        placeholder="Enter your name"
-                        value={enteredName}
-                        onChange={(e) => setEnteredName(e.target.value)}
-                        required
-                      />
-                    </div>
+                <hr style={{ borderColor: "black", height: "1px" }} />
 
-                    <div className="form__group">
-                      <input
-                        type="text"
-                        placeholder="Enter your email"
-                        value={enteredEmail}
-                        onChange={(e) => setEnteredEmail(e.target.value)}
-                        required
-                      />
-                    </div>
+                <form className="form shadow " onSubmit={submitHandler}>
+                  <div className="form__group ">
+                    <input
+                      type="text"
+                      placeholder="Enter your name"
+                      value={enteredName}
+                      onChange={(e) => setEnteredName(e.target.value)}
+                      required
+                    />
+                  </div>
 
-                    <div>
-                      <textarea
-                        className="w-100"
-                        rows={5}
-                        type="text"
-                        placeholder="Write your review"
-                        value={reviewMsg}
-                        onChange={(e) => setReviewMsg(e.target.value)}
-                        required
-                      />
-                    </div>
-                    <Button type="submit" className="fs-5 btnAll" color="warning">
-                      Add Review
-                    </Button>
-                  </form>
-                </div>
-              )}
-            </Col>
+                  <div className="form__group">
+                    <input
+                      type="text"
+                      placeholder="Enter your email"
+                      value={enteredEmail}
+                      onChange={(e) => setEnteredEmail(e.target.value)}
+                      required
+                    />
+                  </div>
 
-            <Col lg="12" className="mb-5 mt-4">
-              <h2 className="related__Product-title">
-                <span className="border-bottom"> You might also like</span>
-              </h2>
-            </Col>
-            <div className="container">
-              <SlideProduct className="container">
-                {relatedProduct.map((item) => (
-                  <Col
-                    lg="3"
-                    md="3"
-                    sm="12"
-                    xs="12"
-                    className="mb-4"
-                    key={item.id}
-                  >
+                  <div>
+                    <textarea
+                      className="w-100"
+                      rows={5}
+                      type="text"
+                      placeholder="Write your review"
+                      value={reviewMsg}
+                      onChange={(e) => setReviewMsg(e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <Button type="submit" className="fs-5 btnAll" color="warning">
+                    Add Review
+                  </Button>
+                </form>
+              </div>
+            )}
+          </Col>
+
+          <Col lg="12" className="mb-5 mt-4">
+            <h2 className="related__Product-title">
+              <span className="border-bottom"> You might also like</span>
+            </h2>
+          </Col>
+
+          <div className="container">
+            <SlideProduct className="container">
+              {products
+                .filter((item) => item.category === product.category)
+                .map((item) => (
+                  <Col lg="3" md="3" sm="12" xs="12" className="mb-4" key={item.id}>
                     <CardProduct item={item} />
                   </Col>
                 ))}
-              </SlideProduct>
-            </div>
-          </Row>
-        </div>
+            </SlideProduct>
+          </div>
+        </Row>
       </section>
     </Helmet>
   );

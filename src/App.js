@@ -39,8 +39,11 @@ function App() {
   return (
     <BrowserRouter>
       <ToastContainer />
+  <div className="app-container">
       <Header />
       {showCart && <Carts />}
+          <div className="content-wrapper">
+
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
@@ -59,12 +62,13 @@ function App() {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/reset" element={<Reset />} />
           <Route path="/verifiemail" element={<Verifiemail />} />
-          <Route path="/Confirmemail" element={<Confirmemail />} />
+          <Route path="/confirmemail" element={<Confirmemail />} />
           <Route path="/productDetail/:id" element={<ProductDetail />} />
           <Route path="/account" element={<Account />} />        
           <Route path="*" element={<NotFound />} />     
       </Routes>
-      <Footer />
+      </div>
+      <Footer /></div>
     </BrowserRouter>
   );
 }

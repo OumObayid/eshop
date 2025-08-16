@@ -161,7 +161,7 @@ const Header = () => {
   const categorylist = useSelector(datacategorys);
 
   return (
-    <header id="navbar">
+    <header id="navbar" className="px-5">
       <Link to="/">
         <div className={` ${styles.header}`}>{logo}</div>
         {/* <img src={logoEshop} alt="logo" style={{ width: "110px" }} /> */}
@@ -293,12 +293,10 @@ const Header = () => {
           </ShowOnLogin>
           <div className="d-flex align-items-center">
             <Link to="/wishlist" className={styles.cartHidden}>
-              <span className="ms-0 me-1 ">Wishlist</span>
               <i className="ri-heart-line fs-2"></i>
             </Link>
 
             <div className={styles.cartHidden} onClick={toggleCart}>
-              <span className="me-1 ">Cart</span>
               <CgShoppingCart size={24} className="mb-2" />
 
               <p
@@ -325,12 +323,11 @@ const Header = () => {
       </nav>
       <div className={styles["menu-icon"]}>
         <span className=" d-flex align-item-center ">
-          <Link to="/wishlist" className={styles.wish}>
-            <span className="me-1">Wishlist</span>
+          <Link to="/wishlist" className={styles.wish}>            
             <i className="ri-heart-line fs-1 "></i>
           </Link>
           <span className={styles.cartbask} to="/cart" onClick={toggleCart}>
-            Cart
+            
             <CgShoppingCart size={20} />
             <p
               className="align-middle"

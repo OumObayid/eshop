@@ -25,6 +25,28 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
+a:hover {
+  text-decoration: none;
+  color: var(--color-orange) !important
+}
+/* fichier App.css ou style global */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* prend toute la hauteur de l'écran */
+}
+
+.content-wrapper {
+  flex: 1; /* prend tout l'espace restant entre header et footer */
+}
+
+
+
 
 html {
   font-size: 10px;

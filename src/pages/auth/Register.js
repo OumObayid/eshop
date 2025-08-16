@@ -4,10 +4,7 @@ import registerImg from "../../assets/register.webp";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from "firebase/auth";
 import { auth, db } from "../../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
 import { Loader, Helmet, Card } from "../../components";
@@ -18,58 +15,57 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
 
-  const registerUser = (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
 
     if (password !== cpassword) {
-      toast.error("passwords do not mutch");
-    } else {
-      setIsLoading(true);
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          const ref = collection(db, "users");
-          const docRef = addDoc(ref, {
-            name: fullName,
-            email: email,
-            password: password,
-            tel: "",
-            address: "",
-            country: "",
-            region: "",
-            city: "",
-            postalCode: "",
-            orders: [],
-            card: {
-              idCard: "",
-              numberCard: "",
-              last4: "",
-              nameOnCard: "",
-              cvc: "",
-              brand: "",
-              exp_month: 0,
-              exp_year: 0,
-            },
-          })
-            .then((rep) => {
-              // send verification mail.
-              sendEmailVerification(user).then(() => {
-                auth.signOut();
-              });
-            })
-            .catch((e) => {
-              toast.error(`Error adding document: ${e.message}`);
-            });
+      toast.error("Passwords do not match");
+      return;
+    }
 
-          setIsLoading(false);
-          navigate("/verifiemail");
-        })
-        .catch((error) => {
-          toast.error(error.message);
-          setIsLoading(false);
-        });
+    try {
+      setIsLoading(true);
+
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      const usersRef = collection(db, "users");
+      await addDoc(usersRef, {
+        name: fullName,
+        email: email,
+        password: password,
+        tel: "",
+        address: "",
+        country: "",
+        region: "",
+        city: "",
+        postalCode: "",
+        orders: [],
+        card: {
+          idCard: "",
+          numberCard: "",
+          last4: "",
+          nameOnCard: "",
+          cvc: "",
+          brand: "",
+          exp_month: 0,
+          exp_year: 0,
+        },
+      });
+
+      // Send verification email
+      await sendEmailVerification(user);
+      await signOut(auth);
+
+      toast.success("Registration successful! Please check your email to verify your account.");
+      navigate("/verifiemail");
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -85,10 +81,8 @@ const Register = () => {
                 type="text"
                 placeholder="Full Name"
                 required
-                // obligatory: value  from useState et onChange to useState
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                //
               />
               <input
                 type="email"

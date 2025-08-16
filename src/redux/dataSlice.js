@@ -79,13 +79,13 @@ const dataSlice = createSlice({
         });
       }
     },
-    setWish : (state,action) => {
-    // const id = action.payload.id;
-    // const val = action.payload.val;
-    // const existingProduct = state.products.find((item) => item.id === id);
-    // if (existingProduct) {
-    //   existingProduct.wish= existingProduct.wish + val;
-    // }
+    setWish: (state, action) => {
+      // const id = action.payload.id;
+      // const val = action.payload.val;
+      // const existingProduct = state.products.find((item) => item.id === id);
+      // if (existingProduct) {
+      //   existingProduct.wish= existingProduct.wish + val;
+      // }
     },
     //add rating to product
     setRating: (state, action) => {
@@ -142,31 +142,36 @@ const dataSlice = createSlice({
       const user = action.payload;
       const userinfos = state.userinfos;
 
-      userinfos.id = user.id;
-      userinfos.name = user.name;
-      userinfos.email = user.email;
-      userinfos.tel = user.tel;
-      userinfos.address = user.address;
-      userinfos.country = user.country;
-      userinfos.region = user.region;
-      userinfos.city = user.city;
-      userinfos.postalCode = user.postalCode;
-      userinfos.password = user.password;
+      userinfos.id = user.id || "";
+      userinfos.name = user.name || "";
+      userinfos.email = user.email || "";
+      userinfos.tel = user.tel || "";
+      userinfos.address = user.address || "";
+      userinfos.country = user.country || "";
+      userinfos.region = user.region || "";
+      userinfos.city = user.city || "";
+      userinfos.postalCode = user.postalCode || "";
+      userinfos.password = user.password || "";
+
+      // initialiser la carte si undefined
       userinfos.card = {
-        idCard: user.card.idCard,
-        numberCard: user.card.numberCard,
-        last4: user.card.last4,
-        nameOnCard: user.card.nameOnCard,
-        cvc: user.card.cvc,
-        brand: user.card.brand,
-        exp_month: user.card.exp_month,
-        exp_year: user.card.exp_year,
-      }     
-      userinfos.orders=[];
-      user.orders.forEach((element) => {
-        userinfos.orders.push(element);
-      });
-     
+        idCard: user.card?.idCard || "",
+        numberCard: user.card?.numberCard || "",
+        last4: user.card?.last4 || "",
+        nameOnCard: user.card?.nameOnCard || "",
+        cvc: user.card?.cvc || "",
+        brand: user.card?.brand || "",
+        exp_month: user.card?.exp_month || 0,
+        exp_year: user.card?.exp_year || 0,
+      };
+
+      // initialiser orders si undefined
+      userinfos.orders = [];
+      if (Array.isArray(user.orders)) {
+        user.orders.forEach((element) => {
+          userinfos.orders.push(element);
+        });
+      }
     },
   },
 });
@@ -180,13 +185,12 @@ export const {
   deleteProduct,
   addCategory,
   deleteCategory,
-  updateUserInfo
+  updateUserInfo,
 } = dataSlice.actions;
 
 //export  states
 export const dataProducts = (state) => state.data.products;
 export const datacategorys = (state) => state.data.categorys;
 export const datauser = (state) => state.data.userinfos;
-
 
 export default dataSlice;
