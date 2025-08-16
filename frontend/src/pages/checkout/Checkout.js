@@ -13,7 +13,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "reactstrap";
 import { Helmet, Loader, Location } from "../../components";
-import "./Checkout.css";
+import "./checkout.css";
 import Carts from "../cart/Carts";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
