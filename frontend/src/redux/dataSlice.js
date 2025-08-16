@@ -14,9 +14,7 @@ const dataSlice = createSlice({
       tel: "",
       address: "",
       country: "",
-      region: "",
       city: "",
-      postalCode: "",
       password: "",
       card: {
         idCard: "",
@@ -148,9 +146,7 @@ const dataSlice = createSlice({
       userinfos.tel = user.tel || "";
       userinfos.address = user.address || "";
       userinfos.country = user.country || "";
-      userinfos.region = user.region || "";
       userinfos.city = user.city || "";
-      userinfos.postalCode = user.postalCode || "";
       userinfos.password = user.password || "";
 
       // initialiser la carte si undefined

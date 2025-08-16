@@ -5,61 +5,76 @@ import { ListGroupItem } from "reactstrap";
 import { AlertDialogSlideSimple } from "../../components";
 import { cartActions } from "../../redux/cartSlice";
 import "./OrderItem.css";
+
 const OrderItem = ({ item }) => {
-  const [isOpen, setisOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  const addItem = () => {
+
+  const addItem = (product) => {
+    console.log("Order again clicked for:", product);
     dispatch(
       cartActions.addItem({
-        id: item.id,
-        productName: item.title,
-        price: item.price,
-        imgUrl: item.img,
+        id: product.id,
+        productName: product.title,
+        price: product.price,
+        imgUrl: product.img,
       })
     );
-    setisOpen(true); //to open dialog box
+    setIsOpen(true);
   };
-  //to close dialog box via props
-  const closeBox = () => {
-    setisOpen(false);
-  };
-  return (
-    <ListGroupItem className="my-0  border-0 cart__item">
-      {isOpen && (
-        <AlertDialogSlideSimple
-          handleClose={closeBox}
-          isOpen={isOpen}
-        />
-      )}
-      <div className=" gap-4 contain">
-        <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12 containt1 ">
-          <Link to={`/ProductDetail/${item.id} `}>
-            <img src={item.img} className=" imgcheckout" alt="product-img" />
-          </Link>
-          <div>
-            <span className="bolderF fs-3  ">{item.title}</span>
-            <p className=" d-flex align-items-center gap-5 fs-4 ">
-              <span>${item.price.toLocaleString()}</span> x{" "}
-              <span>{item.quantity}</span>
-            </p>
-          </div>
-        </div>
-        <div className="fs-3 col-lg-2  col-md-2 col-sm-12 col-xs-12 row ">
-          <span className="bolderF d-flex justify-content-center text-wrap  d-flex ">
-            <span>Total : &nbsp;</span>
-            <span style={{ color: "#F49934" }}>
-              ${item.totalPrice.toLocaleString()}
-            </span>
-          </span>
 
-          <button className="btnAll fs-4 my-5" onClick={addItem} color="warning">
-            order again
-          </button>
+  const closeBox = () => setIsOpen(false);
+
+  console.log("OrderItem mounted with item:", item);
+
+  return (
+    <ListGroupItem className="my-0 border-0 cart__item">
+      {isOpen && <AlertDialogSlideSimple handleClose={closeBox} isOpen={isOpen} />}
+
+      {item.items.map((product, index) => (
+        <div key={product.id}>
+          <div className="gap-4 contain">
+            <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12 containt1">
+              <Link to={`/ProductDetail/${product.id}`}>
+                <img src={product.img} className="imgcheckout" alt={product.title} />
+              </Link>
+              <div>
+                <span className="bolderF fs-3">{product.title}</span>
+                <p className="d-flex align-items-center gap-5 fs-4">
+                  <span>${Number(product.price || 0).toLocaleString()}</span>x{" "}
+                  <span>{product.quantity}</span>
+                </p>
+              </div>
+            </div>
+
+            <div className="fs-3 col-lg-2 col-md-2 col-sm-12 col-xs-12 row">
+              <span className="bolderF d-flex justify-content-center text-wrap">
+                <span>Total : &nbsp;</span>
+                <span style={{ color: "#F49934" }}>
+                  ${Number(product.totalPrice || 0).toLocaleString()}
+                </span>
+              </span>
+
+              <button
+                className="btnAll fs-4 my-5"
+                onClick={() => addItem(product)}
+                color="warning"
+              >
+                order again
+              </button>
+            </div>
+          </div>
+
+          {/* séparateur stylisé sauf après le dernier produit */}
+          {index < item.items.length - 1 && (
+            <hr style={{ border: "1px solid #F49934", margin: "20px 0" }} />
+          )}
         </div>
-      </div>
-      <p className="text-center">
-        <span className="fs-5">order placed on : </span>{" "}
-        <span className="orderdate fs-4">{item.orderDate}</span>
+      ))}
+
+      <p className="text-center mt-3">
+        <span className="fs-5">Order placed on: </span>
+        <span className="orderdate fs-4">{new Date(item.createdAt).toDateString()}</span>
       </p>
     </ListGroupItem>
   );

@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import Styles from "./Styles";
 import { Form, Field } from "react-final-form";
 import Card from "./Card";
-
 import {
   formatCreditCardNumber,
   formatCVC,
   formatExpirationDate,
 } from "./cardUtils";
 import axios from "axios";
-
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "reactstrap";
 import { Helmet, Loader, Location } from "../../components";
@@ -18,12 +16,20 @@ import Carts from "../cart/Carts";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
 import { auth, db } from "../../firebase/config";
-import { collection, query, where, getDocs, doc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  updateDoc,
+  doc,
+  onSnapshot,
+  arrayUnion,
+} from "firebase/firestore";
 import { cartItems, clearCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
 import $ from "jquery";
 
-axios.defaults.baseURL = "http://localhost:4000/api/";
+axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function Checkout() {
@@ -42,65 +48,49 @@ function Checkout() {
   const [enterNumber, setEnterNumber] = useState("");
   const [enterAddress, setEnterAddress] = useState("");
   const [enterCountry, setEnterCountry] = useState("");
-  const [enterRegion, setEnterRegion] = useState("");
   const [enterCity, setEnterCity] = useState("");
-  const [postalCode, setPostalCode] = useState("");
   const [addressSaved, setAddressSaved] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser) {
-        navigate("/login");
-      } else {
-        const getUser = async (email) => {
-          const q = query(collection(db, "users"), where("email", "==", email));
-          const querySnapshot = await getDocs(q);
-          let userGet = {};
-          querySnapshot.forEach((docSnap) => {
-            userGet = {
-              id: docSnap.id,
-              name: docSnap.data().name,
-              email: docSnap.data().email,
-              password: docSnap.data().password,
-              tel: docSnap.data().tel,
-              address: docSnap.data().address,
-              country: docSnap.data().country,
-              region: docSnap.data().region,
-              city: docSnap.data().city,
-              postalCode: docSnap.data().postalCode,
-              orders: docSnap.data().orders || [],
-              card: docSnap.data().card || {
-                idCard: "",
-                numberCard: "",
-                last4: "",
-                nameOnCard: "",
-                cvc: "",
-                brand: "",
-                exp_month: 0,
-                exp_year: 0,
-              },
-            };
-          });
-          setUser(userGet);
-          if (userGet.address) setAddressSaved(true);
-        };
-        getUser(currentUser.email);
-      }
-    });
-  }, [navigate]);
-
   const cartProducts = useSelector(cartItems);
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
   const shippingCost = 30;
   const totalAmount = cartTotalAmount + Number(shippingCost);
 
   const changeCountry = (e) => setEnterCountry(e.target.value);
-  const changeRegion = (e) => setEnterRegion(e.target.value);
   const changeCity = (e) => setEnterCity(e.target.value);
+
+  // 🔹 Charger les infos utilisateur en temps réel
+  useEffect(() => {
+    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
+      if (!currentUser) {
+        navigate("/login");
+      } else {
+        const q = query(
+          collection(db, "users"),
+          where("email", "==", currentUser.email)
+        );
+
+        const unsubscribeSnapshot = onSnapshot(q, (querySnapshot) => {
+          let userGet = {};
+          querySnapshot.forEach((docSnap) => {
+            userGet = {
+              id: docSnap.id,
+              ...docSnap.data(),
+            };
+          });
+          setUser(userGet);
+          if (userGet.address) setAddressSaved(true);
+        });
+
+        return () => unsubscribeSnapshot();
+      }
+    });
+
+    return () => unsubscribeAuth();
+  }, [navigate]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -155,23 +145,39 @@ function Checkout() {
 
               const docRef = doc(db, "users", user.id);
 
+              // 🔹 Ajouter la commande sans écraser les anciennes
               await updateDoc(docRef, {
                 tel: enterNumber || user.tel,
                 address: enterAddress || user.address,
                 country: enterCountry || user.country,
-                region: enterRegion || user.region,
                 city: enterCity || user.city,
-                postalCode: postalCode || user.postalCode,
-                orders: orderlist,
+                orders: arrayUnion({
+                  id: Date.now(),
+                  items: orderlist,
+                  total: totalAmount,
+                  createdAt: new Date().toISOString(),
+                }),
                 card: {
                   idCard: res.data.payment_method || user.card?.idCard || "",
                   numberCard: values.numberCard || user.card?.numberCard || "",
-                  brand: res.data.payment_method_details?.card?.brand || user.card?.brand || "",
+                  brand:
+                    res.data.payment_method_details?.card?.brand ||
+                    user.card?.brand ||
+                    "",
                   nameOnCard: values.nameOnCard || user.card?.nameOnCard || "",
-                  exp_month: res.data.payment_method_details?.card?.exp_month || user.card?.exp_month || 0,
-                  exp_year: res.data.payment_method_details?.card?.exp_year || user.card?.exp_year || 0,
+                  exp_month:
+                    res.data.payment_method_details?.card?.exp_month ||
+                    user.card?.exp_month ||
+                    0,
+                  exp_year:
+                    res.data.payment_method_details?.card?.exp_year ||
+                    user.card?.exp_year ||
+                    0,
                   cvc: values.cvc || user.card?.cvc || "",
-                  last4: res.data.payment_method_details?.card?.last4 || user.card?.last4 || "",
+                  last4:
+                    res.data.payment_method_details?.card?.last4 ||
+                    user.card?.last4 ||
+                    "",
                 },
               });
 
@@ -220,14 +226,19 @@ function Checkout() {
               <Col lg="12" md="12">
                 <div className="checkout__bill">
                   <h5 className="d-flex align-items-center justify-content-between ">
-                    Subtotal: <span>${cartTotalAmount.toLocaleString()}</span>
+                    Subtotal:{" "}
+                    <span>
+                      ${Number(cartTotalAmount || 0).toLocaleString()}
+                    </span>
                   </h5>
                   <h5 className="d-flex align-items-center justify-content-between ">
-                    Shipping: <span>${shippingCost.toLocaleString()}</span>
+                    Shipping:{" "}
+                    <span>${Number(shippingCost || 0).toLocaleString()}</span>
                   </h5>
                   <div className="checkout__total">
                     <h4 className="d-flex align-items-center justify-content-between my-2">
-                      Total: <span>${totalAmount.toLocaleString()}</span>
+                      Total:{" "}
+                      <span>${Number(totalAmount || 0).toLocaleString()}</span>
                     </h4>
                   </div>
                 </div>
@@ -290,8 +301,8 @@ function Checkout() {
                         </p>
                         <p>{user.address}</p>
                         <p>
-                          {user.city}, {user.region}, {user.country},{" "}
-                          {user.postalCode}
+                          {user.city && `${user.city}, `} {user.country && user.country}
+                         
                         </p>
                       </>
                     ) : (
@@ -315,18 +326,10 @@ function Checkout() {
                           />
                         </div>
                         <Location
-                          action={[changeCountry, changeRegion, changeCity]}
+                          action={[changeCountry, changeCity]}
                           selected={null}
                         />
-                        <div className="form__group">
-                          <input
-                            className="fontfrm"
-                            type="number"
-                            placeholder="Postal code"
-                            required
-                            onChange={(e) => setPostalCode(e.target.value)}
-                          />
-                        </div>
+                       
                       </>
                     )}
                     <hr

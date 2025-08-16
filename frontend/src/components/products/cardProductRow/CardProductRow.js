@@ -5,34 +5,36 @@ import { useDispatch } from "react-redux";
 import "./CardProductRow.css";
 import Card from "../../card/Card";
 import { Row, Col } from "reactstrap";
-import {AlertDialogSlideSimple} from "../../../components";
-
+import { AlertDialogSlideSimple } from "../../../components";
 
 const CardProduct = (props) => {
-  
   const prod = props.item;
   const dispatch = useDispatch();
   // for dialog box
-  const [isOpen, setisOpen] = useState(false)
+  const [isOpen, setisOpen] = useState(false);
 
   const addToCart = () => {
     dispatch(cartActions.addItem(prod));
-    setisOpen(true)
+    setisOpen(true);
   };
 
- const closeBox = () => {
-    setisOpen(false)
-  }
-  
+  const closeBox = () => {
+    setisOpen(false);
+  };
+
   return (
     <Card>
-       {isOpen && (<AlertDialogSlideSimple handleClose={closeBox} isOpen={isOpen}/>)}
+      {isOpen && (
+        <AlertDialogSlideSimple handleClose={closeBox} isOpen={isOpen} />
+      )}
       <Row>
         <Col lg="4" md="4" sm="12" xs="12" className="border-2 border-end">
           <Link
             to={`/productDetail/${prod.id}`}
             className="justify-content-center row"
-          > <img src={prod.imgUrl} alt="imagee"/>
+          >
+            {" "}
+            <img src={prod.imgUrl} alt="imagee" />
           </Link>
         </Col>
         <Col lg="8" md="8" sm="12" xs="12">
@@ -43,7 +45,9 @@ const CardProduct = (props) => {
             xs="12"
             className="card-body justify-content-center row px-0"
           >
-            <h5 className="card-title text-danger text-left ">${prod.price.toLocaleString()}</h5>
+            <h5 className="card-title text-danger text-left ">
+              ${Number(prod.price || 0).toLocaleString()}
+            </h5>
             <p className="card-text text-left fs-4 text-truncate fw-bold">
               {prod.productName}
             </p>

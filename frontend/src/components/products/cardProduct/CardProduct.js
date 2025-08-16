@@ -6,7 +6,7 @@ import "./CardProduct.css";
 import { AlertDialogSlideSimple } from "../../../components";
 
 const CardProduct = (props) => {
-  const prod = props.item; 
+  const prod = props.item;
 
   const dispatch = useDispatch();
   // for dialog box
@@ -24,15 +24,11 @@ const CardProduct = (props) => {
   return (
     <div className="card m-1  shadow p-1 ">
       {isOpen && (
-        <AlertDialogSlideSimple
-          handleClose={closeBox}
-          isOpen={isOpen}
-         
-        />
+        <AlertDialogSlideSimple handleClose={closeBox} isOpen={isOpen} />
       )}
 
       <Link
-        to={ `/productDetail/${prod.id} `}
+        to={`/productDetail/${prod.id} `}
         className="justify-content-center row"
       >
         <img
@@ -43,7 +39,7 @@ const CardProduct = (props) => {
 
         <div className="card-body justify-content-center row">
           <h5 className="card-title text-danger text-center pt-4 h-25">
-            ${prod.price.toLocaleString()}
+            ${Number(prod.price ?? 0).toLocaleString()}
           </h5>
           <p className="card-text text-center fs-5 h-25 m-0 text-truncate ">
             {prod.productName}
@@ -51,7 +47,7 @@ const CardProduct = (props) => {
         </div>
       </Link>
       <button className="btn btnAll  fs-5  m-0 w-100" onClick={addToCart}>
-           Add to cart
+        Add to cart
       </button>
     </div>
   );

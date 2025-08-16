@@ -3,7 +3,7 @@ import React from "react";
 import "./CartItem.css";
 
 import { useDispatch } from "react-redux";
-import { addItem ,  deleteItem, removeItem } from "../../redux/cartSlice"
+import { addItem, deleteItem, removeItem } from "../../redux/cartSlice";
 const CartItem = ({ item }) => {
   const { id, title, price, img, quantity, totalPrice } = item;
 
@@ -30,12 +30,15 @@ const CartItem = ({ item }) => {
   return (
     <div className="border-0 cart__item">
       <div className="cart__item-info d-flex gap-4">
-        <div><img src={img} alt="product-img"/></div>
+        <div>
+          <img src={img} alt="product-img" />
+        </div>
         <div className="cart__product-info w-75 d-flex align-items-center gap-4 justify-content-between ">
           <div>
             <span className="fw-bolder fs-5 ">{title}</span>
             <p className="quantprice d-flex align-items-center gap-5 fs-5 ">
-              {quantity} x <span>${Number(totalPrice).toLocaleString()}</span>
+              {quantity} x{" "}
+              <span>${Number(totalPrice ?? 0).toLocaleString()}</span>
             </p>
             <div className=" d-flex align-items-center justify-content-between  increase__decrease-btn">
               <span className="increase__btn" onClick={incrementItem}>

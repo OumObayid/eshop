@@ -141,7 +141,9 @@ const ProductDetail = () => {
 
   return (
     <Helmet title="Product-details">
-      {isOpen && <AlertDialogSlideSimple handleClose={closeBox} isOpen={isOpen} />}
+      {isOpen && (
+        <AlertDialogSlideSimple handleClose={closeBox} isOpen={isOpen} />
+      )}
       {isOpen2 && wish && (
         <AlertDialogSlideWich handleClose={closeBox2} isOpen={isOpen2} />
       )}
@@ -150,7 +152,8 @@ const ProductDetail = () => {
         <div className="mb-4">
           <h2>Product Details</h2>
           <Link to="/shop">
-            <FaLongArrowAltLeft /> <span className="back"> back to products</span>
+            <FaLongArrowAltLeft />{" "}
+            <span className="back"> back to products</span>
           </Link>
         </div>
 
@@ -162,8 +165,12 @@ const ProductDetail = () => {
           </Col>
 
           <Col lg="6" md="6" sm="12" xs="12" className=" mb-5 ps-5">
-            <h2 className=" mb-3 border-2 border-bottom">{product.productName}</h2>
-            <span className="price fw-bold fs-2 mb-5">${Number(product.price).toLocaleString()}</span>
+            <h2 className=" mb-3 border-2 border-bottom">
+              {product.productName}
+            </h2>
+            <span className="price fw-bold fs-2 mb-5">
+              ${Number(product.price || 0).toLocaleString()}
+            </span>
             <Stars actions={[product, () => setTab("rev")]} />
             <p className="my-5 ">
               <span className="fw-bold me-3">Category: </span>
@@ -175,10 +182,17 @@ const ProductDetail = () => {
             </p>
 
             <div className="d-flex align-items-center">
-              <button className="btnAll fs-4 px-5 me-4" onClick={addItem} color="warning">
+              <button
+                className="btnAll fs-4 px-5 me-4"
+                onClick={addItem}
+                color="warning"
+              >
                 Add to Cart
               </button>
-              <span className="wish px-3 border rounded d-flex align-items-center" onClick={toggle_wish}>
+              <span
+                className="wish px-3 border rounded d-flex align-items-center"
+                onClick={toggle_wish}
+              >
                 {wish ? (
                   <i className="ri-heart-fill fs-2 me-3 text-danger"></i>
                 ) : (
@@ -196,10 +210,20 @@ const ProductDetail = () => {
 
           <Col lg="12">
             <div className="tabs d-flex align-items-center gap-5 border-bottom">
-              <h5 className={`allviewlink  fs-4 ${tab === "desc" ? "tab__active" : ""}`} onClick={() => setTab("desc")}>
+              <h5
+                className={`allviewlink  fs-4 ${
+                  tab === "desc" ? "tab__active" : ""
+                }`}
+                onClick={() => setTab("desc")}
+              >
                 Description
               </h5>
-              <h5 className={`allviewlink  fs-4 ${tab === "rev" ? "tab__active" : ""}`} onClick={() => setTab("rev")}>
+              <h5
+                className={`allviewlink  fs-4 ${
+                  tab === "rev" ? "tab__active" : ""
+                }`}
+                onClick={() => setTab("rev")}
+              >
                 Review
               </h5>
             </div>
@@ -272,7 +296,14 @@ const ProductDetail = () => {
               {products
                 .filter((item) => item.category === product.category)
                 .map((item) => (
-                  <Col lg="3" md="3" sm="12" xs="12" className="mb-4" key={item.id}>
+                  <Col
+                    lg="3"
+                    md="3"
+                    sm="12"
+                    xs="12"
+                    className="mb-4"
+                    key={item.id}
+                  >
                     <CardProduct item={item} />
                   </Col>
                 ))}

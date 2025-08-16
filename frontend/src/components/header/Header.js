@@ -65,9 +65,7 @@ const Header = () => {
               tel: doc.data().tel,
               address: doc.data().address,
               country: doc.data().country,
-              region: doc.data().region,
               city: doc.data().city,
-              postalCode: doc.data().postalCode,
               card: doc.data().card,
               orders: doc.data().orders,
             };

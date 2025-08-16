@@ -61,7 +61,7 @@ const Confirmemail = () => {
               </div>
             </div>
             <p className="formGroup text-center mb-5">
-              <span className="fs-5">Go back to?</span>{" "}
+              <span className="fs-4">Go back to?</span>{" "}
               <Link to="/login" className="redirect">
                 Sign in
               </Link>

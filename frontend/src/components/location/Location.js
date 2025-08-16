@@ -1,123 +1,110 @@
-import React, { useEffect } from "react";
-import $ from "jquery";
+import React, { useEffect, useState } from "react";
+import { Country, State, City } from "country-state-city";
 
-const Location = (props) => {
-  //from component CheckoutForm
-  const changeCountry=props.action[0];
-  const changeRegion=props.action[1];
-  const changeCity=props.action[2];
-  
-  //from component Accountedit
-  const selected=props.selected
-  
-  //for select Country Region City
+const Location = ({ action, selected }) => {
+  const changeCountry = action[0];
+  const changeRegion = action[1];
+  const changeCity = action[2];
+
+  const [countries, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+
+  const [countryName, setCountryName] = useState("");
+  const [stateName, setStateName] = useState("");
+  const [cityName, setCityName] = useState("");
+
+  // Initialisation des pays et sélection initiale
   useEffect(() => {
-    let BATTUTA_KEY = "00000000000000000000000000000000";
+    const allCountries = Country.getAllCountries();
+    setCountries(allCountries);
 
-    let dataCountry=[];
-    let  countryCode =""
-  // Populate country select box from battuta API
-  let urlforCountry =
-    "https://battuta.medunes.net/api/country/all/?key=" +
-    BATTUTA_KEY +
-    "&callback=?";
+    if (selected?.[0]) {
+      const selCountry = allCountries.find(c => c.name === selected[0]);
+      if (selCountry) setCountryName(selCountry.isoCode);
+    }
+  }, [selected]);
 
-  // EXTRACT JSON DATA.
-  
-  $.getJSON(urlforCountry, function(data) {
-   dataCountry=[...data] 
-    $.each(data, function(index, value) {
-      // APPEND OR INSERT DATA TO SELECT ELEMENT.
-      $("#country").append(
-        '<option value="' + value.name + '">' + value.name + "</option>"
-      );
-    });
-  });
-  // Country selected --> update region list .
-  $("#country").on("change", function() {
-    const country = dataCountry.find((value) => value.name===$("#country").val())   
-     countryCode = country.code;
-    // Populate country select box from battuta API
-    let urlforRegion =
-      "https://battuta.medunes.net/api/region/" +
-      countryCode +
-      "/all/?key=" +
-      BATTUTA_KEY +
-      "&callback=?";
-    $.getJSON(urlforRegion, function(data) {
-      $("#region option").remove();
-      $('#region').append('<option value="">Please select your region</option>');
-      $.each(data, function(index, value) {
-        // APPEND OR INSERT DATA TO SELECT ELEMENT.
-        $("#region").append(
-          '<option value="' + value.region + '">' + value.region + "</option>"
-        );
-      });
-    });
-  });
-  // Region selected --> updated city list
-  $("#region").on("change", function() {
-    // Populate country select box from battuta API
-    let region = $("#region").val();
-    let url =
-      "https://battuta.medunes.net/api/city/" +
-      countryCode +
-      "/search/?region=" +
-      region +
-      "&key=" +
-      BATTUTA_KEY +
-      "&callback=?";
-    $.getJSON(url, function(data) {
-      $("#city option").remove();
-      $('#city').append('<option value="">Please select your city</option>');
-      $.each(data, function(index, value) {
-        // APPEND OR INSERT DATA TO SELECT ELEMENT.
-        $("#city").append(
-          '<option value="' + value.city + '">' + value.city + "</option>"
-        );
-      });
-    });
-  });
+  // Charger les états à partir du countryName
+  useEffect(() => {
+    if (countryName) {
+      const allStates = State.getStatesOfCountry(countryName);
+      setStates(allStates);
 
+      if (selected?.[1]) {
+        const selState = allStates.find(s => s.name === selected[1]);
+        if (selState) setStateName(selState.isoCode);
+      } else {
+        setStateName("");
+      }
 
-  }, []);
+      setCities([]);
+      setCityName("");
+    } else {
+      setStates([]);
+      setCities([]);
+      setStateName("");
+      setCityName("");
+    }
+  }, [countryName, selected]);
 
-  
+  // Charger les villes à partir de stateName
+  useEffect(() => {
+    if (countryName && stateName) {
+      const allCities = City.getCitiesOfState(countryName, stateName);
+      setCities(allCities);
+
+      if (selected?.[2]) {
+        const selCity = allCities.find(c => c.name === selected[2]);
+        if (selCity) setCityName(selCity.name);
+      } else {
+        setCityName("");
+      }
+    } else {
+      setCities([]);
+      setCityName("");
+    }
+  }, [countryName, stateName, selected]);
+
   return (
     <>
       <div className="form__group fs-4">
         <select
-          className="form-select fontfrm "
-          id="country"
-          onChange={changeCountry}
-        >         
-          {(selected !==null)
-          ?<option selected>{selected[0]}</option>
-          :<option selected value=""> Country</option>}
+          className="form-select fontfrm"
+          value={selected?.[0] || countryName}
+          onChange={e => {
+            setCountryName(e.target.value);
+            changeCountry?.(e);
+          }}
+        >
+          <option value="">Country</option>
+          {countries.map(c => (
+            <option key={c.isoCode} value={c.name}>
+              {c.name}
+            </option>
+          ))}
         </select>
       </div>
-      <div className="form__group ">
+
+      <div className="form__group">
         <select
           className="form-select fontfrm"
-          id="region"
-          onChange={changeRegion}
-        >          
-          {(selected !==null)
-          ?<option selected>{selected[1]}</option>
-          :<option selected value="">Region</option>}
+          value={selected?.[1] || stateName}
+          onChange={e => {
+            setStateName(e.target.value);
+            changeRegion?.(e);
+          }}
+        >
+          <option value="">City</option>
+          {states.map(s => (
+            <option key={s.isoCode} value={s.name}>
+              {s.name}
+            </option>
+          ))}
         </select>
       </div>
-      <div className="form__group ">
-        <select
-          className="form-select fontfrm"
-          id="city"
-          onChange={changeCity}
-        >          
-          {(selected !==null)
-          ?<option selected>{selected[2]}</option>
-          :<option selected value="">City</option>}
-        </select>
-      </div>
+
+  
     </>
   );
 };

@@ -1,8 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth";
-import {
-  doc,
-  updateDoc, 
-} from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Col, Row } from "reactstrap";
@@ -22,20 +19,17 @@ const Account = () => {
   const [errorSuccessPassword, setErrorSuccessPassword] = useState([]);
   ///////////////////first of all check if logged
   const navigate = useNavigate();
-  const userinfo= useSelector(datauser);
+  const userinfo = useSelector(datauser);
   useEffect(() => {
     setUser(userinfo);
     onAuthStateChanged(auth, (user) => {
       if (!user) {
         navigate("/login");
-      }
-      else 
-      console.log('user :', user);
+      } else console.log("user :", user);
     });
     // console.log('userinforedux :', userinfo);
+  }, [navigate, userinfo]);
 
-  }, [navigate,userinfo]);
- 
   //  //handle for changing user informations
   const handleUpdateInfo = async (e) => {
     e.preventDefault();
@@ -45,9 +39,7 @@ const Account = () => {
       tel: user.tel,
       address: user.address,
       country: user.country,
-      region: user.region,
       city: user.city,
-      postalCode: user.postalCode,
     })
       //if all pass good
       .then((docRef) => {
@@ -75,9 +67,7 @@ const Account = () => {
   const changeCountry = (e) => {
     setUser({ ...user, country: e.target.value });
   };
-  const changeRegion = (e) => {
-    setUser({ ...user, region: e.target.value });
-  };
+  
   const changeCity = (e) => {
     setUser({ ...user, city: e.target.value });
   };
@@ -142,32 +132,30 @@ const Account = () => {
             <hr style={{ backgroundColor: "#434341", width: "100%" }} />
             <div className="content__info ">
               <Col lg="9" md="9" sm="12" xs="12" className="fs-4 border p-3">
-                <Col className="form__group pers  row">
+                <Col className="form__group pers  ">
                   <span className="fs-5">Full Name: </span>
                   <p className="fStyle">{user.name}</p>
                 </Col>
-                <Col className="flex_email_tel">
-                  <Col className="form__group pers row">
+               
+                  <Col className="form__group pers ">
                     <span className="fs-5">Email: </span>
                     <p className="fStyle">{user.email}</p>
                   </Col>
-                  <Col className="form__group pers row">
+                  <Col className="form__group pers ">
                     <span className="fs-5">Phone: </span>
                     <p className="fStyle">{user.tel}</p>
                   </Col>
-                </Col>
+            
 
-                <Col className="form__group pers row">
+                <Col className="form__group pers ">
                   <span className="fs-5">Address: </span>
                   <p className="fStyle">{user.address}</p>
                 </Col>
-                <Col className="pers row">
+                <Col className="pers ">
                   <span className="fs-5">Location: </span>
                   <p className="fStyle d-flex text-wrap">
-                    {user.postalCode}, &nbsp;
-                    {user.city}, &nbsp;
-                    {user.region}, &nbsp;
-                    {user.country}
+                    {user.city && `${user.city}, `}
+                    {user.country && user.country}
                   </p>
                 </Col>
               </Col>
@@ -307,28 +295,10 @@ const Account = () => {
                       />
                     </div>
                     <Location
-                      action={[changeCountry, changeRegion, changeCity]}
-                      selected={[
-                        user.country,
-                        user.region,
-                        user.city,
-                      ]}
+                      action={[changeCountry, changeCity]}
+                      selected={[user.country, user.city]}
                     />
-                    <div className="form__group">
-                      <input
-                        className="fontfrm"
-                        type="number"
-                        placeholder="Postal code"
-                        required
-                        value={user.postalCode}
-                        onChange={(e) =>
-                          setUser({
-                            ...user,
-                            postalCode: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
+                  
                     {errorSuccessPassword[1] ? (
                       <div className="fs-4 text-center text-success text-wrap overflow-hidden">
                         {errorSuccessPassword[0]}

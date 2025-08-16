@@ -5,20 +5,19 @@ import { cartUiActions } from "../../redux/cartUiSlice";
 import "./Carts.css";
 import Slide from "@mui/material/Slide";
 import imgCart from "../../assets/cartitems.svg";
-import {  useState } from "react";
+import { useState } from "react";
 const Carts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartProducts = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
-  const [slide, setSlide] = useState(true)
+  const [slide, setSlide] = useState(true);
   const closeCart = () => {
-    setSlide(!slide);    
-   const setInterv = setInterval(() => {
-    dispatch(cartUiActions.toggle());   
-    clearInterval(setInterv);
-   }, 1000);  
-
+    setSlide(!slide);
+    const setInterv = setInterval(() => {
+      dispatch(cartUiActions.toggle());
+      clearInterval(setInterv);
+    }, 1000);
   };
 
   const handleCheckout = () => {
@@ -111,7 +110,7 @@ const Carts = () => {
             <p className="my-auto">
               <span className="text-light fs-4">Subtotal :</span>
               <span className="  fw-bold fs-3">
-                ${totalAmount.toLocaleString()}
+                ${Number(totalAmount ?? 0).toLocaleString()}
               </span>
             </p>
             <button>

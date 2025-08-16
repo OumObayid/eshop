@@ -40,9 +40,7 @@ const Register = () => {
         tel: "",
         address: "",
         country: "",
-        region: "",
         city: "",
-        postalCode: "",
         orders: [],
         card: {
           idCard: "",

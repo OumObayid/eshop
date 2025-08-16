@@ -45,10 +45,7 @@ const WishItem = ({ item }) => {
   return (
     <ListGroupItem className="my-0  border-0 cart__item">
       {isOpen && (
-        <AlertDialogSlideSimple
-          handleClose={closeBox}
-          isOpen={isOpen}
-        />
+        <AlertDialogSlideSimple handleClose={closeBox} isOpen={isOpen} />
       )}
       <div className=" gap-4 contain">
         <div className="col-lg-8 col-md-8 d-flex align-items-center gap-4 justify-content-start ">
@@ -58,15 +55,19 @@ const WishItem = ({ item }) => {
           <div>
             <span className="bolderF fs-2  ">{productName}</span>
             <p className=" d-flex align-items-center gap-5 fs-3 ">
-              <span>${Number(price).toLocaleString()}</span>
+              <span>${Number(price || 0).toLocaleString()}</span>
             </p>
-            <p><span className="fwbld">Category: </span>{category}</p>
-            <p><span className="fwbld">Brand: </span>{brand}</p>
+            <p>
+              <span className="fwbld">Category: </span>
+              {category}
+            </p>
+            <p>
+              <span className="fwbld">Brand: </span>
+              {brand}
+            </p>
           </div>
         </div>
-        <div
-          className="col-lg-2 col-md-2 col-sm-12 col-xs-12"
-        >
+        <div className="col-lg-2 col-md-2 col-sm-12 col-xs-12">
           <div className="fs-3 contain2">
             <button
               className="fs-5  btnwish   my-5"
