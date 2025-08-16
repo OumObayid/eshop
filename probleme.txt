@@ -11,3 +11,5 @@
 scroll to contact from link contact in header
 
 erreur dans le console
+
+apres l'enregistrement au lieu la page tel il revient a home puis tel

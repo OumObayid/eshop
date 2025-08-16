@@ -11,7 +11,6 @@ export { default as ProductSearch } from "./products/ProductSearch";
 export { default as AlertDialogSlideSimple } from "./alertDialogSlide/AlertDialogSlideSimple";
 export { default as AlertDialogSlideWish } from "./alertDialogSlide/AlertDialogSlideWish";
 export { default as Scrolltop } from "./scrolltop/Scrolltop";
-export { default as Search } from "./search/Search";
 export { default as HiddenOnLogin } from "./showHiddenLinks/HiddenOnLogin";
 export { default as ShowOnLogin } from "./showHiddenLinks/ShowOnLogin";
 export { default as Slider } from "./slider/Slider";

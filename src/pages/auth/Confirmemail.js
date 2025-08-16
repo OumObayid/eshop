@@ -21,10 +21,10 @@ const Confirmemail = () => {
       if (oobCode !== null) {
         applyActionCode(auth, oobCode)
           .then(() => {
-            // setverified(true);
+            setverified(true);
           })
           .catch((err) => {
-            // setverified(false);
+            setverified(false);
           });
       }
     

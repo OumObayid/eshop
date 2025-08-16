@@ -120,7 +120,6 @@ const Header = () => {
       });
     };
     getProducts();
-    // get User data from firebase
   }, [dispatch]);
 
   //Code to show or hide menu in mobile

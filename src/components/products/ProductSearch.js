@@ -18,10 +18,10 @@ const ProductSearch = (props) => {
       <div className=" col-md-4 d-flex justify-content-center hidden-view  row mt-1 ">
         <img
           src={view1}
-          className=" imgView  "
+          className="imgView"
           role="button"
           alt="..."
-          onClick={NodisplayList}
+          onClick={NodisplayList} 
         />
         <img
           src={view2}

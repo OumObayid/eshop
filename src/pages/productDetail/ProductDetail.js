@@ -43,6 +43,8 @@ const ProductDetail = () => {
   );
 
   useEffect(() => {
+    console.log('isOpen2 :', isOpen2);
+
     WishedProd !== undefined ? setWish(true) : setWish(false);
   }, [WishedProd]);
 
@@ -150,8 +152,7 @@ const ProductDetail = () => {
        {isOpen2 && wish && (
         <AlertDialogSlideWich
           handleClose={closeBox2}
-          isOpen={isOpen2}
-          
+          isOpen={isOpen2}          
         />
       )}
 

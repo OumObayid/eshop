@@ -64,7 +64,8 @@ const Shop = () => {
   //////////////////   get categorys / brands
   useEffect(() => {
     //categorys
-
+    
+    console.log('rangeMaxVal :', rangeMaxVal);
     setAllCat(data);
     setLaptopCat(data.filter((product) => product.category === "Laptop"));
     setElectronicCat(
@@ -356,8 +357,7 @@ const Shop = () => {
   return (
     <Helmet title="shopping">
       <div className=" pt-5 d-flex justify-content-center row fs-5">
-        <ProductFilter
-          key={seed}
+        <ProductFilter key={seed}
           actions={[
             getAllCat,
             getLaptop,
@@ -375,8 +375,7 @@ const Shop = () => {
           ]}
         />
         <div className="col-md-9 p-0 ">
-          <ProductSearch
-            actions={[
+          <ProductSearch            actions={[
               countP,
               searchString,
               handlSearch,
