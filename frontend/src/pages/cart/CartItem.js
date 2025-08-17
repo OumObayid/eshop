@@ -1,15 +1,28 @@
-import React from "react";
+/*
+ * eShop Project
+ * Copyright (c) 2025 Oumaima El Obayid
+ *
+ * Description:
+ * CartItem component displays a single product in the shopping cart.
+ * It allows the user to increase, decrease, or delete the item from the cart.
+ * Uses Redux to manage cart state.
+ *
+ * License:
+ * MIT License
+ * https://opensource.org/licenses/MIT
+ */
+
 import { ListGroupItem } from "reactstrap";
-
 import "./CartItem.css";
-
 import { useDispatch } from "react-redux";
 import { addItem, deleteItem, removeItem } from "../../redux/cartSlice";
+
 const CartItem = ({ item }) => {
   const { id, title, price, img, quantity, totalPrice } = item;
 
   const dispatch = useDispatch();
 
+  // Increase the quantity of the item in the cart
   const incrementItem = () => {
     dispatch(
       addItem({
@@ -21,32 +34,34 @@ const CartItem = ({ item }) => {
     );
   };
 
+  // Decrease the quantity of the item in the cart
   const decreaseItem = () => {
     dispatch(removeItem(id));
   };
 
+  // Remove the item completely from the cart
   const deletItem = () => {
     dispatch(deleteItem(id));
   };
+
   return (
-    <ListGroupItem className="my-0  border-0 cart__item">
+    <ListGroupItem className="my-0 border-0 cart__item">
       <div className="cart__item-info d-flex gap-4">
         <div>
-          <img src={img} className=" imgcheckout" alt="product-img" />
+          <img src={img} className="imgcheckout" alt="product-img" />
         </div>
-        <div className="cart__product-info w-100 d-flex align-items-center gap-4 justify-content-between ">
+        <div className="cart__product-info w-100 d-flex align-items-center gap-4 justify-content-between">
           <div>
-            <span className="fw-bolder fs-4  ">{title}</span>
-            <p className=" d-flex align-items-center gap-5 fs-4 ">
-              {quantity} x{" "}
-              <span>${Number(totalPrice || 0).toLocaleString()}</span>
+            <span className="fw-bolder fs-4">{title}</span>
+            <p className="d-flex align-items-center gap-5 fs-4">
+              {quantity} x <span>${Number(totalPrice || 0).toLocaleString()}</span>
             </p>
-            <div className=" d-flex align-items-center justify-content-between  increase__decrease-btn">
+            <div className="d-flex align-items-center justify-content-between increase__decrease-btn">
               <span className="increase__btn" onClick={incrementItem}>
                 <i className="ri-add-line fw-bolder"></i>
               </span>
               <span className="quantity fw-bolder">{quantity}</span>
-              <span className="decrease__btn " onClick={decreaseItem}>
+              <span className="decrease__btn" onClick={decreaseItem}>
                 <i className="ri-subtract-line fw-bolder"></i>
               </span>
             </div>

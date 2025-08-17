@@ -1,4 +1,26 @@
-import React from "react";
+/*
+ * eShop Project
+ * Copyright (c) 2025 Oumaima El Obayid
+ *
+ * Description:
+ * ProductFilter component provides UI to filter products by category, brand, and price.
+ * Includes buttons for categories, a brand select dropdown, a price range slider,
+ * and a clear filters button.
+ *
+ * Props:
+ * - actions: array of functions and values controlling filter behavior:
+ *   [getAllCat, getLaptop, getElectro, getPhone, getFashion, clearFilter,
+ *    changeRange, setRange, rangeMinVal, rangeMaxVal, selectBrand,
+ *    valueSelectBrand, rangeValInit]
+ *
+ * Usage:
+ * <ProductFilter actions={[...functions and values...]} />
+ *
+ * License:
+ * MIT License
+ * https://opensource.org/licenses/MIT
+ */
+
 import { MdKeyboardArrowRight } from "react-icons/md";
 import MultiRangeSlider from "multi-range-slider-react";
 import "./ProductFilter.css";
@@ -19,61 +41,35 @@ const ProductFilter = (props) => {
     valueSelectBrand,
     rangeValInit,
   ] = [...props.actions];
+
   return (
     <div className="list-group col-lg-3 pe-lg-5 mb-5">
-      <div
-        className="list-group-item  fs-2 border-0 fw-bold"
-        aria-current="true"
-      >
+      {/* Category section */}
+      <div className="list-group-item fs-2 border-0 fw-bold" aria-current="true">
         Category
       </div>
-      <button
-        className="list-group-item list-group-item-action border-top-0 border-start-0 border-end-0 border-2 "
-        onClick={getAllCat}
-      >
-        <MdKeyboardArrowRight />
-        All
+      <button className="list-group-item list-group-item-action ..." onClick={getAllCat}>
+        <MdKeyboardArrowRight /> All
       </button>
-      <button
-        className="list-group-item list-group-item-action border-top-0 border-start-0 border-end-0 border-2 "
-        onClick={getLaptop}
-      >
-        <MdKeyboardArrowRight />
-        Laptop
+      <button className="list-group-item list-group-item-action ..." onClick={getLaptop}>
+        <MdKeyboardArrowRight /> Laptop
       </button>
-      <button
-        className="list-group-item list-group-item-action border-top-0 border-start-0 border-end-0 border-2 "
-        onClick={getElectro}
-      >
-        <MdKeyboardArrowRight />
-        Electronic
+      <button className="list-group-item list-group-item-action ..." onClick={getElectro}>
+        <MdKeyboardArrowRight /> Electronic
       </button>
-      <button
-        className="list-group-item list-group-item-action border-top-0 border-start-0 border-end-0 border-2"
-        onClick={getPhone}
-      >
-        <MdKeyboardArrowRight />
-        Phone
+      <button className="list-group-item list-group-item-action ..." onClick={getPhone}>
+        <MdKeyboardArrowRight /> Phone
       </button>
-      <button
-        className="list-group-item list-group-item-action border-top-0 border-start-0 border-end-0 border-2 "
-        onClick={getFashion}
-      >
-        <MdKeyboardArrowRight />
-        Fashion
+      <button className="list-group-item list-group-item-action ..." onClick={getFashion}>
+        <MdKeyboardArrowRight /> Fashion
       </button>
-      <div
-        className="list-group-item  fs-2 border-bottom-0 border-start-0 border-end-0 fw-bold"
-        aria-current="true"
-      >
+
+      {/* Brand section */}
+      <div className="list-group-item fs-2 border-bottom-0 border-start-0 border-end-0 fw-bold">
         Brand
       </div>
       <div className="mb-3">
-        <select
-          className="form-select form-select-lg"
-          onChange={selectBrand}
-          value={valueSelectBrand}
-        >
+        <select className="form-select form-select-lg" onChange={selectBrand} value={valueSelectBrand}>
           <option value="0">All</option>
           <option value="1">Lenovo</option>
           <option value="2">HP</option>
@@ -88,61 +84,39 @@ const ProductFilter = (props) => {
           <option value="11">Itel</option>
         </select>
       </div>
-      <div
-        className="list-group-item  fs-2 border-0 fw-bold"
-        aria-current="true"
-      >
-        Price
-      </div>
-      <div
-        className="list-group-item border-bottom-0 border-start-0 border-end-0"
-        aria-current="true"
-      >
-        <label className="form-label pb-2 d-flex justify-content-between justify-item-between ">
-          <div className="align-middle  py-1 d-flex justify-content-between ">
-            <div className="me-3">
-              Min: <span className="fw-bold">{rangeMinVal}</span>
-            </div>
-            <div>
-              Max: <span className="fw-bold">{rangeMaxVal}</span>
-            </div>
+
+      {/* Price section */}
+      <div className="list-group-item fs-2 border-0 fw-bold">Price</div>
+      <div className="list-group-item border-bottom-0 border-start-0 border-end-0">
+        <label className="form-label pb-2 d-flex justify-content-between">
+          <div className="align-middle py-1 d-flex justify-content-between">
+            <div className="me-3">Min: <span className="fw-bold">{rangeMinVal}</span></div>
+            <div>Max: <span className="fw-bold">{rangeMaxVal}</span></div>
           </div>
-          <button
-            type="button"
-            className="btn btn-warning btn-circle align-middle py-1 fw-bold"
-            onClick={setRange}
-          >
+          <button type="button" className="btn btn-warning btn-circle fw-bold" onClick={setRange}>
             Ok
           </button>
         </label>
+
+        {/* Price range slider */}
         <MultiRangeSlider
-          className="border border-0 my-5 "
+          className="border border-0 my-5"
           min={rangeValInit.min}
           max={rangeValInit.max}
           step={1}
-          minValue={rangeValInit.min} 
+          minValue={rangeValInit.min}
           maxValue={rangeValInit.max}
-          style={{
-            border: "none",
-            boxShadow: "none",
-            padding: "0",
-            backgroundColor: "#9fe5e1",
-          }}
+          style={{ border: "none", boxShadow: "none", padding: 0, backgroundColor: "#9fe5e1" }}
           label="false"
           ruler="false"
-          barInnerColor="#848484"  
+          barInnerColor="#848484"
           onChange={changeRange}
         />
       </div>
-      <div
-        className="list-group-item border-bottom-0 border-start-0 border-end-0 "
-        aria-current="true"
-      >
-        <button
-          type="button"
-          className="btn btn-warning fs-5"
-          onClick={clearFilter}
-        >
+
+      {/* Clear filters button */}
+      <div className="list-group-item border-bottom-0 border-start-0 border-end-0">
+        <button type="button" className="btn btn-warning fs-5" onClick={clearFilter}>
           Clear filters
         </button>
         <hr />

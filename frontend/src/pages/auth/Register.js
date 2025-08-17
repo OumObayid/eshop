@@ -1,4 +1,18 @@
-import React, { useState } from "react";
+/*
+ * eShop Project
+ * Copyright (c) 2025 Oumaima El Obayid
+ *
+ * Description:
+ * Register component allows users to create a new account using email and password.
+ * It uses Firebase Authentication to create the user, Firestore to store user data,
+ * and sends an email verification. Displays success or error messages using react-toastify.
+ *
+ * License:
+ * MIT License
+ * https://opensource.org/licenses/MIT
+ */
+
+import { useState } from "react";
 import styles from "./Auth.module.scss";
 import registerImg from "../../assets/register.webp";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,9 +32,11 @@ const Register = () => {
 
   const navigate = useNavigate();
 
+  // Function to register new user
   const registerUser = async (e) => {
     e.preventDefault();
 
+    // Check if passwords match
     if (password !== cpassword) {
       toast.error("Passwords do not match");
       return;
@@ -29,9 +45,11 @@ const Register = () => {
     try {
       setIsLoading(true);
 
+      // Create user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
+      // Add user data to Firestore
       const usersRef = collection(db, "users");
       await addDoc(usersRef, {
         name: fullName,
@@ -54,22 +72,22 @@ const Register = () => {
         },
       });
 
-      // Send verification email
+      // Send verification email and sign out
       await sendEmailVerification(user);
       await signOut(auth);
 
       toast.success("Registration successful! Please check your email to verify your account.");
-      navigate("/verifiemail");
+      navigate("/verifiemail"); // Redirect to email verification page
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.message); // Display any error
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // Stop loader
     }
   };
 
   return (
     <Helmet title="register">
-      {isLoading && <Loader />}
+      {isLoading && <Loader />} {/* Show loader while processing */}
       <section className={`container ${styles.auth}`}>
         <Card>
           <div className={styles.form}>

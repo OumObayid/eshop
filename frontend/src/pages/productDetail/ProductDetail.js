@@ -1,4 +1,17 @@
-import React, { useState, useEffect } from "react";
+/*
+ * eShop Project
+ * ProductDetail Component
+ *
+ * Description:
+ * Displays detailed information for a single product.
+ * Allows users to add the product to cart, toggle wishlist,
+ * submit reviews, and see related products.
+ *
+ * License:
+ * MIT License
+ */
+
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   Helmet,
@@ -19,42 +32,43 @@ import { addWish, dataWishs, deleteWish } from "../../redux/wishSlice";
 import AlertDialogSlideWich from "../../components/alertDialogSlide/AlertDialogSlideWish";
 import { WhatsappShareButton } from "react-share";
 
+// Component ProductDetail
 const ProductDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
+  // 🔹 Fetch product from Redux store
   const products = useSelector(dataProducts);
-  const productId = products.filter((item) => item.id === id);
-  const product = productId[0];
+  const product = products.find((item) => item.id === id);
 
-  // Hooks pour dialog boxes
+  // 🔹 Dialog boxes state
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
 
-  // Hooks pour wishlist
+  // 🔹 Wishlist state
   const [wishCount, setWishCount] = useState(product?.wish || 0);
   const [wish, setWish] = useState(false);
   const WishedProd = useSelector(dataWishs)?.find(
     (item) => item.id === product?.id
   );
 
-  // Hooks pour review
+  // 🔹 Review state
   const [tab, setTab] = useState("desc");
   const [enteredName, setEnteredName] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
   const [reviewMsg, setReviewMsg] = useState("");
 
-  // Scroll top au chargement
+  // Scroll top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Synchronisation wishlist
+  // Sync wishlist
   useEffect(() => {
     setWish(WishedProd !== undefined);
   }, [WishedProd]);
 
-  // Early return si produit non trouvé
+  // Early return if product not found
   if (!product) {
     return (
       <Helmet title="Product-details">
@@ -63,7 +77,7 @@ const ProductDetail = () => {
     );
   }
 
-  // Ajouter au panier
+  // 🔹 Add product to cart
   const addItem = () => {
     dispatch(
       cartActions.addItem({
@@ -76,11 +90,11 @@ const ProductDetail = () => {
     setIsOpen(true);
   };
 
-  // Fermeture des dialog boxes
+  // 🔹 Close dialog boxes
   const closeBox = () => setIsOpen(false);
   const closeBox2 = () => setIsOpen2(false);
 
-  // Soumission review
+  // 🔹 Submit product review
   const submitHandler = async (e) => {
     e.preventDefault();
     const docRef = doc(db, "products", product.id);
@@ -95,11 +109,7 @@ const ProductDetail = () => {
         dispatch(
           productAddReview({
             id: id,
-            review: {
-              name: enteredName,
-              email: enteredEmail,
-              review: reviewMsg,
-            },
+            review: { name: enteredName, email: enteredEmail, review: reviewMsg },
           })
         );
         setTab("rev");
@@ -111,10 +121,10 @@ const ProductDetail = () => {
       .catch((error) => console.log(error));
   };
 
-  // Toggle wishlist
+  // 🔹 Toggle wishlist
   const toggle_wish = async () => {
     const docRef = doc(db, "products", product.id);
-    let countwish = wish ? wishCount - 1 : wishCount + 1;
+    const countwish = wish ? wishCount - 1 : wishCount + 1;
     setWishCount(countwish);
 
     if (wish) dispatch(deleteWish(product.id));
@@ -128,7 +138,7 @@ const ProductDetail = () => {
     setIsOpen2(true);
   };
 
-  // Logo section
+  // 🔹 Logo section
   const logo = (
     <div className="logo" style={{ marginTop: "8px" }}>
       <Link to="/">
@@ -141,6 +151,7 @@ const ProductDetail = () => {
 
   return (
     <Helmet title="Product-details">
+      {/* Dialog boxes */}
       {isOpen && (
         <AlertDialogSlideSimple handleClose={closeBox} isOpen={isOpen} />
       )}
@@ -149,38 +160,41 @@ const ProductDetail = () => {
       )}
 
       <section>
+        {/* Product Header */}
         <div className="mb-4">
           <h2>Product Details</h2>
           <Link to="/shop">
-            <FaLongArrowAltLeft />{" "}
-            <span className="back"> back to products</span>
+            <FaLongArrowAltLeft /> <span className="back"> back to products</span>
           </Link>
         </div>
 
         <Row>
-          <Col lg="6" md="6" sm="12" xs="12" className=" mb-5 border">
+          {/* Product Image */}
+          <Col lg="6" md="6" sm="12" xs="12" className="mb-5 border">
             <figure className="text-center">
-              <img src={product.imgUrl} alt="" className="w-50 " />
+              <img src={product.imgUrl} alt="" className="w-50" />
             </figure>
           </Col>
 
-          <Col lg="6" md="6" sm="12" xs="12" className=" mb-5 ps-5">
-            <h2 className=" mb-3 border-2 border-bottom">
-              {product.productName}
-            </h2>
+          {/* Product Info */}
+          <Col lg="6" md="6" sm="12" xs="12" className="mb-5 ps-5">
+            <h2 className="mb-3 border-2 border-bottom">{product.productName}</h2>
             <span className="price fw-bold fs-2 mb-5">
               ${Number(product.price || 0).toLocaleString()}
             </span>
+
             <Stars actions={[product, () => setTab("rev")]} />
-            <p className="my-5 ">
+
+            <p className="my-5">
               <span className="fw-bold me-3">Category: </span>
               <span className="fs-4">{product.category}</span>
             </p>
-            <p className=" mb-5">
+            <p className="mb-5">
               <span className="fw-bold me-3">Brand: </span>
               <span className="fs-4">{product.brand}</span>
             </p>
 
+            {/* Cart and Wishlist Buttons */}
             <div className="d-flex align-items-center">
               <button
                 className="btnAll fs-4 px-5 me-4"
@@ -196,7 +210,7 @@ const ProductDetail = () => {
                 {wish ? (
                   <i className="ri-heart-fill fs-2 me-3 text-danger"></i>
                 ) : (
-                  <i className="heart1 ri-heart-line fs-2 me-3 "></i>
+                  <i className="heart1 ri-heart-line fs-2 me-3"></i>
                 )}
                 <span className="fs-5">{wishCount}</span>
               </span>
@@ -208,20 +222,17 @@ const ProductDetail = () => {
             </div>
           </Col>
 
+          {/* Tabs Section */}
           <Col lg="12">
             <div className="tabs d-flex align-items-center gap-5 border-bottom">
               <h5
-                className={`allviewlink  fs-4 ${
-                  tab === "desc" ? "tab__active" : ""
-                }`}
+                className={`allviewlink fs-4 ${tab === "desc" ? "tab__active" : ""}`}
                 onClick={() => setTab("desc")}
               >
                 Description
               </h5>
               <h5
-                className={`allviewlink  fs-4 ${
-                  tab === "rev" ? "tab__active" : ""
-                }`}
+                className={`allviewlink fs-4 ${tab === "rev" ? "tab__active" : ""}`}
                 onClick={() => setTab("rev")}
               >
                 Review
@@ -234,8 +245,9 @@ const ProductDetail = () => {
               </div>
             ) : (
               <div className="tab__form my-3">
+                {/* Reviews */}
                 {product.reviews?.map((item, index) => (
-                  <div key={index} className=" border-bottom w-100 mb-2">
+                  <div key={index} className="border-bottom w-100 mb-2">
                     <p className="user__name mb-0 fs-4">{item.name}</p>
                     <p className="user__email fs-4">{item.email}</p>
                     <p className="feedback__text fs-4">{item.review}</p>
@@ -244,8 +256,9 @@ const ProductDetail = () => {
 
                 <hr style={{ borderColor: "black", height: "1px" }} />
 
-                <form className="form shadow " onSubmit={submitHandler}>
-                  <div className="form__group ">
+                {/* Add Review Form */}
+                <form className="form shadow" onSubmit={submitHandler}>
+                  <div className="form__group">
                     <input
                       type="text"
                       placeholder="Enter your name"
@@ -254,7 +267,6 @@ const ProductDetail = () => {
                       required
                     />
                   </div>
-
                   <div className="form__group">
                     <input
                       type="text"
@@ -264,19 +276,16 @@ const ProductDetail = () => {
                       required
                     />
                   </div>
-
                   <div>
                     <textarea
                       className="w-100"
                       rows={5}
-                      type="text"
                       placeholder="Write your review"
                       value={reviewMsg}
                       onChange={(e) => setReviewMsg(e.target.value)}
                       required
                     />
                   </div>
-
                   <Button type="submit" className="fs-5 btnAll" color="warning">
                     Add Review
                   </Button>
@@ -285,9 +294,10 @@ const ProductDetail = () => {
             )}
           </Col>
 
+          {/* Related Products */}
           <Col lg="12" className="mb-5 mt-4">
             <h2 className="related__Product-title">
-              <span className="border-bottom"> You might also like</span>
+              <span className="border-bottom">You might also like</span>
             </h2>
           </Col>
 
@@ -296,14 +306,7 @@ const ProductDetail = () => {
               {products
                 .filter((item) => item.category === product.category)
                 .map((item) => (
-                  <Col
-                    lg="3"
-                    md="3"
-                    sm="12"
-                    xs="12"
-                    className="mb-4"
-                    key={item.id}
-                  >
+                  <Col lg="3" md="3" sm="12" xs="12" className="mb-4" key={item.id}>
                     <CardProduct item={item} />
                   </Col>
                 ))}
@@ -315,4 +318,5 @@ const ProductDetail = () => {
   );
 };
 
+// Export du component
 export default ProductDetail;

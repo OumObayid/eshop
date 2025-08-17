@@ -1,4 +1,19 @@
-import React, { useEffect, useState } from "react";
+/*
+ * eShop Project
+ * Copyright (c) 2025 Oumaima El Obayid
+ *
+ * Description:
+ * Checkout component handles the checkout process including user address,
+ * cart summary, and Stripe payment integration. It updates user info
+ * and orders in Firebase Firestore and Redux store, and clears the cart
+ * after successful payment.
+ *
+ * License:
+ * MIT License
+ * https://opensource.org/licenses/MIT
+ */
+
+import { useEffect, useState } from "react";
 import Styles from "./Styles";
 import { Form, Field } from "react-final-form";
 import Card from "./Card";
@@ -64,7 +79,7 @@ function Checkout() {
   const changeCountry = (e) => setEnterCountry(e.target.value);
   const changeCity = (e) => setEnterCity(e.target.value);
 
-  // 🔹 Charger les infos utilisateur en temps réel
+  // 🔹 Load user info in real-time from Firebase
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) {
@@ -94,11 +109,13 @@ function Checkout() {
     return () => unsubscribeAuth();
   }, [navigate]);
 
+  // 🔹 Adjust layout for mobile
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
     if (mediaQuery.matches) $(".products").removeClass("fixed");
   }, []);
 
+  // 🔹 Load Stripe script dynamically
   useEffect(() => {
     if (!window.document.getElementById("stripe-script")) {
       const s = window.document.createElement("script");
@@ -114,107 +131,135 @@ function Checkout() {
     }
   }, []);
 
+  // 🔹 Handle payment form submission
   const onSubmit = async (values) => {
-  setIsLoading(true);
-  await sleep(300);
-  try {
-    window.Stripe.card.createToken(
-      {
-        number: values.numberCard,
-        exp_month: values.expiry.split("/")[0],
-        exp_year: values.expiry.split("/")[1],
-        cvc: values.cvc,
-        name: values.nameOnCard,
-      },
-      async (status, response) => {
-        if (status === 200) {
-          try {
-            const res = await axios.post("stripe-payment", {
-              token: response,
-              email: user.email,
-              amount: totalAmount,
-            });
+    setIsLoading(true);
+    await sleep(300);
+    try {
+      window.Stripe.card.createToken(
+        {
+          number: values.numberCard,
+          exp_month: values.expiry.split("/")[0],
+          exp_year: values.expiry.split("/")[1],
+          cvc: values.cvc,
+          name: values.nameOnCard,
+        },
+        async (status, response) => {
+          if (status === 200) {
+            try {
+              const res = await axios.post("stripe-payment", {
+                token: response,
+                email: user.email,
+                amount: totalAmount,
+              });
 
-            const orderlist = cartProducts.map((item) => ({
-              id: item.id,
-              title: item.title,
-              img: item.img,
-              price: item.price,
-              quantity: item.quantity,
-              orderDate: new Date().toDateString(),
-              totalPrice: item.totalPrice,
-            }));
+              const orderlist = cartProducts.map((item) => ({
+                id: item.id,
+                title: item.title,
+                img: item.img,
+                price: item.price,
+                quantity: item.quantity,
+                orderDate: new Date().toDateString(),
+                totalPrice: item.totalPrice,
+              }));
 
-            const docRef = doc(db, "users", user.id);
+              const docRef = doc(db, "users", user.id);
 
-            // 🔹 Ajouter la commande dans Firebase
-            const newOrder = {
-              id: Date.now(),
-              items: orderlist,
-              total: totalAmount,
-              createdAt: new Date().toISOString(),
-            };
+              // 🔹 Add order to Firebase
+              const newOrder = {
+                id: Date.now(),
+                items: orderlist,
+                total: totalAmount,
+                createdAt: new Date().toISOString(),
+              };
 
-            await updateDoc(docRef, {
-              tel: enterNumber || user.tel,
-              address: enterAddress || user.address,
-              country: enterCountry || user.country,
-              city: enterCity || user.city,
-              orders: arrayUnion(newOrder),
-              card: {
-                idCard: res.data.payment_method || user.card?.idCard || "",
-                numberCard: values.numberCard || user.card?.numberCard || "",
-                brand: res.data.payment_method_details?.card?.brand || user.card?.brand || "",
-                nameOnCard: values.nameOnCard || user.card?.nameOnCard || "",
-                exp_month: res.data.payment_method_details?.card?.exp_month || user.card?.exp_month || 0,
-                exp_year: res.data.payment_method_details?.card?.exp_year || user.card?.exp_year || 0,
-                cvc: values.cvc || user.card?.cvc || "",
-                last4: res.data.payment_method_details?.card?.last4 || user.card?.last4 || "",
-              },
-            });
+              await updateDoc(docRef, {
+                tel: enterNumber || user.tel,
+                address: enterAddress || user.address,
+                country: enterCountry || user.country,
+                city: enterCity || user.city,
+                orders: arrayUnion(newOrder),
+                card: {
+                  idCard: res.data.payment_method || user.card?.idCard || "",
+                  numberCard: values.numberCard || user.card?.numberCard || "",
+                  brand:
+                    res.data.payment_method_details?.card?.brand ||
+                    user.card?.brand ||
+                    "",
+                  nameOnCard:
+                    values.nameOnCard || user.card?.nameOnCard || "",
+                  exp_month:
+                    res.data.payment_method_details?.card?.exp_month ||
+                    user.card?.exp_month ||
+                    0,
+                  exp_year:
+                    res.data.payment_method_details?.card?.exp_year ||
+                    user.card?.exp_year ||
+                    0,
+                  cvc: values.cvc || user.card?.cvc || "",
+                  last4:
+                    res.data.payment_method_details?.card?.last4 ||
+                    user.card?.last4 ||
+                    "",
+                },
+              });
 
-            // 🔹 Mettre à jour le store Redux
-            dispatch(updateUserInfo({
-              ...user,
-              tel: enterNumber || user.tel,
-              address: enterAddress || user.address,
-              country: enterCountry || user.country,
-              city: enterCity || user.city,
-              card: {
-                idCard: res.data.payment_method || user.card?.idCard || "",
-                numberCard: values.numberCard || user.card?.numberCard || "",
-                brand: res.data.payment_method_details?.card?.brand || user.card?.brand || "",
-                nameOnCard: values.nameOnCard || user.card?.nameOnCard || "",
-                exp_month: res.data.payment_method_details?.card?.exp_month || user.card?.exp_month || 0,
-                exp_year: res.data.payment_method_details?.card?.exp_year || user.card?.exp_year || 0,
-                cvc: values.cvc || user.card?.cvc || "",
-                last4: res.data.payment_method_details?.card?.last4 || user.card?.last4 || "",
-              },
-              orders: [...(user.orders || []), newOrder],
-            }));
+              // 🔹 Update Redux store
+              dispatch(
+                updateUserInfo({
+                  ...user,
+                  tel: enterNumber || user.tel,
+                  address: enterAddress || user.address,
+                  country: enterCountry || user.country,
+                  city: enterCity || user.city,
+                  card: {
+                    idCard: res.data.payment_method || user.card?.idCard || "",
+                    numberCard:
+                      values.numberCard || user.card?.numberCard || "",
+                    brand:
+                      res.data.payment_method_details?.card?.brand ||
+                      user.card?.brand ||
+                      "",
+                    nameOnCard:
+                      values.nameOnCard || user.card?.nameOnCard || "",
+                    exp_month:
+                      res.data.payment_method_details?.card?.exp_month ||
+                      user.card?.exp_month ||
+                      0,
+                    exp_year:
+                      res.data.payment_method_details?.card?.exp_year ||
+                      user.card?.exp_year ||
+                      0,
+                    cvc: values.cvc || user.card?.cvc || "",
+                    last4:
+                      res.data.payment_method_details?.card?.last4 ||
+                      user.card?.last4 ||
+                      "",
+                  },
+                  orders: [...(user.orders || []), newOrder],
+                })
+              );
 
+              setIsLoading(false);
+              dispatch(clearCart());
+              navigate("/checkoutSuccess");
+            } catch (error) {
+              setIsLoading(false);
+              toast.error(error.message);
+              console.log(error.message);
+            }
+          } else {
             setIsLoading(false);
-            dispatch(clearCart());
-            navigate("/checkoutSuccess");
-
-          } catch (error) {
-            setIsLoading(false);
-            toast.error(error.message);
-            console.log(error.message);
+            toast.error(response.error.message);
           }
-        } else {
-          setIsLoading(false);
-          toast.error(response.error.message);
         }
-      }
-    );
-  } catch (error) {
-    setIsLoading(false);
-    toast.error(error.message);
-    console.log("Stripe error:", error.message);
-  }
-};
-
+      );
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.message);
+      console.log("Stripe error:", error.message);
+    }
+  };
 
   const logo = (
     <div className="logo" style={{ marginTop: "8px" }}>
@@ -241,9 +286,7 @@ function Checkout() {
                 <div className="checkout__bill">
                   <h5 className="d-flex align-items-center justify-content-between ">
                     Subtotal:{" "}
-                    <span>
-                      ${Number(cartTotalAmount || 0).toLocaleString()}
-                    </span>
+                    <span>${Number(cartTotalAmount || 0).toLocaleString()}</span>
                   </h5>
                   <h5 className="d-flex align-items-center justify-content-between ">
                     Shipping:{" "}
@@ -316,7 +359,6 @@ function Checkout() {
                         <p>{user.address}</p>
                         <p>
                           {user.city && `${user.city}, `} {user.country && user.country}
-                         
                         </p>
                       </>
                     ) : (
@@ -343,7 +385,6 @@ function Checkout() {
                           action={[changeCountry, changeCity]}
                           selected={null}
                         />
-                       
                       </>
                     )}
                     <hr

@@ -1,9 +1,23 @@
+/*
+ * eShop Project
+ * dataSlice
+ *
+ * Description:
+ * Redux slice for managing the core data of the eShop.
+ * Handles products, categories, and user information.
+ * Provides actions for adding, deleting, and updating products, categories, reviews, ratings, and user info.
+ *
+ * License:
+ * MIT License
+ */
+
 import { createSlice } from "@reduxjs/toolkit";
 
-//////////////////////////////////////////////data
+// Main slice for products, categories, and user info
 const dataSlice = createSlice({
-  name: "data", //nom de l'etat
-  // contenu de l'etat
+  name: "data", // name of the state
+
+  // initial state
   initialState: {
     products: [],
     categorys: [],
@@ -31,8 +45,8 @@ const dataSlice = createSlice({
   },
 
   reducers: {
-    ///////////////////////PRODUCTS/////////////////////
-    //add products
+    /////////////////////// PRODUCTS /////////////////////
+    // Add a new product if it doesn't already exist
     addProduct: (state, action) => {
       const newProduct = action.payload;
       const existingItem = state.products.find(
@@ -57,62 +71,49 @@ const dataSlice = createSlice({
         });
       }
     },
-    //delete product
+
+    // Delete a product by ID
     deleteProduct: (state, action) => {
       const id = action.payload;
-      const existingProduct = state.products.find((item) => item.id === id);
-      if (existingProduct)
-        state.products = state.products.filter((item) => item.id !== id);
+      state.products = state.products.filter((item) => item.id !== id);
     },
-    //add review to product
+
+    // Add a review to a specific product
     productAddReview: (state, action) => {
-      const id = action.payload.id;
-      const itemReview = action.payload.review;
+      const { id, review } = action.payload;
       const existingProduct = state.products.find((item) => item.id === id);
       if (existingProduct) {
         existingProduct.reviews.push({
-          name: itemReview.name,
-          email: itemReview.email,
-          review: itemReview.review,
+          name: review.name,
+          email: review.email,
+          review: review.review,
         });
       }
     },
+
+    // Placeholder for updating wish count on a product
     setWish: (state, action) => {
-      // const id = action.payload.id;
-      // const val = action.payload.val;
-      // const existingProduct = state.products.find((item) => item.id === id);
-      // if (existingProduct) {
-      //   existingProduct.wish= existingProduct.wish + val;
-      // }
+      // Currently commented out
     },
-    //add rating to product
+
+    // Increment rating counters for a product
     setRating: (state, action) => {
       const { id, numRat } = action.payload;
       const existingProduct = state.products.find((item) => item.id === id);
       if (existingProduct) {
         switch (numRat) {
-          case 1:
-            existingProduct.rating1 += 1;
-            break;
-          case 2:
-            existingProduct.rating2 += 1;
-            break;
-          case 3:
-            existingProduct.rating3 += 1;
-            break;
-          case 4:
-            existingProduct.rating4 += 1;
-            break;
-          case 5:
-            existingProduct.rating5 += 1;
-            break;
-          default:
-            break;
+          case 1: existingProduct.rating1 += 1; break;
+          case 2: existingProduct.rating2 += 1; break;
+          case 3: existingProduct.rating3 += 1; break;
+          case 4: existingProduct.rating4 += 1; break;
+          case 5: existingProduct.rating5 += 1; break;
+          default: break;
         }
       }
     },
-    /////////////////////////CATEGORYS/////////////////////
-    //add category
+
+    /////////////////////// CATEGORIES /////////////////////
+    // Add a new category if it doesn't exist
     addCategory: (state, action) => {
       const newCategory = action.payload;
       const existingItem = state.categorys.find(
@@ -127,15 +128,15 @@ const dataSlice = createSlice({
         });
       }
     },
-    //delect category
+
+    // Delete a category by ID
     deleteCategory: (state, action) => {
       const id = action.payload;
-      const existingCategory = state.categorys.find((item) => item.id === id);
-      if (existingCategory)
-        state.categorys = state.categorys.filter((item) => item.id !== id);
+      state.categorys = state.categorys.filter((item) => item.id !== id);
     },
-    /////////////////////////USERINFOS/////////////////////
-    //update user infos
+
+    /////////////////////// USER INFOS /////////////////////
+    // Update user information
     updateUserInfo: (state, action) => {
       const user = action.payload;
       const userinfos = state.userinfos;
@@ -149,7 +150,7 @@ const dataSlice = createSlice({
       userinfos.city = user.city || "";
       userinfos.password = user.password || "";
 
-      // initialiser la carte si undefined
+      // Initialize card info if undefined
       userinfos.card = {
         idCard: user.card?.idCard || "",
         numberCard: user.card?.numberCard || "",
@@ -161,18 +162,13 @@ const dataSlice = createSlice({
         exp_year: user.card?.exp_year || 0,
       };
 
-      // initialiser orders si undefined
-      userinfos.orders = [];
-      if (Array.isArray(user.orders)) {
-        user.orders.forEach((element) => {
-          userinfos.orders.push(element);
-        });
-      }
+      // Initialize orders if undefined
+      userinfos.orders = Array.isArray(user.orders) ? [...user.orders] : [];
     },
   },
 });
 
-//export actions to call
+// Export actions to call in components
 export const {
   addProduct,
   setWish,
@@ -184,9 +180,10 @@ export const {
   updateUserInfo,
 } = dataSlice.actions;
 
-//export  states
+// Export selectors for state
 export const dataProducts = (state) => state.data.products;
 export const datacategorys = (state) => state.data.categorys;
 export const datauser = (state) => state.data.userinfos;
 
+// Export reducer
 export default dataSlice;

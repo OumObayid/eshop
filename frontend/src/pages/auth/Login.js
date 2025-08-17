@@ -1,3 +1,17 @@
+/*
+ * eShop Project
+ * Copyright (c) 2025 Oumaima El Obayid
+ *
+ * Description:
+ * Login component allows users to log in using email/password or Google.
+ * It uses Firebase Authentication to verify credentials and handle email verification.
+ * Displays success or error messages using react-toastify. Redirects logged-in users.
+ *
+ * License:
+ * MIT License
+ * https://opensource.org/licenses/MIT
+ */
+
 import { useState } from "react";
 import styles from "./Auth.module.scss";
 import loginImg from "../../assets/login.webp";
@@ -12,63 +26,65 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
   const navigate = useNavigate();
-  //check if user is connected
+
+  // Check if user is already connected and redirect to home
   onAuthStateChanged(auth, (user) => {   
     if (user) {
-      navigate("/");
+      navigate("/"); // Redirect to home if user is logged in
     } 
-  })
+  });
+
+  // States for email, password, and loading indicator
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  //login
- 
-
+  // Function to login user with email and password
   const loginUser = (e) => {    
     e.preventDefault();
     setIsLoading(true);
+
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
 
         setIsLoading(false);
-        if (user.emailVerified) navigate("/account");
-        else navigate("/verifiemail");
+        if (user.emailVerified) navigate("/account"); // Redirect to account if email verified
+        else navigate("/verifiemail"); // Otherwise redirect to email verification
        
       })
       .catch((error) => {
-        toast.error("email or password is wrong");
+        toast.error("email or password is wrong"); // Show error message
         setIsLoading(false);
       });
   };
 
-  //login with google
+  // Google provider for authentication
   const provider = new GoogleAuthProvider();
+
+  // Function to login with Google
   const loginWithG = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        //const user = result.user;
-
-        navigate("/");
+        navigate("/"); // Redirect after successful Google login
       })
       .catch((error) => {
-        toast.success(error.message);
+        toast.success(error.message); // Display any error message
       });
   };
 
   return (
     <Helmet title="login">
-      {isLoading && <Loader />}
-      <section className={`container ${styles.auth}`}>z
+      {isLoading && <Loader />} {/* Show loader when loading */}
+      <section className={`container ${styles.auth}`}>
         <div className={styles.img}>
-          <img  src={loginImg} alt="login" width={384} />
+          <img src={loginImg} alt="login" width={384} />
         </div>
         <Card>
           <div className={styles.form}>
             <h2>Login</h2>
             <form onSubmit={loginUser}>              
-                <input
+              <input
                 type="email"
                 placeholder="Email"
                 required
@@ -82,7 +98,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button   type="submit" className="--btn --btn-block btn-warning">
+              <button type="submit" className="--btn --btn-block btn-warning">
                 Login
               </button>
               <div className={styles.links}>

@@ -1,11 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { Country, State, City } from "country-state-city";
+/*
+ * eShop Project
+ * Copyright (c) 2025 Oumaima El Obayid
+ 
+ * Description:
+ * Composant Location permettant de sélectionner un pays, un état/région
+ * et une ville. Utilise la librairie "country-state-city" pour récupérer
+ * les données géographiques.
+ *
+ * Props:
+ * - action: tableau de fonctions [changeCountry, changeRegion, changeCity]
+ *           appelées à chaque changement de sélection
+ * - selected: tableau [countryName, cityName] pour définir
+ *             les valeurs initiales
+ *
+ * Usage:
+ * <Location action={[setCountry, setCity]} selected={["Morocco","Casablanca",""]} />
+ *
+ * License:
+ * MIT License
+ * You may freely use, modify, and distribute this file
+ * provided that the above copyright notice and this
+ * permission notice appear in all copies.
+ *
+ * MIT License details: https://opensource.org/licenses/MIT
+ */
+
+import { useEffect, useState } from "react";
+import { Country, State, City } from "country-state-city"; // Librairie pour pays, états et villes
 
 const Location = ({ action, selected }) => {
+  // Déstructuration des fonctions de mise à jour
   const changeCountry = action[0];
   const changeRegion = action[1];
   const changeCity = action[2];
 
+  // États locaux pour stocker les données
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
@@ -25,7 +54,7 @@ const Location = ({ action, selected }) => {
     }
   }, [selected]);
 
-  // Charger les états à partir du countryName
+  // Charger les états à partir du pays sélectionné
   useEffect(() => {
     if (countryName) {
       const allStates = State.getStatesOfCountry(countryName);
@@ -48,7 +77,7 @@ const Location = ({ action, selected }) => {
     }
   }, [countryName, selected]);
 
-  // Charger les villes à partir de stateName
+  // Charger les villes à partir de l'état sélectionné
   useEffect(() => {
     if (countryName && stateName) {
       const allCities = City.getCitiesOfState(countryName, stateName);
@@ -68,6 +97,7 @@ const Location = ({ action, selected }) => {
 
   return (
     <>
+      {/* Sélecteur de pays */}
       <div className="form__group fs-4">
         <select
           className="form-select fontfrm"
@@ -86,6 +116,7 @@ const Location = ({ action, selected }) => {
         </select>
       </div>
 
+      {/* Sélecteur d'état / région */}
       <div className="form__group">
         <select
           className="form-select fontfrm"
@@ -103,8 +134,6 @@ const Location = ({ action, selected }) => {
           ))}
         </select>
       </div>
-
-  
     </>
   );
 };

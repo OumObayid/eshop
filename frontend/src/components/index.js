@@ -1,3 +1,16 @@
+/*
+ * eShop Project
+ * Copyright (c) 2025 Oumaima El Obayid
+ *
+ * This file is part of the eShop application.
+ * It is licensed under the MIT License.
+ * You may freely use, modify, and distribute this file
+ * provided that the above copyright notice and this
+ * permission notice appear in all copies.
+ *
+ * MIT License details: https://opensource.org/licenses/MIT
+ */
+
 export { default as Header } from "./header/Header";
 export { default as Footer } from "./footer/Footer";
 export { default as Card } from "./card/Card";

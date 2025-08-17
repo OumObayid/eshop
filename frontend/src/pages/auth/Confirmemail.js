@@ -1,36 +1,50 @@
-import { applyActionCode, checkActionCode, getAuth } from "firebase/auth";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
-import { Helmet } from "../../components";
+/*
+ * eShop Project
+ * Copyright (c) 2025 Oumaima El Obayid
+ *
+ * Description:
+ * Confirmemail component allows users to verify their email address.
+ * It uses Firebase Authentication to check the verification code and 
+ * apply the email confirmation. Displays success or failure messages.
+ *
+ * License:
+ * MIT License
+ * https://opensource.org/licenses/MIT
+ */
+
+import { applyActionCode, checkActionCode, getAuth } from "firebase/auth"; // Firebase Auth functions
+import { useEffect, useState } from "react"; // React hooks
+import { Link, useNavigate } from "react-router-dom"; // navigation and links
+import { useSearchParams } from "react-router-dom"; // get URL parameters
+import { Helmet } from "../../components"; // for page title
 
 const Confirmemail = () => {
-  const navigate = useNavigate();
-  const [verified, setVerified] = useState(true);
-  const [searchParams] = useSearchParams();
-  const oobCode = searchParams.get("oobCode");
-  const auth = getAuth();
+  const navigate = useNavigate(); // navigation hook
+  const [verified, setVerified] = useState(true); // email verification state
+  const [searchParams] = useSearchParams(); // hook to read URL parameters
+  const oobCode = searchParams.get("oobCode"); // Firebase verification code
+  const auth = getAuth(); // Firebase Auth instance
 
   useEffect(() => {
-    if (!oobCode) return;
+    if (!oobCode) return; // do nothing if code is missing
 
-    let restoredEmail = null; // use let, pas const
+    let restoredEmail = null; // store the email associated with the code
 
-    // Vérifie le code et récupère l'email
+    // check the code and retrieve the email
     checkActionCode(auth, oobCode)
       .then((info) => {
         restoredEmail = info['data']?.email || null;
         console.log("restoredEmail:", restoredEmail);
 
-        // Applique le code de vérification
+        // apply the code to confirm the email
         return applyActionCode(auth, oobCode);
       })
       .then(() => {
-        setVerified(true);
+        setVerified(true); // success
       })
       .catch((err) => {
         console.error(err);
-        setVerified(false);
+        setVerified(false); // failure
       });
   }, [auth, oobCode]);
 
@@ -42,15 +56,17 @@ const Confirmemail = () => {
             <div className="d-md-flex justify-content-center">
               <div
                 className="img"
-                style={{ backgroundImage: "url(../../../../assets/)" }}
+                style={{ backgroundImage: "url(../../../../assets/)" }} // decorative image
               ></div>
               <div className="login-wrap text-center mt-3 p-4 p-md-5">
                 {verified ? (
+                  // email verified
                   <div className="form-group mb-5">
                     <h3>Your mail has been verified</h3>
                     <p>You can now sign in with your new account</p>
                   </div>
                 ) : (
+                  // email not verified
                   <div className="form-group mb-3">
                     <h4>Your mail has not been verified!!!</h4>
                     <p className="text-center mt-5">
@@ -60,6 +76,7 @@ const Confirmemail = () => {
                 )}
               </div>
             </div>
+            {/* Link back to login */}
             <p className="formGroup text-center mb-5">
               <span className="fs-4">Go back to?</span>{" "}
               <Link to="/login" className="redirect">
@@ -73,4 +90,4 @@ const Confirmemail = () => {
   );
 };
 
-export default Confirmemail;
+export default Confirmemail; // export component

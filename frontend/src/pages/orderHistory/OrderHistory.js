@@ -1,3 +1,18 @@
+/*
+ * eShop Project
+ * Copyright (c) 2025 Oumaima El Obayid
+ *
+ * Description:
+ * OrderHistory component displays the logged-in user's order history.
+ * It checks if the user is authenticated and shows a loading spinner
+ * while fetching the orders. Displays the list of orders or a message
+ * if no orders exist.
+ *
+ * License:
+ * MIT License
+ * https://opensource.org/licenses/MIT
+ */
+
 import { Col, ListGroup, Row, Spinner } from "reactstrap";
 import { AccountMenu, Helmet, RatedProducts } from "../../components";
 import { onAuthStateChanged } from "firebase/auth";
@@ -13,13 +28,14 @@ const OrderHistory = () => {
   const userinfo = useSelector(datauser);
   const [loading, setLoading] = useState(true);
 
+  // 🔹 Check if user is authenticated
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
         navigate("/login");
       } else {
         // simulate loading delay
-        setTimeout(() => setLoading(false), 500); 
+        setTimeout(() => setLoading(false), 500);
       }
     });
 

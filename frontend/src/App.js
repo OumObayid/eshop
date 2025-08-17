@@ -1,74 +1,49 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-//components
-import {
-  Header,
-  Footer,
-  Carts,
-  CategoryDetail,  
-} from "./components";
-//pages
-import {
-  Home,
-  Shop,
-  Terms,
-  Policy,
-  OrderHistory,
-  Admin,
-  Login,
-  Register,
-  Reset,
-  Verifiemail,
-  NotFound,
-  Checkout,
-  Account,
-  CheckoutSuccess,
-  ProductDetail,
-  Wishlist,
-  Confirmemail
-} from "./pages";
-//toast
+/*
+ * eShop Project
+ * App
+ *
+ * Description:
+ * Main entry point of the React application.
+ * Wraps the app with BrowserRouter for routing.
+ * Displays header, footer, cart modal, and page content.
+ * Integrates Toast notifications.
+ *
+ * License:
+ * MIT License
+ */
+
+import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-//data
 import { useSelector } from "react-redux";
+
+import { Header, Footer, Carts } from "./components";
 import { cartIsVisible } from "./redux/cartUiSlice";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  //to show or hide cart
+  // get cart visibility state from Redux
   const showCart = useSelector(cartIsVisible);
 
   return (
     <BrowserRouter>
+      {/* Toast notifications */}
       <ToastContainer />
-  <div className="app-container">
-      <Header />
-      {showCart && <Carts />}
-          <div className="content-wrapper">
-
-      <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/eshop" element={<Home />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/categoryDetail/:id" element={<CategoryDetail />} />
-          <Route path="/policy" element={<Policy />} />
-          <Route path="/cart" element={<Carts />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/checkoutSuccess" element={<CheckoutSuccess />} />
-          <Route path="/order-history" element={<OrderHistory />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/reset" element={<Reset />} />
-          <Route path="/verifiemail" element={<Verifiemail />} />
-          <Route path="/confirmemail" element={<Confirmemail />} />
-          <Route path="/productDetail/:id" element={<ProductDetail />} />
-          <Route path="/account" element={<Account />} />        
-          <Route path="*" element={<NotFound />} />     
-      </Routes>
+      
+      <div className="app-container">
+        {/* Header */}
+        <Header />
+        
+        {/* Cart modal */}
+        {showCart && <Carts />}
+        
+        {/* Main content */}
+        <div className="content-wrapper">
+          <AppRoutes />
+        </div>
+        
+        {/* Footer */}
+        <Footer />
       </div>
-      <Footer /></div>
     </BrowserRouter>
   );
 }

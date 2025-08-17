@@ -1,10 +1,25 @@
+/*
+ * eShop Project
+ * Wishlist Redux Slice
+ *
+ * Description:
+ * Manages the user's wishlist items.
+ * Allows adding and removing products from the wishlist.
+ * Persists wishlist in localStorage.
+ *
+ * License:
+ * MIT License
+ */
+
 import { createSlice } from "@reduxjs/toolkit";
 
+// Load wishlist items from localStorage if available
 const items =
   localStorage.getItem("wishItems") !== null
     ? JSON.parse(localStorage.getItem("wishItems"))
     : [];
 
+// Helper function to save wishlist to localStorage
 const setItemStorage = (item) => {
   localStorage.setItem("wishItems", JSON.stringify(item));
 };
@@ -12,58 +27,47 @@ const setItemStorage = (item) => {
 const wishSlice = createSlice({
   name: "wish",
   initialState: {
-    wishItems: items,
+    wishItems: items, // Current wishlist items
   },
 
   reducers: {
-    addWish: (state, action) => {  
+    // Add a new item to wishlist
+    addWish: (state, action) => {
       const newWish = action.payload;
-      if (state.wishItems !== []) {
-        const existingItem = state.wishItems.find(
-          (item) => item.id === newWish.id
-        );
-        if (!existingItem) {
-          state.wishItems.push({
-            id: newWish.id,
-            productName: newWish.productName,
-            imgUrl: newWish.imgUrl,
-            price : newWish.price,
-            category : newWish.category,
-            brand : newWish.brand,
-          });
-        }
-      } else {
+      const existingItem = state.wishItems.find(
+        (item) => item.id === newWish.id
+      );
+      if (!existingItem) {
         state.wishItems.push({
           id: newWish.id,
           productName: newWish.productName,
           imgUrl: newWish.imgUrl,
-          price : newWish.price,
-          category : newWish.category,
-          brand : newWish.brand,
+          price: newWish.price,
+          category: newWish.category,
+          brand: newWish.brand,
         });
       }
+      // Save updated wishlist to localStorage
       setItemStorage(state.wishItems.map((item) => item));
     },
-    //delete product
+
+    // Remove an item from wishlist
     deleteWish: (state, action) => {
       const id = action.payload;
-      const existingItem = state.wishItems.find((item) => item.id === id);
-
-      if (existingItem) {
-        state.wishItems = state.wishItems.filter((item) => item.id !== id);
-      }
-
+      state.wishItems = state.wishItems.filter((item) => item.id !== id);
+      // Save updated wishlist to localStorage
       setItemStorage(state.wishItems.map((item) => item));
     },
   },
 });
 
-//exporter les actions a appeler
+// Export actions to call in components
 export const { addWish, deleteWish } = wishSlice.actions;
-//select variables of state
+
+// Selector to get wishlist items from state
 export const dataWishs = (state) => state.wish.wishItems;
 
+// Export all actions
 export const wishActions = wishSlice.actions;
-
 
 export default wishSlice;

@@ -1,40 +1,57 @@
+/*
+ * eShop Project
+ * Copyright (c) 2025 Oumaima El Obayid
+ *
+ * Description:
+ * RatedProducts component displays the top 10 highest rated products.
+ * It fetches products from the Redux store, calculates their average rating
+ * from individual rating counts, sorts them, and renders them in a slider.
+ *
+ * Usage:
+ * <RatedProducts />
+ *
+ * License:
+ * MIT License
+ * https://opensource.org/licenses/MIT
+ */
+
 import { Row, Col } from "reactstrap";
-import {SlideProduct,CardProduct}  from "../../../components";
-import WellRatedProducts from "../../../assets/Well-Rated-Products.png"
+import { SlideProduct, CardProduct } from "../../../components";
+import WellRatedProducts from "../../../assets/Well-Rated-Products.png";
 import { dataProducts } from "../../../redux/dataSlice";
 import { useSelector } from "react-redux";
 
 const RatedProducts = () => {
-  
+  // Get all products from Redux store
   const products = useSelector(dataProducts);
-  const arrayForSort = [...products]
 
-  const sortProducts  = arrayForSort.sort((a, b) => {
-    const a1 = a.rating1;
-    const a2 = a.rating2;
-    const a3 = a.rating3;
-    const a4 = a.rating4;
-    const a5 = a.rating5;
+  // Create a copy for sorting
+  const arrayForSort = [...products];
+
+  // Sort products by average rating
+  const sortProducts = arrayForSort.sort((a, b) => {
     const ratingA =
-      (a1 * 1 + a2 * 2 + a3 * 3 + a4 * 4 + a5 * 5) / (a1 + a2 + a3 + a4 + a5);
-    const b1 = b.rating1;
-    const b2 = b.rating2;
-    const b3 = b.rating3;
-    const b4 = b.rating4;
-    const b5 = b.rating5;
+      (a.rating1 * 1 + a.rating2 * 2 + a.rating3 * 3 + a.rating4 * 4 + a.rating5 * 5) /
+      (a.rating1 + a.rating2 + a.rating3 + a.rating4 + a.rating5);
+
     const ratingB =
-      (b1 * 1 + b2 * 2 + b3 * 3 + b4 * 4 + b5 * 5) / (b1 + b2 + b3 + b4 + b5);
+      (b.rating1 * 1 + b.rating2 * 2 + b.rating3 * 3 + b.rating4 * 4 + b.rating5 * 5) /
+      (b.rating1 + b.rating2 + b.rating3 + b.rating4 + b.rating5);
+
     return ratingA < ratingB ? 1 : ratingA > ratingB ? -1 : 0;
   });
 
-const productRatedTop=sortProducts.slice(0,10)
-
+  // Take the top 10 highest rated products
+  const productRatedTop = sortProducts.slice(0, 10);
 
   return (
     <div className="container ratedmargTop">
+      {/* Header image */}
       <div className="text-center">
-        <img src={WellRatedProducts} style={{height:"4.7rem"}} alt="Well Rated Products" />
+        <img src={WellRatedProducts} style={{ height: "4.7rem" }} alt="Well Rated Products" />
       </div>
+
+      {/* Separator line */}
       <div className="d-flex justify-content-center">
         <hr
           style={{
@@ -45,13 +62,15 @@ const productRatedTop=sortProducts.slice(0,10)
           }}
         />
       </div>
-      <Row className=" d-flex justify-content-between mb-5">
-      <SlideProduct >
-        {productRatedTop.map((product,index) => (
-          <Col lg="3" md="3" sm="12" xs="12" className="mb-3" key={index}>
-            <CardProduct item={product} />
-          </Col>
-        ))}
+
+      {/* Products slider */}
+      <Row className="d-flex justify-content-between mb-5">
+        <SlideProduct>
+          {productRatedTop.map((product, index) => (
+            <Col lg="3" md="3" sm="12" xs="12" className="mb-3" key={index}>
+              <CardProduct item={product} />
+            </Col>
+          ))}
         </SlideProduct>
       </Row>
     </div>
