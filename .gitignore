@@ -1,0 +1,5 @@
+apiEmail/config.env
+# Node / React
+node_modules/
+build/
+.env
