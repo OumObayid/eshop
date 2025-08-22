@@ -31,6 +31,7 @@ Avec des filtres avancés et une recherche rapide, les utilisateurs trouvent exa
 ---
 
 🚀 Démo
+
 👉 [Lien vers le site](https://eshop.oumportfolio.com/)
 
 ---
@@ -38,16 +39,22 @@ Avec des filtres avancés et une recherche rapide, les utilisateurs trouvent exa
 ## 🛠 Installation et configuration
 
 ### 1️⃣ Cloner le projet
+
+---
 git clone https://github.com/OumObayid/eshop.git
+---
 
 ### 2️⃣ Installer le front-end (React)
+---
 cd eshop
-
 npm install
 npm start
+---
+
 - Accessible à : `http://localhost:3000`
 
 ### 3️⃣ Configurer le back-end (PHP / XAMPP)
+
 1. Copier `apiEmail/config/config_mail.php` **propre**  
 2. Créer `apiEmail/config.env` avec la clé Sendinblue :  
 SENDINBLUE_API_KEY=ta_clef_envoyée_par_Brevo
@@ -66,25 +73,10 @@ SENDINBLUE_API_KEY=ta_clef_envoyée_par_Brevo
 - Passer commande et payer via carte bancaire  
 - Créer un compte pour suivre l’historique et gérer les favoris  
 
-### Exemple de code PHP pour la config mail
-`<?php 
-   return [ 
-         'brevo' => [ 
-                   'api_key' => getenv("SENDINBLUE_API_KEY"), 
-                   'from_email' => 'elobayidoumaima@gmail.com', 
-                   'from_name' => 'eShop.ma' 
-                   ] 
-          ];` 
-          
-### Exemple de commande pour React 
-``` npm install npm start ``` 
+---
 
-## 🌐 Site en ligne Visitez le site eShop : 
-   [https://ton-site-heberge.com](https://ton-site-heberge.com) 
-   
 ## 👨‍💻 Auteur :
     - **Oumaima El Obayid** 
     - Email : elobayidoumaima@gmail.com --- 
-## ⚠️ Notes importantes 
-    - ❌ Ne jamais pousser `config.env` ou `config_mail.php` avec la clé en dur 
-    - 🔒 Toutes les clés API doivent être stockées dans `config.env` et ignorées par Git (`.gitignore`) --- 💡
+
+---
