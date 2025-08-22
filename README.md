@@ -24,6 +24,16 @@ Avec des filtres avancés et une recherche rapide, les utilisateurs trouvent exa
 
 ---
 
+📸 Aperçu
+<img width="320" height="180" alt="eshop" src="https://github.com/user-attachments/assets/044dcc33-4834-44d4-9e2c-4be154825e5f" />
+
+---
+
+🚀 Démo
+👉 [Lien vers le site](https://eshop.oumportfolio.com/)
+
+---
+
 ## 🛠 Installation et configuration
 
 ### 1️⃣ Cloner le projet
