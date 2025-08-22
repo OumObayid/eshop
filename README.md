@@ -38,29 +38,30 @@ Avec des filtres avancés et une recherche rapide, les utilisateurs trouvent exa
 
 ## 🛠 Installation et configuration
 
-### 1️⃣ Cloner le projet
+### 1. Cloner le projet
 
----
+```
 git clone https://github.com/OumObayid/eshop.git
----
+```
 
-### 2️⃣ Installer le front-end (React)
----
+### 2. Installer le front-end (React)
+
+```
 cd eshop
 npm install
 npm start
----
+```
 
 - Accessible à : `http://localhost:3000`
 
-### 3️⃣ Configurer le back-end (PHP / XAMPP)
+### 3. Configurer le back-end (PHP / XAMPP)
 
 1. Copier `apiEmail/config/config_mail.php` **propre**  
 2. Créer `apiEmail/config.env` avec la clé Sendinblue :  
 SENDINBLUE_API_KEY=ta_clef_envoyée_par_Brevo
 3. Vérifier que `config.env` est dans `.gitignore`  
 
-### 4️⃣ Lancer le back-end
+### 4. Lancer le back-end
 - Démarrer XAMPP ou serveur PHP local  
 - Vérifier que `apiEmail/` est accessible via `http://localhost`  
 
